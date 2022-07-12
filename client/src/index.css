@@ -1,0 +1,185 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap');
+
+html , body {
+ margin: 0;
+ padding: 0;
+ text-align: center
+}
+*{
+  font-family: "Readex Pro", sans-serif;
+}
+
+
+.container {
+  width: 90%;
+
+  margin: 40px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ 
+}
+
+.kanban-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.kanban-heading-text {
+  font-size: 1.8rem;
+  background-color: #ac73ff;
+  padding: 0.8rem 1.7rem;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+
+.kanban-block,
+.create-new-task-block {
+  padding: 0.6rem;
+  width: 30.5%;
+
+  min-height: 4.5rem; 
+  border-radius: 0.3rem;
+  margin: 10px;
+}
+ /* for mobile and tablets */
+ @media screen and (max-width: 700px) {
+  .kanban-board {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+
+}
+.kanban-block,
+.create-new-task-block {
+  min-width: 290px;
+  margin: 10px auto;
+}
+ }
+#todo {
+  background-color: #fec6d1;
+}
+
+#inprogress {
+  background-color: #ffaf00;
+  /* display: none; */
+}
+
+#done {
+  background-color: #018b01;
+  /* display: none; */
+}
+
+.task {
+  background-color: white;
+  margin: 0.2rem 0rem 0.3rem 0rem;
+  border: 0.1rem solid black;
+  border-radius: 0.2rem;
+  /* padding: 0.5rem 0.2rem 0.5rem 2rem; */
+}
+.handling-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.details-button {
+ 
+    color: white;
+    background:  #018b01;
+    font-size: 12px;
+    padding: 5px 5px;
+    border-radius: 3px;
+    border:none;
+    margin:5px;
+    cursor:pointer;
+}
+#task-button {
+  margin: 0.2rem 0rem 0.1rem 0rem;
+  background:  #018b01;
+  border-radius: 0.2rem;
+  width: 60%;
+  height: 40px;
+
+  padding: 10px;
+  border-radius: 0.3rem;
+ font-size: 14px;
+}
+
+.create-new-task-block {
+
+  /* display: flex; */
+  background: #ac73ff;
+  width: 64.4%;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  margin: 0.2rem;
+  border-radius: 10px;
+}
+
+.form-row-label {
+  width: 18%;
+  padding: 0.2rem;
+  padding-right: 0.5rem;
+  /* border: 0.1rem solid black; */
+  border-right: 0;
+  border-radius: 0.2rem 0rem 0rem 0.2rem;
+}
+
+.form-row-input {
+  /* border: 0.1rem solid black; */
+  border-radius: 0rem 0.2rem 0.2rem 0rem;
+  width: 85%;
+}
+
+textarea {
+  resize: none;
+}
+
+.form-row-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.2rem;
+}
+
+#edit-button,
+#save-button,
+#cancel-button {
+  margin: 0.2rem 0rem 0.1rem 0rem;
+  background-color: white;
+  border-radius: 0.2rem;
+  width: 49.2%;
+  /* border: 0.25rem solid black; */
+  padding: 0.5rem 2.7rem;
+  border-radius: 15px;
+  font-size: 1rem;
+}
+
+#edit-button {
+  display: none;
+}
+
+#cancel-button {
+  background:  linear-gradient(270deg, red, rgb(242, 143, 143));
+ }
+
+ #save-button {
+  background:  linear-gradient(270deg, green, rgb(163, 245, 163));
+ }
