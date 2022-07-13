@@ -4,6 +4,7 @@ import { MdDeleteForever, MdEdit, MdAdd } from "react-icons/md"
 import CreateTask from '../components/createTask'
 import { fetchTasksAction, deleteTaskAction } from '../redux/taskSlices';
 import DeleteDialogBox from '../components/DeleteDialogBox'
+import {DragDropContext, Droppable,Draggable} from "react-beautiful-dnd"
 
 export default function Kanban() {
     // display or remove action creation/edit form 
@@ -74,7 +75,10 @@ export default function Kanban() {
                             </div>
                             <div className='handling-buttons'>
 
-                                <MdDeleteForever size="20px" color='red' onClick={() => { dispatch(deleteTaskAction(task)); window.location.reload() }} style={{ cursor: "pointer" }} />
+                            <MdDeleteForever size="20px" color='red' onClick={ () => {
+        setShowDeleteModal(true);
+        setCurrentTask(task)
+    }} style={{ cursor: "pointer" }} />
                                 <MdEdit size="20px" color='orange' onClick={ () => {
         setShowModal(true);
         setIsEdit(true);
@@ -94,7 +98,10 @@ export default function Kanban() {
                             </div>
                             <div className='handling-buttons'>
 
-                                <MdDeleteForever size="20px" color='red' onClick={() => { dispatch(deleteTaskAction(task));window.location.reload();console.log("hi") }} style={{ cursor: "pointer" }} />
+                            <MdDeleteForever size="20px" color='red' onClick={ () => {
+        setShowDeleteModal(true);
+        setCurrentTask(task)
+    }} style={{ cursor: "pointer" }} />
                                 <MdEdit size="20px" color='orange' onClick={ () => {
         setShowModal(true);
         setIsEdit(true);
@@ -105,8 +112,8 @@ export default function Kanban() {
                         </div>))}
                 </div>
             </div>
-            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentTask}/>}
-            {showDeleteModal && <DeleteDialogBox setShowDeleteModal ={setShowDeleteModal }  task={currentTask}/>}
+            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentTask} setIsEdit={setIsEdit}/>}
+            {showDeleteModal && <DeleteDialogBox setShowDeleteModal ={setShowDeleteModal }  task={currentTask} item="Task"/>}
         </div>
     )
 }

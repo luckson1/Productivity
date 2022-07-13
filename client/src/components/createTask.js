@@ -18,7 +18,7 @@ const errorSchema = Yup.object().shape({
         .required('Status Information Required'),
 
 });
-function CreateTask({ setShowModal, isEdit, task }) {
+function CreateTask({ setShowModal, setIsEdit, isEdit, task }) {
     const dispatch = useDispatch()
     // use formik hook to handle form state 
     const formik = useFormik({
@@ -41,7 +41,10 @@ function CreateTask({ setShowModal, isEdit, task }) {
 
     return (
         <div className="modal">
-            <MdCancel className='close-icon' color='red' onClick={() => setShowModal(false)} />
+            <MdCancel className='close-icon' color='red' onClick={ () => {
+        setIsEdit(false);
+    setShowModal(false)
+    }}  />
             <form onSubmit={formik.handleSubmit}>
                 <div className="create-new-task-block" id="create-new-task-block">
                     <strong>Task</strong>
