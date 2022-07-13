@@ -1,9 +1,9 @@
 import React from 'react'
-import CreateTask from '../components/createTask'
+import DeleteDialogBox from '../components/DeleteDialogBox'
 
 function Home() {
   return (
-    <div><CreateTask/></div>
+    <div><DeleteDialogBox/></div>
   )
 }
 

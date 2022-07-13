@@ -8,9 +8,9 @@ require('dotenv').config()
 const createTaskCtrl= expressAsyncHandler(async (req, res) => {
     
     // const user= req?.user?._id
-    const {title, summary}=req?.body
+    const {title, summary,status}=req?.body
     try {
-        const task= await Task.create({title,  summary})
+        const task= await Task.create({title,  summary, status})
    
         res.json({task})
     } catch (error) {
@@ -22,9 +22,9 @@ const createTaskCtrl= expressAsyncHandler(async (req, res) => {
 
 const fetchAllTask= expressAsyncHandler(async (req, res) => {
     try {
-        const task= await Task.find({})
-        console.log(task)
-        res.json({task})
+        const tasks= await Task.find({})
+      
+        res.json({tasks})
     } catch (error) {
         res.json({error}) 
     }
@@ -68,8 +68,8 @@ const updateTaskctrl = expressAsyncHandler(async (req, res) => {
     const {title, status,summary}=req?.body
         try {
         const task = await Task.findByIdAndUpdate(id, {title, status,summary}, { new: true })
-        
-        res.json(task)
+      
+        res.json({task})
         
     } catch (error) {
 
@@ -84,7 +84,8 @@ const deleteTaskctrl = expressAsyncHandler(async (req, res) => {
     const { id } = req?.params
     try {
         const task = await Task.findByIdAndDelete (id)
-        res.json(task)
+      
+        res.json({task})
     } catch (error) {
 
         res.json(error)

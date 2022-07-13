@@ -10,7 +10,12 @@ html , body {
   font-family: "Readex Pro", sans-serif;
 }
 
-
+.form-validation {
+  margin: 5px;
+  color: rgb(255, 0, 0);
+  font-size: 15px;
+  
+}
 .container {
   width: 90%;
 
@@ -41,8 +46,7 @@ html , body {
   margin: 1rem;
 }
 
-.kanban-block,
-.create-new-task-block {
+.kanban-block{
   padding: 0.6rem;
   width: 30.5%;
 
@@ -59,29 +63,28 @@ html , body {
     justify-content: center;
 
 }
-.kanban-block,
-.create-new-task-block {
+.kanban-block{
   min-width: 290px;
   margin: 10px auto;
 }
  }
 #todo {
-  background-color: #fec6d1;
+  background-color: #fae2e7;
 }
 
 #inprogress {
-  background-color: #ffaf00;
+  background-color: #f8ebcd;
   /* display: none; */
 }
 
 #done {
-  background-color: #018b01;
+  background-color: #baddba;
   /* display: none; */
 }
 
 .task {
   background-color: white;
-  margin: 0.2rem 0rem 0.3rem 0rem;
+  margin: 0.5rem 0rem 0.3rem 0rem;
   border: 0.1rem solid black;
   border-radius: 0.2rem;
   /* padding: 0.5rem 0.2rem 0.5rem 2rem; */
@@ -105,6 +108,10 @@ html , body {
     margin:5px;
     cursor:pointer;
 }
+.summary {
+  font-size: 13px;
+  text-align: start;
+}
 #task-button {
   margin: 0.2rem 0rem 0.1rem 0rem;
   background:  #018b01;
@@ -116,14 +123,54 @@ html , body {
   border-radius: 0.3rem;
  font-size: 14px;
 }
+ 
 
+/* -----------modal----------- */
+
+
+.modal{
+  position:absolute;
+  left: 0;
+  right: 110px;
+  top: 140px;
+  margin-left: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 340px;
+  min-width: 280px;
+  height: 500px;
+  background-color: rgb(251, 251, 255);
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+
+}
+ /* for mobile and tablets */
+ @media screen and (max-width: 700px) {
+  .modal{
+    right: 0;
+  }
+ }
+.close-icon {
+  margin-left: 290px;
+  font-size:30px;
+  margin-bottom: 5px;
+  -webkit-animation: bounce .73s infinite alternate;
+  -moz-animation: bounce .73s infinite alternate;
+  animation: bounce .73s infinite alternate;
+  
+}
 .create-new-task-block {
 
   /* display: flex; */
-  background: #ac73ff;
-  width: 64.4%;
+  background: #fcfafa;
+  width: 320px;
   flex-direction: column;
   border-radius: 8px;
+  margin: 0px;
+  padding-left: 0px;
 }
 
 .form-row {
@@ -134,18 +181,47 @@ html , body {
 }
 
 .form-row-label {
-  width: 18%;
+  width: 85px;
   padding: 0.2rem;
   padding-right: 0.5rem;
   /* border: 0.1rem solid black; */
-  border-right: 0;
+  /* border-right: 0; */
   border-radius: 0.2rem 0rem 0rem 0.2rem;
 }
+form label {
+  margin: 10px 0px;
+}
+form .multiple-input-container {
+  display: flex;
+  flex-direction: row;
+ 
+}
+form .multiple-input-container input {
+  margin-right:10px;
+  
+}
+form .multiple-input-container input[type="radio"] {
+  display: none;
+ 
+}
+ form .multiple-input-container label{
+  padding: 3px;
+  border:solid 2px rgb(144,144,144);
+  border-radius: 10px;
+  transition: all 0.3s;
+  margin-right: 10px;
+  font-size: 14px;
+}
+ form input[type='radio']:checked +label {
+  background:  rgb(217, 166, 72)
+}
+
 
 .form-row-input {
   /* border: 0.1rem solid black; */
-  border-radius: 0rem 0.2rem 0.2rem 0rem;
-  width: 85%;
+  border-radius: 10px;
+  width: 235px;
+ 
 }
 
 textarea {
@@ -155,7 +231,7 @@ textarea {
 .form-row-buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0.2rem;
 }
 
@@ -183,3 +259,56 @@ textarea {
  #save-button {
   background:  linear-gradient(270deg, green, rgb(163, 245, 163));
  }
+
+
+ /* --------Delete Dialog Box------------ */
+ .delete-modal {
+  text-align: center;
+
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modalContent {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 20px;
+}
+.close {
+  color: rgb(255, 65, 65);
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+.close:hover, .close:focus {
+  color: #ff1010;
+  cursor: pointer;
+}
+.modalContent button {
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+}
+.del {
+  background-color: rgb(255, 65, 65);
+  margin-right: 40px;
+}
+.del:hover {
+  background-color: rgb(255, 7, 7);
+}
+.cancel:hover {
+  background-color: rgb(167, 167, 167);
+}
