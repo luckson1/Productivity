@@ -1,3 +1,6 @@
 export const ItemTypes= {
-    CARD: 'card'
+    PROGRESS: 'progress',
+    DO: "do",
+    DONE: "done"
+  
 };

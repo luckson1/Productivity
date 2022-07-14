@@ -72,18 +72,12 @@ html , body {
   background-color: #fae2e7;
 }
 
-#inprogress {
-  background-color: #f8ebcd;
-  /* display: none; */
-}
 
-#done {
-  background-color: #baddba;
-  /* display: none; */
-}
+
+
 
 .task {
-  background-color: white;
+  background-color: #e1f5fe;
   margin: 0.5rem 0rem 0.3rem 0rem;
   border: 0.1rem solid black;
   border-radius: 0.2rem;

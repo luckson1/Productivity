@@ -1,9 +1,22 @@
 import React from 'react'
+import { useDrag } from 'react-dnd';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
-function TaskCard({ setShowDeleteModal, setCurrentTask, setShowModal, task, setIsEdit }) {
+
+function TaskCard({ setShowDeleteModal, setCurrentTask, setShowModal, task, setIsEdit, type,newStatus }) {
+const [{isDragging},drag]=useDrag({
+  item:{ id: task?._id,
+  status:newStatus},
+    
+
+  type:type,
+  collect: monitor => ({
+    isDragging: !!monitor.isDragging(),
+  })
+})
+
   return (
-    <div className="task" id="task1" draggable="true" key={task?._id}>
+    <div className="task" id="task"  ref= {drag} style={{opacity: isDragging? 0.3: 1}} >
       <span>{task?.title}</span>
       <div className="summary">
         <p>{task?.summary}</p>

@@ -68,7 +68,7 @@ const updateTaskctrl = expressAsyncHandler(async (req, res) => {
     const {title, status,summary}=req?.body
         try {
         const task = await Task.findByIdAndUpdate(id, {title, status,summary}, { new: true })
-      
+
         res.json({task})
         
     } catch (error) {
