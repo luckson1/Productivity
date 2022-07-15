@@ -1,6 +1,8 @@
 export const ItemTypes= {
     PROGRESS: 'progress',
     DO: "do",
-    DONE: "done"
+    DONE: "done",
+    SHOPPING: "shopping",
+    ADDEDTOCARD: "addedtocard"
   
 };

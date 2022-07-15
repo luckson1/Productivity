@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDrop } from 'react-dnd'
-import { ItemTypes } from '../utils/items'
-import { editTasksAction } from '../redux/taskSlices';
+import { ItemTypes } from '../../utils/items'
+import { editTasksAction } from '../../redux/taskSlices';
 import { useDispatch } from 'react-redux';
 
 

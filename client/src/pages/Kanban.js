@@ -1,7 +1,7 @@
 import React from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import KanbanComponent from '../components/KanbanComponent'
+import KanbanComponent from '../components/kanban/KanbanComponent'
 
 function Kanban() {
   return (

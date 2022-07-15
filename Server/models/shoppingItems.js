@@ -17,14 +17,14 @@ const shoppingItemSchema = new mongoose.Schema(
       required: false,
     },
     
-    amount: {
+    units: {
       type: Number,
-      default: 0,
+      default: 1,
     },
 
 status: {
     type: String,
-    default: "Not Bought"
+    default: "On Shopping List"
 },
     
   },
@@ -41,12 +41,12 @@ status: {
 
 //populate virtuals
 
-//calculate days left based on start date and end date
+//calculate total amount of an item
 shoppingItemSchema.virtual("totalItemCost").get(function () {
   
     const price = this.price
-    const amount= this.amount;;
-    const totalItemCost =price*amount
+    const units= this.units;
+    const totalItemCost =price*units
     //convirt to nearest integer
     return Math.round(totalItemCost);
   });

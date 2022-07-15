@@ -2,7 +2,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { createTaskAction, editTasksAction } from '../redux/taskSlices';
+import { createTaskAction, editTasksAction } from '../../redux/taskSlices';
 import { MdCancel } from 'react-icons/md'
 
 const errorSchema = Yup.object().shape({

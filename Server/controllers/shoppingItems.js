@@ -8,12 +8,13 @@ require('dotenv').config()
 const createShoppingItemCtrl= expressAsyncHandler(async (req, res) => {
     
     // const user= req?.user?._id
-    const {name}=req?.body
+    const {name,  units, price}=req?.body
     try {
-        const shoppingItem= await ShoppingItem.create({title,  summary, status})
+        const shoppingItem= await ShoppingItem.create({name,  units, price})
    
         res.json({shoppingItem})
     } catch (error) {
+        console.log(error)
         res.json({error}) 
     }
 });
@@ -23,9 +24,25 @@ const createShoppingItemCtrl= expressAsyncHandler(async (req, res) => {
 const fetchAllShoppingItem= expressAsyncHandler(async (req, res) => {
     try {
         const shoppingItems= await ShoppingItem.find({})
+        // shopping stats
+      const shoppingStats= await ShoppingItem.aggregate([
+        //filter
+        {$match: {totalItemCost: {$gte:0}}},
+        {
+            $group: {
+                _id: null,
+                averageAmount: {$avg: "$totalItemCost"},
+                totalshopping: {$sum: "$totalItemCost"},
+                minSale: {$min: "$totalItemCost"},
+                maxSale: {$max: "$totalItemCost"},
+                totalRecordsshopping: {$sum: 1}
+            }
+        }
+    ])
       
-        res.json({shoppingItems})
+        res.json({shoppingItems, shoppingStats})
     } catch (error) {
+        console.log(error)
         res.json({error}) 
     }
 });
@@ -65,9 +82,9 @@ const fetchOneShoppingItemCtrl = expressAsyncHandler(async (req, res) => {
 const updateShoppingItemctrl = expressAsyncHandler(async (req, res) => {
     const { id } = req?.params
     
-    const {name,price, amount, status}=req?.body
+    const {name,price, units, status}=req?.body
         try {
-        const shoppingItem = await ShoppingItem.findByIdAndUpdate(id, {name,price, amount, status}, { new: true })
+        const shoppingItem = await ShoppingItem.findByIdAndUpdate(id, {name,price, units, status}, { new: true })
 
         res.json({shoppingItem})
         
@@ -90,6 +107,8 @@ const deleteShoppingItemctrl = expressAsyncHandler(async (req, res) => {
 
         res.json(error)
     }
-})
+});
+
+
 
 module.exports ={fetchUserShoppingItem, createShoppingItemCtrl, fetchOneShoppingItemCtrl, fetchAllShoppingItem, updateShoppingItemctrl, deleteShoppingItemctrl}

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { BaseURL } from "../utils/BaseUrl";
 
 // actions for redirect after action is completed
-// create shopppingItem action
+// create shoppingItem action
 
 export const createShoppingItemAction  = createAsyncThunk(
     "shoppingItem/create",
@@ -40,7 +40,7 @@ export const createShoppingItemAction  = createAsyncThunk(
     });
 
 
-// action to get one shopppingItem into our state
+// action to get one shoppingItem into our state
 
 
 export const fetchShoppingItem  = createAsyncThunk(
@@ -75,7 +75,7 @@ const config = {
 
     });
 
-    //get   shopppingItems by gender
+    //get   shoppingItems by gender
 
     export const fetchAllShoppingsItem = createAsyncThunk(
         "shoppingItems/fetch",
@@ -111,7 +111,7 @@ const config = {
 
   
 
-// edit shopppingItem
+// edit shoppingItem
 export const editShoppingItem = createAsyncThunk('shoppingItems/update', async (payload, { rejectWithValue, getState, dispatch }) => {
     //get user token from store
 
@@ -175,143 +175,143 @@ export const deleteShoppingItemAction = createAsyncThunk('shoppingItem/delete', 
 // create slices for dispatch
 
 const ShoppingItemsSlices = createSlice({
-    name: 'shopppingItem',
+    name: 'shoppingItem',
     initialState: {
 
     },
     extraReducers: (builder) => {
-        // create shopppingItem
+        // create shoppingItem
         // handle pending state
         builder.addCase(createShoppingItemAction.pending, (state, action) => {
-            state.shopppingItemLoading = true;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemLoading = true;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
 
         });
     
         //hande success state
         builder.addCase(createShoppingItemAction.fulfilled, (state, action) => {
-            state.shopppingItemCreated = action?.payload;
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
-            state.isshopppingItemCreated = false
+            state.shoppingItemCreated = action?.payload;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
+            state.isshoppingItemCreated = false
         });
         //hande rejected state
 
         builder.addCase(createShoppingItemAction.rejected, (state, action) => {
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = action?.payload?.msg;
-            state.shopppingItemServerErr = action?.error?.msg;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = action?.payload?.msg;
+            state.shoppingItemServerErr = action?.error?.msg;
         })
 
 
-        // fetch one shopppingItem
+        // fetch one shoppingItem
         //handle pending state
         builder.addCase(fetchShoppingItem.pending, (state, action) => {
-            state.shopppingItemLoading = true;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemLoading = true;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
 
         });
         
         
         //hande success state
         builder.addCase(fetchShoppingItem.fulfilled, (state, action) => {
-            state.shopppingItemCreated = action?.payload;
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemCreated = action?.payload;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
             
         });
         //hande rejected state
 
         builder.addCase(fetchShoppingItem.rejected, (state, action) => {
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = action?.payload?.msg;
-            state.shopppingItemServerErr = action?.error?.msg;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = action?.payload?.msg;
+            state.shoppingItemServerErr = action?.error?.msg;
         })
 
 
-        //  fetch all shopppingItem shopppingItems by gender
+        //  fetch all shoppingItem shoppingItems by gender
         //handle pending state
         builder.addCase(fetchAllShoppingsItem.pending, (state, action) => {
-            state.shopppingItemLoading = true;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemLoading = true;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
 
         });
         
         
         //hande success state
         builder.addCase(fetchAllShoppingsItem.fulfilled, (state, action) => {
-            state.shopppingItemsFetched = action?.payload;
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemsFetched = action?.payload;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
             
         });
         //hande rejected state
 
         builder.addCase(fetchAllShoppingsItem.rejected, (state, action) => {
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = action?.payload?.msg;
-            state.shopppingItemServerErr = action?.error?.msg;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = action?.payload?.msg;
+            state.shoppingItemServerErr = action?.error?.msg;
         })
 
         
-        // edit a shopppingItem
+        // edit a shoppingItem
 
          //handle pending state
          builder.addCase(editShoppingItem.pending, (state, action) => {
-            state.shopppingItemLoading = true;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemLoading = true;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
 
         })
  
         //hande success state
         builder.addCase(editShoppingItem.fulfilled, (state, action) => {
-            state.shopppingItemEdited = action?.payload;
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemServerErr = undefined;
+            state.shoppingItemEdited = action?.payload;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemServerErr = undefined;
            
             
         });
         //hande rejected state
 
         builder.addCase(editShoppingItem.rejected, (state, action) => {
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = action?.payload?.msg;
-            state.shopppingItemServerErr = action?.error?.msg;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = action?.payload?.msg;
+            state.shoppingItemServerErr = action?.error?.msg;
         })
 
-                //delete  an shopppingItem -action
+                //delete  an shoppingItem -action
 
-         // delete a shopppingItem
+         // delete a shoppingItem
         //handle pending state
         builder.addCase(deleteShoppingItemAction.pending, (state, action) => {
-            state.shopppingItemLoading = true;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemerverErr = undefined;
+            state.shoppingItemLoading = true;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemerverErr = undefined;
 
         });
      
         //hande success state
         builder.addCase(deleteShoppingItemAction.fulfilled, (state, action) => {
-            state.shopppingItemd = action?.payload;
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = undefined;
-            state.shopppingItemerverErr = undefined;
+            state.shoppingItemd = action?.payload;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = undefined;
+            state.shoppingItemerverErr = undefined;
         
         });
         //hande rejected state
 
         builder.addCase(deleteShoppingItemAction.rejected, (state, action) => {
-            state.shopppingItemLoading = false;
-            state.shopppingItemAppErr = action?.payload?.msg;
-            state.shopppingItemerverErr = action?.error?.msg;
+            state.shoppingItemLoading = false;
+            state.shoppingItemAppErr = action?.payload?.msg;
+            state.shoppingItemerverErr = action?.error?.msg;
         })
 
     }
