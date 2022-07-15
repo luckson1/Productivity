@@ -21,6 +21,7 @@ export default function KanbanComponent() {
     const [currentTask, setCurrentTask] = useState()
 
 
+
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
     useEffect(() => {
@@ -59,10 +60,11 @@ export default function KanbanComponent() {
                                         setCurrentTask={setCurrentTask}
                                         setShowDeleteModal={setShowDeleteModal} 
                                         type={ItemTypes.DO}
-                                        newStatus="In Progress"/>))}
+                                        newStatus="Done"
+                                      />))}
 
                     </div>
-                  <InProgressTasks>
+                  <InProgressTasks  >
                         <strong>In Progress</strong>
                         {taskAppErr || taskServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                             : taskLoading ? <h4>Loading Please Wait......</h4>
@@ -74,7 +76,7 @@ export default function KanbanComponent() {
                                     setCurrentTask={setCurrentTask}
                                     setShowDeleteModal={setShowDeleteModal} 
                                     type={ItemTypes.PROGRESS}
-                                    newStatus="Done"
+                                    newStatus="Done" 
                                    />))}
                   </InProgressTasks>
                    <DoneTasks>
@@ -89,7 +91,7 @@ export default function KanbanComponent() {
                                     setCurrentTask={setCurrentTask}
                                     setShowDeleteModal={setShowDeleteModal} 
                                     type={ItemTypes.DONE}
-                                    />))}
+                                  />))}
                    
                    </DoneTasks>
                 </div>

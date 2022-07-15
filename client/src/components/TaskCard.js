@@ -4,16 +4,20 @@ import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
 
 function TaskCard({ setShowDeleteModal, setCurrentTask, setShowModal, task, setIsEdit, type,newStatus }) {
+ 
+
 const [{isDragging},drag]=useDrag({
   item:{ id: task?._id,
-  status:newStatus},
+},
     
 
   type:type,
   collect: monitor => ({
     isDragging: !!monitor.isDragging(),
+  
   })
 })
+
 
   return (
     <div className="task" id="task"  ref= {drag} style={{opacity: isDragging? 0.3: 1}} >

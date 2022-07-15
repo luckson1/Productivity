@@ -113,39 +113,6 @@ const config = {
     
     
         });
- //get   Tasks by gender
-
- export const fetchMatchedTasksAction = createAsyncThunk(
-    "matched-Tasks/fetch",
-    async (payload, { rejectWithValue, getState, dispatch }) => {
-        //get user token from store
-        const userToken = getState()?.users?.userAuth?.token;
-
-const config = {
-    headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
-    },
-
-        };
-
-
-        try {
-            //make http call here
-
-            const { data } = await axios.get(`${BaseURL}/tasks/matched`, config);
-            return data;
-
-        } catch (error) {
-            if (!error?.response) {
-                throw error;
-            }
-            return rejectWithValue(error?.response?.data);
-        }
-
-
-
-    });
 
   
 
@@ -298,32 +265,6 @@ const TasksSlices = createSlice({
             state.taskAppErr = action?.payload?.msg;
             state.taskServerErr = action?.error?.msg;
         })
-//fetch matched Tasks
-        //handle pending state
-        builder.addCase(fetchMatchedTasksAction.pending, (state, action) => {
-            state.taskLoading = true;
-            state.taskAppErr = undefined;
-            state.taskServerErr = undefined;
-
-        });
-        
-        
-        //hande success state
-        builder.addCase(fetchMatchedTasksAction.fulfilled, (state, action) => {
-            state.tasksMatched = action?.payload;
-            state.taskLoading = false;
-            state.taskAppErr = undefined;
-            state.taskServerErr = undefined;
-            
-        });
-        //hande rejected state
-
-        builder.addCase(fetchMatchedTasksAction.rejected, (state, action) => {
-            state.taskLoading = false;
-            state.taskAppErr = action?.payload?.msg;
-            state.taskServerErr = action?.error?.msg;
-        })
-
 
         
         // edit a Task
