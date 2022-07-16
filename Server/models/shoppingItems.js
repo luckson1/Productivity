@@ -47,8 +47,8 @@ shoppingItemSchema.virtual("totalItemCost").get(function () {
     const price = this.price
     const units= this.units;
     const totalItemCost =price*units
-    //convirt to nearest integer
-    return Math.round(totalItemCost);
+    //convert to nearest integer
+    return totalItemCost
   });
 
 //model

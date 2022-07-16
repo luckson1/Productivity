@@ -31,22 +31,24 @@ export default function ShoppingListComponent() {
     const toDoshoppingItems = shoppingItemsFetched?.shoppingItems?.filter(shoppingItem => shoppingItem?.status === "On Shopping List")
     const doneshoppingItems = shoppingItemsFetched?.shoppingItems?.filter(shoppingItem => shoppingItem?.status === "Added to Cart")
 
+    const toDoshoppingStats = shoppingItemsFetched?.shoppingStats?.filter(shoppingItem => shoppingItem?._id === "On Shopping List")
+    const doneshoppingStats = shoppingItemsFetched?.shoppingStats?.filter(shoppingItem => shoppingItem?._id === "Added to Cart")
 
 
     return (
 
         <div className="container">
             <div className="kanban-heading">
-                <h3 className="kanban-heading-text">Shopping List</h3>
+                <h3 className="kanban-heading-text">Shopping List </h3>
             </div>
             <div className="price-display-buttons">
-                <button className="list-heading-button" onClick={() => setShowCart(false)}
+                <button className="list-heading-button"  onClick={() => setShowCart(false)}
                     style={{
                         backgroundColor: showCart ? "#ac73ff" : "white",
                         borderStartStartRadius: "10px",
                         borderEndStartRadius: "10px"
                     }}>
-                    Items On List
+                    Items On List: Ksh.{toDoshoppingStats?.[0]?.totalShoppingAmount}
                 </button>
                 <button className="list-heading-button " onClick={() => setShowCart(true)}
                     style={{
@@ -54,12 +56,12 @@ export default function ShoppingListComponent() {
                         borderStartEndRadius: "10px",
                         borderEndEndRadius: "10px"
                     }}>
-                    Items In Cart
+                    Items In Cart: Ksh.{doneshoppingStats?.[0]?.totalShoppingAmount}
                 </button>
             </div>
             <div className="kanban-board">
                 {!showCart && <div className="kanban-block" id="todo" >
-                    <strong>On List</strong>
+                    <strong>Items On List</strong>
                     <div className="task-button-block">
                         <button id="task-button" onClick={() => setShowModal(true)}> <MdAdd size="15px" /> Item</button>
 
@@ -80,7 +82,7 @@ export default function ShoppingListComponent() {
 
                 </div>}
                 {showCart && <ItemsAddedToCart>
-                    <strong>Cart</strong>
+                    <strong>Items In Cart</strong>
                     {shoppingItemAppErr || shoppingItemServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                         : shoppingItemLoading ? <h4>Loading Please Wait......</h4>
                             : doneshoppingItems?.map(shoppingItem => (<ShoppingItemCard

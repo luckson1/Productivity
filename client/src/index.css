@@ -52,10 +52,10 @@ html , body {
 }
 .list-heading-button {
   
-  padding: 0.8rem 1.7rem;
+padding: 10px;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-  rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  rgba(0, 0, 0, 0.08) 1px 1px 1px 1px;
   
 }
 .kanban-block{
@@ -91,7 +91,6 @@ html , body {
 .task {
   background-color: #e1f5fe;
   margin: 0.5rem 0rem 0.3rem 0rem;
-  border: 0.1rem solid black;
   border-radius: 0.2rem;
   /* padding: 0.5rem 0.2rem 0.5rem 2rem; */
 }
@@ -115,9 +114,13 @@ html , body {
     cursor:pointer;
 }
 .summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   font-size: 13px;
   text-align: start;
   margin-left: 5px;
+  
 }
 #task-button {
   margin: 0.2rem 0rem 0.1rem 0rem;

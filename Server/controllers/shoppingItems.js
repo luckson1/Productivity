@@ -25,20 +25,22 @@ const fetchAllShoppingItem= expressAsyncHandler(async (req, res) => {
     try {
         const shoppingItems= await ShoppingItem.find({})
         // shopping stats
-      const shoppingStats= await ShoppingItem.aggregate([
-        //filter
-        {$match: {totalItemCost: {$gte:0}}},
-        {
-            $group: {
-                _id: null,
-                averageAmount: {$avg: "$totalItemCost"},
-                totalshopping: {$sum: "$totalItemCost"},
-                minSale: {$min: "$totalItemCost"},
-                maxSale: {$max: "$totalItemCost"},
-                totalRecordsshopping: {$sum: 1}
-            }
-        }
-    ])
+      const shoppingStats= await ShoppingItem.aggregate(
+        [
+          // First Stage grouping
+          {
+            $group :
+              {
+                _id : "$status",
+                totalShoppingAmount: { $sum: { $multiply: [ "$price", "$units" ] } }
+              }
+           },
+           // Second Stage filtering
+           {
+             $match: { "totalShoppingAmount": { $gte: 0 } }
+           }
+         ]
+       )
       
         res.json({shoppingItems, shoppingStats})
     } catch (error) {
