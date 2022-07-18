@@ -1,7 +1,7 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
 
 const errorSchema = Yup.object().shape({
@@ -21,7 +21,7 @@ const errorSchema = Yup.object().shape({
 
 function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsExpense }) {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { MdAdd } from 'react-icons/md'
+
 import CreateEntry from '../components/expenseTraker/CreateEntry'
 import EntryList from '../components/expenseTraker/EntryList'
 

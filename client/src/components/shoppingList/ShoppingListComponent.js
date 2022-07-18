@@ -37,12 +37,10 @@ export default function ShoppingListComponent() {
 
     return (
 
-        <div className="container">
-            <div className="kanban-heading" id="shoppinglist">
-           
-            </div>
+        <div className="container ">
+        
             <div className="content-display-buttons">
-                <button className="list-heading-button"  onClick={() => setShowCart(false)}
+                <button className="list-heading-button" onClick={() => setShowCart(false)}
                     style={{
                         backgroundColor: showCart ? "#ac73ff" : "white",
                         borderStartStartRadius: "10px",
@@ -59,7 +57,7 @@ export default function ShoppingListComponent() {
                     Items In Cart: Ksh.{doneshoppingStats?.[0]?.totalShoppingAmount}
                 </button>
             </div>
-            <div className="kanban-board">
+            <div className="kanban-board" id="shopping-board">
                 {!showCart && <div className="kanban-block" id="todo" >
                     <strong>Items On List</strong>
                     <div className="task-button-block">
@@ -68,7 +66,7 @@ export default function ShoppingListComponent() {
                     </div>
                     {shoppingItemAppErr || shoppingItemServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                         : shoppingItemLoading ? <h4>Loading Please Wait......</h4>
-                            : toDoshoppingItems?.length === 0 ? (<div><h3>No shopping Items to Display, Please create some </h3></div>)
+                            : toDoshoppingItems?.length === 0 ? (<div><p>No shopping Items to Display, Please create some </p></div>)
                                 : toDoshoppingItems?.map(shoppingItem => (<ShoppingItemCard
                                     shoppingItem={shoppingItem}
                                     key={shoppingItem?._id}

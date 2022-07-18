@@ -35,7 +35,7 @@ export default function KanbanComponent() {
 
     return (
 
-        <div className="container">
+        <div className="container ">
             <div className="kanban-heading">
                 <h2 className="kanban-heading-text">Kanban Board</h2>
             </div>

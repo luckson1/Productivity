@@ -19,7 +19,7 @@ html , body {
 .container {
   width: 90%;
 
-  margin: 40px 20px;
+  margin: 40px 10px;
   display: flex;
   flex-direction: column;
 }
@@ -36,6 +36,9 @@ html , body {
   flex-direction: row;
   justify-content: space-between;
 
+}
+#shopping-board {
+  justify-content:space-around;
 }
 #shoppinglist{
   display: flex;
@@ -86,6 +89,7 @@ padding: 10px;
 .kanban-block{
   padding: 0.6rem;
   width: 30.5%;
+  min-width: 300px;
 
   min-height: 4.5rem; 
   border-radius: 0.3rem;
@@ -93,6 +97,11 @@ padding: 10px;
 }
  /* for mobile and tablets */
  @media screen and (max-width: 700px) {
+
+  .container {
+    margin-top: 50px;
+    font-size:12px
+  }
   .kanban-board {
     display: flex;
     flex-direction: column;
@@ -102,6 +111,7 @@ padding: 10px;
 }
 
 .kanban-block{
+  width: 80vw;
   min-width: 290px;
   margin: 10px auto;
 }
