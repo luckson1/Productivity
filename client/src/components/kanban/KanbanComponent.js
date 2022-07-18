@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { MdAdd } from "react-icons/md"
+
 import CreateTask from './createTask'
 import { fetchTasksAction } from '../../redux/taskSlices';
 import DeleteDialogBox from '../DeleteDialogBox'
@@ -44,7 +44,7 @@ export default function KanbanComponent() {
                 <div className="kanban-block" id="todo" >
                     <strong>To Do</strong>
                     <div className="task-button-block">
-                        <button id="task-button" onClick={() => setShowModal(true)}> <MdAdd size="15px" /> New task</button>
+                        <button id="task-button" onClick={() => setShowModal(true)}> Add New task</button>
 
                     </div>
                     {taskAppErr || taskServerErr ? (<div className="form-validation">An Error Has Occured</div>)

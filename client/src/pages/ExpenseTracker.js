@@ -27,8 +27,8 @@ function ExpenseTracker() {
         </button>
       </div>
       <div className="entry-buttons">
-        {!isExpense && <button id="task-button" onClick={() => setShowModal(true)}> <MdAdd size="15px" /> Income</button>}
-        {isExpense && <button id="expense-button" onClick={() => { setShowModal(true); setIsExpense(true) }}> <MdAdd size="15px" /> Expense</button>}
+        {!isExpense && <button id="task-button" onClick={() => setShowModal(true)}> Add Income</button>}
+        {isExpense && <button id="expense-button" onClick={() => { setShowModal(true); setIsExpense(true) }}> Add Expense</button>}
       </div>
       <h3>{isExpense? "Expenses": "Incomes"}</h3>
       <EntryList />

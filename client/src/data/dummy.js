@@ -474,34 +474,18 @@ export const links = [
     title: 'Dashboard',
     links: [
       {
-        name: 'ecommerce',
+        name: 'My-activities',
         icon: <FiShoppingBag />,
       },
     ],
   },
 
-  {
-    title: 'Pages',
-    links: [
-      {
-        name: 'orders',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
-        name: 'employees',
-        icon: <IoMdContacts />,
-      },
-      {
-        name: 'customers',
-        icon: <RiContactsLine />,
-      },
-    ],
-  },
+
   {
     title: 'Apps',
     links: [
       {
-        name: 'calendar',
+        name: 'shopping-list',
         icon: <AiOutlineCalendar />,
       },
       {
@@ -509,53 +493,13 @@ export const links = [
         icon: <BsKanban />,
       },
       {
-        name: 'editor',
+        name: 'expense-tracker',
         icon: <FiEdit />,
       },
-      {
-        name: 'color-picker',
-        icon: <BiColorFill />,
-      },
+    
     ],
   },
-  {
-    title: 'Charts',
-    links: [
-      {
-        name: 'line',
-        icon: <AiOutlineStock />,
-      },
-      {
-        name: 'area',
-        icon: <AiOutlineAreaChart />,
-      },
-
-      {
-        name: 'bar',
-        icon: <AiOutlineBarChart />,
-      },
-      {
-        name: 'pie',
-        icon: <FiPieChart />,
-      },
-      {
-        name: 'financial',
-        icon: <RiStockLine />,
-      },
-      {
-        name: 'color-mapping',
-        icon: <BsBarChart />,
-      },
-      {
-        name: 'pyramid',
-        icon: <GiLouvrePyramid />,
-      },
-      {
-        name: 'stacked',
-        icon: <AiOutlineBarChart />,
-      },
-    ],
-  },
+  
 ];
 
 export const cartData = [

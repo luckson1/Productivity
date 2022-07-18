@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
-import { MdAdd } from "react-icons/md"
+
 
 import DeleteDialogBox from '../DeleteDialogBox'
 import { ItemTypes } from '../../utils/items'
@@ -63,7 +63,7 @@ export default function ShoppingListComponent() {
                 {!showCart && <div className="kanban-block" id="todo" >
                     <strong>Items On List</strong>
                     <div className="task-button-block">
-                        <button id="task-button" onClick={() => setShowModal(true)}> <MdAdd size="15px" /> Item</button>
+                        <button id="task-button" onClick={() => setShowModal(true)}> Add Item</button>
 
                     </div>
                     {shoppingItemAppErr || shoppingItemServerErr ? (<div className="form-validation">An Error Has Occured</div>)

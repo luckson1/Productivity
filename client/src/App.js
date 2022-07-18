@@ -3,6 +3,7 @@ import ExpenseTracker from './pages/ExpenseTracker';
 import Home from './pages/Home';
 import Kanban from './pages/Kanban';
 import ShoppingList from './pages/ShoppingList';
+import './app.css'
 function App() {
   return (
     <BrowserRouter>
