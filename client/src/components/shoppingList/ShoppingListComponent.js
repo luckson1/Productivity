@@ -38,10 +38,10 @@ export default function ShoppingListComponent() {
     return (
 
         <div className="container">
-            <div className="kanban-heading">
-                <h3 className="kanban-heading-text">Shopping List </h3>
+            <div className="kanban-heading" id="shoppinglist">
+           
             </div>
-            <div className="price-display-buttons">
+            <div className="content-display-buttons">
                 <button className="list-heading-button"  onClick={() => setShowCart(false)}
                     style={{
                         backgroundColor: showCart ? "#ac73ff" : "white",
