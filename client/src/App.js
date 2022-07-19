@@ -8,8 +8,9 @@ import { Navbar } from './components/navigation/Navbar';
 import { SideBar } from './components/navigation/SideBar';
 import { useStateContext } from "../src/context/ContextProvider"
 import { FiSettings } from 'react-icons/fi';
+import { ThemeSettings } from './utils/ThemeSettings';
 function App() {
-  const {activeMenu,setThemeSettings,currentColor}= useStateContext();
+  const {activeMenu,setThemeSettings,currentColor,themeSettings}= useStateContext();
   return (
     <BrowserRouter>
     <div className="flex relative dark:bg-main-dark-bg">
@@ -41,6 +42,7 @@ function App() {
                         </div>
                     
                     <div>
+                    { themeSettings &&   <ThemeSettings />}
     <Routes>
     <Route exact path="/" element={<Home />} />
       <Route exact path="/kanban" element={<Kanban />} />     

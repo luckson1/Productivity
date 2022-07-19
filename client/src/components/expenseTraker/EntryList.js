@@ -1,40 +1,25 @@
 import React from 'react'
 
-function EntryList() {
+function EntryList({entries, isExpense, loading}) {
   return (
     <div className="table">
 
     <ul className="responsive-table">
       <li className="table-header">
-        <div className="col col-1">Job Id</div>
-        <div className="col col-2">Customer Name</div>
-        <div className="col col-3">Amount Due</div>
-        <div className="col col-4">Payment Status</div>
+        <div className="col col-1">Title</div>
+        <div className="col col-2">Description</div>
+        <div className="col col-3">Amount</div>
+        <div className="col col-4">Date Created</div>
       </li>
-      <li className="table-row">
-        <div className="col col-1" data-label="Job Id">42235</div>
-        <div className="col col-2" data-label="Customer Name">John Doe</div>
-        <div className="col col-3" data-label="Amount">$350</div>
-        <div className="col col-4" data-label="Payment Status">Pending</div>
-      </li>
-      <li className="table-row">
-        <div className="col col-1" data-label="Job Id">42442</div>
-        <div className="col col-2" data-label="Customer Name">Jennifer Smith</div>
-        <div className="col col-3" data-label="Amount">$220</div>
-        <div className="col col-4" data-label="Payment Status">Pending</div>
-      </li>
-      <li className="table-row">
-        <div className="col col-1" data-label="Job Id">42257</div>
-        <div className="col col-2" data-label="Customer Name">John Smith</div>
-        <div className="col col-3" data-label="Amount">$341</div>
-        <div className="col col-4" data-label="Payment Status">Pending</div>
-      </li>
-      <li className="table-row">
-        <div className="col col-1" data-label="Job Id">42311</div>
-        <div className="col col-2" data-label="Customer Name">John Carpenter</div>
-        <div className="col col-3" data-label="Amount">$115</div>
-        <div className="col col-4" data-label="Payment Status">Pending</div>
-      </li>
+
+{loading? (<p>Loading, Please Wait 😀......</p>):entries?.lenght===0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (  <li className="table-row" key={entry?._id}>
+        <div className="col col-1" data-label="Title">{entry?.title}</div>
+        <div className="col col-2" data-label="Description">{entry?.description}</div>
+        <div className="col col-3" data-label="Amount" style={{color: isExpense? "red": "green"}}>{entry?.amount} </div>
+        <div className="col col-4" data-label="Date">Pending</div>
+      </li>))}
+    
+     
     </ul>
   </div>
   )

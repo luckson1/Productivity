@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit"
 import axios from 'axios'
-import { BaseURL } from "../utils/BaseUrl";
+import { ExpensesURL } from "../utils/BaseUrl";
 
 // actions for redirect 
 export const resetIncomeCreated = createAction("Income/created/reset")
@@ -25,7 +25,7 @@ export const createIncomeAction = createAsyncThunk(
         try {
             //make http call here
 
-            const { data } = await axios.post(`${BaseURL}/incomes`, payload, config);
+            const { data } = await axios.post(`${ExpensesURL}/sales`, payload, config);
             dispatch(resetIncomeCreated())
             return data;
 
@@ -57,7 +57,7 @@ export const fetchIncomesAction = createAsyncThunk('Income/fetch', async (payloa
     try {
         //make http call here
 
-        const { data } = await axios.get(`${BaseURL}/incomes?pages=${payload}`, config);
+        const { data } = await axios.get(`${ExpensesURL}/sales`, config);
 
         return data;
     } catch (error) {
@@ -88,7 +88,7 @@ export const updateIncomeAction = createAsyncThunk('income/update', async (paylo
     try {
         //make http call here
 
-        const { data } = await axios.put(`${BaseURL}/incomes/${payload?.id}`, payload, config);
+        const { data } = await axios.put(`${ExpensesURL}/incomes/${payload?.id}`, payload, config);
         dispatch(resetIncomeUpdated())
         return data;
     } catch (error) {

@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
 import { createShoppingItemAction, editShoppingItem } from '../../redux/shoppingItemSlices';
+import { useStateContext } from '../../context/ContextProvider';
 
 const errorSchema = Yup.object().shape({
 
@@ -18,6 +19,7 @@ const errorSchema = Yup.object().shape({
 
 });
 function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
+    const {currentColor}=useStateContext()
     const dispatch = useDispatch()
     // use formik hook to handle form state 
     const formik = useFormik({
@@ -39,7 +41,7 @@ function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
 
 
     return (
-        <div className="modal">
+        <div className="modal" style={{backgroundColor:currentColor}}>
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
                 setShowModal(false)

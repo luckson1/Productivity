@@ -88,7 +88,7 @@ padding: 10px;
 }
 .kanban-block{
   padding: 0.6rem;
-  width: 30.5%;
+  width: 45.5%;
   min-width: 300px;
 
   min-height: 4.5rem; 
@@ -111,7 +111,7 @@ padding: 10px;
 }
 
 .kanban-block{
-  width: 80vw;
+
   min-width: 290px;
   margin: 10px auto;
 }

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 // import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
+import { useStateContext } from '../../context/ContextProvider';
 
 const errorSchema = Yup.object().shape({
 
@@ -20,6 +21,7 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsExpense }) {
+    const {currentColor}=useStateContext()
 
     // const dispatch = useDispatch()
     // use formik hook to handle form state 
@@ -42,7 +44,7 @@ function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsE
 
 
     return (
-        <div className="modal">
+        <div className="modal" style={{backgroundColor:currentColor}}>
             <MdCancel className='close-icon' color='red' onClick={() => {
                 // setIsEdit(false);
                 setShowModal(false);
@@ -73,13 +75,16 @@ function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsE
                     </div>
                     <span className="form-row">
                         <label className="form-row-label" htmlFor="item-description">Description</label>
-                        <input className="form-row-input"
+                        <textarea  className="form-row-input"
+                 
+                         cols="50" rows="6"
                             type="text"
                             id="item-description"
                             value={formik.values.description}
                             onChange={formik.handleChange("description")}
                             onBlur={formik.handleBlur("description")}
-                        />
+                            placeholder='Describe the Budget Item in a few words' 
+                        ></textarea>
                     </span>
                     {/* errors */}
                     <div className="form-validation">

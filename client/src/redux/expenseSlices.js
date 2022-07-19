@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit"
 import axios from 'axios'
-import { BaseURL } from "../utils/BaseUrl";
+import { ExpensesURL } from "../utils/BaseUrl";
 
 // actions for redirect 
 export const resetExpCreated = createAction("expense/created/reset")
@@ -26,7 +26,7 @@ export const createExpenseAction = createAsyncThunk(
         try {
             //make http call here
 
-            const { data } = await axios.post(`${BaseURL}/expenses`, payload, config);
+            const { data } = await axios.post(`${ExpensesURL}/expenses`, payload, config);
             //dispatch for redirection
             dispatch(resetExpCreated())
 
@@ -60,7 +60,7 @@ export const FetchExpensesAction = createAsyncThunk('expense/fetch', async (payl
     try {
         //make http call here
 
-        const { data } = await axios.get(`${BaseURL}/expenses?pages=${payload}`, config);
+        const { data } = await axios.get(`${ExpensesURL}/expenses?pages=${payload}`, config);
 
         return data;
     } catch (error) {
@@ -91,7 +91,7 @@ export const UpdateExpenseAction = createAsyncThunk('expense/update', async (pay
     try {
         //make http call here
 
-        const { data } = await axios.put(`${BaseURL}/expenses/${payload?.id}`, payload, config);
+        const { data } = await axios.put(`${ExpensesURL}/expenses/${payload?.id}`, payload, config);
         dispatch(resetExpUpdated())
         return data;
     } catch (error) {

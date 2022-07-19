@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 import CreateTask from './createTask'
@@ -8,16 +8,14 @@ import TaskCard from './TaskCard'
 import { ItemTypes } from '../../utils/items'
 import InProgressTasks from './InProgressTasks'
 import DoneTasks from './DoneTasks'
+import { useStateContext } from '../../context/ContextProvider';
 
 
 export default function KanbanComponent() {
     // display or remove action creation/edit form 
-    const [showModal, setShowModal] = useState(false)
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
-    const [isEdit, setIsEdit] = useState(false)
-    const [currentTask, setCurrentTask] = useState()
+  
 
-
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentTask, setCurrentTask} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
@@ -37,7 +35,7 @@ export default function KanbanComponent() {
 
         <div className="container ">
             <div className="kanban-heading">
-                <h2 className="kanban-heading-text">Kanban Board</h2>
+                <h2 className="kanban-heading-text" style={{backgroundColor: currentColor}}>Kanban Board</h2>
             </div>
            
             <div className="kanban-board">

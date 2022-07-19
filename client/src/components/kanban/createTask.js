@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { createTaskAction, editTasksAction } from '../../redux/taskSlices';
 import { MdCancel } from 'react-icons/md'
+import { useStateContext } from '../../context/ContextProvider';
 
 const errorSchema = Yup.object().shape({
 
@@ -19,6 +20,7 @@ const errorSchema = Yup.object().shape({
 
 });
 function CreateTask({ setShowModal, setIsEdit, isEdit, task }) {
+    const {currentColor}=useStateContext()
     const dispatch = useDispatch()
     // use formik hook to handle form state 
     const formik = useFormik({
@@ -40,7 +42,7 @@ function CreateTask({ setShowModal, setIsEdit, isEdit, task }) {
 
 
     return (
-        <div className="modal">
+        <div className="modal" style={{backgroundColor:currentColor}}>
             <MdCancel className='close-icon' color='red' onClick={ () => {
         setIsEdit(false);
     setShowModal(false)
@@ -71,7 +73,7 @@ function CreateTask({ setShowModal, setIsEdit, isEdit, task }) {
                         <label className="form-row-label" htmlFor="task-name">Summary</label>
                         <textarea className="form-row-input"
                             id="task-summary"
-                            cols="70" rows="10"
+                            cols="50" rows="6"
                             value={formik.values.summary}
                             onChange={formik.handleChange("summary")}
                             onBlur={formik.handleBlur("summary")}

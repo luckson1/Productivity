@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 
-import { links} from '../../data/dummy';
+import { links } from '../../data/dummy';
 import { useStateContext } from '../../context/ContextProvider';
 export const SideBar = () => {
     const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext();
@@ -21,26 +21,26 @@ export const SideBar = () => {
         overflow-auto 
         md:hover:overflow-auto 
         pb-10'>
-            {activeMenu && (<> 
-       
-            
-          
-            <div className='flex justify-between items-center mt-8'>
-                
-                <Link to="/" onClick={handleCloseSideBar}
-                    className="items-center
+            {activeMenu && (<>
+
+
+
+                <div className='flex justify-between items-center mt-8'>
+
+                    <Link to="/" onClick={handleCloseSideBar}
+                        className="items-center
                  gap-3 ml-3 mt-4 flex text-xl font-bold
                  tracking-tight dark:text-white text-slate-900">
-                    <SiShopware /> <span>FinTecho</span>
-                </Link>
+                        <SiShopware /> <span>FinTecho</span>
+                    </Link>
 
-                <button  className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden bg-red-400 ' onClick={handleCloseSideBar}>
-                    <MdOutlineCancel />
-                </button>
+                    <button className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden bg-red-400 ' onClick={handleCloseSideBar}>
+                        <MdOutlineCancel />
+                    </button>
 
-            </div>
-           
-            
+                </div>
+
+
                 <div className='mt-10  min-h-full '>
                     {links?.map((item) => (
                         <div key={item?.title} className="flex flex-col  min-h-full justify-around">
@@ -53,12 +53,10 @@ export const SideBar = () => {
                                     style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : "" })}
                                     className={({ isActive }) => isActive ? activeLink : normalLink} >
 
-                                    <div className='flex flex-row'>
-                                        {link?.icon}
-                                        <span className='capitalize '>
-                                            {link?.name}
-                                        </span>
-                                    </div>
+                                    {link?.icon}
+                                    <span className='capitalize'>
+                                        {link?.name}
+                                    </span>
 
 
                                 </NavLink>

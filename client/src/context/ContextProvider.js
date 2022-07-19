@@ -17,6 +17,13 @@ export const ContextProvider = ({ children }) => {
     const [currentColor, setCurrentColor] = useState("#03C9D7")
     const [currentMode, setCurrentMode] = useState("Light")
     const [themeSettings, setThemeSettings] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [isExpense, setIsExpense] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
+    const [isEdit, setIsEdit] = useState(false)
+    const [currentTask, setCurrentTask] = useState()
+    const [currentItem, setCurrentItem] = useState()
+    const [showCart, setShowCart] = useState(false)
 
 
 
@@ -44,6 +51,21 @@ export const ContextProvider = ({ children }) => {
                 setThemeSettings,
                 setMode,
                 setColor,
+                showModal, 
+                setShowModal,
+                isExpense, 
+                setIsExpense,
+                showDeleteModal, 
+                setShowDeleteModal,
+                isEdit, 
+                setIsEdit,
+                currentTask, 
+                setCurrentTask,
+                currentItem, 
+                setCurrentItem,
+                showCart, 
+                setShowCart
+
         
            
             }}>

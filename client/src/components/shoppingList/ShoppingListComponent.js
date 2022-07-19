@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 
@@ -8,17 +8,13 @@ import CreateShoppingItem from './CreateShoppingItem';
 import ShoppingItemCard from './ShoppingItemCard';
 import ItemsAddedToCart from './ItemAddedToCart';
 import { fetchAllShoppingsItem } from '../../redux/shoppingItemSlices'
+import { useStateContext } from '../../context/ContextProvider';
 
 
 export default function ShoppingListComponent() {
     // display or remove action creation/edit form 
-    const [showModal, setShowModal] = useState(false)
-    const [showDeleteModal, setShowDeleteModal] = useState(false)
-    const [isEdit, setIsEdit] = useState(false)
-    const [currentItem, setCurrentItem] = useState()
-    const [showCart, setShowCart] = useState(false)
-
-
+   
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentItem, setCurrentItem,showCart, setShowCart} = useStateContext();
 
     // dispatch action to fetch all itemss
     const dispatch = useDispatch()
@@ -42,7 +38,7 @@ export default function ShoppingListComponent() {
             <div className="content-display-buttons">
                 <button className="list-heading-button" onClick={() => setShowCart(false)}
                     style={{
-                        backgroundColor: showCart ? "#ac73ff" : "white",
+                        backgroundColor: showCart ? currentColor : "white",
                         borderStartStartRadius: "10px",
                         borderEndStartRadius: "10px"
                     }}>
@@ -50,7 +46,7 @@ export default function ShoppingListComponent() {
                 </button>
                 <button className="list-heading-button " onClick={() => setShowCart(true)}
                     style={{
-                        backgroundColor: !showCart ? "#ac73ff" : "white",
+                        backgroundColor: !showCart ? currentColor : "white",
                         borderStartEndRadius: "10px",
                         borderEndEndRadius: "10px"
                     }}>

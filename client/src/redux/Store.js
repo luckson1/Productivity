@@ -12,7 +12,7 @@ const Store=configureStore( {
         tasks: taskReducers,
         shoppingItem: shoppingItemReducers,
         expenses: expensesReducer,
-        sales: incomesReducer,
+        incomes: incomesReducer,
    
         
     }
