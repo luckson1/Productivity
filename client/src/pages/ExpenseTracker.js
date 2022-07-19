@@ -34,7 +34,7 @@ const expenses=expenseList?.docs
       <div className="content-display-buttons" id="transactions">
         <button className="list-heading-button" id="income" onClick={() => setIsExpense(false)}
           style={{
-            backgroundColor: isExpense ? currentColor : "white",
+            backgroundColor: isExpense ? "white" : currentColor,
             borderStartStartRadius: "10px",
             borderEndStartRadius: "10px"
           }}>
@@ -42,18 +42,19 @@ const expenses=expenseList?.docs
         </button>
         <button className="list-heading-button " id="expense" onClick={() => setIsExpense(true)}
           style={{
-            backgroundColor: !isExpense ? currentColor : "white",
+            backgroundColor: !isExpense ? "white" : currentColor,
             borderStartEndRadius: "10px",
             borderEndEndRadius: "10px"
           }}>
           View Expenses
         </button>
       </div>
+      <h1 style={{marginTop: "20px", fontSize: "30px"}}>{isExpense? "Expenses List": "Incomes List"}</h1>
       <div className="entry-buttons">
         {!isExpense && <button id="task-button" onClick={() => setShowModal(true)}> Add Income</button>}
         {isExpense && <button id="expense-button" onClick={() => { setShowModal(true); setIsExpense(true) }}> Add Expense</button>}
       </div>
-      <h3>{isExpense? "Expenses": "Incomes"}</h3>
+  
     
      { !isExpense && <EntryList entries= {incomes} isExpense={isExpense} loading={incomeLoading}/>}
       {isExpense && <EntryList  entries= {expenses} isExpense={isExpense} loading={expenseLoading}/>}

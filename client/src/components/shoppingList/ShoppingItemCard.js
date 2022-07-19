@@ -27,8 +27,8 @@ function ShoppingItemCard({ setShowDeleteModal, setCurrentItem, setShowModal, sh
 
       <div className="summary" >
         <p> {shoppingItem?.units} {shoppingItem?.name} </p>
-        <p style={{ color: "rgb(110, 148, 245)" }}>| Price: {shoppingItem?.price}</p>
-        <p style={{color:"#f56b6b"}}>| Total: Ksh {shoppingItem?.totalItemCost}</p>
+        <p style={{ color: "rgb(110, 148, 245)" }}>| Price: {shoppingItem?.price} |</p>
+        <p style={{color:"#f56b6b"}}> Total: Ksh {shoppingItem?.totalItemCost}</p>
 
       </div>
       <div className='handling-buttons'>
