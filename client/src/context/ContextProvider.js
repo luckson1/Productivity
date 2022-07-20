@@ -24,6 +24,9 @@ export const ContextProvider = ({ children }) => {
     const [currentTask, setCurrentTask] = useState()
     const [currentItem, setCurrentItem] = useState()
     const [showCart, setShowCart] = useState(false)
+    const [showNavBar, setShowNavBar] = useState(true)
+    const [reveal, setReveal] = useState(false)
+    const [isSignUp, setIsSignUp]=useState(true)
 
 
 
@@ -64,7 +67,13 @@ export const ContextProvider = ({ children }) => {
                 currentItem, 
                 setCurrentItem,
                 showCart, 
-                setShowCart
+                setShowCart,
+                showNavBar, 
+                setShowNavBar,
+                reveal, 
+                setReveal,
+                isSignUp, 
+                setIsSignUp
 
         
            

@@ -203,11 +203,71 @@ padding: 10px;
   margin-left: 290px;
   font-size:30px;
   margin-bottom: 5px;
+  
   -webkit-animation: bounce .73s infinite alternate;
   -moz-animation: bounce .73s infinite alternate;
   animation: bounce .73s infinite alternate;
   
 }
+
+/* -----authmodal---------- */
+
+.auth-modal{
+ 
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 80px;
+  margin-left: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 360px;
+  height: 600px;
+
+  border-radius: 20px;
+  padding: 30px;
+  /* display: contents;
+  overflow: visible; */
+
+}
+
+.auth-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-modal input  {
+  padding: 8px;
+  margin: 5px;
+  font-size: 17 px;
+  border-radius: 10px;
+}
+.toggle-icon {
+  margin-left: 300px;
+  margin-top: -38px;
+  cursor: pointer;
+  font-size: large;
+}
+.secondary-button {
+  color: black;
+ 
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  border-radius: 30px;
+  border: solid 2px black;
+  margin: 40px 8px;
+ 
+}
+
+
+
+
+
+
+
+
 .create-new-task-block {
 
   /* display: flex; */
