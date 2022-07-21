@@ -27,9 +27,9 @@ const errorSchema = Yup.object().shape({
 });
 export const Onboarding = () => {
 
-    const { setActiveMenu, setShowNavBar} = useStateContext()
+    const { setActiveMenu, setShowNavBar } = useStateContext()
     useEffect(() => {
-      setActiveMenu(false); setShowNavBar(false)
+        setActiveMenu(false); setShowNavBar(false)
     }, [])
     // dispatch action of creating a profile
 
@@ -44,7 +44,7 @@ export const Onboarding = () => {
             firstName: '',
             lastName: "",
             image: "",
-         
+
 
         },
         validationSchema: errorSchema,
@@ -73,41 +73,41 @@ export const Onboarding = () => {
     // }, [isProfilecreated, navigate])
 
     return (<>
-      
+
         <div className='onboarding mt-10 '>
             <h2>CREATE YOUR PROFILE</h2>
             <form onSubmit={formik.handleSubmit} encType="multipart/form-data" className='flex-col-reverse md:flex-row'>
                 <section>
 
-                <label htmlFor="firstName">First Name</label>    
-            <input
-            id="firstName"
-                value={formik.values.firstName}
-                onChange={formik.handleChange("firstName")}
-                onBlur={formik.handleBlur("firstName")}
-                type="text"
-                placeholder="First Name"
-            />
-            {/* Err */}
-            <div className="form-validation">
-                {formik.touched.firstName && formik.errors.firstName}
-            </div>
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                        id="firstName"
+                        value={formik.values.firstName}
+                        onChange={formik.handleChange("firstName")}
+                        onBlur={formik.handleBlur("firstName")}
+                        type="text"
+                        placeholder="First Name"
+                    />
+                    {/* Err */}
+                    <div className="form-validation">
+                        {formik.touched.firstName && formik.errors.firstName}
+                    </div>
 
-            <label htmlFor="lastName">Last Name</label>   
-        <input
-        id="lastName"
-                value={formik.values.lastName}
-                onChange={formik.handleChange("lastName")}
-                onBlur={formik.handleBlur("lastName")}
-                type="text"
-                placeholder="Last Name"
-            />
-            {/* Err */}
-            <div className="form-validation">
-                {formik.touched.lastName && formik.errors.lastName}
-            </div>
-        
-            <label htmlFor="image">Profile Picture</label>   
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                        id="lastName"
+                        value={formik.values.lastName}
+                        onChange={formik.handleChange("lastName")}
+                        onBlur={formik.handleBlur("lastName")}
+                        type="text"
+                        placeholder="Last Name"
+                    />
+                    {/* Err */}
+                    <div className="form-validation">
+                        {formik.touched.lastName && formik.errors.lastName}
+                    </div>
+
+                    <label htmlFor="image">Profile Picture</label>
                     <input
                         name="image"
                         id='image'
@@ -119,21 +119,21 @@ export const Onboarding = () => {
 
                         type="file"
                         placeholder="Profile Image"
-                        
+
                     />
 
-{/* 
+                    {/* 
                     {createProfileLoading ? <DisabledButton /> : */}
-                     <input type="submit" />
+                    <input type="submit" />
 
                 </section>
                 {/* {createProfileServerErr || createProfileAppErr ? <div className="form-validation" role="alert">
                     {createProfileServerErr} {createProfileAppErr}
                 </div> : null} */}
-              
-<section>
-   <img alt="" src={profile} className="rounded-xl sm:h-4/5 sm:w-3/5 mt-10 md:ml-60" />
-</section>
+
+                <section>
+                    <img alt="" src={profile} className="rounded-xl sm:h-4/5 sm:w-3/5 mt-10 md:ml-60" />
+                </section>
             </form>
         </div>
     </>);
