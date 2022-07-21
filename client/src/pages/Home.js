@@ -11,8 +11,8 @@ import { MdClose, MdMenu } from 'react-icons/md'
 
 function Home() {
 
-  
-  const { setActiveMenu, setShowNavBar, showModal, setShowModal ,setIsSignUp, isOpenMenu, setIsOpenMenu} = useStateContext()
+
+  const { setActiveMenu, setShowNavBar, showModal, setShowModal, setIsSignUp, isOpenMenu, setIsOpenMenu } = useStateContext()
   useEffect(() => {
     setActiveMenu(false); setShowNavBar(false)
   }, [])
@@ -26,32 +26,32 @@ function Home() {
             <div className="pl-4 flex items-center">
             </div>
             <div className="block lg:hidden pr-4">
-              <button onClick={()=> setIsOpenMenu(!isOpenMenu)}
-              id="nav-toggle" className="flex items-center p-1 text-gray-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <button onClick={() => setIsOpenMenu(!isOpenMenu)}
+                id="nav-toggle" className="flex items-center p-1 text-gray-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
 
-               {isOpenMenu? <MdClose /> :<MdMenu />}
+                {isOpenMenu ? <MdClose /> : <MdMenu />}
 
               </button>
             </div>
-            <div className={`w-full flex-grow md:flex md:items-center md:w-auto ${isOpenMenu? "": "hidden" } mt-2 md:mt-0 bg-white  text-black p-4 md:p-0 z-10" `}>
-            <ul class="list-reset md:flex  flex-1 items-center ">
+            <div className={`w-full flex-grow md:flex md:items-center md:w-auto ${isOpenMenu ? "" : "hidden"} mt-2 md:mt-0 bg-white  text-black p-4 md:p-0 z-10" `}>
+              <ul class="list-reset md:flex  flex-1 items-center ">
                 <li className=" mr-96 md:mr-3  ">
-                  <Link onClick={()=> setIsOpenMenu(!isOpenMenu)}
-                  className="inline-block  py-2 px-4 text-black font-bold no-underline " to="/">Home</Link>
+                  <Link onClick={() => setIsOpenMenu(!isOpenMenu)}
+                    className="inline-block  py-2 px-4 text-black font-bold no-underline " to="/">Home</Link>
                 </li>
                 <li className="mr-96 md:mr-3 ">
-                  <Link  onClick={()=> setIsOpenMenu(!isOpenMenu)}
-                  className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Features</Link>
+                  <Link onClick={() => setIsOpenMenu(!isOpenMenu)}
+                    className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Features</Link>
                 </li>
                 <li className="mr-96 md:mr-3 ">
-                  <Link  onClick={()=> setIsOpenMenu(!isOpenMenu)}
-                  className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Resources</Link>
+                  <Link onClick={() => setIsOpenMenu(!isOpenMenu)}
+                    className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Resources</Link>
                 </li>
               </ul>
               <button
                 id="nav Start Free Trial"
                 className="mx-auto mr-96 lg:mx-0 hover:underline bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 text-gray-900 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                onClick={()=> { setShowModal(true); setIsSignUp(false);setIsOpenMenu(false);window.scrollTo(0,0)}}
+                onClick={() => { setShowModal(true); setIsSignUp(false); setIsOpenMenu(false); window.scrollTo(0, 0) }}
               >
                 Login
               </button>
@@ -71,9 +71,9 @@ function Home() {
               <p className="leading-normal text-2xl mb-8" >
                 One workspace for your work and personal milestones.
               </p>
-   
-              <button onClick={()=> setShowModal(true)}
-              className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+
+              <button onClick={() => setShowModal(true)}
+                className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 Sign Up
               </button>
             </div>
@@ -185,8 +185,8 @@ function Home() {
                 </div>
                 <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                   <div className="flex items-center justify-start">
-                    <button 
-                    className="bg-gradient-to-r from-indigo-500  mx-auto lg:mx-0 hover:underline gradient text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <button
+                      className="bg-gradient-to-r from-indigo-500  mx-auto lg:mx-0 hover:underline gradient text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                       Learn More
                     </button>
                   </div>
@@ -214,8 +214,8 @@ function Home() {
                 </div>
                 <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                   <div className="flex items-center justify-center">
-                    <button 
-                    className="bg-gradient-to-r from-indigo-500  mx-auto lg:mx-0 hover:underline gradient text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <button
+                      className="bg-gradient-to-r from-indigo-500  mx-auto lg:mx-0 hover:underline gradient text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                       Learn More
                     </button>
                   </div>
@@ -243,8 +243,8 @@ function Home() {
                 </div>
                 <div className="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                   <div className="flex items-center justify-end">
-                    <button 
-                    className="bg-gradient-to-r from-indigo-500  mx-auto lg:mx-0 hover:underline gradient text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                    <button
+                      className="bg-gradient-to-r from-indigo-500  mx-auto lg:mx-0 hover:underline gradient text-black font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                       Learn More
                     </button>
                   </div>
@@ -286,9 +286,9 @@ function Home() {
           <h3 className="my-4 text-3xl leading-tight">
             Increase your productivity by 10x
           </h3>
-          <button onClick={()=> {setShowModal(true);window.scrollTo(0,0)}}
-          className="mx-auto  hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-          Sign Up
+          <button onClick={() => { setShowModal(true); window.scrollTo(0, 0) }}
+            className="mx-auto  hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+            Sign Up
           </button>
         </section>
 
@@ -355,8 +355,8 @@ function Home() {
           </div>
 
         </footer>
-        
-{showModal && <Authmodal />}
+
+        {showModal && <Authmodal />}
       </div>
 
     </div>
