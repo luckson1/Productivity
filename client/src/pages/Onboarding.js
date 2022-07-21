@@ -8,6 +8,9 @@ import React, { useEffect } from 'react';
 import DisabledButton from '../components/DisabledButton';
 import profile from '../data/ProfilePic.jpg';
 import { useStateContext } from '../context/ContextProvider';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { createProfileAction } from '../redux/usersSlices';
 
 
 
@@ -33,7 +36,7 @@ export const Onboarding = () => {
     }, [])
     // dispatch action of creating a profile
 
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
 
 
@@ -50,27 +53,27 @@ export const Onboarding = () => {
         validationSchema: errorSchema,
         onSubmit: values => {
             console.log(values)
-            // dispatch(createProfileAction(values))
+            dispatch(createProfileAction(values))
         },
     });
 
 
     //get state from store 
-    // const user = useSelector((state) => {
-    //     return state?.users
-    // })
+    const user = useSelector((state) => {
+        return state?.users
+    })
 
-    // const { isProfilecreated, createProfileLoading, createProfileAppErr, createProfileServerErr } = user
+    const { isProfilecreated, createProfileLoading, createProfileAppErr, createProfileServerErr } = user
 
     // force navagation to the dashboard page
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (isProfilecreated) {
-    //         return navigate('/dashboard')
-    //     }
-    // }, [isProfilecreated, navigate])
+    useEffect(() => {
+        if (isProfilecreated) {
+            return navigate('/dashboard')
+        }
+    }, [isProfilecreated, navigate])
 
     return (<>
 
@@ -122,14 +125,14 @@ export const Onboarding = () => {
 
                     />
 
-                    {/* 
-                    {createProfileLoading ? <DisabledButton /> : */}
-                    <input type="submit" />
+                    {
+                    createProfileLoading ? <DisabledButton /> : 
+                        <input type="submit" />}
 
                 </section>
-                {/* {createProfileServerErr || createProfileAppErr ? <div className="form-validation" role="alert">
+                {createProfileServerErr || createProfileAppErr ? <div className="form-validation" role="alert">
                     {createProfileServerErr} {createProfileAppErr}
-                </div> : null} */}
+                </div> : null}
 
                 <section>
                     <img alt="" src={profile} className="rounded-xl sm:h-4/5 sm:w-3/5 mt-10 md:ml-60" />

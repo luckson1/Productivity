@@ -115,7 +115,7 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
 //create profile state
 export const createProfileAction = createAsyncThunk('user/create', async (payload, { rejectWithValue, getState, dispatch }) => {
     const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
-    console.log(userToken)
+   console.log(payload)
     const config = {
         headers: {
             "Content-Type": "multipart/form-data",

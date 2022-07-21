@@ -4,10 +4,12 @@ import { userProfileData } from '../../data/dummy'
 import { useStateContext } from '../../context/ContextProvider';
 import avatar from '../../data/avatar.jpg';
 import { Button } from '../Button';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/usersSlices';
 
 export const UserProfile = () => {
   const { currentColor } = useStateContext();
-
+const dispatch=useDispatch()
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
@@ -57,6 +59,7 @@ export const UserProfile = () => {
           text="Logout"
           borderRadius="10px"
           width="full"
+          onClick={()=> {dispatch(logout()); console.log('Hi')}}
         />
       </div>
     </div>

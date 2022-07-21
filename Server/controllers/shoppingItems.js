@@ -7,10 +7,10 @@ require('dotenv').config()
 
 const createShoppingItemCtrl= expressAsyncHandler(async (req, res) => {
     
-    // const user= req?.user?._id
+    const user= req?.user?._id
     const {name,  units, price}=req?.body
     try {
-        const shoppingItem= await ShoppingItem.create({name,  units, price})
+        const shoppingItem= await ShoppingItem.create({name,  units, price, user})
    
         res.json({shoppingItem})
     } catch (error) {
@@ -25,24 +25,9 @@ const fetchAllShoppingItem= expressAsyncHandler(async (req, res) => {
     try {
         const shoppingItems= await ShoppingItem.find({})
         // shopping stats
-      const shoppingStats= await ShoppingItem.aggregate(
-        [
-          // First Stage grouping
-          {
-            $group :
-              {
-                _id : "$status",
-                totalShoppingAmount: { $sum: { $multiply: [ "$price", "$units" ] } }
-              }
-           },
-           // Second Stage filtering
-           {
-             $match: { "totalShoppingAmount": { $gte: 0 } }
-           }
-         ]
-       )
       
-        res.json({shoppingItems, shoppingStats})
+      
+        res.json({shoppingItems})
     } catch (error) {
         console.log(error)
         res.json({error}) 
@@ -57,8 +42,26 @@ const fetchUserShoppingItem= expressAsyncHandler(async (req, res) => {
     const id= req?.user?._id
 
     try {
-        const shoppingItem=await ShoppingItem.find({id})
-        res.json({shoppingItem})
+        const shoppingItems=await ShoppingItem.find({user:id})
+        const shoppingStats= await ShoppingItem.aggregate(
+            [
+                 // First Stage  filtering by id
+             
+                 {
+                    $match: { user: id }
+                  },
+                    // Second Stage grouping by status
+                  
+              {
+                $group :
+                  {
+                    _id : "$status",
+                    totalShoppingAmount: { $sum: { $multiply: [ "$price", "$units" ] } }
+                  }
+               }
+             ]
+           )
+        res.json({shoppingItems, shoppingStats})
     } catch (error) {
         res.json({error}) 
     }

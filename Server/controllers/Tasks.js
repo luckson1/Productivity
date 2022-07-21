@@ -7,10 +7,10 @@ require('dotenv').config()
 
 const createTaskCtrl= expressAsyncHandler(async (req, res) => {
     
-    // const user= req?.user?._id
+    const user= req?.user?._id
     const {title, summary,status}=req?.body
     try {
-        const task= await Task.create({title,  summary, status})
+        const task= await Task.create({title,  summary, status, user})
    
         res.json({task})
     } catch (error) {
@@ -35,11 +35,12 @@ const fetchAllTask= expressAsyncHandler(async (req, res) => {
 // fetch all Task
 
 const fetchUserTask= expressAsyncHandler(async (req, res) => {
-    const user= req?.user?._id
+    const id= req?.user?._id
 
     try {
-        const task=await Task.find({user:user})
-        res.json({task})
+        const tasks=await Task.find({user:id})
+     
+        res.json({tasks})
     } catch (error) {
         res.json({error}) 
     }

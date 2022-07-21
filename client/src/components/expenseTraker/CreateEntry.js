@@ -4,6 +4,9 @@ import { useFormik } from 'formik';
 // import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
+import { useDispatch } from 'react-redux';
+import { createExpenseAction } from '../../redux/expenseSlices';
+import { createIncomeAction } from '../../redux/IncomeSlices';
 
 const errorSchema = Yup.object().shape({
 
@@ -14,7 +17,7 @@ const errorSchema = Yup.object().shape({
         .number()
         .required('Amount is Required'),
     description: Yup
-        .number()
+        .string()
         .required('Amount is Required'),
 
 
@@ -23,7 +26,7 @@ const errorSchema = Yup.object().shape({
 function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsExpense }) {
     const {currentColor}=useStateContext()
 
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -35,10 +38,10 @@ function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsE
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values => { console.log(values) }
-            : values => {
+        onSubmit: isExpense ? values => { dispatch(createExpenseAction(values)) }
+            : values => { dispatch(createIncomeAction(values))
 
-                console.log(values)
+              
             }
     });
 

@@ -10,8 +10,8 @@ userRoutes=express.Router()
 
 
 userRoutes.post("/register", registerUserCtrl)
-userRoutes.put("/", upload,  createProfileCtrl )
+userRoutes.put("/", upload,  authentication, createProfileCtrl )
 userRoutes.post ("/login", loginUserCtrl)
-userRoutes.get("/profile", fetchUserCtrl)
+userRoutes.get("/profile", authentication, fetchUserCtrl)
 
 module.exports={userRoutes}

@@ -65,6 +65,7 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
 
 const createProfileCtrl = expressAsyncHandler(async (req, res) => {
     const id = req?.user?.id
+  
     const filePath = req?.file?.path
       // upload file to cloudinary
       const result = await cloudinary.uploader.upload(filePath)
@@ -88,10 +89,10 @@ const createProfileCtrl = expressAsyncHandler(async (req, res) => {
     try {
         
         const user = await User.findByIdAndUpdate(id, updateDocument);
-       
+ 
         res.json({user })
     } catch (error) {
-        
+   
         res.json({ error })
     }
 })

@@ -10,6 +10,7 @@ import { useStateContext } from "../src/context/ContextProvider"
 import { FiSettings } from 'react-icons/fi';
 import { ThemeSettings } from './utils/ThemeSettings';
 import { Onboarding } from './pages/Onboarding';
+import ProtectedRoute from './components/users/protectedRoute';
 function App() {
     const { activeMenu, setThemeSettings, currentColor, themeSettings, showNavBar } = useStateContext();
     return (
@@ -49,10 +50,29 @@ function App() {
                         {themeSettings && <ThemeSettings />}
                         <Routes>
                             <Route exact path="/" element={<Home />} />
-                            <Route exact path="/kanban" element={<Kanban />} />
-                            <Route exact path="/shopping-list" element={<ShoppingList />} />
-                            <Route exact path="/expense-tracker" element={<ExpenseTracker />} />
-                            <Route exact path="/onboarding" element={<Onboarding />} />
+
+                            <Route exact path="/kanban" element={
+                                <ProtectedRoute>
+                                    <Kanban />
+                                </ProtectedRoute>} />
+                            <Route exact path="/kanban" element={
+                                <ProtectedRoute>
+                                    <Kanban />
+                                </ProtectedRoute>} />
+                            <Route exact path="/shopping-list" element={
+                                <ProtectedRoute>
+                                    <ShoppingList />
+                                </ProtectedRoute>} />
+                            <Route exact path="/expense-tracker" element={
+                                <ProtectedRoute>
+                                    <ExpenseTracker />
+                                </ProtectedRoute>
+                            } />
+                            <Route exact path="/onboarding" element={
+                                <ProtectedRoute>
+                                    <Onboarding />
+                                </ProtectedRoute>
+                            } />
 
                         </Routes>
                     </div>

@@ -1,11 +1,12 @@
 const express= require('express')
 const  {fetchUserTask, createTaskCtrl, fetchOneTaskCtrl, fetchAllTask, updateTaskctrl, deleteTaskctrl}  = require('../controllers/Tasks');
+const authentication = require('../middlewear/authentication');
 taskRoutes=express.Router()
 
 fetchAllTask
-taskRoutes.post("/",  createTaskCtrl);
-taskRoutes.get("/",  fetchAllTask)
-taskRoutes.get("/:id",  fetchOneTaskCtrl)
-taskRoutes.put("/:id",  updateTaskctrl)
-taskRoutes.delete("/:id",  deleteTaskctrl)
+taskRoutes.post("/", authentication, createTaskCtrl);
+taskRoutes.get("/", authentication, fetchUserTask)
+taskRoutes.get("/:id", authentication, fetchOneTaskCtrl)
+taskRoutes.put("/:id", authentication, updateTaskctrl)
+taskRoutes.delete("/:id", authentication, deleteTaskctrl)
 module.exports={taskRoutes}

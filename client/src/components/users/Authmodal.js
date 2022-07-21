@@ -5,11 +5,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import DisabledButton from "../DisabledButton";
 import { useStateContext } from "../../context/ContextProvider";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { MdCancel } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUserAction, registerUserAction } from "../../redux/usersSlices";
+import { useEffect } from "react";
 
 // use yup to handle errors 
 const SignInErrorSchema = Yup.object().shape({
 
-    email: Yup.string().email('Invalid email').required('Email Required'),
+    email: Yup.string()
+        .email('Invalid email')
+        .required('Email Required'),
     password: Yup.string()
         .matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
             , 'password must contain 6 or more characters with at least one of each: uppercase, lowercase, number and special character')
@@ -29,16 +35,16 @@ const LoginErrorSchema = Yup.object().shape({
 });
 
 export const Authmodal = () => {
-    const{ reveal, setReveal,setShowModal,  isSignUp, setIsSignUp  }= useStateContext()
+    const { reveal, setReveal, setShowModal, isSignUp, setIsSignUp } = useStateContext()
     // dispatch
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     // get data from store
 
-    // const user = useSelector((state) => {
-    //     return state?.users
-    // })
-    // const { userLoading, userServerErr, userAppErr } = user;
+    const user = useSelector((state) => {
+        return state?.users
+    })
+    const { userLoading, userServerErr, userAppErr, isRegistered ,isLoggedIn} = user;
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -52,20 +58,37 @@ export const Authmodal = () => {
         validationSchema: isSignUp ? SignInErrorSchema : LoginErrorSchema,
         onSubmit: values => {
             console.log(values)
-            // isSignUp ? dispatch(registerUserAction(values)) : dispatch(loginUserAction(values))
+            isSignUp ? dispatch(registerUserAction(values)) : dispatch(loginUserAction(values))
         },
     })
 
+
+    // force navigation once an action is performed
+const navigate=useNavigate();
+    useEffect(() => {
+        if (isRegistered) {
+            navigate('/onboarding');
+            window.location.reload();
+        }
+    }, [])
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/kanban');
+            window.location.reload();
+        }
+    }, [isLoggedIn])
+
     return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20'>
-        <div onClick={() => { setShowModal(false); setIsSignUp(true);setReveal(false) }} className="close-icon"><h4>X</h4></div>
+        <div onClick={() => { setShowModal(false); setIsSignUp(true); setReveal(false) }} className="close-icon"><MdCancel color="red" /></div>
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
-        {isSignUp && <p className="text-left"> By clicking Sign Up you are in agreement with our terms. Learn more from our Privacy Policy Page</p>}
+        {isSignUp && <p className="text-left"> By clicking Sign Up you are in agreement with our terms. Learn more from our Privacy Page</p>}
         {/* Errors */}
-        {/* {userAppErr || userServerErr ? (
+        {userAppErr || userServerErr ? (
             <div className="form-validation" role="alert">
                 {userServerErr} {userAppErr}
             </div>
-        ) : null} */}
+        ) : null}
         <form onSubmit={formik.handleSubmit} className="mt-4">
 
 
@@ -85,22 +108,24 @@ export const Authmodal = () => {
                 onChange={formik.handleChange("password")}
                 onBlur={formik.handleBlur("password")}
                 type={reveal ? "text" : "password"}
-                placeholder="Password"z
+                placeholder="Password" z
             />
-         <button className="toggle-icon" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff />: <FiEye />}  </button>
+            <button className="toggle-icon" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff /> : <FiEye />}  </button>
             {/* Err */}
             <div className="form-validation">
                 {formik.touched.password && formik.errors.password}
             </div>
-          
+
             {
-            // userLoading ? <DisabledButton /> : 
-            <button
-                type="submit"
-                className="secondary-button"
-            >
-                {isSignUp ? "Sign Up" : "Login"}
-            </button>}
+                userLoading ? <DisabledButton /> :
+                    <button
+                        type="submit"
+                        className="secondary-button"
+                    >
+                        {isSignUp ? "Sign Up" : "Login"}
+                    </button>}
+            {!isSignUp && <p className="text-left"> Dont have an account? <Link to="/" type="button" className="text-blue-500" onClick={() => setIsSignUp(true)}>Sign Up</Link></p>}
+            {isSignUp && <p className="text-left"> Already have an account? <Link to="/" type="button" className="text-blue-500" onClick={() => setIsSignUp(false)}>Login</Link></p>}
         </form>
 
     </div>);

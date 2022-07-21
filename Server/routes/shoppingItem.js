@@ -1,11 +1,12 @@
 const express= require('express')
 const  {fetchUserShoppingItem, createShoppingItemCtrl, fetchOneShoppingItemCtrl, fetchAllShoppingItem, updateShoppingItemctrl, deleteShoppingItemctrl}  = require('../controllers/shoppingItems');
+const authentication = require('../middlewear/authentication');
 shoppingItemRoutes=express.Router()
 
-fetchAllShoppingItem
-shoppingItemRoutes.post("/",  createShoppingItemCtrl);
-shoppingItemRoutes.get("/",  fetchAllShoppingItem)
-shoppingItemRoutes.get("/:id",  fetchOneShoppingItemCtrl)
-shoppingItemRoutes.put("/:id",  updateShoppingItemctrl)
-shoppingItemRoutes.delete("/:id",  deleteShoppingItemctrl)
+
+shoppingItemRoutes.post("/", authentication, createShoppingItemCtrl);
+shoppingItemRoutes.get("/", authentication, fetchUserShoppingItem)
+shoppingItemRoutes.get("/:id", authentication, fetchOneShoppingItemCtrl)
+shoppingItemRoutes.put("/:id", authentication, updateShoppingItemctrl)
+shoppingItemRoutes.delete("/:id", authentication, deleteShoppingItemctrl)
 module.exports={shoppingItemRoutes}

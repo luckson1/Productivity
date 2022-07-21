@@ -21,14 +21,14 @@ export default function KanbanComponent() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchTasksAction())
-    }, [dispatch])
+    }, [])
 
     const tasksState = useSelector((state) => state?.tasks)
     const { tasksFetched, taskLoading, taskAppErr, taskServerErr } = tasksState
     const toDoTasks = tasksFetched?.tasks?.filter(task => task?.status === "To Do")
     const inProgressTasks = tasksFetched?.tasks?.filter(task => task?.status === "In Progress")
     const doneTasks = tasksFetched?.tasks?.filter(task => task?.status === "Done")
-
+ console.log(tasksFetched?.tasks)
 
 
     return (
