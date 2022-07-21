@@ -26,15 +26,15 @@ export const ContextProvider = ({ children }) => {
     const [showCart, setShowCart] = useState(false)
     const [showNavBar, setShowNavBar] = useState(true)
     const [reveal, setReveal] = useState(false)
-    const [isSignUp, setIsSignUp]=useState(true)
-   const  [isOpenMenu, setIsOpenMenu]=useState(false)
+    const [isSignUp, setIsSignUp] = useState(true)
+    const [isOpenMenu, setIsOpenMenu] = useState(false)
 
 
 
     const setMode = (e) => { setCurrentMode(e.target.value); localStorage.setItem("ThemeMode", e.target.value); setThemeSettings(false) }
     const setColor = (color) => { setCurrentColor(color); localStorage.setItem("ThemeColor", color); setThemeSettings(false) }
 
-    const handleClick = (clicked) => {setIsClicked({ ...initialState, [clicked]: true });console.log(clicked)}
+    const handleClick = (clicked) => { setIsClicked({ ...initialState, [clicked]: true }); console.log(clicked) }
 
 
     return (
@@ -55,31 +55,31 @@ export const ContextProvider = ({ children }) => {
                 setThemeSettings,
                 setMode,
                 setColor,
-                showModal, 
+                showModal,
                 setShowModal,
-                isExpense, 
+                isExpense,
                 setIsExpense,
-                showDeleteModal, 
+                showDeleteModal,
                 setShowDeleteModal,
-                isEdit, 
+                isEdit,
                 setIsEdit,
-                currentTask, 
+                currentTask,
                 setCurrentTask,
-                currentItem, 
+                currentItem,
                 setCurrentItem,
-                showCart, 
+                showCart,
                 setShowCart,
-                showNavBar, 
+                showNavBar,
                 setShowNavBar,
-                reveal, 
+                reveal,
                 setReveal,
-                isSignUp, 
+                isSignUp,
                 setIsSignUp,
-                isOpenMenu, 
+                isOpenMenu,
                 setIsOpenMenu
 
-        
-           
+
+
             }}>
 
             {children}
