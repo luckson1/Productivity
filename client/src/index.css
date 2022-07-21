@@ -238,13 +238,14 @@ padding: 10px;
 
 .auth-modal input  {
   padding: 8px;
-  margin: 5px;
+  margin-bottom: 20px;
   font-size: 17 px;
   border-radius: 10px;
 }
 .toggle-icon {
-  margin-left: 300px;
-  margin-top: -38px;
+
+  margin-left: 260px;
+  margin-top: -45px;
   cursor: pointer;
   font-size: large;
 }
@@ -517,11 +518,73 @@ h2 small {
     padding-right: 10px;
     content: attr(data-label);
     flex-basis: 50%;
-    text-align: right;
+    text-align: right;   
     
   }
 
 
+
+
+
+  
+
+
+
+}
+
+
+
+
+
+
+
+/* ---------Onboarding----------- */
+.onboarding {
+ 
+}
+
+.onboarding form {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+
+
+.onboarding form section {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  
+  text-align: start;
+}
+
+.onboarding form input {
+  padding: 10px 30px;
+  margin:20px 0px;
+  font-size: 15px;
+  border:solid 2px rgb(219, 219,219);
+  border-radius: 10px;
+  min-width: "300px"
+}
+
+.onboarding form input::-webkit-outer-spin-button
+.onboarding form input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin:0;
+}
+
+
+.onboarding form label {
+  margin: 10px 0px;
+}
+
+
+.onboarding form input[type='submit']:hover {
+  background-color: rgb(226,115,155);
+}
+.onboarding form input[type='submit']:active {
+  background-color: rgb(221, 15, 90);
 }
 
 

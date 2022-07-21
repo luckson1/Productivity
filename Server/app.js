@@ -6,6 +6,8 @@ const { notFound, errorHandler } = require('./middlewear/errors');
 const dotenv=require ('dotenv');
 const { taskRoutes } = require('./routes/Tasks');
 const { shoppingItemRoutes } = require('./routes/shoppingItem');
+const { application } = require('express');
+const { userRoutes } = require('./routes/Users');
 
 
 
@@ -34,7 +36,7 @@ app.use('/api/tasks', taskRoutes)
 // shoppingItems route
 app.use('/api/shoppingItems', shoppingItemRoutes)
 
-
+app.use("/api/users", userRoutes)
 
 //error handling //  
 

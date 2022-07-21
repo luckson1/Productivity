@@ -9,6 +9,7 @@ import { SideBar } from './components/navigation/SideBar';
 import { useStateContext } from "../src/context/ContextProvider"
 import { FiSettings } from 'react-icons/fi';
 import { ThemeSettings } from './utils/ThemeSettings';
+import { Onboarding } from './pages/Onboarding';
 function App() {
     const { activeMenu, setThemeSettings, currentColor, themeSettings, showNavBar } = useStateContext();
     return (
@@ -51,6 +52,7 @@ function App() {
                             <Route exact path="/kanban" element={<Kanban />} />
                             <Route exact path="/shopping-list" element={<ShoppingList />} />
                             <Route exact path="/expense-tracker" element={<ExpenseTracker />} />
+                            <Route exact path="/onboarding" element={<Onboarding />} />
 
                         </Routes>
                     </div>

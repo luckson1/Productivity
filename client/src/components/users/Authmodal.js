@@ -3,8 +3,8 @@ import * as Yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux';
 // import { loginUserAction, registerUserAction } from '../redux/usersSlices';
 import DisabledButton from "../DisabledButton";
-import { useState } from "react";
 import { useStateContext } from "../../context/ContextProvider";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 // use yup to handle errors 
 const SignInErrorSchema = Yup.object().shape({
@@ -56,8 +56,8 @@ export const Authmodal = () => {
         },
     })
 
-    return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300'>
-        <div onClick={() => { setShowModal(false); setIsSignUp(true) }} className="close-icon"><h4>X</h4></div>
+    return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20'>
+        <div onClick={() => { setShowModal(false); setIsSignUp(true);setReveal(false) }} className="close-icon"><h4>X</h4></div>
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
         {isSignUp && <p className="text-left"> By clicking Sign Up you are in agreement with our terms. Learn more from our Privacy Policy Page</p>}
         {/* Errors */}
@@ -66,7 +66,7 @@ export const Authmodal = () => {
                 {userServerErr} {userAppErr}
             </div>
         ) : null} */}
-        <form onSubmit={formik.handleSubmit} >
+        <form onSubmit={formik.handleSubmit} className="mt-4">
 
 
             <input
@@ -87,11 +87,12 @@ export const Authmodal = () => {
                 type={reveal ? "text" : "password"}
                 placeholder="Password"z
             />
-            <div className="toggle-icon"><i className={reveal ? "bi bi-eye-slash " : "bi bi-eye "} id="togglePassword" onClick={() => setReveal(!reveal)}></i></div>
+         <button className="toggle-icon" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff />: <FiEye />}  </button>
             {/* Err */}
             <div className="form-validation">
                 {formik.touched.password && formik.errors.password}
             </div>
+          
             {
             // userLoading ? <DisabledButton /> : 
             <button

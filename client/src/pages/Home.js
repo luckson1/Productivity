@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react'
 import productivity from '../data/productivity.svg'
 import todo from '../data/todo.svg'
-import hero from '../data/hero.png'
+
 import { useStateContext } from '../context/ContextProvider'
 import { Link } from 'react-router-dom'
 import { Authmodal } from '../components/users/Authmodal'
+import { MdClose, MdMenu } from 'react-icons/md'
+
 
 
 function Home() {
-  const { setActiveMenu, setShowNavBar, showModal, setShowModal ,setIsSignUp} = useStateContext()
+
+  
+  const { setActiveMenu, setShowNavBar, showModal, setShowModal ,setIsSignUp, isOpenMenu, setIsOpenMenu} = useStateContext()
   useEffect(() => {
     setActiveMenu(false); setShowNavBar(false)
   }, [])
@@ -18,32 +22,36 @@ function Home() {
       <div className="leading-normal tracking-normal text-white gradient" >
 
         <nav id="header" className="fixed w-full z-30 top-0 text-white">
-          <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+          <div className="w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-2 bg-white">
             <div className="pl-4 flex items-center">
             </div>
             <div className="block lg:hidden pr-4">
-              <button id="nav-toggle" className="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <button onClick={()=> setIsOpenMenu(!isOpenMenu)}
+              id="nav-toggle" className="flex items-center p-1 text-gray-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
 
-                <title>Menu</title>
+               {isOpenMenu? <MdClose /> :<MdMenu />}
 
               </button>
             </div>
-            <div className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
-              <ul className="list-reset lg:flex justify-end flex-1 items-center">
-                <li className="mr-3">
-                  <Link className="inline-block py-2 px-4 text-black font-bold no-underline" to="/">Home</Link>
+            <div className={`w-full flex-grow md:flex md:items-center md:w-auto ${isOpenMenu? "": "hidden" } mt-2 md:mt-0 bg-white  text-black p-4 md:p-0 z-10" `}>
+            <ul class="list-reset md:flex  flex-1 items-center ">
+                <li className=" mr-96 md:mr-3  ">
+                  <Link onClick={()=> setIsOpenMenu(!isOpenMenu)}
+                  className="inline-block  py-2 px-4 text-black font-bold no-underline " to="/">Home</Link>
                 </li>
-                <li className="mr-3">
-                  <Link className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Features</Link>
+                <li className="mr-96 md:mr-3 ">
+                  <Link  onClick={()=> setIsOpenMenu(!isOpenMenu)}
+                  className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Features</Link>
                 </li>
-                <li className="mr-3">
-                  <Link className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Resources</Link>
+                <li className="mr-96 md:mr-3 ">
+                  <Link  onClick={()=> setIsOpenMenu(!isOpenMenu)}
+                  className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Resources</Link>
                 </li>
               </ul>
               <button
                 id="nav Start Free Trial"
-                className="mx-auto lg:mx-0 hover:underline bg-white  text-yellow-600 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                onClick={()=> { setShowModal(true); setIsSignUp(false)}}
+                className="mx-auto mr-96 lg:mx-0 hover:underline bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 text-gray-900 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+                onClick={()=> { setShowModal(true); setIsSignUp(false);setIsOpenMenu(false);window.scrollTo(0,0)}}
               >
                 Login
               </button>
@@ -52,7 +60,7 @@ function Home() {
           <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
 
-        <div className="pt-24 bg-gradient-to-r from-indigo-300  text-gray-700  ">
+        <div className="pt-24 bg-gradient-to-r from-indigo-200  text-gray-700  ">
           <div className="container px-3 mx-auto flex flex-wrap  flex-col md:flex-row items-center">
 
             <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
@@ -63,6 +71,7 @@ function Home() {
               <p className="leading-normal text-2xl mb-8" >
                 One workspace for your work and personal milestones.
               </p>
+   
               <button onClick={()=> setShowModal(true)}
               className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 Sign Up
@@ -75,7 +84,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="relative -mt-12 lg:-mt-24 bg-gradient-to-r from-indigo-300 " >
+        <div className="relative -mt-12 lg:-mt-24 bg-gradient-to-r from-indigo-200 " >
           <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g transform="translate(-2.000000, 44.000000)" fill="#FFFFFF" fillRule="nonzero">
@@ -277,9 +286,9 @@ function Home() {
           <h3 className="my-4 text-3xl leading-tight">
             Increase your productivity by 10x
           </h3>
-          <button 
+          <button onClick={()=> {setShowModal(true);window.scrollTo(0,0)}}
           className="mx-auto  hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-          Learn More
+          Sign Up
           </button>
         </section>
 

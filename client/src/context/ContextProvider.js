@@ -27,6 +27,7 @@ export const ContextProvider = ({ children }) => {
     const [showNavBar, setShowNavBar] = useState(true)
     const [reveal, setReveal] = useState(false)
     const [isSignUp, setIsSignUp]=useState(true)
+   const  [isOpenMenu, setIsOpenMenu]=useState(false)
 
 
 
@@ -73,7 +74,9 @@ export const ContextProvider = ({ children }) => {
                 reveal, 
                 setReveal,
                 isSignUp, 
-                setIsSignUp
+                setIsSignUp,
+                isOpenMenu, 
+                setIsOpenMenu
 
         
            
