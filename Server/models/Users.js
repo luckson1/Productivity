@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
+        userId: {
+            type: String,
+            required: true
+        },
         
 
 

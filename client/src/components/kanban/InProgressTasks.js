@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 
 
-function InProgressTasks({children}) {
+function InProgressTasks({children, markAsInProgress}) {
  
     const dispatch= useDispatch()
 const [{isOver, canDrop} ,drop]= useDrop({

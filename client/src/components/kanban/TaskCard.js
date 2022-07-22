@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
 
-function TaskCard({ setShowDeleteModal, setCurrentTask, setShowModal, task, setIsEdit, type,newStatus }) {
+function TaskCard({ setShowDeleteModal, setCurrentEntry, setShowModal, task, setIsEdit, type }) {
  
 
 const [{isDragging},drag]=useDrag({
@@ -29,12 +29,12 @@ const [{isDragging},drag]=useDrag({
 
         <MdDeleteForever size="20px" color='red' onClick={() => {
           setShowDeleteModal(true);
-          setCurrentTask(task)
+          setCurrentEntry(task)
         }} style={{ cursor: "pointer" }} />
         <MdEdit size="20px" color='orange' onClick={() => {
           setShowModal(true);
           setIsEdit(true);
-          setCurrentTask(task)
+          setCurrentEntry(task)
         }} style={{ cursor: "pointer" }} />
 
       </div>

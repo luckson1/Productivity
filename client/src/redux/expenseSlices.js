@@ -60,7 +60,7 @@ export const FetchExpensesAction = createAsyncThunk('expense/fetch', async (payl
     try {
         //make http call here
 
-        const { data } = await axios.get(`${ExpensesURL}/expenses?pages=${payload}`, config);
+        const { data } = await axios.get(`${ExpensesURL}/expenses`, config);
 
         return data;
     } catch (error) {
@@ -75,7 +75,7 @@ export const FetchExpensesAction = createAsyncThunk('expense/fetch', async (payl
 });
 
 // update expenses
-export const UpdateExpenseAction = createAsyncThunk('expense/update', async (payload, { rejectWithValue, getState, dispatch }) => {
+export const updateExpenseAction = createAsyncThunk('expense/update', async (payload, { rejectWithValue, getState, dispatch }) => {
     //get user token from store
 
     const userToken = getState()?.users?.userAuth?.token;
@@ -104,6 +104,38 @@ export const UpdateExpenseAction = createAsyncThunk('expense/update', async (pay
 
 
 });
+
+export const deleteExpenseAction = createAsyncThunk('expense/delete', async (payload, { rejectWithValue, getState, dispatch }) => {
+    //get user token from store
+
+    const userToken = getState()?.users?.userAuth?.token;
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        },
+
+    };
+
+
+console.log(userToken)
+    try {
+        //make http call here
+
+        const { data } = await axios.delete(`${ExpensesURL}/expenses/${payload?.id}`, payload, config);
+       
+        return data;
+    } catch (error) {
+        if (!error?.response) {
+            throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+    }
+
+
+
+});
+
 const expensesSlices = createSlice({
     name: 'expense',
     initialState: {
@@ -159,9 +191,9 @@ const expensesSlices = createSlice({
             state.expenseServerErr = action?.error?.msg;
         });
 
-        //update Expense
+        //Update Expense
         // handle pending state
-        builder.addCase(UpdateExpenseAction.pending, (state, action) => {
+        builder.addCase(updateExpenseAction.pending, (state, action) => {
             state.expenseLoading = true;
 
         });
@@ -170,7 +202,7 @@ const expensesSlices = createSlice({
         })
 
         //hande success state
-        builder.addCase(UpdateExpenseAction.fulfilled, (state, action) => {
+        builder.addCase(updateExpenseAction.fulfilled, (state, action) => {
             state.UpdatedExpense = action?.payload;
             state.expenseLoading = false;
             state.expenseAppErr = undefined;
@@ -179,12 +211,35 @@ const expensesSlices = createSlice({
         });
         //hande rejected state
 
-        builder.addCase(UpdateExpenseAction.rejected, (state, action) => {
+        builder.addCase(updateExpenseAction.rejected, (state, action) => {
             state.expenseLoading = false;
             state.expenseAppErr = action?.payload?.msg;
             state.expenseServerErr = action?.error?.msg;
         })
 
+
+        //Delete Expense
+        // handle pending state
+        builder.addCase(deleteExpenseAction.pending, (state, action) => {
+            state.expenseLoading = true;
+
+        });
+       
+        //hande success state
+        builder.addCase(deleteExpenseAction.fulfilled, (state, action) => {
+            state.deletedExpense = action?.payload;
+            state.expenseLoading = false;
+            state.expenseAppErr = undefined;
+            state.expenseServerErr = undefined;
+         
+        });
+        //hande rejected state
+
+        builder.addCase(deleteExpenseAction.rejected, (state, action) => {
+            state.expenseLoading = false;
+            state.expenseAppErr = action?.payload?.msg;
+            state.expenseServerErr = action?.error?.msg;
+        })
     }
 });
 

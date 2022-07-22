@@ -21,7 +21,7 @@ export const ContextProvider = ({ children }) => {
     const [isExpense, setIsExpense] = useState(false)
     const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [isEdit, setIsEdit] = useState(false)
-    const [currentTask, setCurrentTask] = useState()
+    const [currentEntry, setCurrentEntry] = useState()
     const [currentItem, setCurrentItem] = useState()
     const [showCart, setShowCart] = useState(false)
     const [showNavBar, setShowNavBar] = useState(true)
@@ -36,7 +36,7 @@ export const ContextProvider = ({ children }) => {
 
     const handleClick = (clicked) => { setIsClicked({ ...initialState, [clicked]: true }); console.log(clicked) }
 
-
+ 
     return (
         <StateContext.Provider
             value={{
@@ -63,8 +63,8 @@ export const ContextProvider = ({ children }) => {
                 setShowDeleteModal,
                 isEdit,
                 setIsEdit,
-                currentTask,
-                setCurrentTask,
+                currentEntry,
+                setCurrentEntry,
                 currentItem,
                 setCurrentItem,
                 showCart,
@@ -76,8 +76,9 @@ export const ContextProvider = ({ children }) => {
                 isSignUp,
                 setIsSignUp,
                 isOpenMenu,
-                setIsOpenMenu
-
+                setIsOpenMenu,
+                markAsInProgress:null,
+               markAsDone:null
 
 
             }}>

@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 // import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { useDispatch } from 'react-redux';
-import { createExpenseAction } from '../../redux/expenseSlices';
-import { createIncomeAction } from '../../redux/IncomeSlices';
+import { createExpenseAction, updateExpenseAction } from '../../redux/expenseSlices';
+import { createIncomeAction, updateIncomeAction } from '../../redux/IncomeSlices';
 
 const errorSchema = Yup.object().shape({
 
@@ -23,10 +23,12 @@ const errorSchema = Yup.object().shape({
 
 });
 
-function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsExpense }) {
-    const {currentColor}=useStateContext()
-
+function CreateEntry() {
+    const {currentColor, setShowModal, isEdit, isExpense, setIsExpense, currentEntry}=useStateContext()
+   const  entry=currentEntry
+console.log(entry, isEdit, isExpense)
     const dispatch = useDispatch()
+    
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -38,11 +40,11 @@ function CreateEntry({ setShowModal, setIsEdit, isEdit, entry, isExpense, setIsE
 
         },
         validationSchema: errorSchema,
-        onSubmit: isExpense ? values => { dispatch(createExpenseAction(values)) }
-            : values => { dispatch(createIncomeAction(values))
-
-              
-            }
+        onSubmit: isExpense && !isEdit ? values => { dispatch(createExpenseAction(values)) }
+            : isExpense && isEdit ? values => { dispatch(updateExpenseAction(values))}
+            :!isExpense && !isEdit ? values => { dispatch(createIncomeAction(values))  }
+            :!isExpense && isEdit? values => { dispatch(updateIncomeAction(values)) }
+            :null
     });
 
 

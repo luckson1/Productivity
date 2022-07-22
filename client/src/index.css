@@ -494,10 +494,14 @@ h2 small {
   flex-basis: 40%;
 }
 .responsive-table .col-3 {
-  flex-basis: 25%;
+  flex-basis: 15%;
 }
 .responsive-table .col-4 {
   flex-basis: 25%;
+
+}
+.responsive-table .col-5 {
+  flex-basis: 10%;
 }
 @media all and (max-width: 767px) {
   .responsive-table .table-header {

@@ -15,7 +15,7 @@ function ExpenseTracker() {
   const dispatch= useDispatch()
 useEffect(()=> {
 dispatch(fetchIncomesAction())
-}, [])
+}, [dispatch])
 useEffect(()=> {
   dispatch(FetchExpensesAction())
   }, [])
@@ -23,12 +23,13 @@ useEffect(()=> {
 
   const incomesState=useSelector(state=> state?.incomes)
   const {incomeLoading, incomeList}=incomesState
-const incomes=incomeList?.docs
+const incomes=incomeList
+
 
 
 const expensesState=useSelector(state=> state?.expenses)
 const {expenseLoading, expenseList}=expensesState
-const expenses=expenseList?.docs
+const expenses=expenseList
   return (
     <div>
       <div className="content-display-buttons" id="transactions">

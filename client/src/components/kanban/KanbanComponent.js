@@ -15,7 +15,7 @@ export default function KanbanComponent() {
     // display or remove action creation/edit form 
   
 
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentTask, setCurrentTask} = useStateContext();
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentsetCurrentEntry, setCurrentEntry} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
@@ -53,7 +53,7 @@ export default function KanbanComponent() {
                                     key={task?._id}
                                     setIsEdit={setIsEdit}
                                     setShowModal={setShowModal}
-                                    setCurrentTask={setCurrentTask}
+                                    setCurrentEntry={setCurrentEntry}
                                     setShowDeleteModal={setShowDeleteModal}
                                     type={ItemTypes.DO}
                                     newStatus="Done"
@@ -69,7 +69,7 @@ export default function KanbanComponent() {
                                 key={task?._id}
                                 setIsEdit={setIsEdit}
                                 setShowModal={setShowModal}
-                                setCurrentTask={setCurrentTask}
+                                setCurrentEntry={setCurrentEntry}
                                 setShowDeleteModal={setShowDeleteModal}
                                 type={ItemTypes.PROGRESS}
                                 newStatus="Done"
@@ -84,15 +84,15 @@ export default function KanbanComponent() {
                                 key={task?._id}
                                 setIsEdit={setIsEdit}
                                 setShowModal={setShowModal}
-                                setCurrentTask={setCurrentTask}
+                                setCurrentEntry={setCurrentEntry}
                                 setShowDeleteModal={setShowDeleteModal}
                                 type={ItemTypes.DONE}
                             />))}
 
                 </DoneTasks>
             </div>
-            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentTask} setIsEdit={setIsEdit} />}
-            {showDeleteModal && <DeleteDialogBox setShowDeleteModal={setShowDeleteModal} task={currentTask} item="Task" />}
+            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentsetCurrentEntry} setIsEdit={setIsEdit} />}
+            {showDeleteModal && <DeleteDialogBox setShowDeleteModal={setShowDeleteModal} task={currentsetCurrentEntry} item="Task" />}
         </div>
 
     )

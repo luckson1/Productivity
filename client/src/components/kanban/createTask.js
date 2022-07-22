@@ -19,8 +19,8 @@ const errorSchema = Yup.object().shape({
         .required('Status Information Required'),
 
 });
-function CreateTask({ setShowModal, setIsEdit, isEdit, task }) {
-    const {currentColor}=useStateContext()
+function CreateTask({task}) {
+    const {currentColor, setShowModal, setIsEdit,isEdit}=useStateContext()
     const dispatch = useDispatch()
     // use formik hook to handle form state 
     const formik = useFormik({
