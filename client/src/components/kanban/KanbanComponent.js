@@ -15,7 +15,7 @@ export default function KanbanComponent() {
     // display or remove action creation/edit form 
   
 
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentsetCurrentEntry, setCurrentEntry} = useStateContext();
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry, setCurrentEntry} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
@@ -91,8 +91,8 @@ export default function KanbanComponent() {
 
                 </DoneTasks>
             </div>
-            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentsetCurrentEntry} setIsEdit={setIsEdit} />}
-            {showDeleteModal && <DeleteDialogBox setShowDeleteModal={setShowDeleteModal} task={currentsetCurrentEntry} item="Task" />}
+            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentEntry} setIsEdit={setIsEdit} />}
+            {showDeleteModal && <DeleteDialogBox setShowDeleteModal={setShowDeleteModal} task={currentEntry} item="Task" />}
         </div>
 
     )
