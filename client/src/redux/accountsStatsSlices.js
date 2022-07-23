@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from 'axios'
-import { ExpensesURL } from "../utils/ExpensesURL";
+import { ExpensesURL } from "../utils/BaseUrl";
 
 export const accountsStatsAction = createAsyncThunk( "accountsStats/fetch",
  async(payload, { rejectWithValue, getState, dispatch })=> {

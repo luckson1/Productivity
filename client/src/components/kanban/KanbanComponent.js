@@ -28,7 +28,7 @@ export default function KanbanComponent() {
     const toDoTasks = tasksFetched?.tasks?.filter(task => task?.status === "To Do")
     const inProgressTasks = tasksFetched?.tasks?.filter(task => task?.status === "In Progress")
     const doneTasks = tasksFetched?.tasks?.filter(task => task?.status === "Done")
- console.log(tasksFetched?.tasks)
+ 
 
 
     return (

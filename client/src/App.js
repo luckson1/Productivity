@@ -11,6 +11,7 @@ import { FiSettings } from 'react-icons/fi';
 import { ThemeSettings } from './utils/ThemeSettings';
 import { Onboarding } from './pages/Onboarding';
 import ProtectedRoute from './components/users/protectedRoute';
+import Dashboard from './pages/Dashboard';
 function App() {
     const { activeMenu, setThemeSettings, currentColor, themeSettings, showNavBar } = useStateContext();
     return (
@@ -55,9 +56,9 @@ function App() {
                                 <ProtectedRoute>
                                     <Kanban />
                                 </ProtectedRoute>} />
-                            <Route exact path="/kanban" element={
+                            <Route exact path="/dashboard" element={
                                 <ProtectedRoute>
-                                    <Kanban />
+                                    <Dashboard />
                                 </ProtectedRoute>} />
                             <Route exact path="/shopping-list" element={
                                 <ProtectedRoute>

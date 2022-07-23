@@ -4,13 +4,14 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
 
-import avatar from '../../data/avatar.jpg';
+
 
 import { useStateContext } from '../../context/ContextProvider';
 import { UserProfile } from '../users/UserProfile';
+
 export const Navbar = () => {
-    const { setActiveMenu, handleClick,
-        screenSize, setScreenSize, currentColor, isClicked } = useStateContext();
+    const { setActiveMenu, 
+        screenSize, setScreenSize, currentColor, showProfileModal, setShowProfileModal, user } = useStateContext();
 
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth);
@@ -26,6 +27,8 @@ export const Navbar = () => {
             setActiveMenu(true)
         }
     }, [])
+
+ 
 
     const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
@@ -47,24 +50,24 @@ export const Navbar = () => {
 
                 <div
                     className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-                    onClick={() => handleClick('userProfile')}
+                    onClick={() => setShowProfileModal(true)}
                 >
                     <img
                         className="rounded-full w-8 h-8"
-                        src={avatar}
+                        src={user?.image}
                         alt="user-profile"
                     />
                     <p>
                         <span className="text-gray-400 text-14">Hi,</span>{' '}
                         <span className="text-gray-400 font-bold ml-1 text-14">
-                            Michael
+                           {user?.firstName}
                         </span>
                     </p>
                     <MdKeyboardArrowDown className="text-gray-400 text-14" />
                 </div>
 
             
-                {isClicked.userProfile && <UserProfile />}
+                {showProfileModal && <UserProfile />}
             </div>
         </div>
 

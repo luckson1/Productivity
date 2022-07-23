@@ -20,7 +20,7 @@ function EntryList({ entries, loading }) {
           <div className="col col-5">Action</div>
         </li>
 
-        {loading ? (<p>Loading, Please Wait 😀......</p>) : entries?.lenght === 0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (<li className="table-row" key={entry?._id} >
+        {loading ? (<p>Loading, Please Wait 😀......</p>) : entries?.length === 0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (<li className="table-row" key={entry?._id} >
           <div className="col col-1" data-label="Title">{entry?.title}</div>
           <div className="col col-2" data-label="Description">{entry?.description}</div>
           <div className="col col-3" data-label="Amount" style={{ color: isExpense ? "red" : "green" }}>{currencyFormatter(entry?.amount)} </div>

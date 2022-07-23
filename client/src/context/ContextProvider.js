@@ -1,18 +1,12 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserProfileAction } from "../redux/usersSlices";
 
 const StateContext = createContext();
-const initialState = {
-    chat: false,
-    cart: false,
-    userProfile: false,
-    notification: false,
-}
+
 
 export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true);
-    const [isClicked, setIsClicked] = useState(initialState)
-    // const [isClosed, setIsClosed] = useState({})
-
     const [screenSize, setScreenSize] = useState(undefined)
     const [currentColor, setCurrentColor] = useState("#03C9D7")
     const [currentMode, setCurrentMode] = useState("Light")
@@ -28,13 +22,24 @@ export const ContextProvider = ({ children }) => {
     const [reveal, setReveal] = useState(false)
     const [isSignUp, setIsSignUp] = useState(true)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
+   const [showProfileModal, setShowProfileModal]=useState(false)
 
 
 
     const setMode = (e) => { setCurrentMode(e.target.value); localStorage.setItem("ThemeMode", e.target.value); setThemeSettings(false) }
     const setColor = (color) => { setCurrentColor(color); localStorage.setItem("ThemeColor", color); setThemeSettings(false) }
 
-    const handleClick = (clicked) => { setIsClicked({ ...initialState, [clicked]: true }); console.log(clicked) }
+    
+
+    const dispatch=useDispatch()
+
+    useEffect (()=> {
+      dispatch(fetchUserProfileAction())
+      },[])
+      
+      const userData= useSelector(state=> state?.users?.userProfile)
+
+      const user=userData?.user
 
  
     return (
@@ -42,9 +47,7 @@ export const ContextProvider = ({ children }) => {
             value={{
                 activeMenu,
                 setActiveMenu,
-                isClicked,
-                setIsClicked,
-                handleClick,
+               
                 screenSize,
                 setScreenSize,
                 currentColor,
@@ -77,8 +80,9 @@ export const ContextProvider = ({ children }) => {
                 setIsSignUp,
                 isOpenMenu,
                 setIsOpenMenu,
-                markAsInProgress:null,
-               markAsDone:null
+                showProfileModal, 
+                setShowProfileModal,
+                user
 
 
             }}>
