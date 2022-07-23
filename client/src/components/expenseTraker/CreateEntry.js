@@ -5,8 +5,8 @@ import { useFormik } from 'formik';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { useDispatch } from 'react-redux';
-import { createExpenseAction, updateExpenseAction } from '../../redux/expenseSlices';
-import { createIncomeAction, updateIncomeAction } from '../../redux/IncomeSlices';
+import { createExpenseAction, FetchExpensesAction, updateExpenseAction } from '../../redux/expenseSlices';
+import { createIncomeAction, fetchIncomesAction, updateIncomeAction } from '../../redux/IncomeSlices';
 
 const errorSchema = Yup.object().shape({
 
@@ -40,10 +40,18 @@ console.log(entry, isEdit, isExpense)
 
         },
         validationSchema: errorSchema,
-        onSubmit: isExpense && !isEdit ? values => { dispatch(createExpenseAction(values)) }
-            : isExpense && isEdit ? values => { dispatch(updateExpenseAction(values))}
-            :!isExpense && !isEdit ? values => { dispatch(createIncomeAction(values))  }
-            :!isExpense && isEdit? values => { dispatch(updateIncomeAction(values)) }
+        onSubmit: isExpense && !isEdit ? values => { dispatch(createExpenseAction(values));setTimeout(() => {
+           window.location.reload()
+          }, 500) }
+            : isExpense && isEdit ? values => { dispatch(updateExpenseAction(values));setTimeout(() => {
+                window.location.reload()
+               }, 500)}
+            :!isExpense && !isEdit ? values => { dispatch(createIncomeAction(values));setTimeout(() => {
+                window.location.reload()
+               }, 500)  }
+            :!isExpense && isEdit? values => { dispatch(updateIncomeAction(values));setTimeout(() => {
+                window.location.reload()
+               }, 500)}
             :null
     });
 

@@ -6,6 +6,8 @@ import { useStateContext } from '../context/ContextProvider'
 import { Link } from 'react-router-dom'
 import { Authmodal } from '../components/users/Authmodal'
 import { MdClose, MdMenu } from 'react-icons/md'
+import {  useSelector, useDispatch} from 'react-redux'
+import {  logout } from '../redux/usersSlices';
 
 
 
@@ -16,6 +18,8 @@ function Home() {
   useEffect(() => {
     setActiveMenu(false); setShowNavBar(false)
   }, [])
+const dispatch=useDispatch()
+  const userLogin = useSelector(state => state?.users?.userAuth);
   return (
     <div >
 
@@ -47,13 +51,17 @@ function Home() {
                   <Link onClick={() => setIsOpenMenu(!isOpenMenu)}
                     className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/">Resources</Link>
                 </li>
+               {userLogin && <li className="mr-96 md:mr-3 ">
+                  <Link onClick={() => {setIsOpenMenu(!isOpenMenu);setActiveMenu(true); setShowNavBar(true)}}
+                    className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" to="/dashboard">Dashboard</Link>
+                </li>}
               </ul>
               <button
                 id="nav Start Free Trial"
                 className="mx-auto mr-96 lg:mx-0 hover:underline bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 text-gray-900 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
-                onClick={() => { setShowModal(true); setIsSignUp(false); setIsOpenMenu(false); window.scrollTo(0, 0) }}
+                onClick={ userLogin? ()=> dispatch(logout()):() =>  { setShowModal(true); setIsSignUp(false); setIsOpenMenu(false); window.scrollTo(0, 0) }}
               >
-                Login
+              { userLogin? "Logout": "Login"}
               </button>
             </div>
           </div>
@@ -72,10 +80,10 @@ function Home() {
                 One workspace for your work and personal milestones.
               </p>
 
-              <button onClick={() => {setShowModal(true); window.scrollTo(0, 0)}}
+            { !userLogin && <button onClick={() => {setShowModal(true); window.scrollTo(0, 0)}}
                 className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                 Sign Up
-              </button>
+              </button>}
             </div>
 
             <div className="w-full md:w-3/5 py-5 text-center">
@@ -286,10 +294,10 @@ function Home() {
           <h3 className="my-4 text-3xl leading-tight">
             Increase your productivity by 10x
           </h3>
-          <button onClick={() => { setShowModal(true); window.scrollTo(0, 0) }}
+    {    !userLogin &&   <button onClick={() => { setShowModal(true); window.scrollTo(0, 0) }}
             className="mx-auto  hover:underline bg-white text-gray-800 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
             Sign Up
-          </button>
+          </button>}
         </section>
 
         <footer className="bg-white">
