@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 
 import { useStateContext } from '../../context/ContextProvider';
-import avatar from '../../data/avatar.jpg';
+
 import { Button } from '../Button';
 import { useDispatch} from 'react-redux';
 import {  logout } from '../../redux/usersSlices';
