@@ -55,7 +55,7 @@ export const SideBar = () => {
 
                                     {link?.icon}
                                     <span className='capitalize'>
-                                        {link?.name}
+                                      <p className=" text-gray-900"> {link?.name}</p> 
                                     </span>
 
 
