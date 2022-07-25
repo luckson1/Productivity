@@ -21,7 +21,7 @@ export default function KanbanComponent() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchTasksAction())
-    }, [])
+    }, [dispatch])
 
     const tasksState = useSelector((state) => state?.tasks)
     const { tasksFetched, taskLoading, taskAppErr, taskServerErr } = tasksState
@@ -38,8 +38,8 @@ export default function KanbanComponent() {
                 <h2 className="kanban-heading-text" style={{backgroundColor: currentColor}}>Kanban Board</h2>
             </div>
            
-            <div className="kanban-board">
-                <div className="kanban-block" id="todo" >
+            <div className="kanban-board ">
+                <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
                     <strong>To Do</strong>
                     <div className="task-button-block">
                         <button id="task-button" onClick={() => setShowModal(true)}> Add New task</button>

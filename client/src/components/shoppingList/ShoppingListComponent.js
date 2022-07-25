@@ -54,7 +54,7 @@ export default function ShoppingListComponent() {
                 </button>
             </div>
             <div className="kanban-board" id="shopping-board">
-                {!showCart && <div className="kanban-block" id="todo" >
+                {!showCart && <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200" id="todo" >
                     <strong>Items On List</strong>
                     <div className="task-button-block">
                         <button id="task-button" onClick={() => setShowModal(true)}> Add Item</button>

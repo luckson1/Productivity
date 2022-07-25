@@ -22,7 +22,7 @@ function DoneTasks({ children, setStatus }) {
 
     const isActive = isOver && canDrop
     return (
-        <div className="kanban-block" id="done" ref={drop} style={{ backgroundColor: isActive ? "#276f27" : "#baddba" }} >
+        <div className={ isActive? "bg-gradient-to-r from-green-400 via-emerald-300 to-teal-300 kanban-block" : "bg-gradient-to-r from-green-200 via-emerald-200 to-teal-200 kanban-block" } id="done" ref={drop}  >
             {children}
         </div>
     )
