@@ -84,7 +84,7 @@ const Dashboard = () => {
                     <div className="flex justify-between items-center">
                         <div>
                             <p className="font-bold text-gray-900">Total Income</p>
-                            <p className="text-2xl">{statsLoading ? "Loading, Please wait! 😀"
+                            <p className="text-l text-gray-900">{statsLoading ? "Loading, Please wait! 😀"
                                 : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
                                     : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
                                         : currencyFormatter(totalIncome)}</p>
@@ -116,7 +116,7 @@ const Dashboard = () => {
                         >
                             <BsCurrencyDollar />
                         </button>
-                        <p >{statsLoading ? "Loading, Please wait! 😀"
+                        <p className=" text-gray-900" >{statsLoading ? "Loading, Please wait! 😀"
                             : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
                                 : statsList?.expenseStats === 0 ? "No Expenses Added....yet 😊"
                                     : currencyFormatter(totalExpenditure)}</p>
@@ -132,7 +132,7 @@ const Dashboard = () => {
                         >
                             <BsCurrencyDollar />
                         </button>
-                        <p >{shoppingItemLoading ? "Loading, Please wait! 😀"
+                        <p className=" text-gray-900">{shoppingItemLoading ? "Loading, Please wait! 😀"
                             : shoppingItemAppErr || shoppingItemServerErr ? "An Error Occured. Please Referesh 😥"
                                 : shoppingItemsFetched?.shoppingStats === 0 ? "No Shopping List created....yet 😊"
                                     : currencyFormatter(latestShoppingStats)}</p>
@@ -148,9 +148,9 @@ const Dashboard = () => {
                             <FaTasks />
                         </button>
                         {taskLoading ? "Loading, Please wait! 😀"
-                            : taskAppErr || taskServerErr ? <p>An Error Occured. Please Referesh 😥</p>
-                                : tasksFetched?.tasks === 0 ? <p> No Tasks created....yet 😊</p>
-                                    : <p>{toDoTasks?.length} Tasks to do, {inProgressTasks?.length} in progress and {doneTasks?.length} completed</p>}
+                            : taskAppErr || taskServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                                : tasksFetched?.tasks === 0 ? <p  className=" text-gray-900"> No Tasks created....yet 😊</p>
+                                    : <p  className=" text-gray-900">{toDoTasks?.length} Tasks to do, {inProgressTasks?.length} in progress and {doneTasks?.length} completed</p>}
                         <p className=" text-gray-900  mt-1">Tasks</p>
                     </div>
 
@@ -161,7 +161,7 @@ const Dashboard = () => {
             <div className="flex gap-10 flex-wrap justify-center mt-10">
                 <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg m-1 p-1 rounded-2xl md:w-780  ">
                     <div className="flex justify-between">
-                        <p className="font-semibold text-l ml-5">Income and Expenses Updates</p>
+                        <p className="font-semibold text-l ml-5   text-gray-900">Income and Expenses Updates</p>
                   
                     </div>
                     <div className="mt-5 flex gap-10 flex-wrap justify-center">
@@ -205,7 +205,7 @@ const Dashboard = () => {
                     </div>
      
                 </div>
-                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780">
+                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   text-gray-900">
                     <div className="flex justify-between items-center gap-2">
                         <p className="text-xl font-semibold">Recent Tasks</p>
 
