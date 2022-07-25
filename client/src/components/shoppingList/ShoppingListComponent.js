@@ -33,7 +33,7 @@ export default function ShoppingListComponent() {
 
     return (
 
-        <div className="container ">
+        <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
         
             <div className="content-display-buttons">
                 <button className="list-heading-button" onClick={() => setShowCart(false)}
