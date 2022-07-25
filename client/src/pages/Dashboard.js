@@ -205,9 +205,9 @@ const Dashboard = () => {
                     </div>
      
                 </div>
-                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   text-gray-900">
+                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
-                        <p className="text-xl font-semibold">Recent Tasks</p>
+                        <p className="text-xl font-semibold text-gray-900">Recent Tasks</p>
 
                     </div>
                     <div className="mt-10 w-72 md:w-400">
@@ -217,13 +217,13 @@ const Dashboard = () => {
                                     : tasksFetched?.tasks?.map((task) => (
                                         <div key={task._id} className="flex justify-between mt-4">
                                             <div className="flex gap-4">
-                                                <p>{dateFormatter(task?.updatedAt)}</p>
+                                                <p className="text-gray-900">{dateFormatter(task?.updatedAt)}</p>
                                                 <div>
-                                                    <p className="text-md font-semibold">{task?.title}</p>
+                                                    <p className="text-md font-semibold text-gray-900">{task?.title}</p>
                                                 
                                                 </div>
                                             </div>
-                                            <p >{task?.status}</p>
+                                            <p className='text-gray-900'>{task?.status}</p>
                                         </div>
                                     ))}
                     </div>
