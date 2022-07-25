@@ -5,8 +5,8 @@ import { useFormik } from 'formik';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { useDispatch } from 'react-redux';
-import { createExpenseAction, FetchExpensesAction, updateExpenseAction } from '../../redux/expenseSlices';
-import { createIncomeAction, fetchIncomesAction, updateIncomeAction } from '../../redux/IncomeSlices';
+import { createExpenseAction, updateExpenseAction } from '../../redux/expenseSlices';
+import { createIncomeAction, updateIncomeAction } from '../../redux/IncomeSlices';
 
 const errorSchema = Yup.object().shape({
 
@@ -26,7 +26,7 @@ const errorSchema = Yup.object().shape({
 function CreateEntry() {
     const {currentColor, setShowModal, isEdit, isExpense, setIsExpense, currentEntry}=useStateContext()
    const  entry=currentEntry
-console.log(entry, isEdit, isExpense)
+
     const dispatch = useDispatch()
     
     // use formik hook to handle form state 

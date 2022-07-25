@@ -14,7 +14,7 @@ const createShoppingItemCtrl= expressAsyncHandler(async (req, res) => {
    
         res.json({shoppingItem})
     } catch (error) {
-        console.log(error)
+      
         res.json({error}) 
     }
 });
@@ -29,7 +29,7 @@ const fetchAllShoppingItem= expressAsyncHandler(async (req, res) => {
       
         res.json({shoppingItems})
     } catch (error) {
-        console.log(error)
+      
         res.json({error}) 
     }
 });

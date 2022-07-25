@@ -46,7 +46,7 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
     const { email, password } = req.body;
     //check if user exists
     const user = await User.findOne({ email });
-    console.log(user)
+  
     //Check if password is match
     if (user && (await user?.isPasswordMatch(password))) {
         res.json({

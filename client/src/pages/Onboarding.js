@@ -52,7 +52,7 @@ export const Onboarding = () => {
         },
         validationSchema: errorSchema,
         onSubmit: values => {
-            console.log(values)
+          
             dispatch(createProfileAction(values))
         },
     });

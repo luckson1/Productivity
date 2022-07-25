@@ -57,7 +57,7 @@ export const Authmodal = () => {
 
         validationSchema: isSignUp ? SignInErrorSchema : LoginErrorSchema,
         onSubmit: values => {
-            console.log(values)
+        
             isSignUp ? dispatch(registerUserAction(values)) : dispatch(loginUserAction(values))
         },
     })

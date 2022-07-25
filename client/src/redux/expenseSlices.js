@@ -118,7 +118,7 @@ export const deleteExpenseAction = createAsyncThunk('expense/delete', async (pay
     };
 
 
-console.log(userToken)
+
     try {
         //make http call here
 

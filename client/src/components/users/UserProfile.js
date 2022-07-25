@@ -43,7 +43,7 @@ const dispatch=useDispatch()
           text="Logout"
           borderRadius="10px"
           width="full"
-          onClick={()=> {dispatch(logout()); console.log('Hi')}}
+          onClick={()=> {dispatch(logout())}}
         />
       </div>
     </div>
