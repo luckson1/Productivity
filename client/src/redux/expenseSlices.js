@@ -109,20 +109,19 @@ export const deleteExpenseAction = createAsyncThunk('expense/delete', async (pay
     //get user token from store
 
     const userToken = getState()?.users?.userAuth?.token;
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        },
-
-    };
+    
 
 
 
     try {
         //make http call here
 
-        const { data } = await axios.delete(`${ExpensesURL}/expenses/${payload?.id}`, payload, config);
+        const { data } = await axios.delete(`${ExpensesURL}/expenses/${payload?.id}`, {headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${userToken}`,
+        }, data: {
+            source: payload
+        }});
        
         return data;
     } catch (error) {

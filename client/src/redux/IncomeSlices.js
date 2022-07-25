@@ -101,6 +101,36 @@ export const updateIncomeAction = createAsyncThunk('income/update', async (paylo
 
 
 });
+
+// delete Incomes
+export const deleteIncomeAction = createAsyncThunk('income/delete', async (payload, { rejectWithValue, getState, dispatch }) => {
+     //get user token from store
+     const userToken = getState()?.users?.userAuth?.token;
+
+ 
+
+
+    try {
+        //make http call here
+
+        const { data } = await axios.delete(`${ExpensesURL}/income/${payload?.id}`, {headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${userToken}`,
+        }, data: {
+            source: payload
+        }});
+     
+        return data;
+    } catch (error) {
+        if (!error?.response) {
+            throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+    }
+
+
+
+});
 const incomesSlices = createSlice({
     name: 'income',
     initialState: {
@@ -175,6 +205,29 @@ const incomesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(updateIncomeAction.rejected, (state, action) => {
+            state.incomeLoading = false;
+            state.incomeAppErr = action?.payload?.msg;
+            state.incomeServerErr = action?.error?.msg;
+        })
+
+        //delete Income
+        // handle pending state
+        builder.addCase(deleteIncomeAction.pending, (state, action) => {
+            state.incomeLoading = true;
+
+        });
+ 
+        //hande success state
+        builder.addCase(deleteIncomeAction.fulfilled, (state, action) => {
+            state.deletedIncome = action?.payload;
+            state.incomeLoading = false;
+            state.incomeAppErr = undefined;
+            state.incomeServerErr = undefined;
+          
+        });
+        //hande rejected state
+
+        builder.addCase(deleteIncomeAction.rejected, (state, action) => {
             state.incomeLoading = false;
             state.incomeAppErr = action?.payload?.msg;
             state.incomeServerErr = action?.error?.msg;

@@ -41,9 +41,9 @@ export const SideBar = () => {
                 </div>
 
 
-                <div className='mt-10  min-h-full '>
+                <div className='mt-32  min-h-full '>
                     {links?.map((item) => (
-                        <div key={item?.title} className="flex flex-col  min-h-full justify-around">
+                        <div key={item?.title} className="flex flex-col  min-h-full justify-around ">
 
                             {item?.links?.map((link) => (
                                 <NavLink
@@ -51,11 +51,12 @@ export const SideBar = () => {
                                     to={`/${link?.name}`}
                                     onClick={handleCloseSideBar}
                                     style={({ isActive }) => ({ backgroundColor: isActive ? currentColor : "" })}
-                                    className={({ isActive }) => isActive ? activeLink : normalLink} >
+                                    className={({ isActive }) => isActive ? activeLink : normalLink 
+                                    } >
 
-                                    {link?.icon}
+                                  <p className="my-2">{link?.icon}</p>  
                                     <span className='capitalize'>
-                                      <p className=" text-gray-900"> {link?.name}</p> 
+                                      <p className=" text-gray-900 my-2"> {link?.name}</p> 
                                     </span>
 
 

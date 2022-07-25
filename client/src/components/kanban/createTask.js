@@ -33,10 +33,14 @@ function CreateTask({task}) {
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values => { dispatch(editTasksAction(values));window.location.reload() }
+        onSubmit: isEdit ? values => { dispatch(editTasksAction(values));setTimeout(() => {
+           window.location.reload()
+          }, 500) }
             : values => {
 
-                dispatch(createTaskAction(values));window.location.reload()
+                dispatch(createTaskAction(values));setTimeout(() => {
+           window.location.reload()
+          }, 500)
             }
     });
 

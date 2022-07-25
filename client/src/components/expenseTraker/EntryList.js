@@ -7,7 +7,7 @@ import DeleteDialogBox from '../DeleteDialogBox';
 import CreateEntry from '../expenseTraker/CreateEntry'
 
 function EntryList({ entries, loading }) {
-  const { showDeleteModal, setShowDeleteModal,  setIsEdit,  setCurrentEntry, isExpense, showModal, setShowModal } = useStateContext();
+  const { showDeleteModal, setShowDeleteModal,  setIsEdit,  setCurrentEntry, isExpense, showModal, setShowModal ,currentEntry} = useStateContext();
   return (
     <div className="table">
 
@@ -36,7 +36,7 @@ function EntryList({ entries, loading }) {
               setIsEdit(true);
               setCurrentEntry(entry)
             }} /> </div>
-          {showDeleteModal && <DeleteDialogBox entry={entry} item={isExpense ? "Expense" : "Income"} />}
+          {showDeleteModal && <DeleteDialogBox entry={currentEntry} item={isExpense ? "Expense" : "Income"} />}
           {showModal && <CreateEntry   />}
         </li>))}
 
