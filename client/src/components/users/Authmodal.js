@@ -74,7 +74,7 @@ const navigate=useNavigate();
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/kanban');
+            navigate('/dashboard');
             window.location.reload();
         }
     }, [isLoggedIn])

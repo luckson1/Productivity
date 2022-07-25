@@ -83,7 +83,7 @@ const Dashboard = () => {
                 <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-no-repeat bg-cover bg-center">
                     <div className="flex justify-between items-center">
                         <div>
-                            <p className="font-bold text-gray-400">Total Income</p>
+                            <p className="font-bold text-gray-900">Total Income</p>
                             <p className="text-2xl">{statsLoading ? "Loading, Please wait! 😀"
                                 : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
                                     : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
@@ -120,7 +120,7 @@ const Dashboard = () => {
                             : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
                                 : statsList?.expenseStats === 0 ? "No Expenses Added....yet 😊"
                                     : currencyFormatter(totalExpenditure)}</p>
-                        <p className=" text-gray-400  mt-1">Total Expenditure</p>
+                        <p className=" text-gray-900  mt-1">Total Expenditure</p>
                     </div>
                
 
@@ -136,7 +136,7 @@ const Dashboard = () => {
                             : shoppingItemAppErr || shoppingItemServerErr ? "An Error Occured. Please Referesh 😥"
                                 : shoppingItemsFetched?.shoppingStats === 0 ? "No Shopping List created....yet 😊"
                                     : currencyFormatter(latestShoppingStats)}</p>
-                        <p className=" text-gray-400  mt-1">Latest Shopping Amount</p>
+                        <p className=" text-gray-900  mt-1">Latest Shopping Amount</p>
                     </div>
 
                     <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-3 pt-9 rounded-2xl text-left">
@@ -151,7 +151,7 @@ const Dashboard = () => {
                             : taskAppErr || taskServerErr ? <p>An Error Occured. Please Referesh 😥</p>
                                 : tasksFetched?.tasks === 0 ? <p> No Tasks created....yet 😊</p>
                                     : <p>{toDoTasks?.length} Tasks to do, {inProgressTasks?.length} in progress and {doneTasks?.length} completed</p>}
-                        <p className=" text-gray-400  mt-1">Tasks</p>
+                        <p className=" text-gray-900  mt-1">Tasks</p>
                     </div>
 
 

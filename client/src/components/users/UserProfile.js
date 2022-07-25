@@ -30,7 +30,7 @@ const dispatch=useDispatch()
         <div>
         <p className="font-semibold text-xl dark:text-gray-200"> {user?.firstName} {user?.lastName}</p>
           
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {user?.email}</p>
+          <p className="text-gray-900 text-sm font-semibold dark:text-gray-200"> {user?.email}</p>
         </div>
       </div>
       <div>
