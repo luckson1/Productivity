@@ -106,7 +106,8 @@ const Dashboard = () => {
                         />
                     </div>
                 </div>
-                <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
+                <div className="flex m-3 flex-wrap justify-center gap-1">
+               
 
                     <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
                         <button
