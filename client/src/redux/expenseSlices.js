@@ -75,54 +75,57 @@ export const FetchExpensesAction = createAsyncThunk('expense/fetch', async (payl
 });
 
 // update expenses
-export const updateExpenseAction = createAsyncThunk('expense/update', async (payload, { rejectWithValue, getState, dispatch }) => {
-    //get user token from store
+export const updateExpenseAction = createAsyncThunk(
+    'expense/update',
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        //get user token from store
 
-    const userToken = getState()?.users?.userAuth?.token;
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-        },
+        const userToken = getState()?.users?.userAuth?.token;
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userToken}`,
+            },
 
-    };
+        };
 
 
-    try {
-        //make http call here
+        try {
+            //make http call here
 
-        const { data } = await axios.put(`${ExpensesURL}/expenses/${payload?.id}`, payload, config);
-        dispatch(resetExpUpdated())
-        return data;
-    } catch (error) {
-        if (!error?.response) {
-            throw error;
+            const { data } = await axios.put(`${ExpensesURL}/expenses/${payload?.id}`, payload, config);
+            dispatch(resetExpUpdated())
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+            return rejectWithValue(error?.response?.data);
         }
-        return rejectWithValue(error?.response?.data);
-    }
 
 
 
-});
+    });
 
 export const deleteExpenseAction = createAsyncThunk('expense/delete', async (payload, { rejectWithValue, getState, dispatch }) => {
     //get user token from store
 
     const userToken = getState()?.users?.userAuth?.token;
-    
+
 
 
 
     try {
         //make http call here
+        const { data } = await axios.delete(`${ExpensesURL}/expenses/${payload?.id}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${userToken}`,
+            }, data: {
+                source: payload
+            }
+        });
 
-        const { data } = await axios.delete(`${ExpensesURL}/expenses/${payload?.id}`, {headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${userToken}`,
-        }, data: {
-            source: payload
-        }});
-       
         return data;
     } catch (error) {
         if (!error?.response) {
@@ -165,7 +168,7 @@ const expensesSlices = createSlice({
             state.expenseLoading = false;
             state.expenseAppErr = action?.payload?.msg;
             state.expenseServerErr = action?.error?.msg;
-            
+
         })
 
         //fetchAll
@@ -223,14 +226,14 @@ const expensesSlices = createSlice({
             state.expenseLoading = true;
 
         });
-       
+
         //hande success state
         builder.addCase(deleteExpenseAction.fulfilled, (state, action) => {
             state.deletedExpense = action?.payload;
             state.expenseLoading = false;
             state.expenseAppErr = undefined;
             state.expenseServerErr = undefined;
-         
+
         });
         //hande rejected state
 
