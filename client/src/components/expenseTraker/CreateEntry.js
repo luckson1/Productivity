@@ -42,16 +42,16 @@ function CreateEntry() {
         validationSchema: errorSchema,
         onSubmit: isExpense && !isEdit ? values => { dispatch(createExpenseAction(values));setTimeout(() => {
            window.location.reload()
-          }, 500) }
+          }, 1000) }
             : isExpense && isEdit ? values => { dispatch(updateExpenseAction(values));setTimeout(() => {
                 window.location.reload()
-               }, 500)}
+               }, 1000)}
             :!isExpense && !isEdit ? values => { dispatch(createIncomeAction(values));setTimeout(() => {
                 window.location.reload()
-               }, 500)  }
+               }, 1000)  }
             :!isExpense && isEdit? values => { dispatch(updateIncomeAction(values));setTimeout(() => {
                 window.location.reload()
-               }, 500)}
+               }, 1000)}
             :null
     });
 

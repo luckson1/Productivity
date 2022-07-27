@@ -22,17 +22,17 @@ function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
                             : shoppingItem !== undefined ? () => {
                                 dispatch(deleteShoppingItemAction(shoppingItem)); setTimeout(() => {
                                     window.location.reload()
-                                }, 500)
+                                },1000)
                             }
                                 : entry !== undefined && isExpense ? () => {
                                     dispatch(deleteExpenseAction(entry)); setTimeout(() => {
                                         window.location.reload()
-                                    }, 500)
+                                    },1000)
                                 }
                                     : entry !== undefined && !isExpense ? () => {
                                         dispatch(deleteIncomeAction(entry)); setTimeout(() => {
                                             window.location.reload()
-                                        }, 500)
+                                        },1000)
                                     }
                                         : console.log("error")
                     }>Delete {item}</button>
