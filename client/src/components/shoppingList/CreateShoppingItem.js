@@ -34,12 +34,12 @@ function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
         validationSchema: errorSchema,
         onSubmit: isEdit ? values => { dispatch(editShoppingItem(values));setTimeout(() => {
            window.location.reload()
-          }, 1000) }
+          }, 1200) }
             : values => {
 
                 dispatch(createShoppingItemAction(values));setTimeout(() => {
            window.location.reload()
-          }, 1000)
+          }, 1200)
             }
     });
 
