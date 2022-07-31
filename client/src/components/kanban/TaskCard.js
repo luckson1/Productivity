@@ -25,7 +25,7 @@ const [{isDragging},drag]=useDrag({
       <div className="summary">
         <p>{task?.summary}</p>
       </div>
-      <div className='handling-buttons'>
+      <div className='flex justify-end gap-3'>
 
         <MdDeleteForever size="20px" color='red' onClick={() => {
           setShowDeleteModal(true);
