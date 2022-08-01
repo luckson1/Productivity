@@ -7,7 +7,8 @@ import DeleteDialogBox from '../DeleteDialogBox';
 import CreateEntry from '../expenseTraker/CreateEntry'
 
 function EntryList({ entries, loading }) {
-  const { showDeleteModal, setShowDeleteModal,  setIsEdit,  setCurrentEntry, isExpense, showModal, setShowModal ,currentEntry} = useStateContext();
+  const { showDeleteModal, setShowDeleteModal,  setIsEdit,  setCurrentEntry, isExpense, showModal, setShowModal ,currentEntry,} = useStateContext();
+
   return (
     <div className="table">
 

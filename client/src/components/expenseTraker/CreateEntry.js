@@ -24,11 +24,48 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateEntry() {
-    const {currentColor, setShowModal, isEdit, isExpense, setIsExpense, currentEntry}=useStateContext()
+    const {currentColor, setShowModal, isEdit, isExpense, setIsExpense, currentEntry, incomes, setIncomes,  expenses, setExpenses}=useStateContext()
    const  entry=currentEntry
 
     const dispatch = useDispatch()
+
+    const addIncomeHandler= (values)=> {
+        dispatch(createIncomeAction(values))
+        setIncomes([...incomes, values]);
+        setShowModal(false);
+       
+    }
     
+    const editIncomeHandler= (values)=> {
+     
+        dispatch(updateIncomeAction(values));
+    const newIncomes= incomes?.filter(income=> {
+    return entry._id !==income?._id
+    })
+    
+        setIncomes([...newIncomes, values]);
+        setShowModal(false);
+       
+    }
+
+    const addExpenseHandler= (values)=> {
+        dispatch(createExpenseAction(values))
+        setExpenses([...expenses, values]);
+        setShowModal(false);
+       
+    }
+    
+    const editExpenseHandler= (values)=> {
+     
+        dispatch(updateExpenseAction(values));
+    const newExpenses= expenses?.filter(expense=> {
+    return entry._id !==expense?._id
+    })
+    console.log(values)
+        setExpenses([...newExpenses, values]);
+        setShowModal(false);
+       
+    }
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -36,22 +73,15 @@ function CreateEntry() {
             title: isEdit ? entry?.title : '',
             description: isEdit ? entry?.description : "",
             amount: isEdit ? entry?.amount : "",
+            createdAt: isEdit? entry?.createdAt: new Date(),
             id: isEdit ? entry?._id : null
 
         },
         validationSchema: errorSchema,
-        onSubmit: isExpense && !isEdit ? values => { dispatch(createExpenseAction(values));setTimeout(() => {
-           window.location.reload()
-          }, 1000) }
-            : isExpense && isEdit ? values => { dispatch(updateExpenseAction(values));setTimeout(() => {
-                window.location.reload()
-               }, 1000)}
-            :!isExpense && !isEdit ? values => { dispatch(createIncomeAction(values));setTimeout(() => {
-                window.location.reload()
-               }, 1000)  }
-            :!isExpense && isEdit? values => { dispatch(updateIncomeAction(values));setTimeout(() => {
-                window.location.reload()
-               }, 1000)}
+        onSubmit: isExpense && !isEdit ? values => addExpenseHandler(values)
+            : isExpense && isEdit ? values =>  editExpenseHandler(values)
+            :!isExpense && !isEdit ? values => addIncomeHandler(values)
+            :!isExpense && isEdit? values =>editIncomeHandler(values)
             :null
     });
 

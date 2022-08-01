@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux"
 
 import CreateTask from './createTask'
@@ -15,20 +15,32 @@ export default function KanbanComponent() {
     // display or remove action creation/edit form 
   
 
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry, setCurrentEntry} = useStateContext();
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry, setCurrentEntry, tasks, setTasks} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchTasksAction())
-    }, [dispatch])
+
+useEffect(() => {
+    dispatch(fetchTasksAction())
+
+}, [dispatch])
 
     const tasksState = useSelector((state) => state?.tasks)
     const { tasksFetched, taskLoading, taskAppErr, taskServerErr } = tasksState
-    const toDoTasks = tasksFetched?.tasks?.filter(task => task?.status === "To Do")
-    const inProgressTasks = tasksFetched?.tasks?.filter(task => task?.status === "In Progress")
-    const doneTasks = tasksFetched?.tasks?.filter(task => task?.status === "Done")
+
+    useEffect(() => {
+     if(tasksFetched) {
+        setTasks(tasksFetched?.tasks)
+     }
+    
+    }, [tasksFetched, setTasks])
  
+    console.log(tasks)
+    const toDoTasks = tasks?.filter(task => task?.status === "To Do")
+    const inProgressTasks = tasks?.filter(task => task?.status === "In Progress")
+    const doneTasks = tasks?.filter(task => task?.status === "Done")
+
+   
 
 
     return (

@@ -20,8 +20,28 @@ const errorSchema = Yup.object().shape({
 
 });
 function CreateTask({task}) {
-    const {currentColor, setShowModal, setIsEdit,isEdit}=useStateContext()
+    const {currentColor, setShowModal, setIsEdit,isEdit, tasks,setTasks}=useStateContext()
     const dispatch = useDispatch()
+
+
+    const addTaskHandler= (values)=> {
+        dispatch(createTaskAction(values))
+        setTasks([...tasks, values]);
+        setShowModal(false);
+       
+    }
+
+    const editTaskHandler= (values)=> {
+     
+        dispatch(editTasksAction(values));
+const newTasks= tasks?.filter(item=> {
+    return item._id !==task?._id
+})
+
+        setTasks([...newTasks, values]);
+        setShowModal(false);
+       
+    }
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -29,19 +49,13 @@ function CreateTask({task}) {
             title: isEdit ? task?.title : '',
             summary: isEdit ? task?.summary : '',
             status: isEdit ? task?.status : '',
-            id: isEdit? task?._id :null
+            _id: isEdit? task?._id :null
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values => { dispatch(editTasksAction(values));setTimeout(() => {
-           window.location.reload()
-          }, 1000) }
-            : values => {
-
-                dispatch(createTaskAction(values));setTimeout(() => {
-           window.location.reload()
-          }, 1000)
-            }
+        onSubmit: isEdit ? values =>  editTaskHandler(values)
+            : values =>  addTaskHandler(values)
+            
     });
 
 

@@ -3,15 +3,27 @@ import { useDrop } from 'react-dnd'
 import { ItemTypes } from '../../utils/items'
 import { editTasksAction } from '../../redux/taskSlices';
 import { useDispatch } from 'react-redux';
+import { useStateContext } from '../../context/ContextProvider';
 
 
 
 function InProgressTasks({children}) {
- 
+  const {tasks,setTasks}=useStateContext()
     const dispatch= useDispatch()
+
+    const editTaskHandler= (item)=> {
+      dispatch(editTasksAction(({_id:item.task._id, status:"In Progress"} )));
+const newTasks= tasks?.filter(task=> {
+  return task._id !==item.task._id
+})
+
+      setTasks([...newTasks, {title: item?.task.title, summary: item?.task.summary, status:"In Progress", _id:item.task._id}]);
+ 
+     
+  }
     const [{ isOver, canDrop }, drop] = useDrop({
     accept: [ItemTypes.DO],
-    drop: (item, monitor) => {dispatch(editTasksAction(({id:item?.id, status:"In Progress"} )));window.location.reload() },
+    drop: (item, monitor) => editTaskHandler(item),
 
    
     collect: monitor => ({

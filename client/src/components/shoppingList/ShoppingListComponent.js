@@ -14,7 +14,7 @@ import { useStateContext } from '../../context/ContextProvider';
 export default function ShoppingListComponent() {
     // display or remove action creation/edit form 
    
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentItem, setCurrentItem,showCart, setShowCart} = useStateContext();
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentItem, setCurrentItem,showCart, setShowCart,   setShoppingItems, shoppingItems, setShoppingStats, shoppingStats, } = useStateContext();
 
     // dispatch action to fetch all itemss
     const dispatch = useDispatch()
@@ -22,13 +22,27 @@ export default function ShoppingListComponent() {
         dispatch(fetchAllShoppingsItem())
     }, [dispatch])
 
+
     const shoppingItemsState = useSelector((state) => state?.shoppingItem)
     const { shoppingItemsFetched, shoppingItemLoading, shoppingItemAppErr, shoppingItemServerErr } = shoppingItemsState
-    const toDoshoppingItems = shoppingItemsFetched?.shoppingItems?.filter(shoppingItem => shoppingItem?.status === "On Shopping List")
-    const doneshoppingItems = shoppingItemsFetched?.shoppingItems?.filter(shoppingItem => shoppingItem?.status === "Added to Cart")
 
-    const toDoshoppingStats = shoppingItemsFetched?.shoppingStats?.filter(shoppingItem => shoppingItem?._id === "On Shopping List")
-    const doneshoppingStats = shoppingItemsFetched?.shoppingStats?.filter(shoppingItem => shoppingItem?._id === "Added to Cart")
+    
+
+    useEffect(() => {
+     if(shoppingItemsFetched) {
+        setShoppingItems(shoppingItemsFetched?.shoppingItems);
+        setShoppingStats(shoppingItemsFetched?.shoppingStats)
+      
+     }
+    
+    }, [shoppingItemsFetched, setShoppingItems,setShoppingStats ])
+
+    
+    const toDoshoppingItems = shoppingItems?.filter(shoppingItem => shoppingItem?.status === "On Shopping List")
+    const doneshoppingItems =shoppingItems?.filter(shoppingItem => shoppingItem?.status === "Added to Cart")
+
+    const toDoshoppingStats = shoppingStats?.filter(shoppingItem => shoppingItem?._id === "On Shopping List")
+    const doneshoppingStats = shoppingStats?.filter(shoppingItem => shoppingItem?._id === "Added to Cart")
 
 
     return (
@@ -42,7 +56,7 @@ export default function ShoppingListComponent() {
                         borderStartStartRadius: "10px",
                         borderEndStartRadius: "10px"
                     }}>
-                    Items On List: Ksh.{toDoshoppingStats?.[0]?.totalShoppingAmount}
+                    Items On List
                 </button>
                 <button className="list-heading-button " onClick={() => setShowCart(true)}
                     style={{
@@ -50,14 +64,14 @@ export default function ShoppingListComponent() {
                         borderStartEndRadius: "10px",
                         borderEndEndRadius: "10px"
                     }}>
-                    Items In Cart: Ksh.{doneshoppingStats?.[0]?.totalShoppingAmount}
+                    Items In Cart
                 </button>
             </div>
             <div className="kanban-board" id="shopping-board">
                 {!showCart && <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200" id="todo" >
                     <strong>Items On List</strong>
                     <div className="task-button-block">
-                        <button id="task-button" onClick={() => setShowModal(true)}> Add Item</button>
+                        <button id="task-button" onClick={() => {setShowModal(true);setShowCart(true)}}> Add Item</button>
 
                     </div>
                     {shoppingItemAppErr || shoppingItemServerErr ? (<div className="form-validation">An Error Has Occured</div>)
@@ -77,6 +91,8 @@ export default function ShoppingListComponent() {
                 </div>}
                 {showCart && <ItemsAddedToCart>
                     <strong>Items In Cart</strong>
+                    <br />
+                    <strong>Shopping Amount :  Ksh.{doneshoppingStats?.[0]?.totalShoppingAmount=== undefined? 0: doneshoppingStats?.[0]?.totalShoppingAmount}</strong>
                     {shoppingItemAppErr || shoppingItemServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                         : shoppingItemLoading ? <h4>Loading Please Wait......</h4>
                             : doneshoppingItems?.map(shoppingItem => (<ShoppingItemCard

@@ -7,7 +7,7 @@ function TaskCard({ setShowDeleteModal, setCurrentEntry, setShowModal, task, set
  
 
 const [{isDragging},drag]=useDrag({
-  item:{ id: task?._id,
+  item:{ task,
 },
     
 

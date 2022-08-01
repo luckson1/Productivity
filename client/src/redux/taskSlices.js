@@ -133,7 +133,7 @@ export const editTasksAction = createAsyncThunk('tasks/update', async (payload, 
     try {
         //make http call here
 
-        const { data } = await axios.put(`${BaseURL}/tasks/${payload?.id}`, payload, config);
+        const { data } = await axios.put(`${BaseURL}/tasks/${payload?._id}`, payload, config);
         dispatch(resetTaskUpdated())
         return data;
     } catch (error) {

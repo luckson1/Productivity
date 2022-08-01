@@ -3,8 +3,9 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
-import { createShoppingItemAction, editShoppingItem } from '../../redux/shoppingItemSlices';
+import { createShoppingItemAction, editShoppingItem, fetchAllShoppingsItem } from '../../redux/shoppingItemSlices';
 import { useStateContext } from '../../context/ContextProvider';
+const { v4: uuidv4 } = require('uuid')
 
 const errorSchema = Yup.object().shape({
 
@@ -18,9 +19,27 @@ const errorSchema = Yup.object().shape({
 
 
 });
-function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
-    const {currentColor}=useStateContext()
+function CreateShoppingItem({shoppingItem }) {
+    const { currentColor, setShoppingItems, setShowModal,setIsEdit, isEdit,  shoppingItems, setShoppingStats, shoppingStats, showCart, setShowCart} = useStateContext()
     const dispatch = useDispatch()
+
+
+    const addShoppingItemHandler = (values) => {
+        dispatch(createShoppingItemAction(values))
+        setShoppingItems([...shoppingItems, values]);
+        setShowCart(false);
+        setShowModal(false);
+     
+    }
+const editShoppingItemHandler = values => {
+    dispatch(editShoppingItem(values));
+    dispatch(fetchAllShoppingsItem())
+    const newShoppingList=shoppingItems.filter(listItem=> listItem._id !==shoppingItem?._id);
+    setShoppingItems([...newShoppingList, values]);
+    setShowModal(false);
+}
+
+
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -28,24 +47,21 @@ function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
             name: isEdit ? shoppingItem?.name : '',
             units: isEdit ? shoppingItem?.units : 1,
             price: isEdit ? shoppingItem?.price : 0,
-            id: isEdit ? shoppingItem?._id : null
+            status: isEdit ? shoppingItem?.status : "On Shopping List",
+
+            _id: isEdit ? shoppingItem?._id : uuidv4()
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values => { dispatch(editShoppingItem(values));setTimeout(() => {
-           window.location.reload()
-          }, 1200) }
-            : values => {
+        onSubmit: isEdit ? values => editShoppingItemHandler(values)
+       
+            : values => addShoppingItemHandler(values)
 
-                dispatch(createShoppingItemAction(values));setTimeout(() => {
-           window.location.reload()
-          }, 1200)
-            }
     });
 
 
     return (
-        <div className="modal" style={{backgroundColor:currentColor}}>
+        <div className="modal" style={{ backgroundColor: currentColor }}>
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
                 setShowModal(false)
@@ -79,7 +95,7 @@ function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
                         />
                     </span>
 
-                    <span className="form-row">
+                    {isEdit && <span className="form-row">
                         <label className="form-row-label" htmlFor="item-units">Price</label>
                         <input className="form-row-input"
                             type="number"
@@ -88,9 +104,38 @@ function CreateShoppingItem({ setShowModal, setIsEdit, isEdit, shoppingItem }) {
                             onChange={formik.handleChange("price")}
                             onBlur={formik.handleBlur("price")}
                         />
-                    </span>
-                    <span className="form-row-buttons">
-                        <button id="save-button" type="submit">Save</button>
+                    </span>}
+                {!showCart && <span className="form-row">
+                       <label className="form-row-label" htmlFor="task-name">Add to Cart?</label>
+                <div className='multiple-input-container py-3 pt-5'>
+
+                    <input
+                        id='no'
+                        value={undefined}
+                        onChange={() => { formik.setFieldValue('status', "On Shopping List") }}
+                        onBlur={formik.handleBlur("status")}
+                        type="radio"
+                        checked={formik.values.status === "On Shopping List"}
+
+                    />
+                    <label htmlFor="no">No</label>
+
+                    <input
+                        id='yes'
+                        value={undefined}
+                        onChange={() => { formik.setFieldValue('status', "Added to Cart") }}
+                        onBlur={formik.handleBlur("status")}
+                        type="radio"
+                        checked={formik.values.status === "Added to Cart"}
+
+                    />
+                    <label htmlFor="yes">Yes</label>
+
+                </div>
+                </span>}
+                    <span className="flex justify-center ">
+                        <button className='bg-green-400 py-2 px-10 m-2 rounded-lg' type="submit">Save</button>
+                     
 
                     </span>
                 </div>

@@ -22,32 +22,37 @@ export const ContextProvider = ({ children }) => {
     const [reveal, setReveal] = useState(false)
     const [isSignUp, setIsSignUp] = useState(true)
     const [isOpenMenu, setIsOpenMenu] = useState(false)
-   const [showProfileModal, setShowProfileModal]=useState(false)
+    const [showProfileModal, setShowProfileModal] = useState(false)
+    const [tasks, setTasks] = useState([])
+    const [shoppingItems, setShoppingItems] = useState([])
+    const [shoppingStats, setShoppingStats] = useState([])
+    const [incomes, setIncomes] = useState([])
+    const [expenses, setExpenses] = useState([])
 
 
 
     const setMode = (e) => { setCurrentMode(e.target.value); localStorage.setItem("ThemeMode", e.target.value); setThemeSettings(false) }
     const setColor = (color) => { setCurrentColor(color); localStorage.setItem("ThemeColor", color); setThemeSettings(false) }
 
-    
 
-    const dispatch=useDispatch()
 
-    useEffect (()=> {
-      dispatch(fetchUserProfileAction())
-      },[])
-      
-      const userData= useSelector(state=> state?.users?.userProfile)
+    const dispatch = useDispatch()
 
-      const user=userData?.user
+    useEffect(() => {
+        dispatch(fetchUserProfileAction())
+    }, [])
 
- 
+    const userData = useSelector(state => state?.users?.userProfile)
+
+    const user = userData?.user
+
+
     return (
         <StateContext.Provider
             value={{
                 activeMenu,
                 setActiveMenu,
-               
+
                 screenSize,
                 setScreenSize,
                 currentColor,
@@ -80,8 +85,18 @@ export const ContextProvider = ({ children }) => {
                 setIsSignUp,
                 isOpenMenu,
                 setIsOpenMenu,
-                showProfileModal, 
+                showProfileModal,
                 setShowProfileModal,
+                tasks,
+                setTasks,
+                setShoppingItems,
+                shoppingItems,
+                setShoppingStats,
+                shoppingStats,
+                incomes,
+                setIncomes,
+                expenses,
+                setExpenses,
                 user
 
 

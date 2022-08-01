@@ -8,7 +8,7 @@ import { FetchExpensesAction } from '../redux/expenseSlices'
 import { fetchIncomesAction } from '../redux/IncomeSlices'
 
 function ExpenseTracker() {
-  const {currentColor ,showModal, setShowModal,isExpense, setIsExpense} = useStateContext();
+  const {currentColor ,showModal, setShowModal,isExpense, setIsExpense,  incomes, setIncomes,  expenses, setExpenses} = useStateContext();
 
 
   // dispatch action to fetch incomes and expenses
@@ -23,13 +23,18 @@ useEffect(()=> {
 
   const incomesState=useSelector(state=> state?.incomes)
   const {incomeLoading, incomeList}=incomesState
-const incomes=incomeList
+useEffect(()=> {
+  if(incomeList) setIncomes(incomeList)
+},[incomeList])
 
 
 
 const expensesState=useSelector(state=> state?.expenses)
 const {expenseLoading, expenseList}=expensesState
-const expenses=expenseList
+useEffect(()=> {
+  if(expenseList) setExpenses(expenseList)
+},[expenseList])
+
   return (
     <div>
       <div className="content-display-buttons" id="transactions">

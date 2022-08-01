@@ -128,7 +128,7 @@ export const editShoppingItem = createAsyncThunk('shoppingItems/update', async (
     try {
         //make http call here
 
-        const { data } = await axios.put(`${BaseURL}/shoppingItems/${payload?.id}`, payload, config);
+        const { data } = await axios.put(`${BaseURL}/shoppingItems/${payload?._id}`, payload, config);
       
         return data;
     } catch (error) {
