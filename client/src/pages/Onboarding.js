@@ -33,7 +33,7 @@ export const Onboarding = () => {
     const { setActiveMenu, setShowNavBar } = useStateContext()
     useEffect(() => {
         setActiveMenu(false); setShowNavBar(false)
-    }, [])
+    }, [setActiveMenu, setShowNavBar])
     // dispatch action of creating a profile
 
     const dispatch = useDispatch()
@@ -71,9 +71,10 @@ export const Onboarding = () => {
 
     useEffect(() => {
         if (isProfilecreated) {
-            return navigate('/dashboard')
+            navigate('/dashboard');
+            setActiveMenu(true)
         }
-    }, [isProfilecreated, navigate])
+    }, [isProfilecreated, navigate,setActiveMenu])
 
     return (<>
 

@@ -87,7 +87,8 @@ const Dashboard = () => {
                             <p className="text-l text-gray-900">{statsLoading ? "Loading, Please wait! 😀"
                                 : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
                                     : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
-                                        : currencyFormatter(totalIncome)}</p>
+                                        : isNaN(totalIncome) ? currencyFormatter(0)
+                                            : currencyFormatter(totalIncome)}</p>
                         </div>
                         <button
                             type="button"
@@ -107,7 +108,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="flex m-3 flex-col md:flex-row justify-center gap-1">
-               
+
 
                     <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
                         <button
@@ -120,10 +121,11 @@ const Dashboard = () => {
                         <p className=" text-gray-900" >{statsLoading ? "Loading, Please wait! 😀"
                             : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
                                 : statsList?.expenseStats === 0 ? "No Expenses Added....yet 😊"
-                                    : currencyFormatter(totalExpenditure)}</p>
+                                    : isNaN(totalExpenditure) ? currencyFormatter(0)
+                                        : currencyFormatter(totalExpenditure)}</p>
                         <p className=" text-gray-900  mt-1">Total Expenditure</p>
                     </div>
-               
+
 
                     <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
                         <button
@@ -136,11 +138,12 @@ const Dashboard = () => {
                         <p className=" text-gray-900">{shoppingItemLoading ? "Loading, Please wait! 😀"
                             : shoppingItemAppErr || shoppingItemServerErr ? "An Error Occured. Please Referesh 😥"
                                 : shoppingItemsFetched?.shoppingStats === 0 ? "No Shopping List created....yet 😊"
+                                :isNaN(latestShoppingStats)? currencyFormatter (0)
                                     : currencyFormatter(latestShoppingStats)}</p>
                         <p className=" text-gray-900  mt-1">Latest Shopping Amount</p>
                     </div>
 
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-3 pt-9 rounded-2xl text-left">
+                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-9 rounded-2xl text-left">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -148,11 +151,12 @@ const Dashboard = () => {
                         >
                             <FaTasks />
                         </button>
+                        <p className=" text-gray-900  mt-1">Tasks</p>
                         {taskLoading ? "Loading, Please wait! 😀"
                             : taskAppErr || taskServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
-                                : tasksFetched?.tasks === 0 ? <p  className=" text-gray-900"> No Tasks created....yet 😊</p>
-                                    : <p  className=" text-gray-900">{toDoTasks?.length} Tasks to do, {inProgressTasks?.length} in progress and {doneTasks?.length} completed</p>}
-                        <p className=" text-gray-900  mt-1">Tasks</p>
+                                : tasksFetched?.tasks === 0 ? <p className=" text-gray-900"> No Tasks created....yet 😊</p>
+                                    : <p className=" text-gray-900">{toDoTasks?.length} Tasks to do, {inProgressTasks?.length} in progress and {doneTasks?.length} completed</p>}
+                       
                     </div>
 
 
@@ -163,11 +167,11 @@ const Dashboard = () => {
                 <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg m-1 p-1 rounded-2xl md:w-780  ">
                     <div className="flex justify-between">
                         <p className="font-semibold text-l ml-5   text-gray-900">Income and Expenses Updates</p>
-                  
+
                     </div>
                     <div className="mt-5 flex gap-10 flex-wrap justify-center">
                         <div className=" border-r-1 border-color m-4 pr-1">
-                        
+
                             <div className="mt-5 mx-0">
                                 <ResponsiveContainer width="100%" height="100%" minHeight={280} minWidth={280}>
                                     <BarChart
@@ -186,13 +190,13 @@ const Dashboard = () => {
                                         <YAxis />
                                         <Tooltip />
                                         <Legend />
-                                        <Bar dataKey="total" fill={currentColor}/>
+                                        <Bar dataKey="total" fill={currentColor} />
                                         <Bar dataKey="average" fill="#79a8f2" />
                                         <Bar dataKey="highest" fill="#f0624d" />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
-                           
+
                             <div className="mt-5">
                                 <Button
                                     color="white"
@@ -202,9 +206,9 @@ const Dashboard = () => {
                                 />
                             </div>
                         </div>
-                       
+
                     </div>
-     
+
                 </div>
                 <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
@@ -221,7 +225,7 @@ const Dashboard = () => {
                                                 <p className="text-gray-900">{dateFormatter(task?.updatedAt)}</p>
                                                 <div>
                                                     <p className="text-md font-semibold text-gray-900">{task?.title}</p>
-                                                
+
                                                 </div>
                                             </div>
                                             <p className='text-gray-900'>{task?.status}</p>
@@ -241,9 +245,9 @@ const Dashboard = () => {
 
 
                     </div>
-                </div>            
+                </div>
 
-            </div>       
+            </div>
 
 
         </div>

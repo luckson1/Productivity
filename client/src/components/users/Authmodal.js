@@ -35,7 +35,7 @@ const LoginErrorSchema = Yup.object().shape({
 });
 
 export const Authmodal = () => {
-    const { reveal, setReveal, setShowModal, isSignUp, setIsSignUp } = useStateContext()
+    const { reveal, setReveal, setShowModal, isSignUp, setIsSignUp, setActiveMenu } = useStateContext()
     // dispatch
     const dispatch = useDispatch()
 
@@ -68,16 +68,19 @@ const navigate=useNavigate();
     useEffect(() => {
         if (isRegistered) {
             navigate('/onboarding');
-            window.location.reload();
+            setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+         
         }
-    }, [])
+    }, [isRegistered, navigate])
 
     useEffect(() => {
         if (isLoggedIn) {
             navigate('/dashboard');
-            window.location.reload();
+            setActiveMenu(true);
         }
-    }, [isLoggedIn])
+    }, [isLoggedIn, navigate,setActiveMenu])
 
     return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20'>
         <div onClick={() => { setShowModal(false); setIsSignUp(true); setReveal(false) }} className="close-icon"><MdCancel color="red" /></div>

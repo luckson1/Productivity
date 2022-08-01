@@ -17,7 +17,7 @@ function Home() {
   const { setActiveMenu, setShowNavBar, showModal, setShowModal, setIsSignUp, isOpenMenu, setIsOpenMenu } = useStateContext()
   useEffect(() => {
     setActiveMenu(false); setShowNavBar(false)
-  }, [])
+  }, [setActiveMenu,setShowNavBar])
 const dispatch=useDispatch()
   const userLogin = useSelector(state => state?.users?.userAuth);
   return (
