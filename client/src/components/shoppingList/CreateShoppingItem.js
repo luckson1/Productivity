@@ -37,6 +37,7 @@ const editShoppingItemHandler = values => {
     const newShoppingList=shoppingItems.filter(listItem=> listItem._id !==shoppingItem?._id);
     setShoppingItems([...newShoppingList, values]);
     setShowModal(false);
+    setIsEdit(false);
 }
 
 

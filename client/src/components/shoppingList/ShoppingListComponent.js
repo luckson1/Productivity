@@ -41,7 +41,7 @@ export default function ShoppingListComponent() {
     const toDoshoppingItems = shoppingItems?.filter(shoppingItem => shoppingItem?.status === "On Shopping List")
     const doneshoppingItems =shoppingItems?.filter(shoppingItem => shoppingItem?.status === "Added to Cart")
 
-    const toDoshoppingStats = shoppingStats?.filter(shoppingItem => shoppingItem?._id === "On Shopping List")
+    // const toDoshoppingStats = shoppingStats?.filter(shoppingItem => shoppingItem?._id === "On Shopping List")
     const doneshoppingStats = shoppingStats?.filter(shoppingItem => shoppingItem?._id === "Added to Cart")
 
 
@@ -49,10 +49,10 @@ export default function ShoppingListComponent() {
 
         <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
         
-            <div className="content-display-buttons">
+            <div className="content-display-buttons mb-5">
                 <button className="list-heading-button" onClick={() => setShowCart(false)}
                     style={{
-                        backgroundColor: showCart ? currentColor : "white",
+                        backgroundColor: !showCart ? currentColor : "white",
                         borderStartStartRadius: "10px",
                         borderEndStartRadius: "10px"
                     }}>
@@ -60,7 +60,7 @@ export default function ShoppingListComponent() {
                 </button>
                 <button className="list-heading-button " onClick={() => setShowCart(true)}
                     style={{
-                        backgroundColor: !showCart ? currentColor : "white",
+                        backgroundColor: showCart ? currentColor : "white",
                         borderStartEndRadius: "10px",
                         borderEndEndRadius: "10px"
                     }}>

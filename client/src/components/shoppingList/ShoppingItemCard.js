@@ -1,14 +1,13 @@
 import React from 'react'
 import { useDrag } from 'react-dnd';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
 import { useStateContext } from '../../context/ContextProvider';
-import { editShoppingItem } from '../../redux/shoppingItemSlices';
+
 
 
 function ShoppingItemCard({type, shoppingItem}) {
-  const {setShowDeleteModal, setCurrentItem, setShowModal, setIsEdit,  showCart }=useStateContext()
-  const dispatch = useDispatch()
+  const {setShowDeleteModal, setCurrentItem, setShowModal, setIsEdit }=useStateContext()
+
   const [{ isDragging }, drag] = useDrag({
     item: {
       id: shoppingItem?._id,
