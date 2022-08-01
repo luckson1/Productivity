@@ -69,7 +69,11 @@ function App() {
                                     <ExpenseTracker />
                                 </ProtectedRoute>
                             } />
-                            <Route exact path="/onboarding" element={ <Onboarding /> } />
+                            <Route exact path="/onboarding" element={
+                          
+                                    <Onboarding />
+                             
+                            } />
 
                         </Routes>
                     </div>

@@ -18,14 +18,14 @@ dispatch(fetchIncomesAction())
 }, [dispatch])
 useEffect(()=> {
   dispatch(FetchExpensesAction())
-  }, [dispatch])
+  }, [])
 
 
   const incomesState=useSelector(state=> state?.incomes)
   const {incomeLoading, incomeList}=incomesState
 useEffect(()=> {
   if(incomeList) setIncomes(incomeList)
-},[incomeList, setIncomes])
+},[incomeList])
 
 
 
@@ -33,7 +33,7 @@ const expensesState=useSelector(state=> state?.expenses)
 const {expenseLoading, expenseList}=expensesState
 useEffect(()=> {
   if(expenseList) setExpenses(expenseList)
-},[expenseList, setExpenses])
+},[expenseList])
 
   return (
     <div>
