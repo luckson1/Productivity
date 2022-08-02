@@ -40,7 +40,7 @@ export const ContextProvider = ({ children }) => {
 
     useEffect(() => {
         dispatch(fetchUserProfileAction())
-    }, [])
+    }, [dispatch])
 
     const userData = useSelector(state => state?.users?.userProfile)
 

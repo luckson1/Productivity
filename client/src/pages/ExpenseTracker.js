@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 
 import CreateEntry from '../components/expenseTraker/CreateEntry'
 import EntryList from '../components/expenseTraker/EntryList'
@@ -33,7 +34,7 @@ const expensesState=useSelector(state=> state?.expenses)
 const {expenseLoading, expenseList}=expensesState
 useEffect(()=> {
   if(expenseList) setExpenses(expenseList)
-},[expenseList])
+},[expenseList, setExpenses])
 
   return (
     <div>
