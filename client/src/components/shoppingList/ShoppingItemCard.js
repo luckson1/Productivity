@@ -40,7 +40,8 @@ function ShoppingItemCard({type, shoppingItem}) {
         <MdEdit size="20px" color='orange' onClick={() => {
           setShowModal(true);
           setIsEdit(true);
-          setCurrentItem(shoppingItem)
+          setCurrentItem(shoppingItem);
+          window.scrollTo(0, 0)
         }} style={{ cursor: "pointer" }} />
 
 
