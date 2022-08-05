@@ -36,7 +36,7 @@ const newTasks= tasks?.filter(task=> {
 
     const isActive = isOver && canDrop
     return (
-        <div className={ isActive? "bg-gradient-to-r from-green-400 via-emerald-300 to-teal-300 kanban-block" : "bg-gradient-to-r from-green-200 via-emerald-200 to-teal-200 kanban-block" } id="done" ref={drop}  >
+        <div className={ isActive? "bg-gradient-to-r from-green-400 via-emerald-300 to-teal-300 kanban-block" : "bg-gradient-to-r from-green-100 via-emerald-100 to-teal-100 kanban-block" } id="done" ref={drop}  >
             {children}
         </div>
     )

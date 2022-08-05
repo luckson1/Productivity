@@ -29,13 +29,15 @@ function EntryList({ entries, loading }) {
           <div className="col col-5 flex justify-between" data-label="Action">
             <MdDeleteForever size={"20px"} color={"red"} cursor={"pointer"} onClick={() => {
               setShowDeleteModal(true)
-              setCurrentEntry(entry)
+              setCurrentEntry(entry);
+              window.scrollTo(0, 0)
             }} />
           
             <MdModeEdit size={"20px"} color={"orange"} cursor={"pointer"} onClick={() => {
               setShowModal(true);
               setIsEdit(true);
-              setCurrentEntry(entry)
+              setCurrentEntry(entry); 
+                window.scrollTo(0, 0)
             }} /> </div>
           {showDeleteModal && <DeleteDialogBox entry={currentEntry} item={isExpense ? "Expense" : "Income"} />}
           {showModal && <CreateEntry   />}

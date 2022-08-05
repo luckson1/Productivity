@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
 import { createShoppingItemAction, editShoppingItem, fetchAllShoppingsItem } from '../../redux/shoppingItemSlices';
 import { useStateContext } from '../../context/ContextProvider';
-const { v4: uuidv4 } = require('uuid')
+import { v4 as uuidv4 } from "uuid";
 
 const errorSchema = Yup.object().shape({
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import { useDrag } from 'react-dnd';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import { useStateContext } from '../../context/ContextProvider';
 
 
-function TaskCard({ setShowDeleteModal, setCurrentEntry, setShowModal, task, setIsEdit, type }) {
+function TaskCard({ task, type }) {
  
-
+  const { setShowModal ,setShowDeleteModal, setIsEdit,setCurrentEntry} = useStateContext();
 const [{isDragging},drag]=useDrag({
   item:{ task,
 },

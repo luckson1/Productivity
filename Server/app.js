@@ -8,6 +8,7 @@ const { taskRoutes } = require('./routes/Tasks');
 const { shoppingItemRoutes } = require('./routes/shoppingItem');
 const { application } = require('express');
 const { userRoutes } = require('./routes/Users');
+const { bugRoutes } = require('./routes/Bugs');
 
 
 
@@ -37,6 +38,9 @@ app.use('/api/tasks', taskRoutes)
 app.use('/api/shoppingItems', shoppingItemRoutes)
 
 app.use("/api/users", userRoutes)
+
+//bugs routes
+app.use('/api/bugs', bugRoutes)
 
 //error handling //  
 

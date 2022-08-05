@@ -26,7 +26,7 @@ useEffect(()=> {
   const {incomeLoading, incomeList}=incomesState
 useEffect(()=> {
   if(incomeList) setIncomes(incomeList)
-},[incomeList])
+},[incomeList, setIncomes])
 
 
 

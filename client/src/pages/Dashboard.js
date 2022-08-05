@@ -15,6 +15,7 @@ import { accountsStatsAction } from '../redux/accountsStatsSlices';
 import { fetchTasksAction } from '../redux/taskSlices';
 import { fetchAllShoppingsItem } from '../redux/shoppingItemSlices';
 import currencyFormatter from '../utils/currencyFormatter';
+import { MdBugReport } from 'react-icons/md';
 
 
 
@@ -71,12 +72,12 @@ const Dashboard = () => {
     const inProgressTasks = tasksFetched?.tasks?.filter(task => task?.status === "In Progress")
     // const doneTasks = tasksFetched?.tasks?.filter(task => task?.status === "Done")
 
-
-    //shopping data
-    const shoppingItemsState = stateData?.shoppingItem
-    const { shoppingItemsFetched, shoppingItemLoading, shoppingItemAppErr, shoppingItemServerErr } = shoppingItemsState
-    const latestShoppingStats = shoppingItemsFetched?.shoppingStats?.filter(shoppingItem => shoppingItem?._id === "Added to Cart")?.[0]?.totalShoppingAmount
-
+    // bugss data
+    const bugsState = stateData?.bugs
+    const { bugsFetched, bugLoading, bugAppErr, bugServerErr } = bugsState
+    const openBugs = bugsFetched?.bugs?.filter(bug => bug?.status === "Open")
+    const closedBugs = bugsFetched?.bugs?.filter(bug => bug?.status === "Closed")
+    
     return (
         <div className="mt-24">
             <div className="flex flex-wrap lg:flex-nowrap justify-center ">
@@ -107,7 +108,7 @@ const Dashboard = () => {
                         />
                     </div>
                 </div>
-                <div className="flex m-3 flex-col md:flex-row justify-center gap-1">
+                <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-1">
                
 
                     <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
@@ -127,23 +128,9 @@ const Dashboard = () => {
                     </div>
                
 
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
-                        <button
-                            type="button"
-                            style={{ backgroundColor: currentColor }}
-                            className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                        >
-                            <BsCurrencyDollar />
-                        </button>
-                        <p className=" text-gray-900">{shoppingItemLoading ? "Loading, Please wait! 😀"
-                            : shoppingItemAppErr || shoppingItemServerErr ? "An Error Occured. Please Referesh 😥"
-                                : shoppingItemsFetched?.shoppingStats === 0 ? "No Shopping List created....yet 😊"
-                                : isNaN(latestShoppingStats)?  currencyFormatter(0)
-                                    : currencyFormatter(latestShoppingStats)}</p>
-                        <p className=" text-gray-900  mt-1">Latest Shopping Amount</p>
-                    </div>
+              
 
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl text-left">
+                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -151,15 +138,63 @@ const Dashboard = () => {
                         >
                             <FaTasks />
                         </button>
-                        <p className=" text-gray-900  mt-1">Tasks</p>
+               
                         {taskLoading ? "Loading, Please wait! 😀"
                             : taskAppErr || taskServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
                                 : tasksFetched?.tasks === 0 ? <p  className=" text-gray-900"> No Tasks created....yet 😊</p>
-                                    : <p  className=" text-gray-900">{toDoTasks?.length} Tasks to do and {inProgressTasks?.length} in progress</p>}
+                                    : <p  className=" text-gray-900">{toDoTasks?.length} Task(s) to do  </p>}
+                   
+                    </div>
+                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
+                        <button
+                            type="button"
+                            style={{ backgroundColor: currentColor }}
+                            className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                        >
+                            <FaTasks  />
+                        </button>
+               
+                        {taskLoading ? "Loading, Please wait! 😀"
+                            : taskAppErr || taskServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                                : tasksFetched?.tasks === 0 ? <p  className=" text-gray-900"> No Tasks created....yet 😊</p>
+                                    : <p  className=" text-gray-900">{inProgressTasks?.length} Task(s) in progress</p>}
                    
                     </div>
 
 
+                 
+
+                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
+                        <button
+                            type="button"
+                            style={{ backgroundColor: currentColor }}
+                            className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                        >
+                            <MdBugReport />
+                        </button>
+               
+                        {bugLoading ? "Loading, Please wait! 😀"
+                            : bugAppErr || bugServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                                : bugsFetched?.bugs === 0 ? <p  className=" text-gray-900"> No bugs created....yet 😊</p>
+                                    : <p  className=" text-gray-900">{closedBugs?.length} Closed bug(s)   </p>}
+                   
+                    </div>
+                  
+                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
+                        <button
+                            type="button"
+                            style={{ backgroundColor: currentColor }}
+                            className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                        >
+                            <MdBugReport />
+                        </button>
+               
+                        {bugLoading ? "Loading, Please wait! 😀"
+                            : bugAppErr || bugServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                                : bugsFetched?.bugs === 0 ? <p  className=" text-gray-900"> No bugs created....yet 😊</p>
+                                    : <p  className=" text-gray-900">{openBugs?.length} Open Bug(s)  </p>}
+                   
+                    </div>
                 </div>
             </div>
 

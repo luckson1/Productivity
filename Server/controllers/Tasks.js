@@ -8,9 +8,9 @@ require('dotenv').config()
 const createTaskCtrl= expressAsyncHandler(async (req, res) => {
     
     const user= req?.user?._id
-    const {title, summary,status}=req?.body
+    const {title, summary,taskId}=req?.body
     try {
-        const task= await Task.create({title,  summary, status, user})
+        const task= await Task.create({title,  summary, taskId, user})
    
         res.json({task})
     } catch (error) {
@@ -65,7 +65,7 @@ const fetchOneTaskCtrl = expressAsyncHandler(async (req, res) => {
 
 const updateTaskctrl = expressAsyncHandler(async (req, res) => {
     const { id } = req?.params
-    
+
     const {title, status,summary}=req?.body
         try {
         const task = await Task.findByIdAndUpdate(id, {title, status,summary}, { new: true })

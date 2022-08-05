@@ -1,8 +1,8 @@
 import React from 'react';
-import { AiOutlineDashboard } from 'react-icons/ai';
-import { FiEdit,   FiShoppingCart } from 'react-icons/fi';
+import { AiOutlineDashboard, AiOutlineTeam } from 'react-icons/ai';
 import { BsKanban, } from 'react-icons/bs';
-
+import { MdBugReport } from 'react-icons/md';
+import {FaRegMoneyBillAlt}from 'react-icons/fa';
 
 
 export const themeColors = [
@@ -37,7 +37,7 @@ export const links = [
     links: [
       {
         name: 'dashboard',
-        icon: <AiOutlineDashboard />,
+        icon: <AiOutlineDashboard size="24px"/>,
       },
     ],
   },
@@ -47,16 +47,20 @@ export const links = [
 
     links: [
       {
-        name: 'shopping-list',
-        icon: <FiShoppingCart />,
+        name: 'bug-tracker',
+        icon: <MdBugReport size="24px"/>,
       },
       {
         name: 'kanban',
-        icon: <BsKanban />,
+        icon: <BsKanban size="20px"/>,
       },
       {
         name: 'expense-tracker',
-        icon: <FiEdit />,
+        icon: < FaRegMoneyBillAlt size="24px"/>,
+      },
+      {
+        name: 'team',
+        icon: <AiOutlineTeam size="24px"/>,
       },
     
     ],

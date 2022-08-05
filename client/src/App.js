@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ExpenseTracker from './pages/ExpenseTracker';
 import Home from './pages/Home';
 import Kanban from './pages/Kanban';
-import ShoppingList from './pages/ShoppingList';
 import './app.css'
 import { Navbar } from './components/navigation/Navbar';
 import { SideBar } from './components/navigation/SideBar';
@@ -12,6 +11,7 @@ import { ThemeSettings } from './utils/ThemeSettings';
 import { Onboarding } from './pages/Onboarding';
 import ProtectedRoute from './components/users/protectedRoute';
 import Dashboard from './pages/Dashboard';
+import BugTracker from './pages/BugTracker';
 function App() {
     const { activeMenu, setThemeSettings, currentColor, themeSettings, showNavBar } = useStateContext();
     return (
@@ -60,9 +60,9 @@ function App() {
                                 <ProtectedRoute>
                                     <Dashboard />
                                 </ProtectedRoute>} />
-                            <Route exact path="/shopping-list" element={
+                            <Route exact path="/bug-tracker" element={
                                 <ProtectedRoute>
-                                    <ShoppingList />
+                                    <BugTracker />
                                 </ProtectedRoute>} />
                             <Route exact path="/expense-tracker" element={
                                 <ProtectedRoute>

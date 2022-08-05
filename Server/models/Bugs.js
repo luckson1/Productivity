@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 //schema
-const taskSchema = new mongoose.Schema(
+const bugSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -9,7 +9,7 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "To Do"
+      default: "Open"
     },
     user: {
       type: Schema.Types.ObjectId, 
@@ -17,16 +17,29 @@ const taskSchema = new mongoose.Schema(
       required: true,
     },
     
-    summary: {
+    description: {
       type: String,
       required: true,
     },
-    taskId: {
+    bugId: {
       type: String,
       required: true,
     },
-
-    
+  
+    steps: {
+        type: String,
+        required: true,
+      },
+    priority: {
+        type: String,
+        required: true,
+      },
+      assigned: {
+        type: Schema.Types.ObjectId, 
+        ref: "User",
+        required: false,
+      },
+      
   },
   {
     timestamps: true,
@@ -44,5 +57,5 @@ const taskSchema = new mongoose.Schema(
 
 
 //model
-const Task = mongoose.model("Task", taskSchema);
-module.exports = Task;
+const Bug = mongoose.model("Bug", bugSchema);
+module.exports = Bug;

@@ -6,6 +6,7 @@ import expensesReducer from "./expenseSlices";
 import incomesReducer from "./IncomeSlices";
 import usersReducer from "./usersSlices";
 import accountsStatsReducers from "./accountsStatsSlices";
+import bugsReducers from "./bugsSlices";
 
 
 
@@ -16,7 +17,8 @@ const Store=configureStore( {
         shoppingItem: shoppingItemReducers,
         expenses: expensesReducer,
         incomes: incomesReducer,
-        stats: accountsStatsReducers
+        stats: accountsStatsReducers,
+        bugs: bugsReducers
    
         
     }

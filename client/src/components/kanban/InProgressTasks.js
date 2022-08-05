@@ -40,7 +40,7 @@ const isActive= isOver && canDrop
 
 
   return (
-    <div className={isActive? "bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300 kanban-block" : "bg-gradient-to-r from-orange-200 via-amber-200 to-yellow-200 kanban-block" } ref= {drop}>
+    <div className={isActive? "bg-gradient-to-r from-orange-400 via-amber-400 to-yellow-300 kanban-block" : "bg-gradient-to-r from-orange-100 via-amber-100 to-yellow-100 kanban-block" } ref= {drop}>
         {children}
     </div>
   )

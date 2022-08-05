@@ -15,11 +15,12 @@ export default function KanbanComponent() {
     // display or remove action creation/edit form 
   
 
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry, setCurrentEntry, tasks, setTasks} = useStateContext();
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry,  tasks, setTasks} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
 
+    
 useEffect(() => {
     dispatch(fetchTasksAction())
 
@@ -35,7 +36,7 @@ useEffect(() => {
     
     }, [tasksFetched, setTasks])
  
-    console.log(tasks)
+    
     const toDoTasks = tasks?.filter(task => task?.status === "To Do")
     const inProgressTasks = tasks?.filter(task => task?.status === "In Progress")
     const doneTasks = tasks?.filter(task => task?.status === "Done")
@@ -51,10 +52,10 @@ useEffect(() => {
             </div>
            
             <div className="kanban-board ">
-                <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200">
+                <div className="kanban-block bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
                     <strong>To Do</strong>
                     <div className="task-button-block">
-                        <button id="task-button" onClick={() => setShowModal(true)}> Add New task</button>
+                        <button id="task-button" onClick={() => {setShowModal(true);  window.scrollTo(0, 0)}}> Add New task</button>
 
                     </div>
                     {taskAppErr || taskServerErr ? (<div className="form-validation">An Error Has Occured</div>)
@@ -63,12 +64,8 @@ useEffect(() => {
                                 : toDoTasks?.map(task => (<TaskCard
                                     task={task}
                                     key={task?._id}
-                                    setIsEdit={setIsEdit}
-                                    setShowModal={setShowModal}
-                                    setCurrentEntry={setCurrentEntry}
-                                    setShowDeleteModal={setShowDeleteModal}
                                     type={ItemTypes.DO}
-                                    newStatus="Done"
+                                 
                                 />))}
 
                 </div>
@@ -78,13 +75,9 @@ useEffect(() => {
                         : taskLoading ? <h4>Loading Please Wait......</h4>
                             : inProgressTasks?.map(task => (<TaskCard
                                 task={task}
-                                key={task?._id}
-                                setIsEdit={setIsEdit}
-                                setShowModal={setShowModal}
-                                setCurrentEntry={setCurrentEntry}
-                                setShowDeleteModal={setShowDeleteModal}
+                                key={task?._id}                                
                                 type={ItemTypes.PROGRESS}
-                                newStatus="Done"
+                               
                             />))}
                 </InProgressTasks>
                 <DoneTasks>
@@ -93,11 +86,7 @@ useEffect(() => {
                         : taskLoading ? <h4>Loading Please Wait......</h4>
                             : doneTasks?.map(task => (<TaskCard
                                 task={task}
-                                key={task?._id}
-                                setIsEdit={setIsEdit}
-                                setShowModal={setShowModal}
-                                setCurrentEntry={setCurrentEntry}
-                                setShowDeleteModal={setShowDeleteModal}
+                                key={task?._id}                             
                                 type={ItemTypes.DONE}
                             />))}
 

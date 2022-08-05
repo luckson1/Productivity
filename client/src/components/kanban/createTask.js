@@ -1,10 +1,11 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { createTaskAction, editTasksAction } from '../../redux/taskSlices';
+import { useDispatch, useSelector } from 'react-redux';
+import { createTaskAction, editTasksAction, fetchTasksAction } from '../../redux/taskSlices';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
+import { v4 as uuidv4 } from "uuid";
 
 const errorSchema = Yup.object().shape({
 
@@ -16,31 +17,34 @@ const errorSchema = Yup.object().shape({
         .required('Summary Information Required'),
     status: Yup
         .string()
-        .required('Status Information Required'),
+
 
 });
-function CreateTask({task}) {
-    const {currentColor, setShowModal, setIsEdit,isEdit, tasks,setTasks}=useStateContext()
+function CreateTask({ task }) {
+    const { currentColor, setShowModal, setIsEdit, isEdit, tasks, setTasks } = useStateContext()
     const dispatch = useDispatch()
 
 
-    const addTaskHandler= (values)=> {
+    const addTaskHandler = (values) => {
         dispatch(createTaskAction(values))
         setTasks([...tasks, values]);
         setShowModal(false);
-       
+
     }
+    const upDatedTask=useSelector(state=> state?.tasks?.tasksFetched?.tasks)
+    console.log(upDatedTask)
+    const editTaskHandler = (values) => {
 
-    const editTaskHandler= (values)=> {
-     
         dispatch(editTasksAction(values));
-const newTasks= tasks?.filter(item=> {
-    return item._id !==task?._id
-})
+        const newTasks = tasks?.filter(item => {
+            return item._id !== task?._id
+        })
 
-        setTasks([...newTasks, values]);
-        setShowModal(false);
+        setTasks([...newTasks,  values]);
        
+        setShowModal(false);
+        dispatch(fetchTasksAction())
+
     }
     // use formik hook to handle form state 
     const formik = useFormik({
@@ -48,23 +52,23 @@ const newTasks= tasks?.filter(item=> {
 
             title: isEdit ? task?.title : '',
             summary: isEdit ? task?.summary : '',
-            status: isEdit ? task?.status : '',
-            _id: isEdit? task?._id :null
+            status: isEdit ? task?.status : 'To Do',
+            taskId: isEdit ? task?.taskId : uuidv4(),
+            _id: task?._id
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values =>  editTaskHandler(values)
-            : values =>  addTaskHandler(values)
-            
+        onSubmit: isEdit ? values => {editTaskHandler(values);console.log(values)}
+            : values => { addTaskHandler(values) }
     });
 
 
     return (
-        <div className="modal" style={{backgroundColor:currentColor}}>
-            <MdCancel className='close-icon' color='red' onClick={ () => {
-        setIsEdit(false);
-    setShowModal(false)
-    }}  />
+        <div className="modal" style={{ backgroundColor: currentColor }}>
+            <MdCancel className='close-icon' color='red' onClick={() => {
+                setIsEdit(false);
+                setShowModal(false)
+            }} />
             <form onSubmit={formik.handleSubmit}>
                 <div className="create-new-task-block" id="create-new-task-block">
                     <strong>Task</strong>
@@ -101,7 +105,7 @@ const newTasks= tasks?.filter(item=> {
                     <div className="form-validation">
                         {formik.touched.status && formik.errors.status}
                     </div>
-                    <span className="form-row">
+                    {isEdit && <span className="form-row">
                         <label className="form-row-label" htmlFor="task-name">Status</label>
 
 
@@ -144,7 +148,7 @@ const newTasks= tasks?.filter(item=> {
 
 
                         </div>
-                    </span>
+                    </span>}
                     <span className="form-row-buttons">
                         <button id="save-button" type="submit">Save</button>
 
