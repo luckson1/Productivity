@@ -13,9 +13,9 @@ import { useStateContext } from '../context/ContextProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { accountsStatsAction } from '../redux/accountsStatsSlices';
 import { fetchTasksAction } from '../redux/taskSlices';
-import { fetchAllShoppingsItem } from '../redux/shoppingItemSlices';
 import currencyFormatter from '../utils/currencyFormatter';
 import { MdBugReport } from 'react-icons/md';
+import { fetchbugsAction } from '../redux/bugsSlices';
 
 
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(fetchAllShoppingsItem())
+        dispatch(fetchbugsAction())
     }, [dispatch])
     // get state from store
     const stateData = useSelector(state => state)
