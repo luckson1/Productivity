@@ -81,16 +81,9 @@ const Dashboard = () => {
     return (
         <div className="mt-24">
             <div className="flex flex-wrap lg:flex-nowrap justify-center ">
-                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-no-repeat bg-cover bg-center">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <p className="font-bold text-gray-900">Total Income</p>
-                            <p className="text-l text-gray-900">{statsLoading ? "Loading, Please wait! 😀"
-                                : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
-                                    : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
-                                    :isNaN(totalIncome)? currencyFormatter(0)
-                                        : currencyFormatter(totalIncome)}</p>
-                        </div>
+             
+                <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-1">
+                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -98,17 +91,14 @@ const Dashboard = () => {
                         >
                             <BsCurrencyDollar />
                         </button>
+                        <p className="text-l text-gray-900">{statsLoading ? "Loading, Please wait! 😀"
+                                : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
+                                    : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
+                                    :isNaN(totalIncome)? currencyFormatter(0)
+                                        : currencyFormatter(totalIncome)}</p>
+                         <p className="font-bold text-gray-900">Total Income</p>
                     </div>
-                    <div className="mt-6">
-                        <Button
-                            color="white"
-                            bgColor={currentColor}
-                            text="Download"
-                            borderRadius="10px"
-                        />
-                    </div>
-                </div>
-                <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-1">
+               
                
 
                     <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
