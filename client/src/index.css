@@ -83,6 +83,7 @@ padding: 10px;
 .kanban-block{
   padding: 0.6rem;
   width: 45.5%;
+ 
 
 
   min-height: 4.5rem; 
@@ -457,9 +458,10 @@ h2 small {
 }
 
 .responsive-table li {
-  border-radius: 10px;
-  padding: 10px 5px;
+  border-radius: 20px;
+  padding: 5px 5px;
   display: flex;
+  font-size: 12px;
   justify-content: space-between;
   margin-bottom: 10px;
  
@@ -467,7 +469,7 @@ h2 small {
 }
 .responsive-table .table-header {
   background-color: #95A5A6;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
