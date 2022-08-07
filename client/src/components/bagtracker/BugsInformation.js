@@ -5,10 +5,11 @@ import { useStateContext } from '../../context/ContextProvider';
 import { editBugsAction } from '../../redux/bugsSlices';
 import dateFormatter from '../../utils/dateFormatter';
 import { Button } from '../Button'
-import BugCard from './bugCard';
+import InfoCard from '../InfoCard';
+
 
 export const BugsInformation = ({ bugEntry }) => {
-    const { currentColor, setShowBugInfoModal, setIsEdit, setShowModal, setCurrentEntry, bugs, currentEntry, setBugs} = useStateContext();
+    const { currentColor, setShowInfoModal, setIsEdit, setShowModal, setCurrentEntry, bugs, currentEntry, setBugs} = useStateContext();
     const entry=currentEntry
     const dispatch= useDispatch()
     const editbugHandler = (bugEntry) => {
@@ -29,7 +30,7 @@ export const BugsInformation = ({ bugEntry }) => {
         })
        
         setBugs([...newBugs, values]);
-        setShowBugInfoModal(false);
+        setShowInfoModal(false);
 
     }
 
@@ -42,22 +43,22 @@ export const BugsInformation = ({ bugEntry }) => {
 
                     <MdCancel className='' color='red' size="30px" onClick={() => {
                         setIsEdit(false);
-                        setShowBugInfoModal(false);
+                        setShowInfoModal(false);
 
 
                     }} />
                 </div>
 
-                <div className="mt-3 w-72 md:w-400 text-sm ">
+                <div className="mt-3 text-sm ">
 
                     <div className="flex-col">
 
-                        <BugCard title="Title" details={bugEntry?.title} />
-                        <BugCard title="Status" details={bugEntry?.status} />
-                        <BugCard title="Description" details={bugEntry?.description} />
-                        <BugCard title="Steps" details={bugEntry?.steps} />
-                        <BugCard title="Priority" details={bugEntry?.priority} />
-                        <BugCard title="Date Created" details={dateFormatter(bugEntry?.createdAt)} />
+                        <InfoCard title="Title" details={bugEntry?.title} />
+                        <InfoCard title="Status" details={bugEntry?.status} />
+                        <InfoCard title="Description" details={bugEntry?.description} />
+                        <InfoCard title="Steps" details={bugEntry?.steps} />
+                        <InfoCard title="Priority" details={bugEntry?.priority} />
+                        <InfoCard title="Date Created" details={dateFormatter(bugEntry?.createdAt)} />
 
                     </div>
                 </div>
@@ -68,7 +69,7 @@ export const BugsInformation = ({ bugEntry }) => {
                         bgColor={currentColor}
                         text="Edit Details"
                         borderRadius="10px"
-                        onClick={() => { setShowBugInfoModal(false); setShowModal(true); setIsEdit(true); setCurrentEntry(bugEntry);   window.scrollTo(0, 0) }}
+                        onClick={() => { setShowInfoModal(false); setShowModal(true); setIsEdit(true); setCurrentEntry(bugEntry);   window.scrollTo(0, 0) }}
                     />
                     <Button
                         color="white"

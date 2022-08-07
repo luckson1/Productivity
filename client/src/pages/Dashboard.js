@@ -83,7 +83,7 @@ const Dashboard = () => {
             <div className="flex flex-wrap lg:flex-nowrap justify-center ">
              
                 <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-1">
-                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -101,7 +101,7 @@ const Dashboard = () => {
                
                
 
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -120,7 +120,7 @@ const Dashboard = () => {
 
               
 
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -135,7 +135,7 @@ const Dashboard = () => {
                                     : <p  className=" text-gray-900">{toDoTasks?.length} Task(s) to do  </p>}
                    
                     </div>
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -154,7 +154,7 @@ const Dashboard = () => {
 
                  
 
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -170,7 +170,7 @@ const Dashboard = () => {
                    
                     </div>
                   
-                    <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-1 pt-7 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -189,7 +189,7 @@ const Dashboard = () => {
             </div>
 
             <div className="flex gap-10 flex-wrap justify-center mt-10">
-                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg m-1 p-1 rounded-2xl md:w-780  ">
+                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-secondary-dark-bg m-1 p-1 rounded-2xl md:w-780  ">
                     <div className="flex justify-between">
                         <p className="font-semibold text-l ml-5   text-gray-900">Income and Expenses Updates</p>
                   
@@ -236,7 +236,7 @@ const Dashboard = () => {
                     </div>
      
                 </div>
-                <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
+                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
                         <p className="text-xl font-semibold text-gray-900">Recent Tasks</p>
 
@@ -271,7 +271,43 @@ const Dashboard = () => {
 
 
                     </div>
-                </div>            
+                </div>    
+                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
+                    <div className="flex justify-between items-center gap-2">
+                        <p className="text-xl font-semibold text-gray-900">Open Bugs</p>
+
+                    </div>
+                    <div className="mt-10 w-72 md:w-400 text-sm text-left">
+                        {bugLoading ? "Loading, Please wait! 😀"
+                            : bugAppErr || bugServerErr ? "An Error Occured. Please Referesh 😥"
+                                : bugsFetched?.bugs === 0 ? " No bugs found....yet 😊"
+                                    : bugsFetched?.bugs?.map((bug) => (
+                                        <div key={bug._id} className="flex justify-between mt-4">
+                                            <div className="flex gap-4">
+                                            
+                                             
+                                                    <p className="text-md font-semibold text-gray-900">{bug?.title}</p>
+                                                
+                                                
+                                            </div>
+                                            <p className={bug?.status==="Open"? 'text-blue-500' : bug?.status==="Closed"? 'text-green-500': "text-gray-900" }>{bug?.status}</p>
+                                        </div>
+                                    ))}
+                    </div>
+                    <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                        <div className="mt-3">
+                            <Button
+                                color="white"
+                                bgColor={currentColor}
+                                text="Add"
+                                borderRadius="10px"
+                                onClick={() => navigate("/bug-tracker")}
+                            />
+                        </div>
+
+
+                    </div>
+                </div>         
 
             </div>       
 

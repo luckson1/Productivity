@@ -9,18 +9,19 @@ import { ItemTypes } from '../../utils/items'
 import InProgressTasks from './InProgressTasks'
 import DoneTasks from './DoneTasks'
 import { useStateContext } from '../../context/ContextProvider';
+import { TasksInformation } from './TaskInformation';
 
 
 export default function KanbanComponent() {
     // display or remove action creation/edit form 
   
 
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry,  tasks, setTasks} = useStateContext();
+    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry,  tasks, setTasks, showInfoModal, setShowInfoModal, setCurrentEntry} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
 
-    
+
 useEffect(() => {
     dispatch(fetchTasksAction())
 
@@ -65,7 +66,7 @@ useEffect(() => {
                                     task={task}
                                     key={task?._id}
                                     type={ItemTypes.DO}
-                                 
+                                    onClick={()=> {setShowInfoModal(true); setCurrentEntry(task)}} 
                                 />))}
 
                 </div>
@@ -77,6 +78,7 @@ useEffect(() => {
                                 task={task}
                                 key={task?._id}                                
                                 type={ItemTypes.PROGRESS}
+                                
                                
                             />))}
                 </InProgressTasks>
@@ -92,8 +94,9 @@ useEffect(() => {
 
                 </DoneTasks>
             </div>
-            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} task={currentEntry} setIsEdit={setIsEdit} />}
+            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} entry={currentEntry} setIsEdit={setIsEdit} />}
             {showDeleteModal && <DeleteDialogBox setShowDeleteModal={setShowDeleteModal} task={currentEntry} item="Task" />}
+            {  showInfoModal  && <TasksInformation />}
         </div>
 
     )

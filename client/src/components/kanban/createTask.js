@@ -20,45 +20,45 @@ const errorSchema = Yup.object().shape({
 
 
 });
-function CreateTask({ task }) {
-    const { currentColor, setShowModal, setIsEdit, isEdit, tasks, setTasks } = useStateContext()
+function CreateTask({}) {
+    const { currentColor, setShowModal, setIsEdit, isEdit, tasks, setTasks, currentEntry} = useStateContext()
+const entry=currentEntry
     const dispatch = useDispatch()
 
 
     const addTaskHandler = (values) => {
         dispatch(createTaskAction(values))
-        setTasks([...tasks, values]);
+        setTasks(tasks => [...tasks, values]);
         setShowModal(false);
 
     }
-    const upDatedTask=useSelector(state=> state?.tasks?.tasksFetched?.tasks)
-    console.log(upDatedTask)
+  
     const editTaskHandler = (values) => {
 
         dispatch(editTasksAction(values));
-        const newTasks = tasks?.filter(item => {
-            return item._id !== task?._id
+        const newtasks = tasks?.filter(task => {
+            return entry._id !== task?._id
         })
 
-        setTasks([...newTasks,  values]);
-       
+        setTasks([...newtasks, values]);
         setShowModal(false);
-        dispatch(fetchTasksAction())
 
     }
+
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
 
-            title: isEdit ? task?.title : '',
-            summary: isEdit ? task?.summary : '',
-            status: isEdit ? task?.status : 'To Do',
-            taskId: isEdit ? task?.taskId : uuidv4(),
-            _id: task?._id
+            title: isEdit ? entry?.title : '',
+            summary: isEdit ? entry?.summary : '',
+            status: isEdit ? entry?.status : 'To Do',
+            taskId: isEdit ? entry?.taskId : uuidv4(),
+            _id: entry?._id,
+            createdAt: isEdit ? entry?.createdAt : new Date()
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values => {editTaskHandler(values);console.log(values)}
+        onSubmit: isEdit ? values => {editTaskHandler(values)}
             : values => { addTaskHandler(values) }
     });
 

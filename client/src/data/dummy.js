@@ -3,6 +3,7 @@ import { AiOutlineDashboard, AiOutlineTeam } from 'react-icons/ai';
 import { BsKanban, } from 'react-icons/bs';
 import { MdBugReport } from 'react-icons/md';
 import {FaRegMoneyBillAlt}from 'react-icons/fa';
+import {CgProfile }from 'react-icons/cg';
 
 
 export const themeColors = [
@@ -33,19 +34,13 @@ export const themeColors = [
 ];
 export const links = [
   {
-  
+
     links: [
       {
         name: 'dashboard',
         icon: <AiOutlineDashboard size="24px"/>,
       },
-    ],
-  },
 
-
-  {
-
-    links: [
       {
         name: 'bug-tracker',
         icon: <MdBugReport size="24px"/>,
@@ -62,6 +57,11 @@ export const links = [
         name: 'team',
         icon: <AiOutlineTeam size="24px"/>,
       },
+      {
+        name: 'profile',
+        icon: < CgProfile size="24px"/>,
+      },
+    
     
     ],
   },

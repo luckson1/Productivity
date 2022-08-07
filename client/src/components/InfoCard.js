@@ -2,7 +2,7 @@ import React from 'react'
 
 
 
-function BugCard({ title, details}) {
+function InfoCard({ title, details}) {
 
 
   return (
@@ -16,4 +16,4 @@ function BugCard({ title, details}) {
   )
 }
 
-export default BugCard
+export default InfoCard

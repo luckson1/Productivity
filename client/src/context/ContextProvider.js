@@ -29,7 +29,7 @@ export const ContextProvider = ({ children }) => {
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
     const [bugs, setBugs] = useState([])
-    const [showBugInfoModal, setShowBugInfoModal ]=useState(false)
+    const [showInfoModal, setShowInfoModal ]=useState(false)
 
 
 
@@ -101,8 +101,8 @@ export const ContextProvider = ({ children }) => {
                 setExpenses,
                 bugs, 
                 setBugs,
-                showBugInfoModal, 
-                setShowBugInfoModal,
+                showInfoModal, 
+                setShowInfoModal,
                 user
 
 
