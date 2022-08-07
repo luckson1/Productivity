@@ -3,7 +3,7 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { BsCheck } from 'react-icons/bs';
 
 
-import { themeColors } from '../data/dummy';
+import { themeColors } from '../assets/data';
 import { useStateContext } from '../context/ContextProvider';
 
 export const ThemeSettings = () => {

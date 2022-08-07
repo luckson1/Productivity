@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import productivity from '../data/productivity.svg'
-import todo from '../data/todo.svg'
+import productivity from '../assets/productivity.svg'
+import todo from '../assets/todo.svg'
 
 import { useStateContext } from '../context/ContextProvider'
 import { Link } from 'react-router-dom'

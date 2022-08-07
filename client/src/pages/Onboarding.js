@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 // import { createProfileAction } from '../redux/usersSlices';
 // import { useNavigate } from 'react-router';
 import DisabledButton from '../components/DisabledButton';
-import profile from '../data/ProfilePic.jpg';
+import profile from '../assets/ProfilePic.jpg';
 import { useStateContext } from '../context/ContextProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

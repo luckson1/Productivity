@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md';
 
-import { links } from '../../data/dummy';
+import { links } from '../../assets/data';
 import { useStateContext } from '../../context/ContextProvider';
 export const SideBar = () => {
     const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext();
