@@ -1,8 +1,8 @@
 import React from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { createTaskAction, editTasksAction, fetchTasksAction } from '../../redux/taskSlices';
+import { useDispatch} from 'react-redux';
+import { createTaskAction, editTasksAction} from '../../redux/taskSlices';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { v4 as uuidv4 } from "uuid";
@@ -20,7 +20,7 @@ const errorSchema = Yup.object().shape({
 
 
 });
-function CreateTask({}) {
+function CreateTask() {
     const { currentColor, setShowModal, setIsEdit, isEdit, tasks, setTasks, currentEntry} = useStateContext()
 const entry=currentEntry
     const dispatch = useDispatch()
@@ -64,7 +64,7 @@ const entry=currentEntry
 
 
     return (
-        <div className="modal" style={{ backgroundColor: currentColor }}>
+        <div className="modal  bg-slate-200" >
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
                 setShowModal(false)

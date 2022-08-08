@@ -62,7 +62,7 @@ const editShoppingItemHandler = values => {
 
 
     return (
-        <div className="modal" style={{ backgroundColor: currentColor }}>
+        <div className="modal  bg-slate-200">
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
                 setShowModal(false)
