@@ -21,7 +21,7 @@ useEffect(()=> {
 
 
   const incomesState=useSelector(state=> state?.incomes)
-  const {incomeLoading, incomeList}=incomesState
+  const {incomeLoading, incomeList, incomeAppErr, incomeServerErr}=incomesState
 useEffect(()=> {
   if(incomeList) setIncomes(incomeList)
 },[incomeList, setIncomes])
@@ -29,7 +29,7 @@ useEffect(()=> {
 
 
 const expensesState=useSelector(state=> state?.expenses)
-const {expenseLoading, expenseList}=expensesState
+const {expenseLoading, expenseList, expenseAppErr, expenseServerErr}=expensesState
 useEffect(()=> {
   if(expenseList) setExpenses(expenseList)
 },[expenseList, setExpenses])
@@ -61,8 +61,8 @@ useEffect(()=> {
       </div>
   
     
-     { !isExpense && <EntryList entries= {incomes} isExpense={isExpense} loading={incomeLoading}/>}
-      {isExpense && <EntryList  entries= {expenses} isExpense={isExpense} loading={expenseLoading}/>}
+     { !isExpense && <EntryList entries= {incomes} isExpense={isExpense} loading={incomeLoading} errors={incomeAppErr ||incomeServerErr}/>}
+      {isExpense && <EntryList  entries= {expenses} isExpense={isExpense} loading={expenseLoading}errors={expenseAppErr || expenseServerErr}/>}
      
       {showModal && <CreateEntry setShowModal={setShowModal} isExpense={isExpense} setIsExpense={setIsExpense} />}
     </div>

@@ -21,7 +21,7 @@ dispatch(fetchbugsAction())
 
 
   const bugsState=useSelector(state=> state?.bugs)
-  const {bugLoading, bugsFetched, isbugCreated}=bugsState
+  const {bugLoading, bugsFetched, isbugCreated, bugAppErr, bugServerErr }=bugsState
 useEffect(()=> {
   if(bugsFetched ) setBugs(bugsFetched?.bugs)
 },[bugsFetched, setBugs, isbugCreated])
@@ -39,7 +39,7 @@ useEffect(()=> {
       </div>
   
     
-<BugEntryList entries= {bugs}  loading={bugLoading}/>
+<BugEntryList entries= {bugs}  loading={bugLoading} errors={bugAppErr|| bugServerErr}/>
       
      
       {showModal && <CreateBugEntry setShowModal={setShowModal} />}
