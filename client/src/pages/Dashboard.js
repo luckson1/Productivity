@@ -91,8 +91,8 @@ const Dashboard = () => {
                         >
                             <BsCurrencyDollar />
                         </button>
-                        <p className="text-l text-gray-900">{statsLoading ? "Loading, Please wait! 😀"
-                                : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
+                        <p className={statsAppErr || statsServerErr ? "text-l text-red-500": "text-l text-gray-900"}>{statsLoading ? "Loading, Please wait! 😀"
+                                : statsAppErr || statsServerErr ? "An Error Occured.  😥"
                                     : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
                                     :isNaN(totalIncome)? currencyFormatter(0)
                                         : currencyFormatter(totalIncome)}</p>
@@ -109,8 +109,8 @@ const Dashboard = () => {
                         >
                             <BsCurrencyDollar />
                         </button>
-                        <p className=" text-gray-900" >{statsLoading ? "Loading, Please wait! 😀"
-                            : statsAppErr || statsServerErr ? "An Error Occured. Please Referesh 😥"
+                        <p className={statsAppErr || statsServerErr ? "text-l text-red-500": "text-l text-gray-900"}>{statsLoading ? "Loading, Please wait! 😀"
+                            : statsAppErr || statsServerErr ? "An Error Occured.  😥"
                                 : statsList?.expenseStats === 0 ? "No Expenses Added....yet 😊"
                                 :isNaN(totalExpenditure)? currencyFormatter(0)
                                     : currencyFormatter(totalExpenditure)}</p>
@@ -130,7 +130,7 @@ const Dashboard = () => {
                         </button>
                
                         {taskLoading ? "Loading, Please wait! 😀"
-                            : taskAppErr || taskServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                            : taskAppErr || taskServerErr ? <p className=" text-red-500">An Error Occured.  😥</p>
                                 : tasksFetched?.tasks === 0 ? <p  className=" text-gray-900"> No Tasks created....yet 😊</p>
                                     : <p  className=" text-gray-900">{toDoTasks?.length} Task(s) to do  </p>}
                    
@@ -145,7 +145,7 @@ const Dashboard = () => {
                         </button>
                
                         {taskLoading ? "Loading, Please wait! 😀"
-                            : taskAppErr || taskServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                            : taskAppErr || taskServerErr ? <p className=" text-red-500">An Error Occured.  😥</p>
                                 : tasksFetched?.tasks === 0 ? <p  className=" text-gray-900"> No Tasks created....yet 😊</p>
                                     : <p  className=" text-gray-900">{inProgressTasks?.length} Task(s) in progress</p>}
                    
@@ -164,7 +164,7 @@ const Dashboard = () => {
                         </button>
                
                         {bugLoading ? "Loading, Please wait! 😀"
-                            : bugAppErr || bugServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                            : bugAppErr || bugServerErr ? <p className=" text-red-500">An Error Occured.  😥</p>
                                 : bugsFetched?.bugs === 0 ? <p  className=" text-gray-900"> No bugs created....yet 😊</p>
                                     : <p  className=" text-gray-900">{closedBugs?.length} Closed bug(s)   </p>}
                    
@@ -180,7 +180,7 @@ const Dashboard = () => {
                         </button>
                
                         {bugLoading ? "Loading, Please wait! 😀"
-                            : bugAppErr || bugServerErr ? <p className=" text-gray-900">An Error Occured. Please Referesh 😥</p>
+                            : bugAppErr || bugServerErr ? <p className=" text-red-500">An Error Occured.  😥</p>
                                 : bugsFetched?.bugs === 0 ? <p  className=" text-gray-900"> No bugs created....yet 😊</p>
                                     : <p  className=" text-gray-900">{openBugs?.length} Open Bug(s)  </p>}
                    
@@ -243,7 +243,7 @@ const Dashboard = () => {
                     </div>
                     <div className="mt-10 w-72 md:w-400 text-sm text-left">
                         {taskLoading ? "Loading, Please wait! 😀"
-                            : taskAppErr || taskServerErr ? "An Error Occured. Please Referesh 😥"
+                            : taskAppErr || taskServerErr ? <p className=" text-red-500">An Error Occured.  😥</p>
                                 : tasksFetched?.tasks === 0 ? " No Tasks created....yet 😊"
                                     : tasksFetched?.tasks?.map((task) => (
                                         <div key={task._id} className="flex justify-between mt-4">
@@ -279,7 +279,7 @@ const Dashboard = () => {
                     </div>
                     <div className="mt-10 w-72 md:w-400 text-sm text-left">
                         {bugLoading ? "Loading, Please wait! 😀"
-                            : bugAppErr || bugServerErr ? "An Error Occured. Please Referesh 😥"
+                            : bugAppErr || bugServerErr ? <p className=" text-red-500">An Error Occured.  😥</p>
                                 : bugsFetched?.bugs === 0 ? " No bugs found....yet 😊"
                                     : bugsFetched?.bugs?.map((bug) => (
                                         <div key={bug._id} className="flex justify-between mt-4">
