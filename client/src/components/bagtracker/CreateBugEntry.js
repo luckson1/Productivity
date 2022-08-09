@@ -32,7 +32,7 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-    const { currentColor, setShowModal, isEdit, isExpense, currentEntry, bugs, setBugs} = useStateContext()
+    const { setShowModal, isEdit, isExpense, currentEntry, bugs, setBugs} = useStateContext()
     const entry = currentEntry
 
     const dispatch = useDispatch()

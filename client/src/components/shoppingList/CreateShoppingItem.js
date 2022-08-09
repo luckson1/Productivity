@@ -20,7 +20,7 @@ const errorSchema = Yup.object().shape({
 
 });
 function CreateShoppingItem({shoppingItem }) {
-    const { currentColor, setShoppingItems, setShowModal,setIsEdit, isEdit,  shoppingItems, setShoppingStats, shoppingStats, showCart, setShowCart} = useStateContext()
+    const { setShoppingItems, setShowModal,setIsEdit, isEdit,  shoppingItems, showCart, setShowCart} = useStateContext()
     const dispatch = useDispatch()
 
 

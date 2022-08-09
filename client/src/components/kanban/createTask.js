@@ -21,7 +21,7 @@ const errorSchema = Yup.object().shape({
 
 });
 function CreateTask() {
-    const { currentColor, setShowModal, setIsEdit, isEdit, tasks, setTasks, currentEntry} = useStateContext()
+    const { setShowModal, setIsEdit, isEdit, tasks, setTasks, currentEntry} = useStateContext()
 const entry=currentEntry
     const dispatch = useDispatch()
 

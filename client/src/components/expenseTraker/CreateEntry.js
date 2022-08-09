@@ -24,7 +24,7 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateEntry() {
-    const {currentColor, setShowModal, isEdit, isExpense, setIsExpense, currentEntry, incomes, setIncomes,  expenses, setExpenses}=useStateContext()
+    const {setShowModal, isEdit, isExpense, setIsExpense, currentEntry, incomes, setIncomes,  expenses, setExpenses}=useStateContext()
    const  entry=currentEntry
 
     const dispatch = useDispatch()
