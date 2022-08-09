@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
-
 import CreateEntry from '../components/expenseTraker/CreateEntry'
 import EntryList from '../components/expenseTraker/EntryList'
 import { useStateContext } from '../context/ContextProvider'
@@ -19,7 +17,7 @@ dispatch(fetchIncomesAction())
 }, [dispatch])
 useEffect(()=> {
   dispatch(FetchExpensesAction())
-  }, [])
+  }, [dispatch])
 
 
   const incomesState=useSelector(state=> state?.incomes)
