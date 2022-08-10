@@ -8,8 +8,8 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true);
     const [screenSize, setScreenSize] = useState(undefined)
-    const [currentColor, setCurrentColor] = useState("#03C9D7")
-    const [currentMode, setCurrentMode] = useState("Light")
+    const [currentColor, setCurrentColor] = useState(localStorage.getItem('ThemeColor') ? localStorage.getItem('ThemeColor') : "#03C9D7")
+    const [currentMode, setCurrentMode] = useState(localStorage.getItem('ThemeColor') ? localStorage.getItem('ThemeColor'): "Light")
     const [themeSettings, setThemeSettings] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [isExpense, setIsExpense] = useState(false)
