@@ -8,8 +8,8 @@ const StateContext = createContext();
 export const ContextProvider = ({ children }) => {
     const [activeMenu, setActiveMenu] = useState(true);
     const [screenSize, setScreenSize] = useState(undefined)
-    const [currentColor, setCurrentColor] = useState(localStorage.getItem('ThemeColor') ? localStorage.getItem('ThemeColor') : "#03C9D7")
-    const [currentMode, setCurrentMode] = useState(localStorage.getItem('ThemeColor') ? localStorage.getItem('ThemeColor'): "Light")
+    const [currentColor, setCurrentColor] = useState(localStorage.getItem('ThemeColor') ?? "#03C9D7")
+    const [currentMode, setCurrentMode] = useState(localStorage.getItem('ThemeColor') ?? "Light")
     const [themeSettings, setThemeSettings] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [isExpense, setIsExpense] = useState(false)
@@ -24,7 +24,7 @@ export const ContextProvider = ({ children }) => {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const [showProfileModal, setShowProfileModal] = useState(false)
     const [tasks, setTasks] = useState([])
-    const [shoppingItems, setShoppingItems] = useState([])
+    const [shoppingItems, setShoppingItems] = useState([])                                                                                                                                                                                                                                                         
     const [shoppingStats, setShoppingStats] = useState([])
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])

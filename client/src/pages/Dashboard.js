@@ -94,8 +94,7 @@ const Dashboard = () => {
                         <p className={statsAppErr || statsServerErr ? "text-l text-red-500": "text-l text-gray-900"}>{statsLoading ? "Loading, Please wait! 😀"
                                 : statsAppErr || statsServerErr ? "An Error Occured.  😥"
                                     : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
-                                    :isNaN(totalIncome)? currencyFormatter(0)
-                                        : currencyFormatter(totalIncome)}</p>
+                                        : currencyFormatter(totalIncome??0)}</p>
                          <p className="font-bold text-gray-900">Total Income</p>
                     </div>
                
@@ -111,9 +110,8 @@ const Dashboard = () => {
                         </button>
                         <p className={statsAppErr || statsServerErr ? "text-l text-red-500": "text-l text-gray-900"}>{statsLoading ? "Loading, Please wait! 😀"
                             : statsAppErr || statsServerErr ? "An Error Occured.  😥"
-                                : statsList?.expenseStats === 0 ? "No Expenses Added....yet 😊"
-                                :isNaN(totalExpenditure)? currencyFormatter(0)
-                                    : currencyFormatter(totalExpenditure)}</p>
+                                : statsList?.expenseStats === 0 ? "No Expenses Added....yet 😊"                    
+                                    : currencyFormatter(totalExpenditure??0)}</p>
                         <p className=" text-gray-900  mt-1">Total Expenditure</p>
                     </div>
                
