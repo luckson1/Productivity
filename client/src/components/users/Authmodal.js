@@ -90,7 +90,7 @@ const navigate=useNavigate();
     return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20'>
         <div onClick={() => { setShowModal(false); setIsSignUp(true); setReveal(false) }} className="close-icon"><MdCancel color="red" /></div>
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
-        {isSignUp && <p className="text-left"> Guest login: <spa /> Login: guest@gmail.com password: Greetings@2022</p>}
+        {<p className="text-left"> Guest login: <spa /> email: guest@gmail.com password: Greetings@2022</p>}
         {/* Errors */}
         {userAppErr || userServerErr ? (
             <div className="form-validation" role="alert">
