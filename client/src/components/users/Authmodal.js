@@ -92,7 +92,8 @@ export const Authmodal = () => {
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
         {<>
             <p className="text-left"> Guest login: </p>
-            <p>  email: guest@gmail.com password: Greetings@2022</p>
+            <p className="text-left">  email: guest@gmail.com </p>
+            <p className="text-left">  password: Greetings@2022</p>
         </>}
         {/* Errors */}
         {userAppErr || userServerErr ? (
