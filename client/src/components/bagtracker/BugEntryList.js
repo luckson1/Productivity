@@ -22,7 +22,7 @@ function BugEntryList({ entries, loading, errors }) {
           <div className="col col-3">Assignee</div>
         </li>
 
-        {loading ? (<p>Loading, Please Wait 😀......</p>) : errors? <p className="text-red-500">An Error Occured 😥</p>: entries?.length === 0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (<li className="table-row" key={entry?._id } style={{cursor:"pointer"}} onClick={()=> {setShowInfoModal (true); setCurrentEntry(entry);   window.scrollTo(0, 0)}} >
+        {loading ? (<p>Loading, Please Wait 😀......</p>) : errors? <p className="text-red-500">An Error Occured 😥</p>: entries?.length === 0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (<li className="table-row" key={entry?.bugId } style={{cursor:"pointer"}} onClick={()=> {setShowInfoModal (true); setCurrentEntry(entry);   window.scrollTo(0, 0)}} >
           <div className="col col-2" data-label="Title">{entry?.title}</div>
           <div  className={entry?.priority==="Low"? 'text-blue-500 col col-5' : entry?.priority==="Medium"? 'text-amber-400 col col-5' : entry?.priority==="High"? 'text-red-500 col col-5': "text-gray-900" } data-label="Description">{entry?.priority}</div>
           <div className="col col-3" data-label="Amount" style={{ color: entry?.status==="Open"? currentColor: "green" }}>{entry?.status}</div>

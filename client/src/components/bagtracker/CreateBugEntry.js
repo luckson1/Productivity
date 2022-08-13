@@ -32,14 +32,14 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-    const { setShowModal, isEdit, isExpense, currentEntry, bugs, setBugs} = useStateContext()
+    const { setShowModal, isEdit, isExpense, currentEntry, bugs, setBugs, setIsEdit} = useStateContext()
     const entry = currentEntry
 
     const dispatch = useDispatch()
 
     const addBugHandler = (values) => {
         dispatch(createBugAction(values))
-        setBugs([...bugs, values]);
+        setBugs(bugs => [...bugs, values]);
         setShowModal(false);
 
     }
@@ -70,7 +70,7 @@ function CreateBugEntry() {
             assigned: isEdit ? entry?.assigned : undefined,
             createdAt: isEdit ? entry?.createdAt : new Date(),
             _id: isEdit ? entry?._id :  undefined,
-            bugId: isEdit ? entry?._id  : uuidv4()
+            bugId: isEdit ? entry?.bugId  : uuidv4()
 
         },
         validationSchema: errorSchema,
@@ -81,14 +81,15 @@ function CreateBugEntry() {
     return (
         <div className="modal bg-slate-200" >
             <MdCancel className='close-icon' color='red' onClick={() => {
-                // setIsEdit(false);
+                setIsEdit(false);
                 setShowModal(false);
+                
                
 
             }} />
             <form onSubmit={formik.handleSubmit}>
                 <div className="create-new-task-block" id="create-new-task-block">
-                    <strong>Create Bug</strong>
+                    <strong>{isEdit? "Edit Bug Info" :"Create Bug"}</strong>
                     {/* errors */}
                     <div className="form-validation">
                         {formik.touched.title && formik.errors.title}

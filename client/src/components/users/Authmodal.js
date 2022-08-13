@@ -71,7 +71,7 @@ const navigate=useNavigate();
 
             setTimeout(()=> {
                 window.location.reload();
-            },1000)
+            },100)
             
         }
     }, [isRegistered, navigate])
@@ -81,13 +81,16 @@ const navigate=useNavigate();
             navigate('/dashboard');
             setActiveMenu(true);
             setShowNavBar(true)
+            setTimeout(()=> {
+                window.location.reload();
+            },100)
         }
     }, [isLoggedIn,navigate,setActiveMenu, setShowNavBar])
 
     return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20'>
         <div onClick={() => { setShowModal(false); setIsSignUp(true); setReveal(false) }} className="close-icon"><MdCancel color="red" /></div>
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
-        {isSignUp && <p className="text-left"> By clicking Sign Up you are in agreement with our terms. Learn more from our Privacy Page</p>}
+        {isSignUp && <p className="text-left"> Guest login: <spa /> Login: guest@gmail.com password: Greetings@2022</p>}
         {/* Errors */}
         {userAppErr || userServerErr ? (
             <div className="form-validation" role="alert">
@@ -115,7 +118,7 @@ const navigate=useNavigate();
                 type={reveal ? "text" : "password"}
                 placeholder="Password" z
             />
-            <button className="toggle-icon" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff /> : <FiEye />}  </button>
+            <div className="toggle-icon"  role="button" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff /> : <FiEye />}  </div>
             {/* Err */}
             <div className="form-validation">
                 {formik.touched.password && formik.errors.password}

@@ -51,7 +51,7 @@ const Dashboard = () => {
     const averageExpense = statsList?.expenseStats?.[0]?.averageExpense
 
     const data = [{
-        type: "Incomes",
+        type: "Budget",
         total: totalIncome
     },
     {
@@ -189,7 +189,7 @@ const Dashboard = () => {
             <div className="flex gap-10 flex-wrap justify-center mt-10">
                 <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-secondary-dark-bg m-1 p-1 rounded-2xl md:w-780  ">
                     <div className="flex justify-between">
-                        <p className="font-semibold text-l ml-5   text-gray-900">Income and Expenses Updates</p>
+                        <p className="font-semibold text-l ml-5   text-gray-900">Budget and Expenses Updates</p>
                   
                     </div>
                     <div className="mt-5 flex gap-10 flex-wrap justify-center">
