@@ -95,7 +95,7 @@ const Dashboard = () => {
                                 : statsAppErr || statsServerErr ? "An Error Occured.  😥"
                                     : statsList?.incomeStats === 0 ? "No Incomes Added....yet 😊"
                                         : currencyFormatter(totalIncome??0)}</p>
-                         <p className="font-bold text-gray-900">Total Income</p>
+                         <p className="font-bold text-gray-900">Total Budget</p>
                     </div>
                
                
