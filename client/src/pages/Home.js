@@ -204,19 +204,19 @@ const dispatch=useDispatch()
                 <div className="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                   <a href="/" className="flex flex-wrap no-underline hover:no-underline">
                     <p className="w-full text-gray-900 text-xs md:text-sm px-6 uppercase">
-                      Shopping List Creator
+                     Bug Tracker
                     </p>
                     <div className="w-full font-bold text-xl text-gray-900 px-6">
-                      Budget your shopping with Ease
+                      Let your engineering team track anf fix bugs with ease
                     </div>
                     <p className="text-gray-900 text-base px-6 mb-5 text-left">
-                      No more messy paper shopping lists that are easy to forget at home.
+                    Your engineering team can create tickets for tracking bugs in your application
                       <br />
                       <br />
-                      Create a shopping list using our responsive list creator app
+                      The team leader can assign an engineer to take care of the bug
                       <br />
                       <br />
-                      Track your shopping spend as you shop.
+                      Once completed, an engineer can mark the process of debugging as completed
                     </p>
                   </a>
                 </div>
