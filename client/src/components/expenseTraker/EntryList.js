@@ -7,7 +7,7 @@ import DeleteDialogBox from '../DeleteDialogBox';
 import CreateEntry from '../expenseTraker/CreateEntry'
 
 function EntryList({ entries, loading, errors }) {
-  const { showDeleteModal, setShowDeleteModal,  setIsEdit,  setCurrentEntry, isExpense, showModal, setShowModal ,currentEntry,} = useStateContext();
+  const { showDeleteModal, setShowDeleteModal, setIsEdit, setCurrentEntry, isExpense, showModal, setShowModal, currentEntry, } = useStateContext();
 
   return (
     <div className="table">
@@ -21,27 +21,30 @@ function EntryList({ entries, loading, errors }) {
           <div className="col col-5">Action</div>
         </li>
 
-        {loading ? (<p>Loading, Please Wait 😀......</p>): errors? <p className="text-red-500">An Error Occured 😥</p>: entries?.length === 0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (<li className="table-row" key={entry?._id} >
-          <div className="col col-1" data-label="Title">{entry?.title}</div>
-          <div className="col col-2" data-label="Description">{entry?.description}</div>
-          <div className="col col-3" data-label="Amount" style={{ color: isExpense ? "red" : "green" }}>{currencyFormatter(entry?.amount)} </div>
-          <div className="col col-4" data-label="Date">{dateFormatter(entry?.createdAt)}</div>
-          <div className="col col-5 flex justify-between" data-label="Action">
-            <MdDeleteForever size={"20px"} color={"red"} cursor={"pointer"} onClick={() => {
-              setShowDeleteModal(true)
-              setCurrentEntry(entry);
-              window.scrollTo(0, 0)
-            }} />
-          
-            <MdModeEdit size={"20px"} color={"orange"} cursor={"pointer"} onClick={() => {
-              setShowModal(true);
-              setIsEdit(true);
-              setCurrentEntry(entry); 
-                window.scrollTo(0, 0)
-            }} /> </div>
-          {showDeleteModal && <DeleteDialogBox entry={currentEntry} item={isExpense ? "Expense" : "Income"} />}
-          {showModal && <CreateEntry   />}
-        </li>))}
+        {loading ? (<p>Loading, Please Wait 😀......</p>)
+          : errors ? <p className="text-red-500">An Error Occured 😥</p>
+            : entries?.length === 0 ? (<p>No Entries, Create some 😀 </p>)
+              : entries?.map(entry => (<li className="table-row" key={entry?._id} >
+                <div className="col col-1" data-label="Title">{entry?.title}</div>
+                <div className="col col-2" data-label="Description">{entry?.description}</div>
+                <div className="col col-3" data-label="Amount" style={{ color: isExpense ? "red" : "green" }}>{currencyFormatter(entry?.amount)} </div>
+                <div className="col col-4" data-label="Date">{dateFormatter(entry?.createdAt)}</div>
+                <div className="col col-5 flex justify-between" data-label="Action">
+                  <MdDeleteForever size={"20px"} color={"red"} cursor={"pointer"} onClick={() => {
+                    setShowDeleteModal(true)
+                    setCurrentEntry(entry);
+                    window.scrollTo(0, 0)
+                  }} />
+
+                  <MdModeEdit size={"20px"} color={"orange"} cursor={"pointer"} onClick={() => {
+                    setShowModal(true);
+                    setIsEdit(true);
+                    setCurrentEntry(entry);
+                    window.scrollTo(0, 0)
+                  }} /> </div>
+                {showDeleteModal && <DeleteDialogBox entry={currentEntry} item={isExpense ? "Expense" : "Income"} />}
+                {showModal && <CreateEntry />}
+              </li>))}
 
 
       </ul>

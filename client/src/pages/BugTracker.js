@@ -21,10 +21,10 @@ dispatch(fetchbugsAction())
 
 
   const bugsState=useSelector(state=> state?.bugs)
-  const {bugLoading, bugsFetched, isbugCreated, bugAppErr, bugServerErr }=bugsState
+  const {bugLoading, bugsFetched, bugAppErr, bugServerErr }=bugsState
 useEffect(()=> {
   if(bugsFetched ) setBugs(bugsFetched?.bugs)
-},[bugsFetched, setBugs, isbugCreated])
+},[bugsFetched, setBugs])
 
 
 

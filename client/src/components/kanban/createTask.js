@@ -28,7 +28,10 @@ const entry=currentEntry
 
     const addTaskHandler = (values) => {
         dispatch(createTaskAction(values))
-        setTasks(tasks => [...tasks, values]);
+
+        let newTask= []
+        newTask.push(values)
+        setTasks( [...tasks, ...newTask]);       
         setShowModal(false);
 
     }

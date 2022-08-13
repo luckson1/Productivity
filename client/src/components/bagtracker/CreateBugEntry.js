@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 // import { useDispatch } from 'react-redux';
@@ -39,7 +39,11 @@ function CreateBugEntry() {
 
     const addBugHandler = (values) => {
         dispatch(createBugAction(values))
-        setBugs(bugs => [...bugs, values]);
+       
+        let newBug= []
+        newBug.push(values)
+        setBugs( [...bugs, ...newBug]);
+     
         setShowModal(false);
 
     }
@@ -50,8 +54,9 @@ function CreateBugEntry() {
         const newBugs = bugs?.filter(bug => {
             return entry._id !== bug?._id
         })
-
-        setBugs([...newBugs, values]);
+        let editedBug= []
+        editedBug.push(values)
+        setBugs([...newBugs, ...editedBug]);
         setShowModal(false);
 
     }

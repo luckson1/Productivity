@@ -35,7 +35,7 @@ const LoginErrorSchema = Yup.object().shape({
 });
 
 export const Authmodal = () => {
-    const { reveal, setReveal, setShowModal, isSignUp, setIsSignUp,setActiveMenu, setShowNavBar } = useStateContext()
+    const { reveal, setReveal, setShowModal, isSignUp, setIsSignUp, setActiveMenu, setShowNavBar } = useStateContext()
     // dispatch
     const dispatch = useDispatch()
 
@@ -44,7 +44,7 @@ export const Authmodal = () => {
     const user = useSelector((state) => {
         return state?.users
     })
-    const { userLoading, userServerErr, userAppErr, isRegistered ,isLoggedIn} = user;
+    const { userLoading, userServerErr, userAppErr, isRegistered, isLoggedIn } = user;
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -57,22 +57,22 @@ export const Authmodal = () => {
 
         validationSchema: isSignUp ? SignInErrorSchema : LoginErrorSchema,
         onSubmit: values => {
-        
+
             isSignUp ? dispatch(registerUserAction(values)) : dispatch(loginUserAction(values))
         },
     })
 
 
     // force navigation once an action is performed
-const navigate=useNavigate();
+    const navigate = useNavigate();
     useEffect(() => {
         if (isRegistered) {
             navigate('/onboarding');
 
-            setTimeout(()=> {
+            setTimeout(() => {
                 window.location.reload();
-            },100)
-            
+            }, 100)
+
         }
     }, [isRegistered, navigate])
 
@@ -81,16 +81,19 @@ const navigate=useNavigate();
             navigate('/dashboard');
             setActiveMenu(true);
             setShowNavBar(true)
-            setTimeout(()=> {
+            setTimeout(() => {
                 window.location.reload();
-            },100)
+            }, 100)
         }
-    }, [isLoggedIn,navigate,setActiveMenu, setShowNavBar])
+    }, [isLoggedIn, navigate, setActiveMenu, setShowNavBar])
 
     return (<div className='auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20'>
         <div onClick={() => { setShowModal(false); setIsSignUp(true); setReveal(false) }} className="close-icon"><MdCancel color="red" /></div>
         <h2>{isSignUp ? "CREATE ACCOUNT" : "LOG IN"}</h2>
-        {<p className="text-left"> Guest login: <spa /> email: guest@gmail.com password: Greetings@2022</p>}
+        {<>
+            <p className="text-left"> Guest login: </p>
+            <p>  email: guest@gmail.com password: Greetings@2022</p>
+        </>}
         {/* Errors */}
         {userAppErr || userServerErr ? (
             <div className="form-validation" role="alert">
@@ -118,7 +121,7 @@ const navigate=useNavigate();
                 type={reveal ? "text" : "password"}
                 placeholder="Password" z
             />
-            <div className="toggle-icon"  role="button" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff /> : <FiEye />}  </div>
+            <div className="toggle-icon" role="button" onClick={() => setReveal(!reveal)}>{reveal ? <FiEyeOff /> : <FiEye />}  </div>
             {/* Err */}
             <div className="form-validation">
                 {formik.touched.password && formik.errors.password}
