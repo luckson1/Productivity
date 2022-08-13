@@ -207,7 +207,7 @@ const dispatch=useDispatch()
                      Bug Tracker
                     </p>
                     <div className="w-full font-bold text-xl text-gray-900 px-6">
-                      Let your engineering team track anf fix bugs with ease
+                      Let your engineering team track and fix bugs with ease
                     </div>
                     <p className="text-gray-900 text-base px-6 mb-5 text-left">
                     Your engineering team can create tickets for tracking bugs in your application
