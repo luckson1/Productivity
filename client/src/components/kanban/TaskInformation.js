@@ -46,7 +46,7 @@ const  task=currentEntry
                     />
                     <Button
                         color="white"
-                        bgColor={currentColor}
+                        bgColor= "red"
                         text="Delete Task"
                         borderRadius="10px"
                         onClick={() => {

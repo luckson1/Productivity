@@ -188,7 +188,7 @@ const TasksSlices = createSlice({
         // create Task
         // handle pending state
         builder.addCase(createTaskAction.pending, (state, action) => {
-            state.taskLoading = true;
+            state.taskCreatedLoading = true;
             state.taskAppErr = undefined;
             state.taskServerErr = undefined;
 
@@ -199,7 +199,7 @@ const TasksSlices = createSlice({
         //hande success state
         builder.addCase(createTaskAction.fulfilled, (state, action) => {
             state.taskCreated = action?.payload;
-            state.taskLoading = false;
+            state.taskCreatedLoading= false;
             state.taskAppErr = undefined;
             state.taskServerErr = undefined;
             state.isTaskCreated = false
@@ -207,7 +207,7 @@ const TasksSlices = createSlice({
         //hande rejected state
 
         builder.addCase(createTaskAction.rejected, (state, action) => {
-            state.taskLoading = false;
+            state.taskCreatedLoading= false;
             state.taskAppErr = action?.payload?.msg;
             state.taskServerErr = action?.error?.msg;
         })
@@ -271,7 +271,7 @@ const TasksSlices = createSlice({
 
          //handle pending state
          builder.addCase(editTasksAction.pending, (state, action) => {
-            state.editTaskLoading = true;
+            state.taskEditedLoading = true;
             state.editTaskAppErr = undefined;
             state.editTaskServerErr = undefined;
 
@@ -282,7 +282,7 @@ const TasksSlices = createSlice({
         //hande success state
         builder.addCase(editTasksAction.fulfilled, (state, action) => {
             state.editTaskCreated = action?.payload;
-            state.editTaskLoading = false;
+            state.taskEditedLoading= false;
             state.editTaskAppErr = undefined;
             state.editTaskServerErr = undefined;
             state.isTaskUpdated = false
@@ -291,7 +291,7 @@ const TasksSlices = createSlice({
         //hande rejected state
 
         builder.addCase(editTasksAction.rejected, (state, action) => {
-            state.editTaskLoading = false;
+            state.taskEditedLoading= false;
             state.editTaskAppErr = action?.payload?.msg;
             state.editTaskServerErr = action?.error?.msg;
         })
@@ -301,7 +301,7 @@ const TasksSlices = createSlice({
          // delete a Task
         //handle pending state
         builder.addCase(deleteTaskAction.pending, (state, action) => {
-            state.deleteTaskLoading = true;
+            state.deletedTaskLoading = true;
             state.deleteTaskAppErr = undefined;
             state.deleteTaskerverErr = undefined;
 
@@ -313,7 +313,7 @@ const TasksSlices = createSlice({
         //hande success state
         builder.addCase(deleteTaskAction.fulfilled, (state, action) => {
             state.deleteTaskCreated = action?.payload;
-            state.deleteTaskLoading = false;
+            state.deletedTaskLoading  = false;
             state.deleteTaskAppErr = undefined;
             state.deleteTaskerverErr = undefined;
             state.isTaskDeleted = false
@@ -321,7 +321,7 @@ const TasksSlices = createSlice({
         //hande rejected state
 
         builder.addCase(deleteTaskAction.rejected, (state, action) => {
-            state.deleteTaskLoading = false;
+            state.deletedTaskLoading  = false;
             state.deleteTaskAppErr = action?.payload?.msg;
             state.deleteTaskerverErr = action?.error?.msg;
         })
