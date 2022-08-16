@@ -70,7 +70,7 @@ const updateTaskctrl = expressAsyncHandler(async (req, res) => {
     if (updatedTaskId === undefined) {
         try {
             const updatedTask = await Task.findOne({ taskId })
-            console.log(updatedTask )
+         
             id = updatedTask?._id
         } catch (error) {
             res.json(error)

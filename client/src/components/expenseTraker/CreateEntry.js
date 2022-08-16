@@ -61,7 +61,7 @@ function CreateEntry() {
     const newExpenses= expenses?.filter(expense=> {
     return entry._id !==expense?._id
     })
-    console.log(values)
+   
         setExpenses([...newExpenses, values]);
         setShowModal(false);
        

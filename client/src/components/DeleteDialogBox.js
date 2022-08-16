@@ -15,7 +15,6 @@ function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
         dispatch(deleteTaskAction(task))
         const newTasks= tasks.filter(item=> item.id !== task.id)
         setTasks(newTasks);
-        console.log(task)
         setShowDeleteModal(false)
     }
 

@@ -140,7 +140,7 @@ const incomesSlices = createSlice({
         // create Income
         // handle pending state
         builder.addCase(createIncomeAction.pending, (state, action) => {
-            state.incomeLoading = true;
+            state.incomeCreatedLoading = true;
             state.incomeAppErr = undefined;
             state.incomeServerErr = undefined;
 
@@ -150,7 +150,7 @@ const incomesSlices = createSlice({
         })
         //hande success state
         builder.addCase(createIncomeAction.fulfilled, (state, action) => {
-            state.incomeCreated = action?.payload;
+            state.incomeCreatedLoading = action?.payload;
             state.incomeLoading = false;
             state.incomeAppErr = undefined;
             state.incomeServerErr = undefined;
@@ -159,7 +159,7 @@ const incomesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(createIncomeAction.rejected, (state, action) => {
-            state.incomeLoading = false;
+            state.incomeCreatedLoading = false;
             state.incomeAppErr = action?.payload?.msg;
             state.incomeServerErr = action?.error?.msg;
         })
@@ -189,7 +189,7 @@ const incomesSlices = createSlice({
         //update Income
         // handle pending state
         builder.addCase(updateIncomeAction.pending, (state, action) => {
-            state.incomeLoading = true;
+            state.incomeUpdatedLoading = true;
 
         });
         builder.addCase(resetIncomeUpdated, (state, action) => {
@@ -197,7 +197,7 @@ const incomesSlices = createSlice({
         //hande success state
         builder.addCase(updateIncomeAction.fulfilled, (state, action) => {
             state.updatedIncome = action?.payload;
-            state.incomeLoading = false;
+             state.incomeUpdatedLoading = false;
             state.incomeAppErr = undefined;
             state.incomeServerErr = undefined;
             state.isIncomeUpdated = false
@@ -205,7 +205,7 @@ const incomesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(updateIncomeAction.rejected, (state, action) => {
-            state.incomeLoading = false;
+             state.incomeUpdatedLoading = false;
             state.incomeAppErr = action?.payload?.msg;
             state.incomeServerErr = action?.error?.msg;
         })
@@ -213,14 +213,14 @@ const incomesSlices = createSlice({
         //delete Income
         // handle pending state
         builder.addCase(deleteIncomeAction.pending, (state, action) => {
-            state.incomeLoading = true;
+            state.incomeDeletedLoading = true;
 
         });
  
         //hande success state
         builder.addCase(deleteIncomeAction.fulfilled, (state, action) => {
             state.deletedIncome = action?.payload;
-            state.incomeLoading = false;
+            state.incomeDeletedLoading  = false;
             state.incomeAppErr = undefined;
             state.incomeServerErr = undefined;
           
@@ -228,7 +228,7 @@ const incomesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(deleteIncomeAction.rejected, (state, action) => {
-            state.incomeLoading = false;
+            state.incomeDeletedLoading = false;
             state.incomeAppErr = action?.payload?.msg;
             state.incomeServerErr = action?.error?.msg;
         })

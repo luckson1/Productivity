@@ -147,7 +147,7 @@ const expensesSlices = createSlice({
         // create expense
         // handle pending state
         builder.addCase(createExpenseAction.pending, (state, action) => {
-            state.expenseLoading = true;
+            state.expenseCreatedLoading = true;
 
         });
         builder.addCase(resetExpCreated, (state, action) => {
@@ -157,7 +157,7 @@ const expensesSlices = createSlice({
         //hande success state
         builder.addCase(createExpenseAction.fulfilled, (state, action) => {
             state.expenseCreated = action?.payload;
-            state.expenseLoading = false;
+            state.expenseCreatedLoading = false;
             state.expenseAppErr = undefined;
             state.expenseServerErr = undefined;
             state.isExpCreated = false
@@ -165,7 +165,7 @@ const expensesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(createExpenseAction.rejected, (state, action) => {
-            state.expenseLoading = false;
+            state.expenseCreatedLoading = false;
             state.expenseAppErr = action?.payload?.msg;
             state.expenseServerErr = action?.error?.msg;
 
@@ -196,7 +196,7 @@ const expensesSlices = createSlice({
         //Update Expense
         // handle pending state
         builder.addCase(updateExpenseAction.pending, (state, action) => {
-            state.expenseLoading = true;
+            state.updatedExpenseLoading = true;
 
         });
         builder.addCase(resetExpUpdated, (state, action) => {
@@ -205,8 +205,8 @@ const expensesSlices = createSlice({
 
         //hande success state
         builder.addCase(updateExpenseAction.fulfilled, (state, action) => {
-            state.UpdatedExpense = action?.payload;
-            state.expenseLoading = false;
+            state.updatedExpense = action?.payload;
+            state.updatedExpenseLoading = false;
             state.expenseAppErr = undefined;
             state.expenseServerErr = undefined;
             state.isExpUpdated = false
@@ -214,7 +214,7 @@ const expensesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(updateExpenseAction.rejected, (state, action) => {
-            state.expenseLoading = false;
+            state.updatedExpenseLoading = false;
             state.expenseAppErr = action?.payload?.msg;
             state.expenseServerErr = action?.error?.msg;
         })
@@ -223,14 +223,14 @@ const expensesSlices = createSlice({
         //Delete Expense
         // handle pending state
         builder.addCase(deleteExpenseAction.pending, (state, action) => {
-            state.expenseLoading = true;
+            state.deletedExpenseLoading = true;
 
         });
 
         //hande success state
         builder.addCase(deleteExpenseAction.fulfilled, (state, action) => {
             state.deletedExpense = action?.payload;
-            state.expenseLoading = false;
+           state.deletedExpenseLoading= false;
             state.expenseAppErr = undefined;
             state.expenseServerErr = undefined;
 
@@ -238,7 +238,7 @@ const expensesSlices = createSlice({
         //hande rejected state
 
         builder.addCase(deleteExpenseAction.rejected, (state, action) => {
-            state.expenseLoading = false;
+           state.deletedExpenseLoading= false;
             state.expenseAppErr = action?.payload?.msg;
             state.expenseServerErr = action?.error?.msg;
         })

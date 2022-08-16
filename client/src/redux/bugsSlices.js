@@ -188,7 +188,7 @@ const bugsSlices = createSlice({
         // create bug
         // handle pending state
         builder.addCase(createBugAction.pending, (state, action) => {
-            state.bugLoading = true;
+            state.bugCreatedLoading = true;
             state.bugAppErr = undefined;
             state.bugServerErr = undefined;
 
@@ -199,7 +199,7 @@ const bugsSlices = createSlice({
         //hande success state
         builder.addCase(createBugAction.fulfilled, (state, action) => {
             state.bugCreated = action?.payload;
-            state.bugLoading = false;
+            state.bugCreatedLoading = false;
             state.bugAppErr = undefined;
             state.bugServerErr = undefined;
             state.isbugCreated = false
@@ -207,7 +207,7 @@ const bugsSlices = createSlice({
         //hande rejected state
 
         builder.addCase(createBugAction.rejected, (state, action) => {
-            state.bugLoading = false;
+            state.bugCreatedLoading = false;
             state.bugAppErr = action?.payload?.msg;
             state.bugServerErr = action?.error?.msg;
         })
@@ -271,7 +271,7 @@ const bugsSlices = createSlice({
 
          //handle pending state
          builder.addCase(editBugsAction.pending, (state, action) => {
-            state.editBugLoading = true;
+            state.editedBugLoading = true;
             state.editBugAppErr = undefined;
             state.editBugServerErr = undefined;
 
@@ -282,7 +282,7 @@ const bugsSlices = createSlice({
         //hande success state
         builder.addCase(editBugsAction.fulfilled, (state, action) => {
             state.editBugCreated = action?.payload;
-            state.editBugLoading = false;
+            state.editedBugLoading = false;
             state.editBugAppErr = undefined;
             state.editBugServerErr = undefined;
             state.isbugUpdated = false
@@ -291,7 +291,7 @@ const bugsSlices = createSlice({
         //hande rejected state
 
         builder.addCase(editBugsAction.rejected, (state, action) => {
-            state.editBugLoading = false;
+            state.editedBugLoading = false;
             state.editBugAppErr = action?.payload?.msg;
             state.editBugServerErr = action?.error?.msg;
         })
@@ -301,7 +301,7 @@ const bugsSlices = createSlice({
          // delete a bug
         //handle pending state
         builder.addCase(deleteBugAction.pending, (state, action) => {
-            state.deleteBugLoading = true;
+            state.deletedBugLoading = true;
             state.deleteBugAppErr = undefined;
             state.deleteBugerverErr = undefined;
 
@@ -313,7 +313,7 @@ const bugsSlices = createSlice({
         //hande success state
         builder.addCase(deleteBugAction.fulfilled, (state, action) => {
             state.deleteBugCreated = action?.payload;
-            state.deleteBugLoading = false;
+            state.deletedBugLoading  = false;
             state.deleteBugAppErr = undefined;
             state.deleteBugerverErr = undefined;
             state.isbugDeleted = false
@@ -321,7 +321,7 @@ const bugsSlices = createSlice({
         //hande rejected state
 
         builder.addCase(deleteBugAction.rejected, (state, action) => {
-            state.deleteBugLoading = false;
+            state.deletedBugLoading  = false;
             state.deleteBugAppErr = action?.payload?.msg;
             state.deleteBugerverErr = action?.error?.msg;
         })

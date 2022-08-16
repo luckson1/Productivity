@@ -12,12 +12,13 @@ export const BugsInformation = ({ bugEntry }) => {
     const { currentColor, setShowInfoModal, setIsEdit, setShowModal, setCurrentEntry, bugs, currentEntry, setBugs} = useStateContext();
     const entry=currentEntry
     const dispatch= useDispatch()
+    const newStatus=bugEntry?.status=== "Open" ?"In Review": bugEntry?.status=== "In Review"? "Closed": "Open"
     const editbugHandler = (bugEntry) => {
         const values={
             title:bugEntry.title, 
             description:bugEntry.description, 
             steps:bugEntry.steps,
-            status: "Closed",
+            status: newStatus,
             priority:bugEntry.priority ,
             assigned:bugEntry.assigned ,
             createdAt:bugEntry.createdAt ,
@@ -71,13 +72,13 @@ export const BugsInformation = ({ bugEntry }) => {
                         borderRadius="10px"
                         onClick={() => { setShowInfoModal(false); setShowModal(true); setIsEdit(true); setCurrentEntry(bugEntry);   window.scrollTo(0, 0) }}
                     />
-                    <Button
-                        color="white"
-                        bgColor={currentColor}
-                        text="Mark Complete"
-                        borderRadius="10px"
-                        onClick={() => { editbugHandler(bugEntry)  }}
-                    />
+                <Button
+                    color="white"
+                    bgColor={currentColor}
+                    text={bugEntry?.status==="Open"? "Send to Review": bugEntry?.status ==="In Review" ?"Mark as Complete": bugEntry?.status ==="Closed" ?"Re-Open": null}
+                    borderRadius="10px"
+                    onClick={() => { editbugHandler(bugEntry)  }}
+                />
 
 
 
