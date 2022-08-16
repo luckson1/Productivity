@@ -64,23 +64,12 @@ const fetchOneTaskCtrl = expressAsyncHandler(async (req, res) => {
 //updates Task
 
 const updateTaskctrl = expressAsyncHandler(async (req, res) => {
-    const { updatedTaskId } = req?.params
-    let id = "";
-    const { taskId, title, status, summary } = req?.body
-    if (updatedTaskId === undefined) {
-        try {
-            const updatedTask = await Task.findOne({ taskId })
-         
-            id = updatedTask?._id
-        } catch (error) {
-            res.json(error)
-        }
-    } else {
+    const { id } = req?.params
 
-        id = updatedTaskId
-    }
+    const { taskId, title, status, summary } = req?.body
+
     try {
-        const task = await Task.findByIdAndUpdate(id, { title, status, summary }, { new: true })
+        const task = await Task.findOneAndUpdate({taskId:id}, { title, status, summary, taskId}, { new: true })
 
         res.json({ task })
 
@@ -97,7 +86,7 @@ const deleteTaskctrl = expressAsyncHandler(async (req, res) => {
     const { id } = req?.params
     
     try {
-        const task = await Task.findByIdAndDelete(id)
+        const task = await Task.findOneAndDelete({taskId:id})
 
         res.json({ task })
     } catch (error) {

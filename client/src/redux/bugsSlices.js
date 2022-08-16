@@ -133,7 +133,7 @@ export const editBugsAction = createAsyncThunk('bugs/update', async (payload, { 
     try {
         //make http call here
 
-        const { data } = await axios.put(`${BaseURL}/bugs/${payload?._id}`, payload, config);
+        const { data } = await axios.put(`${BaseURL}/bugs/${payload?.bugId}`, payload, config);
         dispatch(resetBugUpdated())
         return data;
     } catch (error) {
@@ -163,7 +163,7 @@ export const deleteBugAction = createAsyncThunk('bug/delete', async (payload, { 
      try {
          //make http call here
  
-         const { data } = await axios.delete(`${BaseURL}/bugs/${payload?._id}`, config);
+         const { data } = await axios.delete(`${BaseURL}/bugs/${payload?.bugId}`, config);
         dispatch(resetBugDeleted())
          return data;
      } catch (error) {

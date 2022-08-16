@@ -10,6 +10,7 @@ import InProgressTasks from './InProgressTasks'
 import DoneTasks from './DoneTasks'
 import { useStateContext } from '../../context/ContextProvider';
 import { TasksInformation } from './TaskInformation';
+import { Button } from '../Button';
 
 
 export default function KanbanComponent() {
@@ -48,17 +49,13 @@ useEffect(() => {
     return (
 
         <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
-            <div className="kanban-heading">
-                <h2 className="kanban-heading-text" style={{backgroundColor: currentColor}}>Kanban Board</h2>
+           <div className="kanban-heading">
+            <Button bgColor={currentColor} borderRadius="10px" text="Add New Task"onClick={() => {setShowModal(true);  window.scrollTo(0, 0)}} /> 
             </div>
            
             <div className="kanban-board ">
                 <div className="kanban-block bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
                     <strong>To Do</strong>
-                    <div className="task-button-block">
-                        <button id="task-button" onClick={() => {setShowModal(true);  window.scrollTo(0, 0)}}> Add New task</button>
-
-                    </div>
                     {taskAppErr || taskServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                         : taskLoading ? <h4>Loading Please Wait......</h4>
                             : toDoTasks?.length === 0 ? (<div><h3>No Tasks to Display, Please create some </h3></div>)

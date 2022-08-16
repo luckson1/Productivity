@@ -4,6 +4,7 @@ import { ItemTypes } from '../../utils/items'
 import { useDispatch } from 'react-redux';
 import { editTasksAction } from '../../redux/taskSlices';
 import { useStateContext } from '../../context/ContextProvider';
+import { v4 as uuidv4 } from "uuid";
 
 function DoneTasks({ children, setStatus }) {
     const {tasks,setTasks}=useStateContext()
@@ -11,7 +12,7 @@ function DoneTasks({ children, setStatus }) {
 
 
     const editTaskHandler= (item)=> {
-        const editedTaskValues= {title: item?.task.title, summary: item?.task.summary, status:"Done", _id:item.task._id, createdAt: item.task.createdAt}
+        const editedTaskValues= {title: item?.task.title, summary: item?.task.summary, status:"Done", _id:item.task._id, createdAt: item.task.createdAt, taskId: item?.task.taskId ?? uuidv4()}
         let editedTask=[]
         editedTask.push(editedTaskValues)
         dispatch(editTasksAction(( editedTaskValues)))

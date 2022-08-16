@@ -42,8 +42,9 @@ const entry=currentEntry
         const newtasks = tasks?.filter(task => {
             return entry._id !== task?._id
         })
-
-        setTasks([...newtasks, values]);
+let editedTask= []
+editedTask.push(values)
+        setTasks([...newtasks, ...editedTask]);
         setShowModal(false);
 
     }
@@ -55,7 +56,7 @@ const entry=currentEntry
             title: isEdit ? entry?.title : '',
             summary: isEdit ? entry?.summary : '',
             status: isEdit ? entry?.status : 'To Do',
-            taskId: isEdit ? entry?.taskId : uuidv4(),
+            taskId: isEdit ? entry?.taskId ?? uuidv4() : uuidv4(),
             _id: entry?._id,
             createdAt: isEdit ? entry?.createdAt : new Date()
 

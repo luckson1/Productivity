@@ -2,7 +2,7 @@ import React from 'react'
 import { MdCancel } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useStateContext } from '../../context/ContextProvider';
-import { editBugsAction } from '../../redux/bugsSlices';
+import { deleteBugAction, editBugsAction } from '../../redux/bugsSlices';
 import dateFormatter from '../../utils/dateFormatter';
 import { Button } from '../Button'
 import InfoCard from '../InfoCard';
@@ -23,7 +23,7 @@ export const BugsInformation = ({ bugEntry }) => {
             assigned:bugEntry.assigned ,
             createdAt:bugEntry.createdAt ,
             _id:bugEntry._id ,
-            bugId:bugEntry._id 
+            bugId:bugEntry.bugId
         }
         dispatch(editBugsAction(values));
         const newBugs = bugs?.filter(bug => {
@@ -35,7 +35,13 @@ export const BugsInformation = ({ bugEntry }) => {
 
     }
 
-
+// const deleteBugHundler= (bugEntry) => {
+//     const newBugs= bugs?.filter(bug => {
+//         return  bug.bugId!==bugEntry.bugId
+//     })
+//     setBugs(newBugs)
+//     dispatch(deleteBugAction(bugEntry))
+// }
     return (
         <div className="modal">
             <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
@@ -77,7 +83,7 @@ export const BugsInformation = ({ bugEntry }) => {
                     bgColor={currentColor}
                     text={bugEntry?.status==="Open"? "Send to Review": bugEntry?.status ==="In Review" ?"Mark as Complete": bugEntry?.status ==="Closed" ?"Re-Open": null}
                     borderRadius="10px"
-                    onClick={() => { editbugHandler(bugEntry)  }}
+                    onClick={() => {editbugHandler(bugEntry)  }}
                 />
 
 

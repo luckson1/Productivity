@@ -4,7 +4,7 @@ import { ItemTypes } from '../../utils/items'
 import { editTasksAction } from '../../redux/taskSlices';
 import { useDispatch } from 'react-redux';
 import { useStateContext } from '../../context/ContextProvider';
-
+import { v4 as uuidv4 } from "uuid";
 
 
 function InProgressTasks({children}) {
@@ -12,7 +12,7 @@ function InProgressTasks({children}) {
     const dispatch= useDispatch()
 
     const editTaskHandler= (item)=> {
-      const editedTaskValues= {title: item?.task.title, summary: item?.task.summary, status:"In Progress", _id:item.task._id, taskId:item.task.taskId, createdAt: item.task.createdAt}
+      const editedTaskValues= {title: item?.task.title, summary: item?.task.summary, status:"Done", _id:item.task._id, createdAt: item.task.createdAt, taskId: item?.task.taskId ?? uuidv4()}
       let editedTask=[]
       editedTask.push(editedTaskValues)
       dispatch(editTasksAction(( editedTaskValues)))

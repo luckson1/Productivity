@@ -8,6 +8,7 @@ import CreateBugEntry from './CreateBugEntry';
 import { BugsInformation } from './BugsInformation';
 import ReviewBugs from './ReviewBugs';
 import ClosedBugs from './ClosedBug';
+import { Button } from '../Button';
 
 
 export default function BugEntryComponent() {
@@ -47,16 +48,13 @@ useEffect(() => {
 
         <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
             <div className="kanban-heading">
-                <h2 className="kanban-heading-text" style={{backgroundColor: currentColor}}>Bug Tracker</h2>
+            <Button bgColor={currentColor} borderRadius="10px" text="Add New Bug"onClick={() => {setShowModal(true);  window.scrollTo(0, 0)}} /> 
             </div>
            
             <div className="kanban-board ">
                 <div className="kanban-block bg-slate-100">
                     <strong>Open</strong>
-                    <div className="task-button-block">
-                        <button id="task-button" onClick={() => {setShowModal(true);  window.scrollTo(0, 0)}}> Add New task</button>
-
-                    </div>
+                   
                     {bugAppErr || bugServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                         : bugLoading ? <h4>Loading Please Wait......</h4>
                             : openBugs?.length === 0 ? (<div><h3>No Bugs to Display, Please create some </h3></div>)
