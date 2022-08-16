@@ -133,7 +133,7 @@ export const editTasksAction = createAsyncThunk('tasks/update', async (payload, 
     try {
         //make http call here
 
-        const { data } = await axios.put(`${BaseURL}/tasks/${payload?._id}`, payload, config);
+        const { data } = await axios.put(`${BaseURL}/tasks/${payload?.taskId}`, payload, config);
         dispatch(resetTaskUpdated())
         return data;
     } catch (error) {
@@ -163,7 +163,7 @@ export const deleteTaskAction = createAsyncThunk('task/delete', async (payload, 
      try {
          //make http call here
  
-         const { data } = await axios.delete(`${BaseURL}/tasks/${payload?._id}`, config);
+         const { data } = await axios.delete(`${BaseURL}/tasks/${payload?.taskId}`, config);
         dispatch(resetTaskDeleted())
          return data;
      } catch (error) {
