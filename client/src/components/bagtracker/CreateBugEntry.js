@@ -51,6 +51,7 @@ function CreateBugEntry() {
     const editbugHandler = (values) => {
 
         dispatch(editBugsAction(values));
+        console.log(values);
         const newBugs = bugs?.filter(bug => {
             return entry._id !== bug?._id
         })

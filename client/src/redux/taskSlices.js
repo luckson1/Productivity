@@ -50,7 +50,7 @@ export const createTaskAction = createAsyncThunk(
 
 export const fetchTaskAction = createAsyncThunk(
     "task/fetch",
-    async (payload, { rejectWithValue, getState, dispatch }) => {
+    async (payload, { rejectWithValue, getState}) => {
         //get user token from store
         const userToken = getState()?.users?.userAuth?.token;
 

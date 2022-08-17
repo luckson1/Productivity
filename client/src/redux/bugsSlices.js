@@ -49,7 +49,7 @@ export const createBugAction = createAsyncThunk(
 
 export const fetchbugAction = createAsyncThunk(
     "bug/fetch",
-    async (payload, { rejectWithValue, getState, dispatch }) => {
+    async (payload, { rejectWithValue, getState }) => {
         //get user token from store
         const userToken = getState()?.users?.userAuth?.token;
 
@@ -84,7 +84,7 @@ const config = {
 
     export const fetchbugsAction = createAsyncThunk(
         "bugs/fetch",
-        async (payload, { rejectWithValue, getState, dispatch }) => {
+        async (payload, { rejectWithValue, getState}) => {
             //get user token from store
             const userToken = getState()?.users?.userAuth?.token;
     
@@ -187,13 +187,13 @@ const bugsSlices = createSlice({
     extraReducers: (builder) => {
         // create bug
         // handle pending state
-        builder.addCase(createBugAction.pending, (state, action) => {
+        builder.addCase(createBugAction.pending, (state) => {
             state.bugCreatedLoading = true;
             state.bugAppErr = undefined;
             state.bugServerErr = undefined;
 
         });
-        builder.addCase(resetBugCreated, (state, action) => {
+        builder.addCase(resetBugCreated, (state) => {
             state.isbugCreated = true
         })
         //hande success state
