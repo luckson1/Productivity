@@ -42,7 +42,7 @@ export const links = [
       },
 
       {
-        name: 'bug-tracker',
+        name: 'issue-tracker',
         icon: <MdBugReport size="24px"/>,
       },
       {
@@ -50,7 +50,7 @@ export const links = [
         icon: <BsKanban size="20px"/>,
       },
       {
-        name: 'expense-tracker',
+        name: 'budgeting',
         icon: < FaRegMoneyBillAlt size="24px"/>,
       },
       {

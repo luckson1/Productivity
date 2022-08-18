@@ -60,11 +60,11 @@ function App() {
                                 <ProtectedRoute>
                                     <Dashboard />
                                 </ProtectedRoute>} />
-                            <Route exact path="/bug-tracker" element={
+                            <Route exact path="/issue-tracker" element={
                                 <ProtectedRoute>
                                     <BugTracker />
                                 </ProtectedRoute>} />
-                            <Route exact path="/expense-tracker" element={
+                            <Route exact path="/budgeting" element={
                                 <ProtectedRoute>
                                     <ExpenseTracker />
                                 </ProtectedRoute>
