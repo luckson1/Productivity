@@ -11,6 +11,7 @@ import DoneTasks from './DoneTasks'
 import { useStateContext } from '../../context/ContextProvider';
 import { TasksInformation } from './TaskInformation';
 import { Button } from '../Button';
+import moment from "moment"
 
 
 export default function KanbanComponent() {
@@ -41,7 +42,7 @@ useEffect(() => {
     
     const toDoTasks = tasks?.filter(task => task?.status === "To Do")
     const inProgressTasks = tasks?.filter(task => task?.status === "In Progress")
-    const doneTasks = tasks?.filter(task => task?.status === "Done")
+    const doneTasks = tasks?.filter(task => task?.status === "Done" && new Date(task?.updatedAt) > new Date(moment().subtract(7, 'days').calendar()))
 
    
 

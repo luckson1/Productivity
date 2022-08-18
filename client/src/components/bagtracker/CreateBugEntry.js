@@ -75,6 +75,7 @@ function CreateBugEntry() {
             priority: isEdit ? entry?.priority : "",
             assigned: isEdit ? entry?.assigned : undefined,
             createdAt: isEdit ? entry?.createdAt : new Date(),
+            updatedAt: new Date(),
             _id: isEdit ? entry?._id :  undefined,
             bugId: isEdit ? entry?.bugId  : uuidv4()
 

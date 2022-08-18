@@ -11,7 +11,7 @@ function ReviewBugs({ children }) {
 
 
     const editBugHandler= (item)=> {
-        const editedBugValues= {title: item?.bug.title, description: item?.bug.description, status:"In Review", _id:item?.bug._id, createdAt: item?.bug.createdAt,  bugId:item?.bug.bugId, }
+        const editedBugValues= {title: item?.bug.title, description: item?.bug.description, status:"In Review", _id:item?.bug._id, createdAt: item?.bug.createdAt,  bugId:item?.bug.bugId, updatedAt: new Date()}
         let editedBug=[]
         editedBug.push(editedBugValues)
         dispatch(editBugsAction(( editedBugValues)))

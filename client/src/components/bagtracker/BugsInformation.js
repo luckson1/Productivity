@@ -2,7 +2,7 @@ import React from 'react'
 import { MdCancel } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
 import { useStateContext } from '../../context/ContextProvider';
-import { deleteBugAction, editBugsAction } from '../../redux/bugsSlices';
+import {  editBugsAction } from '../../redux/bugsSlices';
 import dateFormatter from '../../utils/dateFormatter';
 import { Button } from '../Button'
 import InfoCard from '../InfoCard';
@@ -22,6 +22,7 @@ export const BugsInformation = ({ bugEntry }) => {
             priority:bugEntry.priority ,
             assigned:bugEntry.assigned ,
             createdAt:bugEntry.createdAt ,
+            updatedAt: new Date(),
             _id:bugEntry._id ,
             bugId:bugEntry.bugId
         }
