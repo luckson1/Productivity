@@ -272,7 +272,7 @@ const Dashboard = () => {
                 </div>    
                 <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
-                        <p className="text-xl font-semibold text-gray-900">Open Bugs</p>
+                        <p className="text-xl font-semibold text-gray-900">Recent Bugs</p>
 
                     </div>
                     <div className="mt-10 w-72 md:w-400 text-sm text-left">
