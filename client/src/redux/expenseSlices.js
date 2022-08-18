@@ -5,6 +5,8 @@ import { ExpensesURL } from "../utils/BaseUrl";
 // actions for redirect 
 export const resetExpCreated = createAction("expense/created/reset")
 export const resetExpUpdated = createAction("expense/updated/reset")
+export const showExpensesAction = createAction("expense/show")
+export const hideExpensesAction = createAction("expense/hide")
 
 //create expense action
 
@@ -143,7 +145,13 @@ const expensesSlices = createSlice({
     initialState: {
 
     },
+   
     extraReducers: (builder) => {
+
+
+        //show/hide expenses list
+        builder.addCase(showExpensesAction, (state, action)=> { state.isExpense=true})
+        builder.addCase(hideExpensesAction, (state, action)=> { state.isExpense=false})
         // create expense
         // handle pending state
         builder.addCase(createExpenseAction.pending, (state, action) => {
@@ -244,6 +252,5 @@ const expensesSlices = createSlice({
         })
     }
 });
-
 
 export default expensesSlices.reducer;

@@ -9,8 +9,8 @@ import { BugsInformation } from './BugsInformation';
 import ReviewBugs from './ReviewBugs';
 import ClosedBugs from './ClosedBug';
 import { Button } from '../Button';
-import moment, {parseZone} from "moment"
-import dateFormatter from '../../utils/dateFormatter';
+import moment from "moment"
+
 
 export default function BugEntryComponent() {
     // display or remove action creation/edit form 

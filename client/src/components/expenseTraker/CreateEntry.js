@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { useDispatch } from 'react-redux';
-import { createExpenseAction, updateExpenseAction } from '../../redux/expenseSlices';
+import { createExpenseAction, hideExpensesAction, updateExpenseAction } from '../../redux/expenseSlices';
 import { createIncomeAction, updateIncomeAction } from '../../redux/IncomeSlices';
 
 const errorSchema = Yup.object().shape({
@@ -23,8 +23,8 @@ const errorSchema = Yup.object().shape({
 
 });
 
-function CreateEntry() {
-    const {setShowModal, isEdit, isExpense, setIsExpense, currentEntry, incomes, setIncomes,  expenses, setExpenses}=useStateContext()
+function CreateEntry({isExpense}) {
+    const {setShowModal, isEdit,  currentEntry, incomes, setIncomes,  expenses, setExpenses}=useStateContext()
    const  entry=currentEntry
 
     const dispatch = useDispatch()
@@ -91,7 +91,7 @@ function CreateEntry() {
             <MdCancel className='close-icon' color='red' onClick={() => {
                 // setIsEdit(false);
                 setShowModal(false);
-                setIsExpense(false)
+          dispatch(hideExpensesAction())
 
             }} />
             <form onSubmit={formik.handleSubmit}>
