@@ -16,6 +16,7 @@ const  task=currentEntry
 
 
     return (
+        <div className="fixed-modal">
         <div className="modal">
             <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl md:w-780   ">
                 <div className="flex justify-between items-center gap-2">
@@ -61,6 +62,7 @@ const  task=currentEntry
 
                 </div>
             </div>
+        </div>
         </div>
     )
 }

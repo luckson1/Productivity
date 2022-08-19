@@ -42,7 +42,7 @@ function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
     return (
         <div>
 
-            <div className="delete-modal">
+            <div className="fixed-modal">
                 <div className="modalContent">
                     <span className="close" onClick={() => setShowDeleteModal(false)}>×</span>
                     <p>Are you sure you want to delete this {item}</p>

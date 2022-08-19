@@ -68,6 +68,7 @@ editedTask.push(values)
 
 
     return (
+        <div className="fixed-modal">
         <div className="modal  bg-slate-200" >
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
@@ -159,6 +160,7 @@ editedTask.push(values)
                     </span>
                 </div>
             </form>
+        </div>
         </div>
     )
 }
