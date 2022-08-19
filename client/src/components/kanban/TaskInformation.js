@@ -21,7 +21,7 @@ const  task=currentEntry
                 <div className="flex justify-between items-center gap-2">
                     <p className="text-xl font-semibold text-gray-900 text-center">Task Information</p>
 
-                    <MdCancel className='' color='red' size="30px" onClick={() => {setShowInfoModal(false); }} />
+                    <MdCancel className='' color='red' size="30px" onClick={() => {setShowInfoModal(false); setIsEdit(false);}} style={{cursor: "pointer"}}/>
                 </div>
 
                 <div className="mt-3 text-sm ">
@@ -31,6 +31,7 @@ const  task=currentEntry
                         <InfoCard title="Title" details={task?.title} />
                         <InfoCard title="Status" details={task?.status} />
                         <InfoCard title="Summary" details={task?.summary} />
+                        <InfoCard title="Assignee" details={task?.assigned ?? "Not Assigned"} />
                         <InfoCard title="Date Created" details={dateFormatter(task?.createdAt)} />
 
                     </div>

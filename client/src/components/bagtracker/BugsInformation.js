@@ -49,7 +49,7 @@ export const BugsInformation = ({ bugEntry }) => {
                 <div className="flex justify-between items-center gap-2">
                     <p className="text-xl font-semibold text-gray-900 text-center">Bug Information</p>
 
-                    <MdCancel className='' color='red' size="30px" onClick={() => {
+                    <MdCancel className='' color='red' size="30px"style={{cursor: "pointer"}} onClick={() => {
                         setIsEdit(false);
                         setShowInfoModal(false);
 
@@ -66,6 +66,7 @@ export const BugsInformation = ({ bugEntry }) => {
                         <InfoCard title="Description" details={bugEntry?.description} />
                         <InfoCard title="Steps" details={bugEntry?.steps} />
                         <InfoCard title="Priority" details={bugEntry?.priority} />
+                        <InfoCard title="Assignee" details={bugEntry?.assigned ?? "Not Assigned"} />
                         <InfoCard title="Date Created" details={dateFormatter(bugEntry?.createdAt)} />
 
                     </div>
