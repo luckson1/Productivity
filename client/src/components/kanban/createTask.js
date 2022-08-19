@@ -58,7 +58,8 @@ editedTask.push(values)
             status: isEdit ? entry?.status : 'To Do',
             taskId: isEdit ? entry?.taskId ?? uuidv4() : uuidv4(),
             _id: entry?._id,
-            createdAt: isEdit ? entry?.createdAt : new Date()
+            createdAt: isEdit ? entry?.createdAt : new Date(),
+            updateAt: isEdit ? entry?.updateAtAt ?? new Date() : ""
 
         },
         validationSchema: errorSchema,

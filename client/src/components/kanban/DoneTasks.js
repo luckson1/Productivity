@@ -12,7 +12,7 @@ function DoneTasks({ children, setStatus }) {
 
 
     const editTaskHandler= (item)=> {
-        const editedTaskValues= {title: item?.task.title, summary: item?.task.summary, status:"Done", _id:item.task._id, createdAt: item.task.createdAt, taskId: item?.task.taskId ?? uuidv4()}
+        const editedTaskValues= {title: item?.task.title, summary: item?.task.summary, status:"Done", _id:item.task._id, createdAt: item.task.createdAt, updatedAt: new Date(), taskId: item?.task.taskId ?? uuidv4()}
         let editedTask=[]
         editedTask.push(editedTaskValues)
         dispatch(editTasksAction(( editedTaskValues)))
@@ -20,7 +20,7 @@ function DoneTasks({ children, setStatus }) {
     return task._id !==item.task._id
   })
   
-        setTasks([...newTasks, ...editedTask]);
+        setTasks([ ...editedTask, ...newTasks]);
     }
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: [ItemTypes.PROGRESS, ItemTypes.DO],
