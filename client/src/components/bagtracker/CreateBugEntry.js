@@ -86,6 +86,7 @@ function CreateBugEntry() {
 
 
     return (
+        <div className="fixed-modal">
         <div className="modal bg-slate-200" >
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
@@ -222,6 +223,7 @@ function CreateBugEntry() {
                     </span>
                 </div>
             </form>
+        </div>
         </div>
     )
 }
