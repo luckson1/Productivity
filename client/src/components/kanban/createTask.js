@@ -68,8 +68,8 @@ function CreateTask() {
 
         },
         validationSchema: errorSchema,
-        // onSubmit: isEdit ? values => {editTaskHandler(values)}
-        onSubmit: isEdit ? values => console.log(values)
+        onSubmit: isEdit ? values => {editTaskHandler(values)}
+    
             : values => { addTaskHandler(values) }
     });
 
