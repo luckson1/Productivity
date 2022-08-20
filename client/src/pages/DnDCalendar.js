@@ -59,7 +59,7 @@ return (
     localizer={localizer}
     events={events}
     draggableAccessor={(event) => true}
-    startAccessor="createdAt" endAccessor="createdAt"
+    startAccessor="start" endAccessor="end"
     style={{ height: "60vh"}} 
     popup
   />

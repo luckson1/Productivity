@@ -66,10 +66,10 @@ const fetchOneTaskCtrl = expressAsyncHandler(async (req, res) => {
 const updateTaskctrl = expressAsyncHandler(async (req, res) => {
     const { id } = req?.params
 
-    const { taskId, title, status, summary } = req?.body
+    const { taskId, title, status, summary, start, end } = req?.body
 
     try {
-        const task = await Task.findOneAndUpdate({taskId:id}, { title, status, summary, taskId}, { new: true })
+        const task = await Task.findOneAndUpdate({taskId:id}, { title, status, summary, taskId, start, end}, { new: true })
 
         res.json({ task })
 

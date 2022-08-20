@@ -34,6 +34,10 @@ const  task=currentEntry
                         <InfoCard title="Summary" details={task?.summary} />
                         <InfoCard title="Assignee" details={task?.assigned ?? "Not Assigned"} />
                         <InfoCard title="Date Created" details={dateFormatter(task?.createdAt)} />
+                    {  task?.start!==undefined &&  <InfoCard title=" Starting Date" details={dateFormatter(task?.start)} />}
+                        { task?.end!==undefined && <InfoCard title="Ending Date" details={dateFormatter(task?.end)} />}
+
+
 
                     </div>
                 </div>

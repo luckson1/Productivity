@@ -50,8 +50,8 @@ function CreateTask() {
 
     }
     // control state of data input 
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState((new Date(entry?.start ?? new Date())))
+    const [endDate, setEndDate] = useState((new Date(entry?.end ?? new Date ())))
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
@@ -62,9 +62,9 @@ function CreateTask() {
             taskId: isEdit ? entry?.taskId ?? uuidv4() : uuidv4(),
             _id: entry?._id,
             createdAt: isEdit ? entry?.createdAt : new Date(),
-            updateAt: isEdit ? entry?.updateAtAt ?? new Date() : "",
-            start: "",
-            end: "",
+            updateAt: isEdit ? entry?.updateAt ?? new Date() : "",
+            start: isEdit ? entry?.start ?? "" :"",
+            end:isEdit ? entry?.end ?? "":"",
 
         },
         validationSchema: errorSchema,
@@ -166,6 +166,7 @@ function CreateTask() {
                                 name='startDate'
                                 placeholder="start-date"
                                 selected={startDate}
+                              
                                 onChange={val => { formik.setFieldValue('start', val); setStartDate(val) }}
                                 minDate={new Date()}
                                 onBlur={formik.handleBlur("startDate")} />
