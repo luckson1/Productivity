@@ -2,8 +2,9 @@ import React from 'react';
 import { AiOutlineDashboard, AiOutlineTeam } from 'react-icons/ai';
 import { BsKanban, } from 'react-icons/bs';
 import { MdBugReport } from 'react-icons/md';
-import {FaRegMoneyBillAlt}from 'react-icons/fa';
-import {CgProfile }from 'react-icons/cg';
+import {FaRegMoneyBillAlt}  from 'react-icons/fa';
+import {CgProfile } from 'react-icons/cg';
+import {FcCalendar }from 'react-icons/fc';
 
 
 export const themeColors = [
@@ -46,8 +47,13 @@ export const links = [
         icon: <MdBugReport size="24px"/>,
       },
       {
-        name: 'kanban',
+        name: 'tasks',
         icon: <BsKanban size="20px"/>,
+      },
+     
+      {
+        name: 'calender',
+        icon: <FcCalendar size="24px"/>,
       },
       {
         name: 'budgeting',

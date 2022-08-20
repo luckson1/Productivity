@@ -5,7 +5,7 @@ import { useStateContext } from '../../context/ContextProvider';
 
 function TaskCard({ task, type }) {
  
-  const { setCurrentEntry, setShowInfoModal, setIsEdit} = useStateContext();
+  const { setCurrentEntry, setShowInfoModal} = useStateContext();
 const [{isDragging},drag]=useDrag({
   item:{ task,
 },

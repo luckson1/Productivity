@@ -12,6 +12,7 @@ import { Onboarding } from './pages/Onboarding';
 import ProtectedRoute from './components/users/protectedRoute';
 import Dashboard from './pages/Dashboard';
 import BugTracker from './pages/BugTracker';
+import DnDCalendar from './pages/DnDCalendar';
 function App() {
     const { activeMenu, setThemeSettings, currentColor, themeSettings, showNavBar } = useStateContext();
     return (
@@ -52,7 +53,7 @@ function App() {
                         <Routes>
                             <Route exact path="/" element={<Home />} />
 
-                            <Route exact path="/kanban" element={
+                            <Route exact path="/tasks" element={
                                 <ProtectedRoute>
                                     <Kanban />
                                 </ProtectedRoute>} />
@@ -67,6 +68,11 @@ function App() {
                             <Route exact path="/budgeting" element={
                                 <ProtectedRoute>
                                     <ExpenseTracker />
+                                </ProtectedRoute>
+                            } />
+                              <Route exact path="/calender" element={
+                                <ProtectedRoute>
+                                    <DnDCalendar />
                                 </ProtectedRoute>
                             } />
                             <Route exact path="/onboarding" element={
