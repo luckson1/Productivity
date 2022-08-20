@@ -46,8 +46,8 @@ useEffect(() => {
  const events=tasks.map(task=> {return task})
 return (
   <div className=" w-10/12 mt-5 ml-10">
-    <h1>Tasks with no timelines</h1>
-    <div className='width-5/6 h-32 bg-slate-100 mb-3 rounded-lg flex flex-row flex-wrap justify-between'>
+    <h1>Tasks with no timelines(click to edit)</h1>
+    <div className='width-5/6 h-32 bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 mb-3 rounded-lg flex flex-row flex-wrap justify-between'>
 {tasks?.filter(task => !task?.start && task?.status !=="Done")?.map(task => 
   <div className="bg-white rounded m-5 p-1 shadow-2xl text-xs h-8"   key={task?.taskId} >
   <span>{task?.title}</span>

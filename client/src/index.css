@@ -327,6 +327,7 @@ form .multiple-input-container input[type="radio"] {
   width: 80%;
   margin: auto;
   min-width: 230px;
+  min-height: 40px;
   overflow:hidden;
  
 }
