@@ -39,7 +39,7 @@ function ClosedBugs({ children }) {
 
     const isActive = isOver && canDrop
     return (
-        <div className={ isActive? "bg-gradient-to-r from-green-400 via-emerald-300 to-teal-300 kanban-block" : "bg-slate-100 kanban-block" } id="done" ref={drop}  >
+        <div className={ isActive? "bg-gradient-to-r from-green-400 via-emerald-300 to-teal-300 kanban-block" : "bg-indigo-100 kanban-block" } id="done" ref={drop}  >
             {children}
         </div>
     )
