@@ -76,12 +76,12 @@ function CreateTask() {
 
     return (
         <div className="fixed-modal">
-            <div className="modal  bg-slate-200" >
+            <div className="modal  bg-slate-200 dark:bg-[#484B52]" >
                 <MdCancel className='close-icon' color='red' onClick={() => {
                     setIsEdit(false);
                     setShowModal(false)
                 }} />
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} className=" dark:bg-[#484B52]">
                     <div className="create-new-task-block" id="create-new-task-block">
                         <strong>Task</strong>
                         {/* errors */}

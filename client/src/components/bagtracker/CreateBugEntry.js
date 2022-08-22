@@ -87,7 +87,7 @@ function CreateBugEntry() {
 
     return (
         <div className="fixed-modal">
-        <div className="modal bg-slate-200" >
+        <div className="modal bg-slate-200  dark:bg-[#484B52]" >
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
                 setShowModal(false);

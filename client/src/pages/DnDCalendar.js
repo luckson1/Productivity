@@ -84,7 +84,8 @@ export default function DnDCalendar() {
   }, [tasksFetched, setTasks])
 
   return (
-    <div className=" w-10/12 mt-5 ml-10">
+    
+    <div className=" w-10/12 mt-5 ml-10  dark:bg-[#484B52] rounded-md dark:text-slate-50">
 
       {!showNoDateModal && <Button
         bgColor={currentColor}
@@ -114,7 +115,7 @@ export default function DnDCalendar() {
         draggableAccessor={(event) => true}
         startAccessor="start" endAccessor="end"
         allDayAccessor="allDay"
-        style={{ height: "60vh" }}
+        style={{ height: "70vh" }}
         scrollToTime={scrollToTime}
         popup
       />

@@ -14,7 +14,7 @@ export const SideBar = () => {
         }
     }
     const activeLink = `flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2`
-    const normalLink = "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-md text-gray-900 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2"
+    const normalLink = "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-md text-gray-900 dark:text-gray-100 dark:hover:text-black hover:bg-light-gray m-2"
     return (
         <div className='ml-3 h-screen
         md:overflow-hidden 
@@ -56,7 +56,7 @@ export const SideBar = () => {
 
                                   <p className="my-1">{link?.icon}</p>  
                                     <span className='capitalize'>
-                                      <p className=" text-gray-900 my-1"> {link?.name}</p> 
+                                      <p className=" text-gray-900 my-1 dark:text-slate-50"> {link?.name}</p> 
                                     </span>
 
 

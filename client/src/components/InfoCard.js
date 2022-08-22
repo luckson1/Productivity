@@ -6,7 +6,7 @@ function InfoCard({ title, details}) {
 
 
   return (
-    <div className="task" id="task"  >
+    <div className="task dark:bg-[#484B52]" id="task"  >
      
       <div className="text-left py-2 flex flex-row gap-2">
     <p className="text-blue-500">{title}: </p> <p> {details}</p>
