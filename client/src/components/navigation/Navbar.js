@@ -58,8 +58,8 @@ export const Navbar = () => {
                         alt="user-profile"
                     />
                     <p>
-                        <span className="text-gray-900 text-14">Hi,</span>{' '}
-                        <span className="text-gray-900 font-bold ml-1 text-14">
+                        <span className="text-gray-900 text-14 dark:text-slate-50">Hi,</span>{' '}
+                        <span className="text-gray-900 font-bold ml-1 text-14  dark:text-slate-50">
                            {user?.firstName}
                         </span>
                     </p>

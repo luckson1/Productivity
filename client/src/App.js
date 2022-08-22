@@ -33,7 +33,7 @@ function App() {
 
                 </div>
                 {activeMenu ? (
-                    <div className="w-72 fixed sidebar dark:bg-slate-800 bg-white dark:text-white">
+                    <div className="w-72 fixed sidebar dark:bg-[#484B52] bg-white dark:text-white">
                         <SideBar />
                     </div>
                 ) : (
@@ -43,10 +43,10 @@ function App() {
                 )}
                 <div className={
                     activeMenu
-                        ? 'dark:bg-slate-800 bg-slate-50 min-h-screen md:ml-72 w-full  '
+                        ? 'dark:bg-slate-700 bg-slate-50 min-h-screen md:ml-72 w-full  '
                         : ' bg-slate-50  dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
                 }>
-                    <div className="fixed md:static  bg-slate-50  dark:bg-slate-800 -navbar w-full ">
+                    <div className="fixed md:static  bg-slate-50  dark:bg-slate-700 -navbar w-full ">
                         {showNavBar && <Navbar />}
                     </div>
 

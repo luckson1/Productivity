@@ -16,7 +16,7 @@ const dispatch=useDispatch()
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg dark:text-gray-200">User Profile</p>
+        <p className="font-semibold text-lg dark:text-gray-50">User Profile</p>
  
           <MdOutlineCancel size="30px" color='red' cursor={"pointer"} onClick={()=> setShowProfileModal(false)}/>
        
@@ -28,9 +28,9 @@ const dispatch=useDispatch()
           alt="user-profile"
         />
         <div>
-        <p className="font-semibold text-xl dark:text-gray-200"> {user?.firstName} {user?.lastName}</p>
+        <p className="font-semibold text-xl dark:text-gray-50"> {user?.firstName} {user?.lastName}</p>
           
-          <p className="text-gray-900 text-sm font-semibold dark:text-gray-200"> {user?.email}</p>
+          <p className="text-gray-900 text-sm font-semibold dark:text-gray-50"> {user?.email}</p>
         </div>
       </div>
       <div>
