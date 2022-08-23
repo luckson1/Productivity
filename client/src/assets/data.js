@@ -55,19 +55,12 @@ export const links = [
         name: 'calender',
         icon: <FcCalendar size="24px"/>,
       },
-      {
-        name: 'budgeting',
-        icon: < FaRegMoneyBillAlt size="24px"/>,
-      },
+    
       {
         name: 'team',
         icon: <AiOutlineTeam size="24px"/>,
       },
-      {
-        name: 'profile',
-        icon: < CgProfile size="24px"/>,
-      },
-    
+ 
     
     ],
   },
