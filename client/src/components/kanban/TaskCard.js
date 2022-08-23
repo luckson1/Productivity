@@ -22,9 +22,7 @@ const [{isDragging},drag]=useDrag({
   return (
     <div className="task dark:bg-[#484B52] dark:text-slate-100" id="task"  ref= {drag} style={{opacity: isDragging? 0.3: 1, cursor: "pointer"}}  onClick={()=> {setShowInfoModal(true); setCurrentEntry(task); }} >
       <span>{task?.title}</span>
-      <div className="summary">
-        <p>{task?.summary}</p>
-      </div>
+      
  
 
    
