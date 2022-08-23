@@ -19,10 +19,16 @@ export const UserProfile = () => {
   const dispatch = useDispatch()
 
 
+  const loginUserInfo = useSelector(state => state?.users?.userAuth?.user) 
+const editedProfile=useSelector(state => state?.users?.editedProfile) 
+  const [user, setUser]=useState(loginUserInfo)
+   useEffect(()=> {
+    if(editedProfile){
+      setUser(editedProfile?.user)
+    }
+   }, [editedProfile])
+ 
 
-
-
-  const user = useSelector(state => state?.users?.userAuth?.user)
 
 
 

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, createAction} from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit"
 import axios from 'axios'
 import { BaseURL } from "../utils/BaseUrl";
 
@@ -8,12 +8,12 @@ export const resetUserRegistered = createAction("user/registered/reset")
 //login action creation
 export const resetLoginAction = createAction("user/login/reset")
 export const registerUserAction = createAsyncThunk('user/register', async (payload, { rejectWithValue, getState, dispatch }) => {
-    
+
     // configuring the request
     const config = {
         headers: {
             "Content-Type": "application/json",
-          },
+        },
     };
 
     try {
@@ -25,7 +25,7 @@ export const registerUserAction = createAsyncThunk('user/register', async (paylo
 
         //save user into localstorage
         localStorage.setItem('userInfo', JSON.stringify(data))
-        dispatch(resetUserRegistered ())
+        dispatch(resetUserRegistered())
         return data;
 
     } catch (error) {
@@ -44,7 +44,7 @@ export const loginUserAction = createAsyncThunk('user/login', async (payload, { 
     const config = {
         headers: {
             "Content-Type": "application/json",
-          },
+        },
     };
 
     try {
@@ -100,7 +100,8 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
         //http call
         const { data } = await axios.get(
             `${BaseURL}/users/profile`, config);
-           
+
+        localStorage.setItem('userData', JSON.stringify(data));
         return data;
 
     } catch (error) {
@@ -114,14 +115,14 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
 
 //create profile state
 export const createProfileAction = createAsyncThunk('user/create', async (payload, { rejectWithValue, getState, dispatch }) => {
-    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
+    const userToken = getState()?.users?.userAuth ? getState()?.users?.userAuth?.token : getState()?.users?.userRegistered?.token
 
     const config = {
         headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${userToken}`,
-        
-          
+
+
         },
     };
 
@@ -129,7 +130,9 @@ export const createProfileAction = createAsyncThunk('user/create', async (payloa
         //http call
         const { data } = await axios.put(
             `${BaseURL}/users`, payload, config);
-          dispatch(resetProfilecreated()) 
+
+        localStorage.setItem('userData', JSON.stringify(data));
+        
         return data;
 
     } catch (error) {
@@ -141,48 +144,54 @@ export const createProfileAction = createAsyncThunk('user/create', async (payloa
 }
 );
 
-export const editProfilePicAction= createAsyncThunk('user/pic/edit', async(payload, {rejectWithValue, getState, dispatch})=> {
-    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
+export const editProfilePicAction = createAsyncThunk('user/pic/edit', async (payload, { rejectWithValue, getState, dispatch }) => {
+    const userToken = getState()?.users?.userAuth ? getState()?.users?.userAuth?.token : getState()?.users?.userRegistered?.token
     const config = {
         headers: {
             "Content-Type": "multipart/form-data",
             Authorization: `Bearer ${userToken}`,
-        
-          
+
+
         },
     };
     try {
-        const {data}= await axios.put( `${BaseURL}/users`, payload, config)
+        const { data } = await axios.put(`${BaseURL}/users`, payload, config);
+        localStorage.setItem('userData', JSON.stringify(data));
         return data
     } catch (error) {
-        return rejectWithValue(error?.response?.data); 
+        return rejectWithValue(error?.response?.data);
     }
 })
 
-export const editProfileAction= createAsyncThunk('user/edit', async(payload, {rejectWithValue, getState, dispatch})=> {
-    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
+export const editProfileAction = createAsyncThunk('user/edit', async (payload, { rejectWithValue, getState, dispatch }) => {
+    const userToken = getState()?.users?.userAuth ? getState()?.users?.userAuth?.token : getState()?.users?.userRegistered?.token
     const config = {
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${userToken}`,
-        
-          
+
+
         },
     };
     try {
-        const {data}= await axios.put( `${BaseURL}/users/update/`, payload, config)
+        const { data } = await axios.put(`${BaseURL}/users/update/`, payload, config)
+        localStorage.setItem('userData', JSON.stringify(data));
+
         return data
+        
     } catch (error) {
-        return rejectWithValue(error?.response?.data); 
+        return rejectWithValue(error?.response?.data);
     }
 })
 
 //slices
 const userLoginFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : undefined;
+
 const usersSlices = createSlice({
     name: 'user',
     initialState: {
         userAuth: userLoginFromStorage
+        
     },
     extraReducers: (builder) => {
         // register
@@ -246,7 +255,7 @@ const usersSlices = createSlice({
             state.userAuth = undefined;
             state.userLoading = false;
         });
-         // profile
+        // profile
 
         // handle pending state
         builder.addCase(fetchUserProfileAction.pending, (state, action) => {
@@ -272,8 +281,8 @@ const usersSlices = createSlice({
         });
 
         // slices to handle creation of profile info
-           // handle pending state
-           builder.addCase(createProfileAction.pending, (state, action) => {
+        // handle pending state
+        builder.addCase(createProfileAction.pending, (state, action) => {
             state.createProfileLoading = true;
             state.createProfileAppErr = undefined;
             state.createProfileServerErr = undefined;
@@ -298,14 +307,14 @@ const usersSlices = createSlice({
             state.createProfileAppErr = action?.payload?.msg;
             state.createProfileServerErr = action?.error?.msg;
         });
- // slices to handle updateof profile info
-           // handle pending state
-           builder.addCase(editProfilePicAction.pending, (state, action) => {
+        // slices to handle update of profile pic
+        // handle pending state
+        builder.addCase(editProfilePicAction.pending, (state, action) => {
             state.editProfileLoading = true;
             state.editProfileAppErr = undefined;
             state.editProfileServerErr = undefined;
         });
-    
+
 
         //hande success state
         builder.addCase(editProfilePicAction.fulfilled, (state, action) => {
@@ -323,9 +332,34 @@ const usersSlices = createSlice({
             state.editProfileAppErr = action?.payload?.msg;
             state.editProfileServerErr = action?.error?.msg;
         });
-       
+// slices to handle update of profile info
+        // handle pending state
+        builder.addCase(editProfileAction.pending, (state, action) => {
+            state.editProfileLoading = true;
+            state.editProfileAppErr = undefined;
+            state.editProfileServerErr = undefined;
+        });
 
-    }})
+
+        //hande success state
+        builder.addCase(editProfileAction.fulfilled, (state, action) => {
+            state.editedProfile = action?.payload;
+            state.editProfileLoading = false;
+            state.editProfileAppErr = undefined;
+            state.editProfileServerErr = undefined;
+
+        });
+        //hande rejected state
+
+        builder.addCase(editProfileAction.rejected, (state, action) => {
+
+            state.editProfileLoading = false;
+            state.editProfileAppErr = action?.payload?.msg;
+            state.editProfileServerErr = action?.error?.msg;
+        });
+
+    }
+})
 
 
-    export default usersSlices.reducer;
+export default usersSlices.reducer;
