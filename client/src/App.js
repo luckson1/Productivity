@@ -44,7 +44,7 @@ function App() {
                 <div className={
                     activeMenu
                         ? 'dark:bg-gray-600 bg-slate-50 min-h-screen md:ml-72 w-full  '
-                        : ' bg-slate-50  dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
+                        : ' bg-slate-50  dark:bg-gray-600  w-full min-h-screen flex-2 '
                 }>
                     <div className="fixed md:static  bg-slate-50  dark:bg-gray-600 -navbar w-full ">
                         {showNavBar && <Navbar />}
