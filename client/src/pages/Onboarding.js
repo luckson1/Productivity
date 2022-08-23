@@ -1,10 +1,6 @@
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
-
-// import { useDispatch, useSelector } from 'react-redux';
-// import { createProfileAction } from '../redux/usersSlices';
-// import { useNavigate } from 'react-router';
 import DisabledButton from '../components/DisabledButton';
 import profile from '../assets/ProfilePic.jpg';
 import { useStateContext } from '../context/ContextProvider';
