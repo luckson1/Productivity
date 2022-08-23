@@ -28,9 +28,7 @@ function BugCard({ bug, type }) {
           <p>{bug?.priority} Priority</p>
         </div>
       </div>
-      <div className="summary">
-        <p>{bug?.description}</p>
-      </div>
+      
 
 
 
