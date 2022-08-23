@@ -26,7 +26,7 @@ const taskSchema = new mongoose.Schema(
     
     summary: {
       type: String,
-      required: true,
+      
     },
     taskId: {
       type: String,
