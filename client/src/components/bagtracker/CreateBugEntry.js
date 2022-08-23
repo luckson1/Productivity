@@ -86,17 +86,17 @@ function CreateBugEntry() {
 
 
     return (
-        <div className="fixed-modal">
-        <div className="modal bg-slate-200  dark:bg-[#484B52]" >
+        <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
+        <div className="float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-full sm:w-6/12 ">
+            <div className="px-7 pt-5" >
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
                 setShowModal(false);
                 
                
 
-            }} />
-            <form onSubmit={formik.handleSubmit}>
-                <div className="create-new-task-block" id="create-new-task-block">
+            }} style={{cursor: "pointer"}}/>            
+            <form onSubmit={formik.handleSubmit}>                
                     <strong>{isEdit? "Edit Bug Info" :"Create Bug"}</strong>
                     {/* errors */}
                     <div className="form-validation">
@@ -221,8 +221,9 @@ function CreateBugEntry() {
                         <button id="save-button" type="submit" style={{ background: isExpense ? "red" : "linear-gradient(270deg, green, rgb(163, 245, 163))" }}>Save</button>
 
                     </span>
-                </div>
+                
             </form>
+            </div>
         </div>
         </div>
     )
