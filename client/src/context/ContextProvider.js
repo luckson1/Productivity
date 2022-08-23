@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfileAction } from "../redux/usersSlices";
 
 const StateContext = createContext();
@@ -38,15 +37,7 @@ export const ContextProvider = ({ children }) => {
 
 
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchUserProfileAction())
-    }, [dispatch])
-
-    const userData = useSelector(state => state?.users?.userProfile)
-
-    const user = userData?.user
+    
 
 
     return (
@@ -103,7 +94,7 @@ export const ContextProvider = ({ children }) => {
                 setBugs,
                 showInfoModal, 
                 setShowInfoModal,
-                user
+               
 
 
             }}>
