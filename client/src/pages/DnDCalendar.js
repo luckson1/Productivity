@@ -7,12 +7,13 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasksAction } from '../redux/taskSlices';
 import { useStateContext } from '../context/ContextProvider';
-import CreateTask from '../components/kanban/createTask';
+import CreateTask from '../components/kanban/EditTasks';
 import DeleteDialogBox from '../components/DeleteDialogBox';
 import { TasksInformation } from '../components/kanban/TaskInformation';
 import globalize from 'globalize'
 import { Button } from '../components/Button';
 import { MdCancel } from 'react-icons/md';
+import EditTasks from '../components/kanban/EditTasks';
 
 
 
@@ -119,7 +120,7 @@ export default function DnDCalendar() {
         scrollToTime={scrollToTime}
         popup
       />
-      {showModal && <CreateTask />}
+      {showModal && <EditTasks/>}
       {showDeleteModal && <DeleteDialogBox task={currentEntry} item="Task" />}
       {showInfoModal && <TasksInformation />}
     </div>

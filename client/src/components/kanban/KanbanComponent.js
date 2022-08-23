@@ -1,7 +1,5 @@
 import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux"
-
-import CreateTask from './createTask'
 import { fetchTasksAction } from '../../redux/taskSlices';
 import DeleteDialogBox from '../DeleteDialogBox'
 import TaskCard from './TaskCard'
@@ -10,15 +8,16 @@ import InProgressTasks from './InProgressTasks'
 import DoneTasks from './DoneTasks'
 import { useStateContext } from '../../context/ContextProvider';
 import { TasksInformation } from './TaskInformation';
-import { Button } from '../Button';
 import moment from "moment"
+import CreateTasks from './CreateTasks';
+import EditTasks from './EditTasks';
 
 
 export default function KanbanComponent() {
     // display or remove action creation/edit form 
   
 
-    const {currentColor, showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry,  tasks, setTasks, showInfoModal, setShowInfoModal, setCurrentEntry} = useStateContext();
+    const { showModal, setShowModal ,showDeleteModal, setShowDeleteModal,isEdit, setIsEdit,currentEntry,  tasks, setTasks, showInfoModal, setShowInfoModal, setCurrentEntry} = useStateContext();
 
     // dispatch action to fetch all tasks
     const dispatch = useDispatch()
@@ -49,23 +48,26 @@ useEffect(() => {
 
     return (
 
-        <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
-           <div className="kanban-heading">
-            <Button bgColor={currentColor} borderRadius="10px" text="Add New Task"onClick={() => {setShowModal(true);  window.scrollTo(0, 0)}} /> 
-            </div>
+        <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">      
            
-            <div className="kanban-board ">
+            <div className="kanban-board ">         
+                             
                 <div className="kanban-block bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
+              
+                               
                     <strong>To Do</strong>
+                    <CreateTasks />
+                
                     {taskAppErr || taskServerErr ? (<div className="form-validation">An Error Has Occured</div>)
                         : taskLoading ? <h4>Loading Please Wait......</h4>
                             : toDoTasks?.length === 0 ? (<div><h3>No Tasks to Display, Please create some </h3></div>)
                                 : toDoTasks?.map(task => (<TaskCard
                                     task={task}
-                                    key={task?._id}
+                                    key={task?.taskId}
                                     type={ItemTypes.DO}
                                     onClick={()=> {setShowInfoModal(true); setCurrentEntry(task)}} 
                                 />))}
+                                
 
                 </div>
                 <InProgressTasks  >
@@ -74,7 +76,7 @@ useEffect(() => {
                         : taskLoading ? <h4>Loading Please Wait......</h4>
                             : inProgressTasks?.map(task => (<TaskCard
                                 task={task}
-                                key={task?._id}                                
+                                key={task?.taskId}                                
                                 type={ItemTypes.PROGRESS}
                                 
                                
@@ -86,13 +88,13 @@ useEffect(() => {
                         : taskLoading ? <h4>Loading Please Wait......</h4>
                             : doneTasks?.map(task => (<TaskCard
                                 task={task}
-                                key={task?._id}                             
+                                key={task?.taskId}                             
                                 type={ItemTypes.DONE}
                             />))}
 
                 </DoneTasks>
             </div>
-            {showModal && <CreateTask setShowModal={setShowModal} isEdit={isEdit} entry={currentEntry} setIsEdit={setIsEdit} />}
+            {showModal && <EditTasks setShowModal={setShowModal} isEdit={isEdit} entry={currentEntry} setIsEdit={setIsEdit} />}
             {showDeleteModal && <DeleteDialogBox setShowDeleteModal={setShowDeleteModal} task={currentEntry} item="Task" />}
             {  showInfoModal  && <TasksInformation />}
         </div>

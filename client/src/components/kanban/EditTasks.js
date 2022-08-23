@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
-import { createTaskAction, editTasksAction } from '../../redux/taskSlices';
+import { editTasksAction } from '../../redux/taskSlices';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { v4 as uuidv4 } from "uuid";
@@ -14,28 +14,17 @@ const errorSchema = Yup.object().shape({
         .string()
         .required('Title Required'),
     summary: Yup
-        .string()
-        .required('Summary Information Required'),
+        .string(),
     status: Yup
         .string()
 
 
 });
-function CreateTask() {
+function EditTasks() {
     const { setShowModal, setIsEdit, isEdit, tasks, setTasks, currentEntry } = useStateContext()
     const entry = currentEntry
     const dispatch = useDispatch()
 
-
-    const addTaskHandler = (values) => {
-        dispatch(createTaskAction(values))
-
-        let newTask = []
-        newTask.push(values)
-        setTasks([...tasks, ...newTask]);
-        setShowModal(false);
-
-    }
 
     const editTaskHandler = (values) => {
 
@@ -51,26 +40,24 @@ function CreateTask() {
     }
     // control state of data input 
     const [startDate, setStartDate] = useState((new Date(entry?.start ?? new Date())))
-    const [endDate, setEndDate] = useState((new Date(entry?.end ?? new Date ())))
+    const [endDate, setEndDate] = useState((new Date(entry?.end ?? new Date())))
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
 
-            title: isEdit ? entry?.title : '',
-            summary: isEdit ? entry?.summary : '',
-            status: isEdit ? entry?.status : 'To Do',
-            taskId: isEdit ? entry?.taskId ?? uuidv4() : uuidv4(),
+            title: entry?.title,
+            summary: entry?.summary,
+            status: entry?.status ,
+            taskId: entry?.taskId ?? uuidv4(),
             _id: entry?._id,
-            createdAt: isEdit ? entry?.createdAt : new Date(),
-            updateAt: isEdit ? entry?.updateAt ?? new Date() : "",
-            start: isEdit ? entry?.start ?? "" :"",
-            end:isEdit ? entry?.end ?? "":"",
+            createdAt: entry?.createdAt,
+            updateAt: entry?.updateAt ?? new Date(),
+            start: entry?.start ?? "",
+            end: entry?.end ?? "",
 
         },
         validationSchema: errorSchema,
-        onSubmit: isEdit ? values => {editTaskHandler(values)}
-    
-            : values => { addTaskHandler(values) }
+        onSubmit: values => { editTaskHandler(values) }
     });
 
 
@@ -103,7 +90,7 @@ function CreateTask() {
                         <div className="form-validation">
                             {formik.touched.summary && formik.errors.summary}
                         </div>
-                        <span className="form-row">
+                        {isEdit && <span className="form-row">
                             <label className="form-row-label" htmlFor="task-name">Summary</label>
                             <textarea className="form-row-input"
                                 id="task-summary"
@@ -112,7 +99,7 @@ function CreateTask() {
                                 onChange={formik.handleChange("summary")}
                                 onBlur={formik.handleBlur("summary")}
                                 placeholder='Describe the Task......'></textarea>
-                        </span>
+                        </span>}
 
                         {isEdit && <span className="form-row">
                             <label className="form-row-label" htmlFor="task-name">Status</label>
@@ -158,15 +145,15 @@ function CreateTask() {
 
                             </div>
                         </span>}
-                        {isEdit &&    <span className="form-row">
+                        {isEdit && <span className="form-row">
                             <label className="form-row-label" htmlFor="startDate">Start Date</label>
                             <DatePicker
-                               className="form-row-input"
+                                className="form-row-input"
                                 id="startDate"
                                 name='startDate'
                                 placeholder="start-date"
                                 selected={startDate}
-                              
+
                                 onChange={val => { formik.setFieldValue('start', val); setStartDate(val) }}
                                 minDate={new Date()}
                                 onBlur={formik.handleBlur("startDate")} />
@@ -176,10 +163,10 @@ function CreateTask() {
 
 
 
-                        {isEdit &&    <span className="form-row">
+                        {isEdit && <span className="form-row">
                             <label className="form-row-label" htmlFor="endDate">End Date</label>
                             <DatePicker
-                               className="form-row-input"
+                                className="form-row-input"
                                 name='endDate'
                                 selected={endDate}
                                 onChange={val => { formik.setFieldValue('end', val); setEndDate(val) }}
@@ -199,4 +186,4 @@ function CreateTask() {
     )
 }
 
-export default CreateTask
+export default EditTasks
