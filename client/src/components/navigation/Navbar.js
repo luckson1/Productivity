@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { useSelector } from 'react-redux';
 
 
 
@@ -11,7 +12,7 @@ import { UserProfile } from '../users/UserProfile';
 
 export const Navbar = () => {
     const { setActiveMenu, 
-        screenSize, setScreenSize, currentColor, showProfileModal, setShowProfileModal, user } = useStateContext();
+        screenSize, setScreenSize, currentColor, showProfileModal, setShowProfileModal} = useStateContext();
 
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth);
@@ -28,7 +29,7 @@ export const Navbar = () => {
         }
     }, [])
 
- 
+    const user = useSelector(state => state?.users?.userAuth?.user)
 
     const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
