@@ -14,8 +14,9 @@ export const UserProfile = () => {
   const [isEditPic, setIsEditPic]=useState(false)
   const [showProfileEditModal, setShowProfileEditModal ]=useState(false)
   const removeProfileEditModal=useCallback(()=> {
-    setShowProfileEditModal(false)
-  }, [ setShowProfileEditModal])
+    setShowProfileEditModal(false);
+    setShowProfileModal(false)
+  }, [ setShowProfileEditModal, setShowProfileModal])
   const dispatch = useDispatch()
 
 

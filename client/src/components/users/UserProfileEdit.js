@@ -4,7 +4,8 @@ import React, { useEffect } from 'react';
 import DisabledButton from '../DisabledButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { editProfileAction, editProfilePicAction, fetchUserProfileAction } from '../../redux/usersSlices';
+import { editProfileAction, editProfilePicAction} from '../../redux/usersSlices';
+import { MdOutlineCancel } from 'react-icons/md';
 
 
 
@@ -40,7 +41,7 @@ function UserProfileEdit({ user, isEditPic, removeProfileEditModal }) {
         validationSchema: errorSchema,
         onSubmit: isEditPic ? values => {
 
-            dispatch(editProfilePicAction(values)); ; removeProfileEditModal()
+            dispatch(editProfilePicAction(values)); ;removeProfileEditModal()
         } : values => {
 
             dispatch(editProfileAction(values)); removeProfileEditModal()
@@ -64,8 +65,11 @@ function UserProfileEdit({ user, isEditPic, removeProfileEditModal }) {
     return (
         <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
             <div className="float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-full sm:w-6/12">
-                <div className='onboarding mt-10  flex flex-col'>
-                    <h2 >EDIT YOUR PROFILE</h2>
+                <div className='onboarding mt-10  flex flex-col px-2'>
+                <div className="flex flex-row justify-between px-5">
+                <h2 >EDIT YOUR PROFILE</h2>
+                    <MdOutlineCancel size="30px" color='red' cursor={"pointer"} onClick={() => { removeProfileEditModal()}} />
+                </div>
                     <form onSubmit={formik.handleSubmit} encType={isEditPic ? "multipart/form-data " : undefined} className="flex flex-col">
 
 
