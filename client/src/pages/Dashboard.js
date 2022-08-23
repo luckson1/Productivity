@@ -1,15 +1,10 @@
 import React, { useEffect } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { BsCurrencyDollar } from 'react-icons/bs';
-
-
 import { FaTasks } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import { Button } from '../components/Button';
 import { useStateContext } from '../context/ContextProvider';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasksAction } from '../redux/taskSlices';
-import currencyFormatter from '../utils/currencyFormatter';
 import { MdBugReport } from 'react-icons/md';
 import { fetchbugsAction } from '../redux/bugsSlices';
 

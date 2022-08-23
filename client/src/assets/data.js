@@ -2,8 +2,6 @@ import React from 'react';
 import { AiOutlineDashboard, AiOutlineTeam } from 'react-icons/ai';
 import { BsKanban, } from 'react-icons/bs';
 import { MdBugReport } from 'react-icons/md';
-import {FaRegMoneyBillAlt}  from 'react-icons/fa';
-import {CgProfile } from 'react-icons/cg';
 import {FcCalendar }from 'react-icons/fc';
 
 
