@@ -71,7 +71,7 @@ const createProfileCtrl = expressAsyncHandler(async (req, res) => {
       const result = await cloudinary.uploader.upload(filePath)
 
       // get url of uploaded image
-      const image = result?.secure_url;
+      const image = result?.secure_url
   
     const {firstName, lastName} = req?.body
     
@@ -84,8 +84,42 @@ const createProfileCtrl = expressAsyncHandler(async (req, res) => {
             lastName:lastName,
             image: image
         },
-    }
+    };
  
+
+
+    try {
+        
+        const user = await User.findByIdAndUpdate(id, updateDocument);
+ 
+        res.json({user })
+    } catch (error) {
+   
+        res.json({ error })
+    }
+})
+
+//update user detals
+const upDateProfileCtrl = expressAsyncHandler(async (req, res) => {
+    const id = req?.user?.id
+  
+    
+  
+    const {firstName, lastName} = req?.body
+    
+     
+    
+    const updateDocument = {
+        $set: {
+             
+            firstName:firstName, 
+            lastName:lastName,
+           
+        },
+    };
+ 
+
+
     try {
         
         const user = await User.findByIdAndUpdate(id, updateDocument);
@@ -112,4 +146,4 @@ const fetchUserCtrl= expressAsyncHandler (async (req, res)=> {
 })
 
 
-module.exports= {registerUserCtrl,loginUserCtrl,createProfileCtrl, fetchUserCtrl};
+module.exports= {registerUserCtrl,loginUserCtrl,createProfileCtrl, fetchUserCtrl, upDateProfileCtrl};
