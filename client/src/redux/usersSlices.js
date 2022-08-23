@@ -141,8 +141,41 @@ export const createProfileAction = createAsyncThunk('user/create', async (payloa
 }
 );
 
-// update matches
+export const editProfilePicAction= createAsyncThunk('user/pic/edit', async(payload, {rejectWithValue, getState, dispatch})=> {
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
+    const config = {
+        headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userToken}`,
+        
+          
+        },
+    };
+    try {
+        const {data}= await axios.put( `${BaseURL}/users`, payload, config)
+        return data
+    } catch (error) {
+        return rejectWithValue(error?.response?.data); 
+    }
+})
 
+export const editProfileAction= createAsyncThunk('user/edit', async(payload, {rejectWithValue, getState, dispatch})=> {
+    const userToken = getState()?.users?.userAuth? getState()?.users?.userAuth?.token: getState()?.users?.userRegistered?.token 
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        
+          
+        },
+    };
+    try {
+        const {data}= await axios.put( `${BaseURL}/users/update/`, payload, config)
+        return data
+    } catch (error) {
+        return rejectWithValue(error?.response?.data); 
+    }
+})
 
 //slices
 const userLoginFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : undefined;
@@ -238,7 +271,7 @@ const usersSlices = createSlice({
             state.profileServerErr = action?.error?.msg;
         });
 
-        // slices to handle change of profile info
+        // slices to handle creation of profile info
            // handle pending state
            builder.addCase(createProfileAction.pending, (state, action) => {
             state.createProfileLoading = true;
@@ -265,7 +298,31 @@ const usersSlices = createSlice({
             state.createProfileAppErr = action?.payload?.msg;
             state.createProfileServerErr = action?.error?.msg;
         });
+ // slices to handle updateof profile info
+           // handle pending state
+           builder.addCase(editProfilePicAction.pending, (state, action) => {
+            state.editProfileLoading = true;
+            state.editProfileAppErr = undefined;
+            state.editProfileServerErr = undefined;
+        });
+    
 
+        //hande success state
+        builder.addCase(editProfilePicAction.fulfilled, (state, action) => {
+            state.editedProfile = action?.payload;
+            state.editProfileLoading = false;
+            state.editProfileAppErr = undefined;
+            state.editProfileServerErr = undefined;
+
+        });
+        //hande rejected state
+
+        builder.addCase(editProfilePicAction.rejected, (state, action) => {
+
+            state.editProfileLoading = false;
+            state.editProfileAppErr = action?.payload?.msg;
+            state.editProfileServerErr = action?.error?.msg;
+        });
        
 
     }})
