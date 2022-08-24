@@ -19,7 +19,7 @@ const errorSchema = Yup.object().shape({
 
 });
 function CreateTasks() {
-    const {   tasks, setTasks, currentColor } = useStateContext()
+    const {   tasks, setTasks } = useStateContext()
 
     const dispatch = useDispatch()
 
@@ -61,7 +61,7 @@ function CreateTasks() {
                         </span>
                         
                         <span className="form-row-buttons">
-                        <button type="submit" style={{backgroundColor: "blueviolet", paddingLeft: "5px", paddingRight: "5px", borderRadius: "5px"}}> Save </button>                   
+                        <button type="submit" className='py-2 px-5 bg-gradient-to-r from-indigo-300 to-white rounded-md'> Save </button>                   
 
                     </span>
                           {/* errors */}

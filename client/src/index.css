@@ -114,10 +114,10 @@ padding: 10px;
 .task {
   background-color: white;
   margin: 0.3rem 0rem 0.3rem 0rem;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 8px 10px;
- 
-  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.3);
+ font-size: 12px;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.7);
 
   /* padding: 0.5rem 0.2rem 0.5rem 2rem; */
 }
@@ -283,10 +283,12 @@ padding: 10px;
 }
 
 .form-row-label {
-  width: 80px;
+  width: 20%;
   font-size: 12px;
   padding: 0.2rem;
   padding-right: 0.5rem;
+  margin-right: 5px;
+
   /* border: 0.1rem solid black; */
   /* border-right: 0; */
   border-radius: 0.2rem 0rem 0rem 0.2rem;

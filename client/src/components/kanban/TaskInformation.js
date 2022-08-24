@@ -16,16 +16,15 @@ const  task=currentEntry
 
 
     return (
-        <div className="fixed-modal">
-        <div className="modal">
-            <div className="bg-gradient-to-r from-indigo-200 via-purple-100 to-pink-100 dark:text-gray-200 bg-[#484B52] p-6 rounded-2xl md:w-780 h-full overflow-scroll   ">
-                <div className="flex justify-between items-center gap-2">
-                    <p className="text-xl font-semibold text-gray-900 text-center">Task Information</p>
+        <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
+        <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
+                <div className="flex justify-between items-center gap-2 mx-7 mt-7">
+                    <p className="text-xl font-semibold text-gray-900 text-center ">Task Information</p>
 
                     <MdCancel className='' color='red' size="30px" onClick={() => {setShowInfoModal(false); setIsEdit(false);}} style={{cursor: "pointer"}}/>
                 </div>
 
-                <div className="mt-3 text-sm ">
+                <div className="mt-3 text-sm mx-7">
 
                     <div className="flex-col">
 
@@ -41,7 +40,7 @@ const  task=currentEntry
 
                     </div>
                 </div>
-                <div className="flex justify-between items-center mt-3 border-t-1 border-color">
+                <div className="flex justify-between items-center mt-3 border-t-1 border-color mx-7">
 
                     <Button
                         color="white"
@@ -66,7 +65,6 @@ const  task=currentEntry
 
                 </div>
             </div>
-        </div>
         </div>
     )
 }

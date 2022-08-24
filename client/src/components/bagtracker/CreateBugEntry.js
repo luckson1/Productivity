@@ -32,7 +32,7 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-    const { setShowModal, isEdit, isExpense, currentEntry, bugs, setBugs, setIsEdit} = useStateContext()
+    const { setShowModal, isEdit,  currentEntry, bugs, setBugs, setIsEdit} = useStateContext()
     const entry = currentEntry
 
     const dispatch = useDispatch()
@@ -87,7 +87,7 @@ function CreateBugEntry() {
 
     return (
         <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
-        <div className="float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-full sm:w-6/12 ">
+        <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-50  dark:bg-[#484B52] w-full sm:w-6/12 ">
             <div className="px-7 pt-5" >
             <MdCancel className='close-icon' color='red' onClick={() => {
                 setIsEdit(false);
@@ -97,7 +97,7 @@ function CreateBugEntry() {
 
             }} style={{cursor: "pointer"}}/>            
             <form onSubmit={formik.handleSubmit}>                
-                    <strong>{isEdit? "Edit Bug Info" :"Create Bug"}</strong>
+                    <strong>{isEdit? "Edit Issue Info" :"Create Issue"}</strong>
                     {/* errors */}
                     <div className="form-validation">
                         {formik.touched.title && formik.errors.title}
@@ -110,7 +110,7 @@ function CreateBugEntry() {
                             value={formik.values.title}
                             onChange={formik.handleChange("title")}
                             onBlur={formik.handleBlur("title")}
-                            placeholder='Title of the bug' />
+                            placeholder='Title of the Issue' />
 
                     </span>
                     {/* errors */}
@@ -127,7 +127,7 @@ function CreateBugEntry() {
                             value={formik.values.description}
                             onChange={formik.handleChange("description")}
                             onBlur={formik.handleBlur("description")}
-                            placeholder='Describe the Bug in a few words'
+                            placeholder='Describe the Issue in a few words'
                         ></textarea>
                     </span>
                     {/* errors */}
@@ -201,7 +201,7 @@ function CreateBugEntry() {
                         <select
                             className="form-row-input"
                             id="assigned"
-                            name="ç"
+                            name="assigned"
                             placeholder=''
                             onBlur={formik.handleBlur("assigned")}
                             onChange={formik.handleChange("assigned")}
@@ -209,7 +209,7 @@ function CreateBugEntry() {
 
                         >
 
-                            <option value="">Assign a developer</option>
+                            <option value="">Assign a team mate</option>
                             <option     onBlur={formik.handleBlur("assigned")}  value="cat">Cat</option>
                             <option     onBlur={formik.handleBlur("assigned")}  value="hamster">Hamster</option>
                             <option     onBlur={formik.handleBlur("assigned")}  value="parrot">Parrot</option>
@@ -218,8 +218,8 @@ function CreateBugEntry() {
                         </select>
                     </span>
                     <span className="form-row-buttons">
-                        <button id="save-button" type="submit" style={{ background: isExpense ? "red" : "linear-gradient(270deg, green, rgb(163, 245, 163))" }}>Save</button>
-
+                    <label className="form-row-label" htmlFor="button"></label>
+                    <button type="submit" className='form-row-input bg-gradient-to-r from-blue-300 to-white rounded-lg'>Save Issue</button>
                     </span>
                 
             </form>

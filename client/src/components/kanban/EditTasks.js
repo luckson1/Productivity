@@ -47,7 +47,7 @@ function EditTasks() {
 
             title: entry?.title,
             summary: entry?.summary,
-            status: entry?.status ,
+            status: entry?.status,
             taskId: entry?.taskId ?? uuidv4(),
             _id: entry?._id,
             createdAt: entry?.createdAt,
@@ -62,15 +62,18 @@ function EditTasks() {
 
 
     return (
-        <div className="fixed-modal">
-            <div className="modal  bg-slate-200 dark:bg-[#484B52]" >
-                <MdCancel className='close-icon' color='red' onClick={() => {
-                    setIsEdit(false);
-                    setShowModal(false)
-                }} />
-                <form onSubmit={formik.handleSubmit} className=" dark:bg-[#484B52]">
-                    <div className="create-new-task-block" id="create-new-task-block">
-                        <strong>Task</strong>
+        <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
+            <div className="float-right h-screen bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-50  dark:bg-[#484B52] w-full sm:w-6/12 ">
+                <div className="px-7 pt-5" >
+                    <MdCancel className='close-icon' color='red' onClick={() => {
+                        setIsEdit(false);
+                        setShowModal(false);
+
+
+
+                    }} style={{ cursor: "pointer" }} />
+                    <form onSubmit={formik.handleSubmit} className=" dark:bg-[#484B52]">
+                        <strong>Edit Task</strong>
                         {/* errors */}
                         <div className="form-validation">
                             {formik.touched.title && formik.errors.title}
@@ -148,7 +151,7 @@ function EditTasks() {
                         {isEdit && <span className="form-row">
                             <label className="form-row-label" htmlFor="startDate">Start Date</label>
                             <DatePicker
-                                className="form-row-input"
+                                className="w-11/12 rounded-lg m-auto h-10"
                                 id="startDate"
                                 name='startDate'
                                 placeholder="start-date"
@@ -166,7 +169,7 @@ function EditTasks() {
                         {isEdit && <span className="form-row">
                             <label className="form-row-label" htmlFor="endDate">End Date</label>
                             <DatePicker
-                                className="form-row-input"
+                                className="w-11/12 rounded-lg m-auto h-10"
                                 name='endDate'
                                 selected={endDate}
                                 onChange={val => { formik.setFieldValue('end', val); setEndDate(val) }}
@@ -176,11 +179,12 @@ function EditTasks() {
                         </span>}
 
                         <span className="form-row-buttons">
-                            <button id="save-button" type="submit">Save</button>
+                            <label className="form-row-label" htmlFor="button"></label>
+                            <button type="submit" className='form-row-input bg-gradient-to-r from-blue-300 to-white rounded-lg'>Save Task</button>
 
                         </span>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     )
