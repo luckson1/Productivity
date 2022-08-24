@@ -89,15 +89,17 @@ function CreateBugEntry() {
         <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
         <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-50  dark:bg-[#484B52] w-full sm:w-6/12 ">
             <div className="px-7 pt-5" >
-            <MdCancel className='close-icon' color='red' onClick={() => {
-                setIsEdit(false);
-                setShowModal(false);
-                
-               
+            <div className="flex flex-row justify-between my-5">
+                        <p className="text-xl font-semibold text-gray-900 text-center ">{isEdit? "Edit Issue Info" :"Create Issue"}</p>
+                        <MdCancel size="30px" color='red' onClick={() => {
+                            setIsEdit(false);
+                            setShowModal(false);
 
-            }} style={{cursor: "pointer"}}/>            
-            <form onSubmit={formik.handleSubmit}>                
-                    <strong>{isEdit? "Edit Issue Info" :"Create Issue"}</strong>
+
+
+                        }} style={{ cursor: "pointer" }} />
+                    </div>         
+            <form onSubmit={formik.handleSubmit}>              
                     {/* errors */}
                     <div className="form-validation">
                         {formik.touched.title && formik.errors.title}

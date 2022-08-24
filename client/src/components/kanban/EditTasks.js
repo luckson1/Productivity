@@ -63,17 +63,20 @@ function EditTasks() {
 
     return (
         <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
-            <div className="float-right h-screen bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-50  dark:bg-[#484B52] w-full sm:w-6/12 ">
+            <div className="float-right h-screen bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-100  dark:bg-[#484B52] w-full sm:w-6/12 ">
                 <div className="px-7 pt-5" >
-                    <MdCancel className='close-icon' color='red' onClick={() => {
-                        setIsEdit(false);
-                        setShowModal(false);
+                    <div className="flex flex-row justify-between my-5">
+                        <p className="text-xl font-semibold text-gray-900 text-center ">Edit Task</p>
+                        <MdCancel size="30px" color='red' onClick={() => {
+                            setIsEdit(false);
+                            setShowModal(false);
 
 
 
-                    }} style={{ cursor: "pointer" }} />
-                    <form onSubmit={formik.handleSubmit} className=" dark:bg-[#484B52]">
-                        <strong>Edit Task</strong>
+                        }} style={{ cursor: "pointer" }} />
+                    </div>
+                    <form onSubmit={formik.handleSubmit} className=" ">
+
                         {/* errors */}
                         <div className="form-validation">
                             {formik.touched.title && formik.errors.title}
