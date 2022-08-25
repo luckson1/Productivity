@@ -2,18 +2,19 @@
 const expressAsyncHandler = require('express-async-handler');
 const generateToken = require('../middlewear/generateTokens');
 const User = require('../models/Users');
-const cloudinary=require('../utils/cloudinary')
-const {v4: uuidv4} = require('uuid')
+const cloudinary = require('../utils/cloudinary')
+const { v4: uuidv4 } = require('uuid');
+var nodemailer = require('nodemailer');
 
 
 // registering a user
 
 const registerUserCtrl = expressAsyncHandler(async (req, res) => {
-    const { email, firstName, lastName, password }= req?.body
+    const { email, password, } = req?.body
     const userId = uuidv4()
 
-// generate token
-const token=generateToken(userId)
+    // generate token
+    const token = generateToken(userId)
 
     //find if a user exists
 
@@ -27,10 +28,10 @@ const token=generateToken(userId)
     try {
 
         // if new, create one
-        const user = await User.create({ email,  password, userId })
-        
-        const token=generateToken(userId)
-        res.json({ user, token})
+        const user = await User.create({ email, password, userId })
+
+        const token = generateToken(userId)
+        res.json({ user, token })
 
 
     } catch (error) {
@@ -46,7 +47,7 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
     const { email, password } = req.body;
     //check if user exists
     const user = await User.findOne({ email });
-  
+
     //Check if password is match
     if (user && (await user?.isPasswordMatch(password))) {
         res.json({
@@ -65,36 +66,36 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
 
 const createProfileCtrl = expressAsyncHandler(async (req, res) => {
     const id = req?.user?.id
-  
-    const filePath = req?.file?.path
-      // upload file to cloudinary
-      const result = await cloudinary.uploader.upload(filePath)
 
-      // get url of uploaded image
-      const image = result?.secure_url
-  
-    const {firstName, lastName} = req?.body
-    
-     
-    
+    const filePath = req?.file?.path
+    // upload file to cloudinary
+    const result = await cloudinary.uploader.upload(filePath)
+
+    // get url of uploaded image
+    const image = result?.secure_url
+
+    const { firstName, lastName } = req?.body
+
+
+
     const updateDocument = {
         $set: {
-             
-            firstName:firstName, 
-            lastName:lastName,
+
+            firstName: firstName,
+            lastName: lastName,
             image: image
         },
     };
- 
+
 
 
     try {
-        
+
         const user = await User.findByIdAndUpdate(id, updateDocument);
- 
-        res.json({user })
+
+        res.json({ user })
     } catch (error) {
-   
+
         res.json({ error })
     }
 })
@@ -102,48 +103,102 @@ const createProfileCtrl = expressAsyncHandler(async (req, res) => {
 //update user detals
 const upDateProfileCtrl = expressAsyncHandler(async (req, res) => {
     const id = req?.user?.id
-  
-    
-  
-    const {firstName, lastName} = req?.body
-    
-     
-    
+
+
+
+    const { firstName, lastName } = req?.body
+
+
+
     const updateDocument = {
         $set: {
-             
-            firstName:firstName, 
-            lastName:lastName,
-           
+
+            firstName: firstName,
+            lastName: lastName,
+
         },
     };
- 
+
 
 
     try {
-        
+
         const user = await User.findByIdAndUpdate(id, updateDocument);
- 
-        res.json({user })
+
+        res.json({ user })
     } catch (error) {
-   
+
         res.json({ error })
     }
 })
 
 // fetch one user
 
-const fetchUserCtrl= expressAsyncHandler (async (req, res)=> {
+const fetchUserCtrl = expressAsyncHandler(async (req, res) => {
 
-    const id=req?.user?.id;
+    const id = req?.user?.id;
 
     try {
-        const user=await User.findById(id)
-        res.json({user})
+        const user = await User.findById(id)
+        res.json({ user })
     } catch (error) {
         res.json({ error })
     }
-})
+});
+
+// create a new account by admin
+const createUserctrl = expressAsyncHandler(async (req, res) => {
+    // Make sure this account doesn't already exist
+    //find if a user exists
+    const id = req?.user?.userId
+    const { email, name, userId, role, } = req.body;
+    const password = uuidv4() //generate a random password
+    const invitedBy = id
+    let domain = "https://techivity.netlify.app"
+  
+    // Create the transporter with the required configuration for Outlook
+// change the user and pass !
+var transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com", // hostname
+    secureConnection: false, // TLS requires secureConnection to be false
+    port: 587, // port for secure SMTP
+    tls: {
+       ciphers:'SSLv3'
+    },
+    auth: {
+        user: 'gathondudev@outlook.com',
+        pass: process.env.MAIL_PASSWORD,
+    }
+});
+
+// setup e-mail data, even with unicode symbols
+var mailOptions = {
+    from: '"Techivity " <gathondudev@outlook.com>', // sender address (who sends)
+    to: email, // list of receivers (who receives)
+    subject: 'New Account Created', // Subject line
+    text: 'Hello World', // plaintext body
+    html: `<p>Hello ${name}<p><br><p>A new account has been created for you on ${domain}. Please use <br>username: <strong>${email} <strong> and password: <strong>${password} <strong><br>  to login.</p> 
+    <br><p>If you did not request this, please ignore this email.</p>` // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        return console.log(error);
+    }
+
+    console.log('Message sent: ' + info.response);
+});
+    
+    try {
+        //create and save user
+        const newUser = await User.create({ invitedBy, email, password, userId, role, status: "Pending" });
+
+    } catch (error) {
+        res.json({ error })
+    }
+});
 
 
-module.exports= {registerUserCtrl,loginUserCtrl,createProfileCtrl, fetchUserCtrl, upDateProfileCtrl};
+
+module.exports = { registerUserCtrl, loginUserCtrl, createProfileCtrl, fetchUserCtrl, upDateProfileCtrl, createUserctrl }

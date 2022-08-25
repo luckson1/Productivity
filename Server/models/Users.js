@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
+const { isBooleanObject } = require('util/types');
 
 
 const userSchema = new mongoose.Schema(
@@ -13,7 +14,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-      
+
         firstName: {
             type: String,
             required: false,
@@ -38,7 +39,18 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true
         },
-        
+        invitedBy: {
+            type: String,
+            required: false,
+        },
+        role: {
+            type: String,
+            required: false,
+        },
+        status: {
+            type: String,
+            required: false,
+        },
 
 
         passwordChangeAt: Date,
