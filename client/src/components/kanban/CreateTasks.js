@@ -51,7 +51,7 @@ function CreateTasks() {
                     
                        
                         <span className="form-row">                            
-                            <input className="form-row-input px-3"
+                            <input className="form-row-input px-3 shadow-lg"
                                 type="text"
                                 id="task-name"
                                 value={formik.values.title}
@@ -61,7 +61,7 @@ function CreateTasks() {
                         </span>
                         
                         <span className="form-row-buttons">
-                        <button type="submit" className='py-2 px-5 bg-gradient-to-r from-indigo-400 to-blue-100 rounded-md '> Add </button>                   
+                        <button type="submit" className='py-2 px-5 bg-white text-blue-500 rounded-md shadow-2xl'> Add </button>                   
 
                     </span>
                           {/* errors */}
