@@ -48,7 +48,7 @@ export default function BugEntryComponent() {
 
     return (
 
-        <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap mt-7">
+        <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap mt-24">
             <div className="kanban-heading">
                 <Button bgColor={currentColor} borderRadius="10px" text="Add New Bug" onClick={() => { setShowModal(true); window.scrollTo(0, 0) }} />
             </div>
