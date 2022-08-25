@@ -35,26 +35,26 @@ export const links = [
   {
 
     links: [
-      {
+      {id:1,
         name: 'dashboard',
         icon: <AiOutlineDashboard size="24px"/>,
       },
 
-      {
+      {id:2,
         name: 'issue-tracker',
         icon: <MdBugReport size="24px"/>,
       },
-      {
+      {id:3,
         name: 'tasks',
         icon: <BsKanban size="20px"/>,
       },
      
-      {
+      {id:4,
         name: 'calender',
         icon: <FcCalendar size="24px"/>,
       },
     
-      {
+      {id:5,
         name: 'team',
         icon: <AiOutlineTeam size="24px"/>,
       },
