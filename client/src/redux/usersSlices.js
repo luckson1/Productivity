@@ -38,6 +38,36 @@ export const registerUserAction = createAsyncThunk('user/register', async (paylo
 
 });
 
+
+// action to handle creation/invitation of a user by an admin
+export const createUserAction = createAsyncThunk('user/invite', async (payload, { rejectWithValue, getState, dispatch }) => {
+
+    const userToken = getState()?.users?.userAuth?.token;
+    //configure headers
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+        },
+    };
+    try {
+        //http call
+        const { data } = await axios.post(
+            `${BaseURL}/users/create`,
+            payload,
+            config);
+        return data;
+
+    } catch (error) {
+        if (!error?.response) {
+            throw error;
+        }
+        return rejectWithValue(error?.response?.data);
+    }
+
+
+});
+
 //login action
 
 export const loginUserAction = createAsyncThunk('user/login', async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -114,7 +144,7 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
 );
 
 //create profile state
-export const createProfileAction = createAsyncThunk('user/create', async (payload, { rejectWithValue, getState, dispatch }) => {
+export const createProfileAction = createAsyncThunk('user/profile/create', async (payload, { rejectWithValue, getState, dispatch }) => {
     const userToken = getState()?.users?.userAuth ? getState()?.users?.userAuth?.token : getState()?.users?.userRegistered?.token
 
     const config = {
@@ -221,7 +251,31 @@ const usersSlices = createSlice({
             state.userAppErr = action?.payload?.msg;
             state.userServerErr = action?.error?.msg;
         });
+// create user by admin
 
+        // handle pending state
+        builder.addCase(createUserAction.pending, (state, action) => {
+            state.userLoading = true;
+            state.userAppErr = undefined;
+            state.userServerErr = undefined;
+        });
+   
+        //hande success state
+        builder.addCase(createUserAction.fulfilled, (state, action) => {
+            state.userCreateed = action?.payload;
+            state.userLoading = false;
+            state.userAppErr = undefined;
+            state.userServerErr = undefined;
+          
+        });
+        //handle rejected state
+
+        builder.addCase(createUserAction.rejected, (state, action) => {
+
+            state.userLoading = false;
+            state.userAppErr = action?.payload?.msg;
+            state.userServerErr = action?.error?.msg;
+        });
 
         // login
         // handle pending state
