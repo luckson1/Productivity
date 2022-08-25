@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ExpenseTracker from './pages/ExpenseTracker';
 import Home from './pages/Home';
 import Kanban from './pages/Kanban';
 import './app.css'
@@ -13,6 +12,7 @@ import ProtectedRoute from './components/users/protectedRoute';
 import Dashboard from './pages/Dashboard';
 import BugTracker from './pages/BugTracker';
 import DnDCalendar from './pages/DnDCalendar';
+import Team from './pages/Team';
 function App() {
     const { activeMenu, setThemeSettings, currentColor, themeSettings, showNavBar ,currentMode} = useStateContext();
     return (
@@ -67,9 +67,9 @@ function App() {
                                 <ProtectedRoute>
                                     <BugTracker />
                                 </ProtectedRoute>} />
-                            <Route exact path="/budgeting" element={
+                            <Route exact path="/team" element={
                                 <ProtectedRoute>
-                                    <ExpenseTracker />
+                                    <Team />
                                 </ProtectedRoute>
                             } />
                               <Route exact path="/calender" element={
