@@ -41,9 +41,9 @@ export const SideBar = () => {
                 </div>
 
 
-                <div className='mt-20  min-h-full '>
+                <div className='mt-10  min-h-full '>
                     {links?.map((item) => (
-                        <div key={item?.title} className="flex flex-col  min-h-full justify-around ">
+                        <div key={item?.title} className="flex flex-col  min-h-full  ">
 
                             {item?.links?.map((link) => (
                                 <NavLink
@@ -54,9 +54,9 @@ export const SideBar = () => {
                                     className={({ isActive }) => isActive ? activeLink : normalLink 
                                     } >
 
-                                  <p className="my-1">{link?.icon}</p>  
+                                  <p className="">{link?.icon}</p>  
                                     <span className='capitalize'>
-                                      <p className=" text-gray-900 my-1 dark:text-slate-50"> {link?.name}</p> 
+                                      <p className=" text-gray-900  dark:text-slate-50"> {link?.name}</p> 
                                     </span>
 
 
