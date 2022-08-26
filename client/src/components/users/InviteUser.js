@@ -49,7 +49,7 @@ function InviteUser({ ...props }) {
 
 
     return (
-        <div className="modal bg-slate-200 h-96 w-96" >
+        <div className="modal bg-white h-96 w-96 shadow-2xl" >
             <div className="flex flex-row justify-between mx-5 mt-5">
                 <strong>Create new Member</strong>
             <MdCancel size="30px" color='red' onClick={() => {
@@ -65,7 +65,7 @@ function InviteUser({ ...props }) {
                     </div>
                     <span className="form-row">
                         <label className="form-row-label" htmlFor="name">Name</label>
-                        <input className="form-row-input"
+                        <input className="form-row-input border-2 border-indigo-300"
                             type="text"
                             id="name"
                             value={formik.values.name}
@@ -80,7 +80,7 @@ function InviteUser({ ...props }) {
                     </div>
                     <span className="form-row">
                         <label className="form-row-label" htmlFor="email">Email</label>
-                        <input className="form-row-input"
+                            <input className="form-row-input border-2 border-indigo-300"
                             type="text"
                             id="email"
                             value={formik.values.email}
@@ -94,7 +94,7 @@ function InviteUser({ ...props }) {
                     </div>
                     <span className="form-row">
                         <label className="form-row-label" htmlFor="Role">Role</label>
-                        <input className="form-row-input"
+                            <input className="form-row-input border-2 border-indigo-300"
                             type="text"
                             id="role"
                             value={formik.values.role}
