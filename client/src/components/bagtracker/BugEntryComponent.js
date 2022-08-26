@@ -54,7 +54,7 @@ export default function BugEntryComponent() {
             </div>
 
             <div className="kanban-board ">
-                <div className="kanban-block bg-indigo-100">
+                <div className="kanban-block bg-indigo-100 shadow-md">
                     <strong>Open</strong>
 
                     {bugAppErr || bugServerErr ? (<div className="form-validation">An Error Has Occured</div>)

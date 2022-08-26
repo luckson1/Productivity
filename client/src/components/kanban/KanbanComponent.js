@@ -52,7 +52,7 @@ useEffect(() => {
            
             <div className="kanban-board ">         
                              
-                <div className="kanban-block bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100">
+                <div className="kanban-block bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 shadow-md">
               
                                
                     <strong>To Do</strong>
