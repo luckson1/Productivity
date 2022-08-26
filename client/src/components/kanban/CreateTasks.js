@@ -6,6 +6,7 @@ import { createTaskAction } from '../../redux/taskSlices';
 import { useStateContext } from '../../context/ContextProvider';
 import { v4 as uuidv4 } from "uuid";
 import "react-datepicker/dist/react-datepicker.css";
+import { SiAddthis } from 'react-icons/si';
 const errorSchema = Yup.object().shape({
 
     title: Yup
@@ -58,9 +59,12 @@ function CreateTasks() {
                     onChange={formik.handleChange("title")}
                     onBlur={formik.handleBlur("title")}
                     placeholder='Tittle of the Task'
-                    style={{width: "80%"}} />
+                    style={{width: "90%"}} />
 
-                <button type="submit" className='py-2 px-1 bg-white text-blue-500 rounded-md shadow-2xl ' style={{width: "20%"}} > Add </button>
+                <button type="submit" className=' h-10 w-10 bg-black text-white rounded-md shadow-2xl '  >
+                <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-sky-600 opacity-75"></span>
+                     <SiAddthis size="100% "/> 
+                     </button>
 
             </div>
 
