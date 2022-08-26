@@ -51,8 +51,8 @@ function CreateTasks() {
         <form onSubmit={formik.handleSubmit} className=" dark:bg-[#484B52] flex flex-row px-0 ">
 
 
-            <div className="flex flex-row justify-between gap-1" style={{width: "100%"}}>
-                <input className=" shadow-2xl rounded-md px-1"
+            <div className="flex flex-row justify-between gap-1 border-1 border-slate-50" style={{width: "100%"}}>
+                <input className=" shadow-2xl rounded-md px-1 text-xs  animate-pulse"
                     type="text"
                     id="name"
                     value={formik.values.title}
