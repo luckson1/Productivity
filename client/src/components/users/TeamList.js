@@ -8,9 +8,10 @@ import { useStateContext } from '../../context/ContextProvider';
 
 
 
-function TeamList({ members, loading, errors,}) {
-  const { setIsEdit, setCurrentEntry,  setShowModal } = useStateContext();
-
+function TeamList({ teamId, loading, errors}) {
+  const { setIsEdit, setCurrentEntry,  setShowModal, teams} = useStateContext();
+const members=teams?.filter(team=>team?._id===teamId)
+console.log(members)
   return (
     <div className="table">
 
