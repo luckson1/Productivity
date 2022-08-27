@@ -162,7 +162,7 @@ const fetchUserCtrl = expressAsyncHandler(async (req, res) => {
 
 // create a new account by admin
 const createUserctrl = expressAsyncHandler(async (req, res) => {
-    const { email, name, userId, role } = req.body;
+    const { email, name, userId, role,team } = req.body;
     let domain = "https://techivity.netlify.app"
     const id = req?.user?.userId
 
@@ -181,11 +181,14 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
     }
     if (userExists && !alreadyTeamMember) {
         // adding user to the team(by adding the invite sender userId to the list of invitedBy array), if user exists but not added to the request-sender's team
-        const updateDocument = {
+        const updateDocument1 = {
             $push: { invitedBy: id }
         }
+        const updateDocument2 = {
+            $push: { teams: team }
+        }
         try {
-            const user = await User.findByIdAndUpdate(userExists?._id, updateDocument)
+            const user = await User.findByIdAndUpdate(userExists?._id, updateDocument1, updateDocument2)
             // setup e-mail data
             var mailOptions = {
                 from: '"Techivity " <gathondudev@outlook.com>', // sender address (who sends)
@@ -217,7 +220,10 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
 
             const password = uuidv4() //generate a random password
             const invitedBy = id
-            const newUser = await User.create({ invitedBy, email, password, userId, role, status: "Pending" });
+            const teams=[team]
+            const newUser = await User.create({ invitedBy, email, password, userId, role, status: "Pending", teams });
+
+          
             // setup e-mail data
             var mailOptions = {
                 from: '"Techivity " <gathondudev@outlook.com>', // sender address (who sends)
@@ -243,15 +249,23 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
         }
 
     }
+});
 
+//find other users invited by the requesting sender
+const fetchTeamMembersCtrl= expressAsyncHandler(async (req, res) => {
 
+    const invitesenderId= req?.user?.userId;
 
+      try {
+        const teamMembers= await User.aggregate(
+            [ { $match : { invitedBy :invitesenderId } } ]
+        );
 
-
-
-
+        res.json({teamMembers})
+    } catch (error) {
+        res.json({error})
+    }
 });
 
 
-
-module.exports = { registerUserCtrl, loginUserCtrl, createProfileCtrl, fetchUserCtrl, upDateProfileCtrl, createUserctrl }
+module.exports = { fetchTeamMembersCtrl, registerUserCtrl, loginUserCtrl, createProfileCtrl, fetchUserCtrl, upDateProfileCtrl, createUserctrl,}
