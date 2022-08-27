@@ -1,13 +1,12 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { fetchUserProfileAction } from "../redux/usersSlices";
+import { createContext, useContext, useState } from "react";
+
 
 const StateContext = createContext();
 
 
 export const ContextProvider = ({ children }) => {
-    const user= useSelector((state)=> state?.users?.userAuth?.user)
-    const [team, setTeam]=useState([user])
+ 
+    const [teams, setTeams]=useState([])
     const [activeMenu, setActiveMenu] = useState(true);
     const [screenSize, setScreenSize] = useState(undefined)
     const [currentColor, setCurrentColor] = useState(localStorage.getItem('ThemeColor') ?? "#03C9D7")
@@ -32,6 +31,7 @@ export const ContextProvider = ({ children }) => {
     const [expenses, setExpenses] = useState([])
     const [bugs, setBugs] = useState([])
     const [showInfoModal, setShowInfoModal ]=useState(false)
+    const [ showCreateTeamModal, setShowCreateTeamModal]=useState(false)
 
 
 
@@ -97,8 +97,10 @@ export const ContextProvider = ({ children }) => {
                 setBugs,
                 showInfoModal, 
                 setShowInfoModal,
-                team, 
-                setTeam
+                teams, 
+                setTeams,
+                showCreateTeamModal, 
+                setShowCreateTeamModal
                
 
 
