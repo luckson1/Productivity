@@ -5,8 +5,7 @@ const dbConnect = require('./dbConnect');
 const { notFound, errorHandler } = require('./middlewear/errors');
 const dotenv=require ('dotenv');
 const { taskRoutes } = require('./routes/Tasks');
-const { shoppingItemRoutes } = require('./routes/shoppingItem');
-const { application } = require('express');
+const { teamRoutes } = require('./routes/Teams');
 const { userRoutes } = require('./routes/Users');
 const { bugRoutes } = require('./routes/Bugs');
 
@@ -34,8 +33,8 @@ app.use(express.urlencoded({extended: false}))
 //tasks routes
 app.use('/api/tasks', taskRoutes)
 
-// shoppingItems route
-app.use('/api/shoppingItems', shoppingItemRoutes)
+// teamsroute
+app.use('/api/teams', teamRoutes)
 
 app.use("/api/users", userRoutes)
 
