@@ -3,13 +3,12 @@ import { useDispatch } from "react-redux"
 import { useStateContext } from '../context/ContextProvider';
 import { deleteExpenseAction } from '../redux/expenseSlices';
 import { deleteIncomeAction } from '../redux/IncomeSlices';
-import { deleteShoppingItemAction, fetchAllShoppingsItem } from '../redux/shoppingItemSlices';
 import { deleteTaskAction } from '../redux/taskSlices';
 function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
 
     // dispatch action to delete task
     const dispatch = useDispatch()
-    const { setShowDeleteModal, isExpense, tasks,setTasks, setShoppingItems, shoppingItems,incomes, setIncomes,  expenses, setExpenses } = useStateContext();
+    const { setShowDeleteModal, isExpense, tasks,setTasks, incomes, setIncomes,  expenses, setExpenses } = useStateContext();
 
     const deleteTaskHandler= ()=>{
         dispatch(deleteTaskAction(task))
@@ -18,13 +17,7 @@ function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
         setShowDeleteModal(false)
     }
 
-    const deleteShoppingItemHandler = () => {
-        dispatch(deleteShoppingItemAction(shoppingItem));
-        dispatch(fetchAllShoppingsItem());
-        const newShoppingList=shoppingItems.filter(listItem=> listItem._id !==shoppingItem?._id);
-        setShoppingItems( newShoppingList);
-        setShowDeleteModal(false)
-    }
+   
 
     const deleteIncomeHandler = () => {
         dispatch(deleteIncomeAction(entry));
@@ -47,8 +40,7 @@ function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
                     <span className="close" onClick={() => setShowDeleteModal(false)}>×</span>
                     <p>Are you sure you want to delete this {item}</p>
                     <button className="del" onClick={
-                        task !== undefined ? () =>deleteTaskHandler() 
-                            : shoppingItem !== undefined ? () => deleteShoppingItemHandler()
+                        task !== undefined ? () =>deleteTaskHandler()
                                 : entry !== undefined && isExpense ? () => deleteExpenseHandler()
                                     : entry !== undefined && !isExpense ? () => deleteIncomeHandler()
                                         : console.log("error")
