@@ -142,6 +142,32 @@ export const fetchUserProfileAction = createAsyncThunk('user/profile', async (pa
     }
 }
 );
+// get data of a team
+
+// export const fetchTeamMembersAction = createAsyncThunk('user/team', async (payload, { rejectWithValue, getState, dispatch }) => {
+//     const userToken = getState()?.users?.userAuth?.token;
+//     const config = {
+//         headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${userToken}`,
+//         },
+//     };
+
+//     try {
+//         //http call
+//         const { data } = await axios.get(
+//             `${BaseURL}/users/team`, config);
+
+//         return data;
+
+//     } catch (error) {
+//         if (!error?.response) {
+//             throw error;
+//         }
+//         return rejectWithValue(error?.response?.data);
+//     }
+// }
+// );
 
 //create profile state
 export const createProfileAction = createAsyncThunk('user/profile/create', async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -333,6 +359,30 @@ const usersSlices = createSlice({
             state.profileAppErr = action?.payload?.msg;
             state.profileServerErr = action?.error?.msg;
         });
+
+
+        // // team action
+        // // handle pending state
+        // builder.addCase(fetchTeamMembersAction.pending, (state, action) => {
+        //     state.teamProfileLoading = true;
+        //     state.teamProfileAppErr = undefined;
+        //     state.teamProfileServerErr = undefined;
+        // });
+
+        // //hande success state
+        // builder.addCase(fetchTeamMembersAction.fulfilled, (state, action) => {
+        //     state.teamProfile = action?.payload;
+        //     state.teamProfileLoading = false;
+          
+        // });
+        // //hande rejected state
+
+        // builder.addCase(fetchTeamMembersAction.rejected, (state, action) => {
+
+        //     state.teamProfileLoading = false;
+        //     state.teamProfileAppErr = action?.payload?.msg;
+        //     state.teamProfileServerErr = action?.error?.msg;
+        // });
 
         // slices to handle creation of profile info
         // handle pending state
