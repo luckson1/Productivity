@@ -38,7 +38,7 @@ const dispatch=useDispatch()
               </button>
             </div>
             <div className={`w-full flex-grow md:flex md:items-center md:w-auto ${isOpenMenu ? "" : "hidden"} mt-2 md:mt-0 bg-white  text-black p-4 md:p-0 z-10" `}>
-              <ul class="list-reset md:flex  flex-1 items-center ">
+              <ul className="list-reset md:flex  flex-1 items-center ">
                 <li className=" mr-96 md:mr-3  ">
                   <Link onClick={() => setIsOpenMenu(!isOpenMenu)}
                     className="inline-block  py-2 px-4 text-black font-bold no-underline " to="/">Home</Link>
