@@ -7,60 +7,35 @@ import InviteUser from '../components/users/InviteUser'
 import TeamList from '../components/users/TeamList'
 import { useStateContext } from '../context/ContextProvider'
 import { fetchAllTeamsAction } from '../redux/TeamSlices'
+import { fetchTeamMembersAction } from '../redux/usersSlices'
 
 function Team() {
-  const { currentColor, showModal, setShowModal, teams, setTeams, setShowCreateTeamModal, showCreateTeamModal, setCurrentEntry, currentEntry} = useStateContext();
+  const { currentColor, showModal, setShowModal, setTeam, showCreateTeamModal} = useStateContext();
  
   const dispatch = useDispatch()
   useEffect(()=> {
-  dispatch(fetchAllTeamsAction())
+  dispatch(fetchTeamMembersAction())
   }, [])
 
-const fetchedTeams= useSelector(state=> state?.team?.teamsFetched?.teams)
+const teamMembers= useSelector(state=> state?.users?.teamProfile?.teamMembers)
 useEffect(()=> {
-  if (typeof fetchedTeams !== "undefined") setTeams(fetchedTeams)
-})
-const[selectedTeamId, setSelectedTeamId]=useState()
-console.log(selectedTeamId)
+  if (typeof teamMembers !== "undefined") setTeam(teamMembers)
+}, [teamMembers])
+
+
   return (
     <div>
-      <div className="flex mt-16 mb-3">
-        <div className='flex flex-row gap-2 w-11/12 justify-center'>
-          <span className="form-row">
-          
-            <select
-              className="rounded-md px-1 py-2 w-11/12"
-              id="assigned"
-              name="assigned"
-              placeholder=''
-            onChange={(e)=> setSelectedTeamId(e.target.value)}
-            value={selectedTeamId}
-
-            >
-              <option value="">{ "Select Team"}</option>
-{teams?.map(team=>  <option key={team?.teamId}value={team?._id}>{team?.name ?? "No Team Available"}</option>)}
-             
-              
-            </select>
-
-          </span>
-          <button className=' h-10 w-10 bg-black text-white rounded-md shadow-2xl animate-bounce' onClick={()=>setShowCreateTeamModal(true)} >
-           
-            <SiAddthis size="100% " />
-          </button>
-        </div>
-
-      </div>
+  
       <Button onClick={() => {setShowModal(true)}} text="Add Member" bgColor={currentColor} borderRadius="10px" />
       <div className='mt-7'>
      
-        <TeamList teamId={selectedTeamId} />
+        <TeamList />
       </div>
 
 
-      {showModal && <InviteUser team={selectedTeamId} />}
+      {showModal && <InviteUser />}
 
-      {showCreateTeamModal  && <AddTeam team={selectedTeamId}/>}
+      {showCreateTeamModal  && <AddTeam />}
     </div>
   )
 }
