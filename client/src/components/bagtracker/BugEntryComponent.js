@@ -10,13 +10,14 @@ import ReviewBugs from './ReviewBugs';
 import ClosedBugs from './ClosedBug';
 import { Button } from '../Button';
 import moment from "moment"
+import { fetchTeamMembersAction } from '../../redux/usersSlices';
 
 
 export default function BugEntryComponent() {
     // display or remove action creation/edit form 
 
 
-    const { currentColor, showModal, setShowModal, isEdit, setIsEdit, currentEntry, bugs, setBugs, showInfoModal } = useStateContext();
+    const { currentColor, showModal, setShowModal, isEdit, setIsEdit, currentEntry, bugs, setBugs, showInfoModal, setTeam} = useStateContext();
 
     // dispatch action to fetch all Bugs
     const dispatch = useDispatch()
@@ -26,6 +27,9 @@ export default function BugEntryComponent() {
         dispatch(fetchbugsAction())
 
     }, [dispatch])
+    useEffect(()=> {
+        dispatch(fetchTeamMembersAction())
+        }, [])
 
     const bugsState = useSelector((state) => state?.bugs)
     const { bugsFetched, bugLoading, bugAppErr, bugServerErr } = bugsState
@@ -43,7 +47,12 @@ export default function BugEntryComponent() {
     const closedBugs = bugs?.filter(bug => bug?.status === "Closed" && new Date(bug?.updatedAt) > new Date(moment().subtract(7, 'days').calendar()))
 
 
-
+    const teamMembers= useSelector(state=> state?.users?.teamProfile?.teamMembers)
+    useEffect(()=> {
+      if (typeof teamMembers !== "undefined") setTeam(teamMembers.filter(member=> member?.status !=="Pending"))
+    }, [teamMembers])
+  
+   
 
 
     return (

@@ -5,7 +5,7 @@ import { useStateContext } from '../../context/ContextProvider';
 
 function BugCard({ bug, type }) {
 
-  const { setCurrentEntry, setShowInfoModal } = useStateContext();
+  const { setCurrentEntry, setShowInfoModal, team } = useStateContext();
   const [{ isDragging }, drag] = useDrag({
     item: {
       bug,
@@ -19,7 +19,7 @@ function BugCard({ bug, type }) {
     })
   })
 
-
+  const assigneeData=team?.filter(member=> member?._id=== bug?.assigned)
   return (
     <div className="task dark:bg-[#484B52]
      dark:text-slate-100 
@@ -34,8 +34,13 @@ function BugCard({ bug, type }) {
       onClick={() => { setShowInfoModal(true); setCurrentEntry(bug) }} >
       <div className="flex flex-row justify-between">
         <p>{bug?.title}</p>
+        <img
+            className="rounded-full h-8 w-8"
+            src={assigneeData[0]?.image}
+            alt="user-profile"
+          />
         <div className={bug?.priority === "Low" ? 'bg-blue-200 rounded mt-1 text-xs p-1' : bug?.priority === "Medium" ? " rounded mt-1 text-xs p-1 bg-amber-200" : "bg-red-500 rounded mt-1 text-xs p-1"}>
-          <p>{bug?.priority} Priority</p>
+          <p>{bug?.priority}</p>
         </div>
       </div>
 
