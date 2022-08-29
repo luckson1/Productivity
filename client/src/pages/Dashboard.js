@@ -52,9 +52,9 @@ const Dashboard = () => {
         <div className="mt-24">
             <div className="flex flex-wrap lg:flex-nowrap justify-center ">
              
-                <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-1"> 
+                <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-3"> 
 
-                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -69,7 +69,7 @@ const Dashboard = () => {
                                     : <p  className=" text-gray-900">{toDoTasks?.length} Task(s) to do  </p>}
                    
                     </div>
-                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -88,7 +88,7 @@ const Dashboard = () => {
 
                  
 
-                    <div className="dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200">
+                    <div className="dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -104,7 +104,7 @@ const Dashboard = () => {
                    
                     </div>
                   
-                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+                    <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
                         <button
                             type="button"
                             style={{ backgroundColor: currentColor }}
@@ -124,7 +124,7 @@ const Dashboard = () => {
 
             <div className="flex gap-10 flex-wrap justify-center mt-10">
              
-                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
                         <p className="text-xl font-semibold text-gray-900">Recent Tasks</p>
 
@@ -160,7 +160,7 @@ const Dashboard = () => {
 
                     </div>
                 </div>    
-                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
                         <p className="text-xl font-semibold text-gray-900">Recent Bugs</p>
 
