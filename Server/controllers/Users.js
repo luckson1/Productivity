@@ -88,7 +88,7 @@ const createProfileCtrl = expressAsyncHandler(async (req, res) => {
     // get url of uploaded image
     const image = result?.secure_url
 
-    const { firstName, lastName } = req?.body
+    const { firstName, lastName} = req?.body
 
 
 
@@ -97,7 +97,8 @@ const createProfileCtrl = expressAsyncHandler(async (req, res) => {
 
             firstName: firstName,
             lastName: lastName,
-            image: image
+            image: image,
+            status: "Approved" 
         },
     };
 
@@ -162,7 +163,7 @@ const fetchUserCtrl = expressAsyncHandler(async (req, res) => {
 
 // create a new account by admin
 const createUserctrl = expressAsyncHandler(async (req, res) => {
-    const { email, name, userId, role,team } = req.body;
+    const { email, firstName, userId, role,team } = req.body;
     let domain = "https://techivity.netlify.app"
     const id = req?.user?.userId
 
@@ -195,7 +196,7 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
                 to: email, // list of receivers (who receives)
                 subject: 'Added to a team', // Subject line
                 text: 'Hello', // plaintext body
-                html: `<p>Hello ${name}<p><br><p>You were addded to a new team on ${domain}. <p>If you did not request this, please ignore this email.</p>` // html body
+                html: `<p>Hello ${firstName}<p><br><p>You were addded to a new team on ${domain}. <p>If you did not request this, please ignore this email.</p>` // html body
             };
 
             // send mail with defined transport object
@@ -221,7 +222,7 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
             const password = uuidv4() //generate a random password
             const invitedBy = id
             const teams=[team]
-            const newUser = await User.create({ invitedBy, email, password, userId, role, status: "Pending", teams });
+            const newUser = await User.create({ invitedBy, email, password, userId, role, status: "Pending", teams, firstName });
 
           
             // setup e-mail data
@@ -230,7 +231,7 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
                 to: email, // list of receivers (who receives)
                 subject: 'New Account Created', // Subject line
                 text: 'Hello', // plaintext body
-                html: `<p>Hello ${name}<p><br><p>A new account has been created for you on ${domain}. Please use <br>username: <strong>${email} <strong> and password: <strong>${password} <strong><br>  to login.</p> 
+                html: `<p>Hello ${firstName}<p><br><p>A new account has been created for you on ${domain}. Please use <br>username: <strong>${email} <strong> and password: <strong>${password} <strong><br>  to login.</p> 
             <br><p>If you did not request this, please ignore this email.</p>` // html body
             };
 
@@ -251,14 +252,14 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
     }
 });
 
-//find other users invited by the requesting sender
+//find members belonging to ateam created by sender
 const fetchTeamMembersCtrl= expressAsyncHandler(async (req, res) => {
 
-    const invitesenderId= req?.user?.userId;
+    const inviteSenderId= req?.user?.userId;
 
       try {
         const teamMembers= await User.aggregate(
-            [ { $match : { invitedBy :invitesenderId } } ]
+            [ { $match : { invitedBy :inviteSenderId } } ]
         );
 
         res.json({teamMembers})
