@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdCancel } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useStateContext } from '../../context/ContextProvider';
 import {  editBugsAction } from '../../redux/bugsSlices';
 import dateFormatter from '../../utils/dateFormatter';
@@ -8,8 +8,8 @@ import { Button } from '../Button'
 import InfoCard from '../InfoCard';
 
 
-export const BugsInformation = ({ bugEntry }) => {
-    const { currentColor, setShowInfoModal, setIsEdit, setShowModal, setCurrentEntry, bugs, currentEntry, setBugs} = useStateContext();
+export const BugsInformation = ({ bugEntry, }) => {
+    const { currentColor, setShowInfoModal, setIsEdit, setShowModal, setCurrentEntry, bugs, currentEntry, setBugs, team} = useStateContext();
     const entry=currentEntry
     const dispatch= useDispatch()
     const newStatus=bugEntry?.status=== "Open" ?"In Review": bugEntry?.status=== "In Review"? "Closed": "Open"
@@ -43,6 +43,10 @@ export const BugsInformation = ({ bugEntry }) => {
 //     setBugs(newBugs)
 //     dispatch(deleteBugAction(bugEntry))
 // }
+
+
+  
+    const assigneeData=team?.filter(member=> member?._id=== bugEntry?.assigned)
     return (
         <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
         <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -66,7 +70,7 @@ export const BugsInformation = ({ bugEntry }) => {
                         <InfoCard title="Description" details={bugEntry?.description} />
                         <InfoCard title="Steps" details={bugEntry?.steps} />
                         <InfoCard title="Priority" details={bugEntry?.priority} />
-                        <InfoCard title="Assignee" details={bugEntry?.assigned ?? "Not Assigned"} />
+                        <InfoCard title="Assignee" details={assigneeData[0]?.firstName?? "Not Assigned"} />
                         <InfoCard title="Date Created" details={dateFormatter(bugEntry?.createdAt)} />
 
                     </div>

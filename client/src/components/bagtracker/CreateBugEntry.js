@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 // import { useDispatch } from 'react-redux';
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { createBugAction, editBugsAction } from '../../redux/bugsSlices';
 import { v4 as uuidv4 } from "uuid";
 
@@ -32,7 +32,7 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-    const { setShowModal, isEdit,  currentEntry, bugs, setBugs, setIsEdit} = useStateContext()
+    const { setShowModal, isEdit,  currentEntry, bugs, setBugs, setIsEdit, team} = useStateContext()
     const entry = currentEntry
 
     const dispatch = useDispatch()
@@ -212,11 +212,8 @@ function CreateBugEntry() {
                         >
 
                             <option value="">Assign a team mate</option>
-                            <option     onBlur={formik.handleBlur("assigned")}  value="cat">Cat</option>
-                            <option     onBlur={formik.handleBlur("assigned")}  value="hamster">Hamster</option>
-                            <option     onBlur={formik.handleBlur("assigned")}  value="parrot">Parrot</option>
-                            <option     onBlur={formik.handleBlur("assigned")}  value="spider">Spider</option>
-                            <option     onBlur={formik.handleBlur("assigned")} value="goldfish">Goldfish</option>
+                         {team?.map(member => <option  key={member?.userId}   onBlur={formik.handleBlur("assigned")}  value={member?._id}>{member?.firstName ?? member?.email}</option>)}
+                        
                         </select>
                     </span>
                     <span className="form-row-buttons">

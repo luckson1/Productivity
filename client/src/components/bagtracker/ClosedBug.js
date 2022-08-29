@@ -12,7 +12,7 @@ function ClosedBugs({ children }) {
 
     const editBugHandler= (item)=> {
 
-        const editedBugValues= {title: item?.bug.title, description: item?.bug.description, status:"Closed", _id:item?.bug._id, createdAt: item?.bug.createdAt,  bugId:item?.bug.bugId,updatedAt: new Date()}
+        const editedBugValues= {title: item?.bug.title, priority: item?.bug.priority, assigned: item?.bug.assigned, description: item?.bug.description, status:"Closed", _id:item?.bug._id, createdAt: item?.bug.createdAt,  bugId:item?.bug.bugId,updatedAt: new Date()}
         let editedBug=[]
         editedBug.push(editedBugValues)
         console.log(editedBugValues)
