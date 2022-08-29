@@ -38,7 +38,7 @@ const fetchAllTeams= expressAsyncHandler(async (req, res) => {
 });
 
 
-// fetch teams a user is part of 
+// fetch all teams a user is part of 
 
 
 const fetchUserTeams= expressAsyncHandler(async (req, res) => {
