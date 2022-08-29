@@ -43,10 +43,6 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: false,
         }],
-        teams: [ {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Team",
-        }],
         role: {
             type: String,
             required: false,
@@ -97,8 +93,8 @@ userSchema.methods.isPasswordMatch = async function (enteredPassword) {
 
 
 // /populate virtuals
-userSchema.virtual("myTeams", {
-    ref: "Team",
+userSchema.virtual("Team", {
+    ref: "teamCreator",
     localField: "_id",
     foreignField: "user",
   });
