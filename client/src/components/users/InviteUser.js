@@ -9,7 +9,7 @@ import { createUserAction } from '../../redux/usersSlices';
 
 const errorSchema = Yup.object().shape({
 
-    name: Yup
+    firstName: Yup
         .string()
         .required('Name is Required'),
     email: Yup
@@ -23,7 +23,7 @@ const errorSchema = Yup.object().shape({
 
 });
 
-function InviteUser({ team }) {
+function InviteUser() {
     const { setShowModal, currentColor } = useStateContext()
 
 
@@ -38,16 +38,14 @@ function InviteUser({ team }) {
     // use formik hook to handle form state 
     const formik = useFormik({
         initialValues: {
-            name: '',
+            firstName: '',
             role: "",
             email: "",
             status: "pending",
             userId: uuidv4(),
-            team:team,
         },
         validationSchema: errorSchema,
-        // onSubmit: values => addMemberHandler(values
-        onSubmit: values => console.log(values)
+        onSubmit: values => addMemberHandler(values)
     });
 
 
@@ -67,13 +65,13 @@ function InviteUser({ team }) {
                         {formik.touched.name && formik.errors.name}
                     </div>
                     <span className="form-row">
-                        <label className="form-row-label" htmlFor="name">Name</label>
+                        <label className="form-row-label" htmlFor="firstName">Name</label>
                         <input className="form-row-input border-b-2 border-b-indigo-500 rounded-none"
                             type="text"
-                            id="name"
-                            value={formik.values.name}
-                            onChange={formik.handleChange("name")}
-                            onBlur={formik.handleBlur("name")}
+                            id="firstName"
+                            value={formik.values.firstName}
+                            onChange={formik.handleChange("firstName")}
+                            onBlur={formik.handleBlur("firstName")}
                             placeholder='Name of the invitee' />
 
                     </span>
