@@ -62,7 +62,7 @@ function CreateTasks() {
                     style={{width: "90%"}} />
 
                 <button type="submit" className=' h-10 w-10 bg-black text-white rounded-md shadow-2xl '  >
-                <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-sky-600 opacity-75"></span>
+                <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-sky-600 opacity-75"></span>
                      <SiAddthis size="100% "/> 
                      </button>
 
