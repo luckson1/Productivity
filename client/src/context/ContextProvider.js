@@ -6,7 +6,7 @@ const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
  
-    const [teams, setTeams]=useState([])
+    const [team, setTeam]=useState([])
     const [activeMenu, setActiveMenu] = useState(true);
     const [screenSize, setScreenSize] = useState(undefined)
     const [currentColor, setCurrentColor] = useState(localStorage.getItem('ThemeColor') ?? "#03C9D7")
@@ -97,8 +97,8 @@ export const ContextProvider = ({ children }) => {
                 setBugs,
                 showInfoModal, 
                 setShowInfoModal,
-                teams, 
-                setTeams,
+                team, 
+                setTeam,
                 showCreateTeamModal, 
                 setShowCreateTeamModal
                
