@@ -81,9 +81,6 @@ export const Authmodal = () => {
             navigate('/dashboard');
             setActiveMenu(true);
             setShowNavBar(true)
-            setTimeout(() => {
-                window.location.reload();
-            }, 100)
         }
     }, [isLoggedIn, navigate, setActiveMenu, setShowNavBar])
 
