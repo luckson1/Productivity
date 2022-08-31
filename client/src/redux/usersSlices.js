@@ -397,7 +397,7 @@ const usersSlices = createSlice({
 
         //hande success state
         builder.addCase(createProfileAction.fulfilled, (state, action) => {
-            state.newProfile = action?.payload;
+            state.userProfile  = action?.payload;
             state.createProfileLoading = false;
             state.createProfileAppErr = undefined;
             state.createProfileServerErr = undefined;
@@ -422,7 +422,7 @@ const usersSlices = createSlice({
 
         //hande success state
         builder.addCase(editProfilePicAction.fulfilled, (state, action) => {
-            state.editedProfile = action?.payload;
+            state.userProfile  = action?.payload;
             state.editProfileLoading = false;
             state.editProfileAppErr = undefined;
             state.editProfileServerErr = undefined;
@@ -447,7 +447,7 @@ const usersSlices = createSlice({
 
         //hande success state
         builder.addCase(editProfileAction.fulfilled, (state, action) => {
-            state.editedProfile = action?.payload;
+            state.userProfile  = action?.payload;
             state.editProfileLoading = false;
             state.editProfileAppErr = undefined;
             state.editProfileServerErr = undefined;
