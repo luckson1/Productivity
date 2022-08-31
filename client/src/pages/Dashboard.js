@@ -124,7 +124,7 @@ const Dashboard = () => {
 
             <div className="flex gap-10 flex-wrap justify-center mt-10">
              
-                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+                <div className="bg-white shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
                         <p className="text-xl font-semibold text-gray-900">Recent Tasks</p>
 
@@ -160,7 +160,7 @@ const Dashboard = () => {
 
                     </div>
                 </div>    
-                <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+                <div className="bg-white shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
                         <p className="text-xl font-semibold text-gray-900">Recent Bugs</p>
 
