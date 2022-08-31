@@ -17,7 +17,7 @@ const createTeamCtrl= expressAsyncHandler(async (req, res) => {
    
         res.json({team})
     } catch (error) {
-      console.log(error)
+     
         res.json({error}) 
     }
 });

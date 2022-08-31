@@ -25,7 +25,7 @@ const newTasks= tasks?.filter(task=> {
     const [{ isOver, canDrop }, drop] = useDrop({
     accept: [ItemTypes.DO],
     drop: (item, monitor) => editTaskHandler(item),
-    // drop: (item, monitor) => console.log(item),
+
 
    
     collect: monitor => ({

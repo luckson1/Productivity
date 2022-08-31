@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { SiAddthis } from 'react-icons/si'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../components/Button'
 import AddTeam from '../components/users/AddTeam'
 import InviteUser from '../components/users/InviteUser'
 import TeamList from '../components/users/TeamList'
 import { useStateContext } from '../context/ContextProvider'
-import { fetchAllTeamsAction } from '../redux/TeamSlices'
 import { fetchTeamMembersAction } from '../redux/usersSlices'
 
 function Team() {

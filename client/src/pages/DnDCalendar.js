@@ -7,7 +7,6 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTasksAction } from '../redux/taskSlices';
 import { useStateContext } from '../context/ContextProvider';
-import CreateTask from '../components/kanban/EditTasks';
 import DeleteDialogBox from '../components/DeleteDialogBox';
 import { TasksInformation } from '../components/kanban/TaskInformation';
 import globalize from 'globalize'
@@ -44,7 +43,7 @@ export default function DnDCalendar() {
 
   }
   );
-  console.log(events)
+
   const defaultTZ = DateTime.local().zoneName
   const defaultDateStr = '2015-04-13'
 

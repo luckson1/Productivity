@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { MdCancel } from 'react-icons/md'
 import { useStateContext } from '../../context/ContextProvider';
 import { useDispatch } from 'react-redux';
-import { createUserAction } from '../../redux/usersSlices';
-import { SiAddthis } from 'react-icons/si';
 import { createTeamAction } from '../../redux/TeamSlices';
 
 const errorSchema = Yup.object().shape({
@@ -25,7 +23,7 @@ const errorSchema = Yup.object().shape({
 });
 
 function AddTeam({...props}) {
-    const { setShowModal, currentColor, setTeams,teams, setShowCreateTeamModal} = useStateContext()
+    const { currentColor, setTeams,teams, setShowCreateTeamModal} = useStateContext()
 
 
     const dispatch = useDispatch()
@@ -45,7 +43,7 @@ function AddTeam({...props}) {
         },
         validationSchema: errorSchema,
         onSubmit: values => addMemberHandler(values)
-        // onSubmit: values =>   console.log(values)
+     
     });
 
 
