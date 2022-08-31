@@ -2,7 +2,6 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik';
 import DisabledButton from '../DisabledButton';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { editProfileAction, editProfilePicAction} from '../../redux/usersSlices';
 import { MdOutlineCancel } from 'react-icons/md';
 
@@ -55,9 +54,6 @@ function UserProfileEdit({ user, isEditPic, removeProfileEditModal }) {
 
     const { createProfileLoading, createProfileAppErr, createProfileServerErr } = userData
 
-    // force navagation to the dashboard page
-
-    const navigate = useNavigate();
 
 
 
