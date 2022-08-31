@@ -35,7 +35,7 @@ function BugCard({ bug, type }) {
       <div className="flex flex-row justify-between">
         <p>{bug?.title}</p>
         <img
-            className="rounded-full h-8 w-8"
+            className="rounded-full h-6 w-6"
             src={assigneeData[0]?.image}
             alt="user-profile"
           />
