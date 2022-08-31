@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
 
 import { useStateContext } from '../../context/ContextProvider';
+import { fetchUserProfileAction } from '../../redux/usersSlices';
 import { UserProfile } from '../users/UserProfile';
 
 export const Navbar = () => {
@@ -29,7 +30,11 @@ export const Navbar = () => {
         }
     }, [])
 
-    const user = useSelector(state => state?.users?.userAuth?.user)
+    const dispatch= useDispatch()
+    useEffect(()=> {
+        dispatch(fetchUserProfileAction())
+    }, [])
+    const user = useSelector(state => state?.users?.userProfile?.user)
 
     const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 

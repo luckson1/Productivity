@@ -5,7 +5,7 @@ import { useStateContext } from '../../context/ContextProvider';
 
 import { Button } from '../Button';
 import { useDispatch, useSelector } from 'react-redux';
-import {  logout } from '../../redux/usersSlices';
+import {  fetchUserProfileAction, logout } from '../../redux/usersSlices';
 import { FaEdit } from 'react-icons/fa';
 import UserProfileEdit from './UserProfileEdit';
 
@@ -20,14 +20,10 @@ export const UserProfile = () => {
   const dispatch = useDispatch()
 
 
-  const loginUserInfo = useSelector(state => state?.users?.userAuth?.user) 
-const editedProfile=useSelector(state => state?.users?.editedProfile) 
-  const [user, setUser]=useState(loginUserInfo)
-   useEffect(()=> {
-    if(editedProfile){
-      setUser(editedProfile?.user)
-    }
-   }, [editedProfile])
+useEffect(()=> {
+    dispatch(fetchUserProfileAction())
+}, [])
+const user = useSelector(state => state?.users?.userProfile?.user)
  
 
 
