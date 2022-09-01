@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { editBugsAction } from "../../redux/bugsSlices";
 import { useStateContext } from "../../context/ContextProvider";
 
-function ReviewBugs({ children }) {
+function InProgressBugs({ children }) {
   const { bugs, setBugs } = useStateContext();
   const dispatch = useDispatch();
 
@@ -15,7 +15,7 @@ function ReviewBugs({ children }) {
       priority: item?.bug.priority,
       assigned: item?.bug.assigned,
       description: item?.bug.description,
-      status: "In Review",
+      status: "In Progress",
       _id: item?.bug._id,
       createdAt: item?.bug.createdAt,
       bugId: item?.bug.bugId,
@@ -31,7 +31,7 @@ function ReviewBugs({ children }) {
     setBugs([...newBugs, ...editedBug]);
   };
   const [{ isOver, canDrop }, drop] = useDrop({
-    accept: [ItemTypes.PROGRESS],
+    accept: [ItemTypes.OPEN],
 
     drop: (item, monitor) => {
       editBugHandler(item);
@@ -49,7 +49,7 @@ function ReviewBugs({ children }) {
     <div
       className={
         isActive
-          ? "bg-gradient-to-r from-orange-400 via-amber-100 to-yellow-300 kanban-block shadow-2xl"
+          ? "bg-gradient-to-r from-indigo-400 via-pink-100 to-purple-400 kanban-block shadow-2xl"
           : "bg-indigo-100 kanban-block shadow-md"
       }
       ref={drop}
@@ -59,4 +59,4 @@ function ReviewBugs({ children }) {
   );
 }
 
-export default ReviewBugs;
+export default InProgressBugs;
