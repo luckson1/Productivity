@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useStateContext } from '../../context/ContextProvider';
 import { editBugsAction } from '../../redux/bugsSlices';
 import { fetchCommentAction } from '../../redux/CommentSlices';
-import dateFormatter from '../../utils/dateFormatter';
 import { Button } from '../Button'
 import CreateComment from '../CreateComment';
 import InfoCard from '../InfoCard';
@@ -44,7 +43,6 @@ dispatch(fetchCommentAction({id:bugEntry?.bugId}))
 
 
 const comments= useSelector(state=> state?.comment?.commentsFetched?.comment)
-console.log(comments)
     const assigneeData = team?.filter(member => member?._id === bugEntry?.assigned)
 
     return (
