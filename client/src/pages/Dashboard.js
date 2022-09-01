@@ -124,9 +124,9 @@ const Dashboard = () => {
 
             <div className="flex gap-10 flex-wrap justify-center mt-10">
              
-                <div className="bg-white shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+                <div className="bg-white shadow-2xl dark:text-gray-100 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
-                        <p className="text-xl font-semibold text-gray-900">Recent Tasks</p>
+                        <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">Recent Tasks</p>
 
                     </div>
                     <div className="mt-10 w-72 md:w-400 text-sm text-left">
@@ -138,7 +138,7 @@ const Dashboard = () => {
                                             <div className="flex gap-4">
                                             
                                              
-                                                    <p className="text-md font-semibold text-gray-900">{task?.title}</p>
+                                                    <p className="text-md font-semibold text-gray-900  dark:text-gray-100">{task?.title}</p>
                                                 
                                                 
                                             </div>
@@ -162,7 +162,7 @@ const Dashboard = () => {
                 </div>    
                 <div className="bg-white shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
                     <div className="flex justify-between items-center gap-2">
-                        <p className="text-xl font-semibold text-gray-900">Recent Bugs</p>
+                        <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">Recent Bugs</p>
 
                     </div>
                     <div className="mt-10 w-72 md:w-400 text-sm text-left">
@@ -174,7 +174,7 @@ const Dashboard = () => {
                                             <div className="flex gap-4">
                                             
                                              
-                                                    <p className="text-md font-semibold text-gray-900">{bug?.title}</p>
+                                                    <p className="text-md font-semibold text-gray-900  dark:text-gray-100">{bug?.title}</p>
                                                 
                                                 
                                             </div>
