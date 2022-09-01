@@ -9,19 +9,16 @@ import { Button } from '../Button'
 
 
 export const TasksInformation = () => {
-    const { currentColor, setShowInfoModal, setIsEdit, setShowModal,  setShowDeleteModal, setCurrentEntry, currentEntry} = useStateContext();
-    
-const  task=currentEntry
+    const { currentColor, setShowInfoModal, setIsEdit, setShowModal, setShowDeleteModal, setCurrentEntry, currentEntry } = useStateContext();
 
-
-
+    const task = currentEntry
     return (
         <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
-        <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
+            <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
                 <div className="flex justify-between items-center gap-2 mx-7 mt-7">
                     <p className="text-xl font-semibold text-gray-900 text-center ">Task Information</p>
 
-                    <MdCancel className='' color='red' size="30px" onClick={() => {setShowInfoModal(false); setIsEdit(false);}} style={{cursor: "pointer"}}/>
+                    <MdCancel className='' color='red' size="30px" onClick={() => { setShowInfoModal(false); setIsEdit(false); }} style={{ cursor: "pointer" }} />
                 </div>
 
                 <div className="mt-3 text-sm mx-7">
@@ -33,8 +30,8 @@ const  task=currentEntry
                         <InfoCard title="Summary" details={task?.summary} />
                         <InfoCard title="Assignee" details={task?.assigned ?? "Not Assigned"} />
                         <InfoCard title="Date Created" details={dateFormatter(task?.createdAt)} />
-                    {  task?.start!==undefined &&  <InfoCard title=" Starting Date" details={dateFormatter(task?.start)} />}
-                        { task?.end!==undefined && <InfoCard title="Ending Date" details={dateFormatter(task?.end)} />}
+                        {task?.start !== undefined && <InfoCard title=" Starting Date" details={dateFormatter(task?.start)} />}
+                        {task?.end !== undefined && <InfoCard title="Ending Date" details={dateFormatter(task?.end)} />}
 
 
 
@@ -47,18 +44,18 @@ const  task=currentEntry
                         bgColor={currentColor}
                         text="Edit Details"
                         borderRadius="10px"
-                        onClick={() => { setShowInfoModal(false); setShowModal(true); setIsEdit(true);  setCurrentEntry(task);window.scrollTo(0, 0) }}
+                        onClick={() => { setShowInfoModal(false); setShowModal(true); setIsEdit(true); setCurrentEntry(task); window.scrollTo(0, 0) }}
                     />
                     <Button
                         color="white"
-                        bgColor= "red"
+                        bgColor="red"
                         text="Delete Task"
                         borderRadius="10px"
                         onClick={() => {
                             setShowDeleteModal(true);
-                       
-                            setShowInfoModal(false); 
-                          }}
+
+                            setShowInfoModal(false);
+                        }}
                     />
 
 

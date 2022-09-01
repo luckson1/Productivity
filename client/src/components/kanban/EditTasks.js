@@ -52,8 +52,8 @@ function EditTasks() {
             _id: entry?._id,
             createdAt: entry?.createdAt,
             updateAt: entry?.updateAt ?? new Date(),
-            start: entry?.start ?? "",
-            end: entry?.end ?? "",
+            start: entry?.start ?? undefined,
+            end: entry?.end ?? undefined,
 
         },
         validationSchema: errorSchema,
