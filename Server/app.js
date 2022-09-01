@@ -8,6 +8,7 @@ const { taskRoutes } = require('./routes/Tasks');
 const { teamRoutes } = require('./routes/Teams');
 const { userRoutes } = require('./routes/Users');
 const { bugRoutes } = require('./routes/Bugs');
+const commentsRouter = require('./routes/Comments');
 
 
 
@@ -40,6 +41,9 @@ app.use("/api/users", userRoutes)
 
 //bugs routes
 app.use('/api/bugs', bugRoutes)
+
+//comments routes
+app.use("/api/comments", commentsRouter)
 
 //error handling //  
 
