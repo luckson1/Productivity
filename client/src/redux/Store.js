@@ -4,6 +4,7 @@ import taskReducers from "./taskSlices";
 import usersReducer from "./usersSlices";
 import bugsReducers from "./bugsSlices";
 import teamReducers from "./TeamSlices";
+import commentReducers from "./CommentSlices";
 
 
 
@@ -12,7 +13,8 @@ const Store=configureStore( {
         users:usersReducer,
         tasks: taskReducers,
         bugs: bugsReducers,
-        team: teamReducers
+        team: teamReducers,
+        comment: commentReducers
    
         
     }
