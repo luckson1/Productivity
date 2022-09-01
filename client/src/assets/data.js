@@ -41,7 +41,7 @@ export const links = [
       },
 
       {id:2,
-        name: 'issue-tracker',
+        name: 'bug-tracker',
         icon: <MdBugReport size="24px"/>,
       },
       {id:3,
