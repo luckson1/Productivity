@@ -9,31 +9,32 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "To Do"
+      default: "To Do",
     },
     start: {
-      type: String,      
+      type: String,
     },
     end: {
       type: String,
-     
     },
     user: {
-      type: Schema.Types.ObjectId, 
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    
+
     summary: {
       type: String,
-      
     },
     taskId: {
       type: String,
       required: true,
     },
-
-    
+    assigned: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: false,
+    },
   },
   {
     timestamps: true,
@@ -47,8 +48,6 @@ const taskSchema = new mongoose.Schema(
 );
 
 //populate virtuals
-
-
 
 //model
 const Task = mongoose.model("Task", taskSchema);
