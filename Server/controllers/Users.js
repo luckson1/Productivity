@@ -259,7 +259,7 @@ const fetchTeamMembersCtrl= expressAsyncHandler(async (req, res) => {
 
       try {
         const teamMembers= await User.aggregate(
-            [ { $match : { invitedBy :inviteSenderId } } ]
+            [ { $match : { $or: [{invitedBy :inviteSenderId}, {userId: inviteSenderId }]} } ]
         );
 
         res.json({teamMembers})
