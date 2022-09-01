@@ -74,7 +74,7 @@ export default function KanbanComponent() {
   return (
     <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
       <div className="kanban-board ">
-        <div className="kanban-block bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 shadow-md">
+        <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-50 to-pink-200 shadow-md">
           <strong>To Do</strong>
           <CreateTasks />
 
