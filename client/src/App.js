@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import BugTracker from "./pages/BugTracker";
 import DnDCalendar from "./pages/DnDCalendar";
 import Team from "./pages/Team";
+import CompletedItems from "./pages/CompletedItems";
 function App() {
   const {
     activeMenu,
@@ -108,6 +109,15 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <DnDCalendar />
+                    </ProtectedRoute>
+                  }
+                />
+                  <Route
+                  exact
+                  path="/completed"
+                  element={
+                    <ProtectedRoute>
+                      <CompletedItems />
                     </ProtectedRoute>
                   }
                 />
