@@ -1,5 +1,5 @@
 import { Calendar, globalizeLocalizer } from "react-big-calendar";
-import { DateTime, Settings } from "luxon";
+import { DateTime } from "luxon";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";

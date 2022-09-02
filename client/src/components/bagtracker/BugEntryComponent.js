@@ -9,7 +9,6 @@ import { BugsInformation } from "./BugsInformation";
 import ReviewBugs from "./ReviewBugs";
 import ClosedBugs from "./ClosedBug";
 import { Button } from "../Button";
-import moment from "moment";
 import { fetchTeamMembersAction } from "../../redux/usersSlices";
 import InProgressBugs from "./InProgressBugs";
 
