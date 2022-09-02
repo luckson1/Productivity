@@ -6,7 +6,7 @@ import { useStateContext } from '../../context/ContextProvider';
 
 
 
-function TeamList({ selectedTeamId, loading, errors}) {
+function TeamList() {
   const {  team} = useStateContext();
 
   return (
@@ -21,10 +21,7 @@ function TeamList({ selectedTeamId, loading, errors}) {
 
         </li>
 
-        {loading ? (<p>Loading, Please Wait 😀......</p>)
-          : errors ? <p className="text-red-500">An Error Occured 😥</p>
-            : team?.length === 0 ? (<p>No Team created 😀 </p>)
-              : team?.map(member=> (<li className="table-row" key={member?.userId} >
+        {team?.map(member=> (<li className="table-row" key={member?.userId} >
                 <div className="col col-1" data-label="Name">{member?.firstName??member?.name}</div>
                 <div className="col col-2" data-label="Email">{member?.email}</div>
                 <div className="col col-3" data-label="Role" >{member?.role??"Not Defined"} </div>
