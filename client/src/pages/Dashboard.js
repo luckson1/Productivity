@@ -41,14 +41,19 @@ const Dashboard = () => {
   const inProgressTasks = tasksFetched?.tasks?.filter(
     (task) => task?.status === "In Progress"
   );
-  // const doneTasks = tasksFetched?.tasks?.filter(task => task?.status === "Done")
+  const completeTasks = tasksFetched?.tasks?.filter(
+    (task) => task?.status === "Complete"
+  );
 
   // bugs data
   const bugsState = stateData?.bugs;
   const { bugsFetched, bugLoading, bugAppErr, bugServerErr } = bugsState;
   const openBugs = bugsFetched?.bugs?.filter((bug) => bug?.status === "Open");
-  const closedBugs = bugsFetched?.bugs?.filter(
-    (bug) => bug?.status === "Closed"
+  const inProgressBugs = bugsFetched?.bugs?.filter(
+    (bug) => bug?.status === "In Progress"
+  );
+  const completeBugs = bugsFetched?.bugs?.filter(
+    (bug) => bug?.status === "Complete"
   );
 
   return (
@@ -61,6 +66,7 @@ const Dashboard = () => {
                 type="button"
                 style={{ backgroundColor: currentColor }}
                 className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                onClick={() => navigate("/tasks")}
               >
                 <FaTasks />
               </button>
@@ -82,6 +88,7 @@ const Dashboard = () => {
                 type="button"
                 style={{ backgroundColor: currentColor }}
                 className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                onClick={() => navigate("/tasks")}
               >
                 <FaTasks />
               </button>
@@ -98,12 +105,37 @@ const Dashboard = () => {
                 </p>
               )}
             </div>
+            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+              <button
+                type="button"
+                style={{ backgroundColor: currentColor }}
+                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                onClick={() =>
+                  navigate("/completed", { state: { tasks: completeTasks } })
+                }
+              >
+                <FaTasks />
+              </button>
+
+              {taskLoading ? (
+                "Loading, Please wait! 😀"
+              ) : taskAppErr || taskServerErr ? (
+                <p className=" text-red-500">An Error Occured. 😥</p>
+              ) : tasksFetched?.tasks === 0 ? (
+                <p className=" text-gray-900"> No Tasks created....yet 😊</p>
+              ) : (
+                <p className=" text-gray-900">
+                  {completeTasks?.length} Task(s) in Completed
+                </p>
+              )}
+            </div>
 
             <div className="dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200">
               <button
                 type="button"
                 style={{ backgroundColor: currentColor }}
                 className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                onClick={() => navigate("/bug-tracker")}
               >
                 <MdBugReport />
               </button>
@@ -116,7 +148,7 @@ const Dashboard = () => {
                 <p className=" text-gray-900"> No bugs created....yet 😊</p>
               ) : (
                 <p className=" text-gray-900">
-                  {closedBugs?.length} Closed bug(s){" "}
+                  {openBugs?.length} Open bug(s){" "}
                 </p>
               )}
             </div>
@@ -126,6 +158,7 @@ const Dashboard = () => {
                 type="button"
                 style={{ backgroundColor: currentColor }}
                 className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                onClick={() => navigate("/bug-tracker")}
               >
                 <MdBugReport />
               </button>
@@ -138,7 +171,31 @@ const Dashboard = () => {
                 <p className=" text-gray-900"> No bugs created....yet 😊</p>
               ) : (
                 <p className=" text-gray-900">
-                  {openBugs?.length} Open Bug(s){" "}
+                  {inProgressBugs?.length} Bug(s) In Progresss{" "}
+                </p>
+              )}
+            </div>
+            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+              <button
+                type="button"
+                style={{ backgroundColor: currentColor }}
+                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                onClick={() =>
+                  navigate("/completed", { state: { bugs: completeBugs } })
+                }
+              >
+                <MdBugReport />
+              </button>
+
+              {bugLoading ? (
+                "Loading, Please wait! 😀"
+              ) : bugAppErr || bugServerErr ? (
+                <p className=" text-red-500">An Error Occured. 😥</p>
+              ) : bugsFetched?.bugs === 0 ? (
+                <p className=" text-gray-900"> No bugs created....yet 😊</p>
+              ) : (
+                <p className=" text-gray-900">
+                  {completeBugs?.length} Bug(s) Solved{" "}
                 </p>
               )}
             </div>
@@ -160,28 +217,30 @@ const Dashboard = () => {
               ) : tasksFetched?.tasks === 0 ? (
                 " No Tasks created....yet 😊"
               ) : (
-                tasksFetched?.tasks?.filter(task=> task?.status !=="Complete")?.map((task) => (
-                  <div key={task._id} className="flex justify-between mt-4">
-                    <div className="flex gap-4">
-                      <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
-                        {task?.title}
+                tasksFetched?.tasks
+                  ?.filter((task) => task?.status !== "Complete")
+                  ?.map((task) => (
+                    <div key={task._id} className="flex justify-between mt-4">
+                      <div className="flex gap-4">
+                        <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
+                          {task?.title}
+                        </p>
+                      </div>
+                      <p
+                        className={
+                          task?.status === "To Do"
+                            ? "text-blue-500"
+                            : task?.status === "In Progress"
+                            ? "text-amber-400"
+                            : task?.status === "Done"
+                            ? "text-green-500"
+                            : "text-gray-900"
+                        }
+                      >
+                        {task?.status}
                       </p>
                     </div>
-                    <p
-                      className={
-                        task?.status === "To Do"
-                          ? "text-blue-500"
-                          : task?.status === "In Progress"
-                          ? "text-amber-400"
-                          : task?.status === "Done"
-                          ? "text-green-500"
-                          : "text-gray-900"
-                      }
-                    >
-                      {task?.status}
-                    </p>
-                  </div>
-                ))
+                  ))
               )}
             </div>
             <div className="flex justify-between items-center mt-5 border-t-1 border-color">
@@ -191,7 +250,7 @@ const Dashboard = () => {
                   bgColor={currentColor}
                   text="Add"
                   borderRadius="10px"
-                  onClick={() => navigate("/kanban")}
+                  onClick={() => navigate("/tasks")}
                 />
               </div>
             </div>
@@ -210,26 +269,28 @@ const Dashboard = () => {
               ) : bugsFetched?.bugs === 0 ? (
                 " No bugs found....yet 😊"
               ) : (
-                bugsFetched?.bugs?.filter(bug=> bug?.status !=="Complete")?.map((bug) => (
-                  <div key={bug._id} className="flex justify-between mt-4">
-                    <div className="flex gap-4">
-                      <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
-                        {bug?.title}
+                bugsFetched?.bugs
+                  ?.filter((bug) => bug?.status !== "Complete")
+                  ?.map((bug) => (
+                    <div key={bug._id} className="flex justify-between mt-4">
+                      <div className="flex gap-4">
+                        <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
+                          {bug?.title}
+                        </p>
+                      </div>
+                      <p
+                        className={
+                          bug?.status === "Open"
+                            ? "text-blue-500"
+                            : bug?.status === "Closed"
+                            ? "text-green-500"
+                            : "text-gray-900"
+                        }
+                      >
+                        {bug?.status}
                       </p>
                     </div>
-                    <p
-                      className={
-                        bug?.status === "Open"
-                          ? "text-blue-500"
-                          : bug?.status === "Closed"
-                          ? "text-green-500"
-                          : "text-gray-900"
-                      }
-                    >
-                      {bug?.status}
-                    </p>
-                  </div>
-                ))
+                  ))
               )}
             </div>
             <div className="flex justify-between items-center mt-5 border-t-1 border-color">
