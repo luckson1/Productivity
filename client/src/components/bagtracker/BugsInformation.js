@@ -29,6 +29,8 @@ export const BugsInformation = ({ bugEntry }) => {
       ? "In Review"
       : bugEntry?.status === "In Review"
       ? "Closed"
+      : bugEntry?.status === "Closed"
+      ? "Complete"
       : "Open";
   const editbugHandler = (bugEntry) => {
     const values = {
@@ -39,7 +41,6 @@ export const BugsInformation = ({ bugEntry }) => {
       priority: bugEntry.priority,
       assigned: bugEntry.assigned,
       createdAt: bugEntry.createdAt,
-      updatedAt: new Date(),
       _id: bugEntry._id,
       bugId: bugEntry.bugId,
     };
@@ -132,11 +133,11 @@ export const BugsInformation = ({ bugEntry }) => {
               bugEntry?.status === "Open"
                 ? "Add to Progress"
                 : bugEntry?.status === "In Review"
-                ? "Mark as Complete"
+                ? "Mark as Closed"
                 : bugEntry?.status === "In Progress"
                 ? "Send to Review"
                 : bugEntry?.status === "Closed"
-                ? "Re-Open"
+                ? "Mark as Complete"
                 : null
             }
             borderRadius="10px"
