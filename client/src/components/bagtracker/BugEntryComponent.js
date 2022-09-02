@@ -51,12 +51,7 @@ export default function BugEntryComponent() {
   const openBugs = bugs?.filter((bug) => bug?.status === "Open");
   const inProgressBugs = bugs?.filter((bug) => bug?.status === "In Progress");
   const inReviewBugs = bugs?.filter((bug) => bug?.status === "In Review");
-  const closedBugs = bugs?.filter(
-    (bug) =>
-      bug?.status === "Closed" &&
-      new Date(bug?.updatedAt) >
-        new Date(moment().subtract(7, "days").calendar())
-  );
+  const closedBugs = bugs?.filter((bug) => bug?.status === "Closed");
 
   const teamMembers = useSelector(
     (state) => state?.users?.teamProfile?.teamMembers
