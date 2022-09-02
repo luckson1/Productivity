@@ -160,7 +160,7 @@ const Dashboard = () => {
               ) : tasksFetched?.tasks === 0 ? (
                 " No Tasks created....yet 😊"
               ) : (
-                tasksFetched?.tasks?.map((task) => (
+                tasksFetched?.tasks?.filter(task=> task?.status !=="Complete")?.map((task) => (
                   <div key={task._id} className="flex justify-between mt-4">
                     <div className="flex gap-4">
                       <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
@@ -210,7 +210,7 @@ const Dashboard = () => {
               ) : bugsFetched?.bugs === 0 ? (
                 " No bugs found....yet 😊"
               ) : (
-                bugsFetched?.bugs?.map((bug) => (
+                bugsFetched?.bugs?.filter(bug=> bug?.status !=="Complete")?.map((bug) => (
                   <div key={bug._id} className="flex justify-between mt-4">
                     <div className="flex gap-4">
                       <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
