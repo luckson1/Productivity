@@ -8,7 +8,6 @@ import InProgressTasks from "./InProgressTasks";
 import DoneTasks from "./DoneTasks";
 import { useStateContext } from "../../context/ContextProvider";
 import { TasksInformation } from "./TaskInformation";
-import moment from "moment";
 import CreateTasks from "./CreateTasks";
 import EditTasks from "./EditTasks";
 import { fetchTeamMembersAction } from "../../redux/usersSlices";
@@ -53,15 +52,8 @@ export default function KanbanComponent() {
   }, []);
 
   const toDoTasks = tasks?.filter((task) => task?.status === "To Do");
-  const inProgressTasks = tasks?.filter(
-    (task) => task?.status === "In Progress"
-  );
-  const doneTasks = tasks?.filter(
-    (task) =>
-      task?.status === "Done" &&
-      new Date(task?.updatedAt) >
-        new Date(moment().subtract(7, "days").calendar())
-  );
+  const inProgressTasks = tasks?.filter((task) => task?.status === "In Progress");
+  const doneTasks = tasks?.filter((task) => task?.status === "Done");
 
   const teamMembers = useSelector(
     (state) => state?.users?.teamProfile?.teamMembers
