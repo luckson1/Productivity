@@ -62,7 +62,7 @@ function EditTasks() {
   });
 
   return (
-    <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
+    <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-50">
       <div className="float-right h-screen bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-100  dark:bg-[#484B52] w-full sm:w-6/12 ">
         <div className="px-7 pt-5">
           <div className="flex flex-row justify-between my-5">

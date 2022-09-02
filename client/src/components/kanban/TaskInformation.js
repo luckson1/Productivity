@@ -33,7 +33,7 @@ export const TasksInformation = () => {
     (state) => state?.comment?.commentsFetched?.comment
   );
   return (
-    <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
+    <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-10">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
         <div className="flex justify-between items-center gap-2 mx-7 mt-7">
           <p className="text-xl font-semibold text-gray-900 text-center ">
