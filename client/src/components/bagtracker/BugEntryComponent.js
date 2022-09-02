@@ -65,6 +65,7 @@ export default function BugEntryComponent() {
       <div className="kanban-heading">
         <Button
           bgColor={currentColor}
+          animationType="bounce"
           borderRadius="10px"
           text="Add New Bug"
           onClick={() => {
