@@ -162,6 +162,18 @@ function EditTasks() {
                     checked={formik.values.status === "Done"}
                   />
                   <label htmlFor="Done">Done</label>
+
+                  <input
+                    id="Complete"
+                    value={undefined}
+                    onChange={() => {
+                      formik.setFieldValue("status", "Complete");
+                    }}
+                    onBlur={formik.handleBlur("status")}
+                    type="radio"
+                    checked={formik.values.status === "Complete"}
+                  />
+                  <label htmlFor="Complete">Complete</label>
                 </div>
               </span>
             )}
