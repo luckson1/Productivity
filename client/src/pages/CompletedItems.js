@@ -30,7 +30,6 @@ const newStatus=location?.state?.bugs ? "Open" : "To Do"
     const newList = completedItems?.filter((selectedItem) => {
       return selectedItem._id !== item?._id;
     });
-console.log(newList)
     setCompletedItems(newList);
    
   };

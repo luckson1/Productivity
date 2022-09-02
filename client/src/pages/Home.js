@@ -25,7 +25,6 @@ function Home() {
     setShowNavBar(false);
   }, [setActiveMenu, setShowNavBar]);
   const dispatch = useDispatch();
-  console.log(showModal);
   // get data from store
   const userLogin = useSelector((state) => state?.users?.userAuth);
   const user = useSelector((state) => {

@@ -13,7 +13,6 @@ export const createCommentAction= createAsyncThunk("create/comment", async(paylo
             },
 
         };
-console.log(config.headers.Authorization)
     try {
         const {data}=await axios.post(`${BaseURL}/comments`, payload, config)
         return data

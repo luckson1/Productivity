@@ -23,7 +23,6 @@ export const TasksInformation = () => {
   } = useStateContext();
   const dispatch = useDispatch();
   const task = currentEntry;
-  console.log(task?.taskId);
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
   useEffect(() => {
     dispatch(fetchCommentAction({ id: task?.taskId }));

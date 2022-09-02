@@ -34,7 +34,6 @@ export default function DnDCalendar() {
   }, []);
   const tasksState = useSelector((state) => state?.tasks);
   const tasks = tasksState?.tasksFetched?.tasks;
-  console.log(tasks);
   const events = tasks?.map((task) => {
     return {
       start: new Date(Date.parse(task?.start)),
