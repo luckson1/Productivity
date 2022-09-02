@@ -10,7 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import UserProfileEdit from "./UserProfileEdit";
 
 export const UserProfile = () => {
-  const { currentColor, setShowProfileModal } = useStateContext();
+  const { currentColor, setShowProfileModal, setShowModal } = useStateContext();
   const [isEditPic, setIsEditPic] = useState(false);
   const [showProfileEditModal, setShowProfileEditModal] = useState(false);
   const removeProfileEditModal = useCallback(() => {
@@ -81,6 +81,8 @@ export const UserProfile = () => {
           borderRadius="10px"
           width="full"
           onClick={() => {
+            setShowProfileModal(false);
+            setShowModal(false);
             dispatch(logout());
           }}
         />
