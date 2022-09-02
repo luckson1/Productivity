@@ -96,7 +96,7 @@ export default function DnDCalendar() {
           </div>
           <div className="flex flex-row flex-wrap gap-1">
             {tasks
-              ?.filter((task) => !task?.start && task?.status !== "Done")
+              ?.filter((task) => !task?.start && task?.status !== "Complete")
               ?.map((task) => (
                 <div
                   className="bg-white rounded m-1 p-1 shadow-2xl text-xs h-8"
