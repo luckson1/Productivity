@@ -1,19 +1,20 @@
 import React from 'react'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useStateContext } from '../context/ContextProvider';
 
-import { deleteTaskAction } from '../redux/taskSlices';
-function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
+import { deleteTaskAction, isShowDeleteModalReset } from '../redux/taskSlices';
+function DeleteDialogBox({ item,  task,  }) {
 
     // dispatch action to delete task
     const dispatch = useDispatch()
-    const { setShowDeleteModal,  tasks,setTasks } = useStateContext();
-
+    const {  tasks,setTasks } = useStateContext();
+    const tasksState = useSelector((state) => state?.tasks);
     const deleteTaskHandler= ()=>{
-        dispatch(deleteTaskAction(task))
+        dispatch(deleteTaskAction(task));
+        dispatch(isShowDeleteModalReset());
         const newTasks= tasks.filter(item=> item.id !== task.id)
         setTasks(newTasks);
-        setShowDeleteModal(false)
+   
     }
 
    
@@ -25,13 +26,12 @@ function DeleteDialogBox({ item, shoppingItem, task, entry, }) {
 
             <div className="fixed-modal">
                 <div className="modalContent">
-                    <span className="close" onClick={() => setShowDeleteModal(false)}>×</span>
+                    <span className="close" onClick={() => dispatch(isShowDeleteModalReset())}>×</span>
                     <p>Are you sure you want to delete this {item}</p>
-                    <button className="del" onClick={
-                        task !== undefined ? () =>deleteTaskHandler()
-                                        : console.log("error")
+                    <button className="del" onClick={ () =>deleteTaskHandler()
+                                     
                     }>Delete {item}</button>
-                    <button className="cancel" onClick={() => setShowDeleteModal(false)}>Cancel</button>
+                    <button className="cancel" onClick={() => isShowDeleteModalReset()}>Cancel</button>
                 </div>
             </div>
         </div>

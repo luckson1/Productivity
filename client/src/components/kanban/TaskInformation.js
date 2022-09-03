@@ -9,18 +9,17 @@ import { Button } from "../Button";
 import CreateComment from "../CreateComment";
 import { fetchCommentAction } from "../../redux/CommentSlices";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  isEditModeReset,
+  isShowDeleteModal,
+  isShowInfoModalReset,
+  isShowModal,
+  isEditMode,
+} from "../../redux/taskSlices";
 
 export const TasksInformation = () => {
-  const {
-    currentColor,
-    setShowInfoModal,
-    setIsEdit,
-    setShowModal,
-    setShowDeleteModal,
-    setCurrentEntry,
-    currentEntry,
-    team,
-  } = useStateContext();
+  const { currentColor, setCurrentEntry, currentEntry, team } =
+    useStateContext();
   const dispatch = useDispatch();
   const task = currentEntry;
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
@@ -44,8 +43,8 @@ export const TasksInformation = () => {
             color="red"
             size="30px"
             onClick={() => {
-              setShowInfoModal(false);
-              setIsEdit(false);
+              dispatch(isShowInfoModalReset());
+              dispatch(isEditModeReset());
             }}
             style={{ cursor: "pointer" }}
           />
@@ -95,9 +94,9 @@ export const TasksInformation = () => {
             text="Edit Details"
             borderRadius="10px"
             onClick={() => {
-              setShowInfoModal(false);
-              setShowModal(true);
-              setIsEdit(true);
+              dispatch(isShowInfoModalReset());
+              dispatch(isShowModal());
+              dispatch(isEditMode());
               setCurrentEntry(task);
               window.scrollTo(0, 0);
             }}
@@ -108,9 +107,8 @@ export const TasksInformation = () => {
             text="Delete Task"
             borderRadius="10px"
             onClick={() => {
-              setShowDeleteModal(true);
-
-              setShowInfoModal(false);
+              dispatch(isShowDeleteModal());
+              dispatch(isShowInfoModalReset());
             }}
           />
         </div>

@@ -2,12 +2,20 @@ import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit"
 import axios from 'axios'
 import { BaseURL } from "../utils/BaseUrl";
 
-// actions for redirect after action is completed
+// actions 
 export const resetTaskCreated = createAction("task/created/reset")
 
 export const resetTaskUpdated = createAction("task/updated/reset")
 export const resetTaskPublished = createAction("task/publish/reset")
 export const resetTaskDeleted = createAction("task/Deleted/reset")
+export const isEditMode = createAction("task/isEdit/mode")
+export const isEditModeReset = createAction("task/isEdit/reset")
+export const isShowModal = createAction("task/isShowFormModal")
+export const isShowModalReset = createAction("task/isShowFormModal/reset")
+export const isShowInfoModal = createAction("task/isShowInfoModal")
+export const isShowInfoModalReset = createAction("task/isShowInfoModal/reset")
+export const isShowDeleteModal = createAction("task/isShowDeleteModal")
+export const isShowDeleteModalReset = createAction("task/isShowDeleteModal/reset")
 // create Task action
 
 export const createTaskAction = createAsyncThunk(
@@ -185,6 +193,38 @@ const TasksSlices = createSlice({
 
     },
     extraReducers: (builder) => {
+        // set state to edit mode
+        builder.addCase(isEditMode, (state, action)=> {
+            state.isEdit=true
+        })
+        builder.addCase(isEditModeReset, (state, action)=> {
+            state.isEdit=false
+        })
+
+
+        // render bug  form modals/components
+        builder.addCase(isShowModal, (state, action)=> {
+            state.showModal=true
+        })
+        builder.addCase(isShowModalReset, (state, action)=> {
+            state.showModal=false
+        })
+
+           // render bug information modals/components
+           builder.addCase(isShowInfoModal, (state, action)=> {
+            state.showInfoModal=true
+        })
+        builder.addCase(isShowInfoModalReset, (state, action)=> {
+            state.showInfoModal=false
+        })
+
+             // render bug delete modals/components
+             builder.addCase(isShowDeleteModal, (state, action)=> {
+                state.showDeleteModal=true
+            })
+            builder.addCase(isShowDeleteModalReset, (state, action)=> {
+                state.showDeleteModal=false
+            })
         // create Task
         // handle pending state
         builder.addCase(createTaskAction.pending, (state, action) => {

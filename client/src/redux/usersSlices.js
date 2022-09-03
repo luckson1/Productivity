@@ -2,9 +2,17 @@ import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BaseURL } from "../utils/BaseUrl";
 
-//action for redirection
+//action 
 export const resetProfilecreated = createAction("user/created/reset");
 export const resetUserRegistered = createAction("user/registered/reset");
+export const isEditMode = createAction("user/isEdit/mode")
+export const isEditModeReset = createAction("user/isEdit/reset")
+export const isShowModal = createAction("user/isShowModal")
+export const isShowModalReset = createAction("user/isShowModal/reset")
+export const isShowProfileModal = createAction("user/isShowProfileModal")
+export const isShowProfileModalReset = createAction("user/isShowProfileModal/reset")
+export const isShowSignUpModal = createAction("user/isShowSignUpModal")
+export const isShowSignUpModalReset = createAction("user/isShowSignUpModal/reset")
 //login action creation
 export const resetLoginAction = createAction("user/login/reset");
 export const registerUserAction = createAsyncThunk(
@@ -260,6 +268,38 @@ const usersSlices = createSlice({
     userAuth: userLoginFromStorage,
   },
   extraReducers: (builder) => {
+
+    // set state to edit mode
+    builder.addCase(isEditMode, (state, action)=> {
+      state.isEdit=true
+  })
+  builder.addCase(isEditModeReset, (state, action)=> {
+      state.isEdit=false
+  })
+
+
+  // render user  profile modals/components
+  builder.addCase(isShowProfileModal, (state, action)=> {
+      state.showProfileModal=true
+  })
+  builder.addCase(isShowProfileModalReset, (state, action)=> {
+      state.showProfileModal=false
+  })
+ // render team  form modals/components
+ builder.addCase(isShowModal, (state, action)=> {
+  state.showModal=true
+})
+builder.addCase(isShowModalReset, (state, action)=> {
+  state.showModal=false
+})
+builder.addCase(isShowSignUpModal, (state, action)=> {
+  state.isSignUp=true
+})
+builder.addCase(isShowSignUpModalReset, (state, action)=> {
+  state.isSignUp=false
+})
+
+
     // register
 
     // handle pending state

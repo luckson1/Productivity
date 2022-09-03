@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../components/Button'
-import AddTeam from '../components/users/AddTeam'
 import InviteUser from '../components/users/InviteUser'
 import TeamList from '../components/users/TeamList'
 import { useStateContext } from '../context/ContextProvider'
-import { fetchTeamMembersAction } from '../redux/usersSlices'
+import { fetchTeamMembersAction, isShowModal } from '../redux/usersSlices'
 
 function Team() {
-  const { currentColor, showModal, setShowModal, setTeam, showCreateTeamModal} = useStateContext();
- 
+  const { currentColor, setTeam} = useStateContext();
+
   const dispatch = useDispatch()
   useEffect(()=> {
   dispatch(fetchTeamMembersAction())
   }, [])
 
-const teamMembers= useSelector(state=> state?.users?.teamProfile?.teamMembers)
+const teamData= useSelector(state=> state?.users)
+const {teamProfile, showModal}=teamData
+const teamMembers=teamProfile?.teamMembers
 useEffect(()=> {
   if (typeof teamMembers !== "undefined") setTeam(teamMembers)
 }, [teamMembers])
@@ -24,7 +25,7 @@ useEffect(()=> {
   return (
     <div>
   
-      <Button onClick={() => {setShowModal(true)}} text="Add Member" bgColor={currentColor} borderRadius="10px" />
+      <Button onClick={() => {dispatch(isShowModal())}} text="Add Member" bgColor={currentColor} borderRadius="10px" animationType="bounce"/>
       <div className='mt-7'>
      
         <TeamList />
@@ -33,7 +34,6 @@ useEffect(()=> {
 
       {showModal && <InviteUser />}
 
-      {showCreateTeamModal  && <AddTeam />}
     </div>
   )
 }

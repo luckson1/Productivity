@@ -2,11 +2,17 @@ import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit"
 import axios from 'axios'
 import { BaseURL } from "../utils/BaseUrl";
 
-// actions for redirect after action is completed
+// actions 
 export const resetBugCreated = createAction("bug/created/reset")
 
 export const resetBugUpdated = createAction("bug/updated/reset")
 export const resetBugDeleted = createAction("bug/Deleted/reset")
+export const isEditMode = createAction("bug/isEdit/mode")
+export const isEditModeReset = createAction("bug/isEdit/reset")
+export const isShowModal = createAction("bug/isShowFormModal")
+export const isShowModalReset = createAction("bug/isShowFormModal/reset")
+export const isShowInfoModal = createAction("bug/isShowInfoModal")
+export const isShowInfoModalReset = createAction("bug/isShowModal/reset")
 // create bug action
 
 export const createBugAction = createAsyncThunk(
@@ -185,6 +191,30 @@ const bugsSlices = createSlice({
 
     },
     extraReducers: (builder) => {
+        // set state to edit mode
+        builder.addCase(isEditMode, (state, action)=> {
+            state.isEdit=true
+        })
+        builder.addCase(isEditModeReset, (state, action)=> {
+            state.isEdit=false
+        })
+
+
+        // render bug  form modals/components
+        builder.addCase(isShowModal, (state, action)=> {
+            state.showModal=true
+        })
+        builder.addCase(isShowModalReset, (state, action)=> {
+            state.showModal=false
+        })
+
+           // render bug information modals/components
+           builder.addCase(isShowInfoModal, (state, action)=> {
+            state.showInfoModal=true
+        })
+        builder.addCase(isShowInfoModalReset, (state, action)=> {
+            state.showInfoModal=false
+        })
         // create bug
         // handle pending state
         builder.addCase(createBugAction.pending, (state) => {

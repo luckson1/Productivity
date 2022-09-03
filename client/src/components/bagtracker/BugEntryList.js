@@ -1,18 +1,21 @@
-import React from 'react'
+import React from "react";
 
-import dateFormatter from '../../utils/dateFormatter'
+import dateFormatter from "../../utils/dateFormatter";
 
-import { useStateContext } from '../../context/ContextProvider';
+import { useStateContext } from "../../context/ContextProvider";
 
-import { BugsInformation } from './BugsInformation';
-
+import { BugsInformation } from "./BugsInformation";
+import { useDispatch, useSelector } from "react-redux";
+import { isShowInfoModal } from "../../redux/bugsSlices";
 
 function BugEntryList({ entries, loading, errors }) {
-  const {   setCurrentEntry ,currentEntry,currentColor, showInfoModal, setShowInfoModal  } = useStateContext();
-
+  const { setCurrentEntry, currentEntry, currentColor } = useStateContext();
+const dispatch=useDispatch()
+  // get bug state from store
+  const bugsState = useSelector((state) => state?.bugs);
+  const { showInfoModal } = bugsState;
   return (
     <div className="table">
-
       <ul className="responsive-table">
         <li className="table-header">
           <div className="col col-2">Title</div>
@@ -22,23 +25,65 @@ function BugEntryList({ entries, loading, errors }) {
           <div className="col col-3">Assignee</div>
         </li>
 
-        {loading ? (<p>Loading, Please Wait 😀......</p>) : errors? <p className="text-red-500">An Error Occured 😥</p>: entries?.length === 0 ? (<p>No Entries, Create some 😀 </p>) : entries?.map(entry => (<li className="table-row" key={entry?.bugId } style={{cursor:"pointer"}} onClick={()=> {setShowInfoModal (true); setCurrentEntry(entry);   window.scrollTo(0, 0)}} >
-          <div className="col col-2" data-label="Title">{entry?.title}</div>
-          <div  className={entry?.priority==="Low"? 'text-blue-500 col col-5' : entry?.priority==="Medium"? 'text-amber-400 col col-5' : entry?.priority==="High"? 'text-red-500 col col-5': "text-gray-900" } data-label="Description">{entry?.priority}</div>
-          <div className="col col-3" data-label="Amount" style={{ color: entry?.status==="Open"? currentColor: "green" }}>{entry?.status}</div>
-          <div className="col col-4" data-label="Date">{dateFormatter(entry?.createdAt)}</div>
-          <div className="col col-3" data-label="Assigned">{entry?.assigned===undefined? "Not Assigned": entry?.assigned}</div>
-        
-         
-      
-        </li>))}
-
-
+        {loading ? (
+          <p>Loading, Please Wait 😀......</p>
+        ) : errors ? (
+          <p className="text-red-500">An Error Occured 😥</p>
+        ) : entries?.length === 0 ? (
+          <p>No Entries, Create some 😀 </p>
+        ) : (
+          entries?.map((entry) => (
+            <li
+              className="table-row"
+              key={entry?.bugId}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+             dispatch(isShowInfoModal())
+                setCurrentEntry(entry);
+                window.scrollTo(0, 0);
+              }}
+            >
+              <div className="col col-2" data-label="Title">
+                {entry?.title}
+              </div>
+              <div
+                className={
+                  entry?.priority === "Low"
+                    ? "text-blue-500 col col-5"
+                    : entry?.priority === "Medium"
+                    ? "text-amber-400 col col-5"
+                    : entry?.priority === "High"
+                    ? "text-red-500 col col-5"
+                    : "text-gray-900"
+                }
+                data-label="Description"
+              >
+                {entry?.priority}
+              </div>
+              <div
+                className="col col-3"
+                data-label="Amount"
+                style={{
+                  color: entry?.status === "Open" ? currentColor : "green",
+                }}
+              >
+                {entry?.status}
+              </div>
+              <div className="col col-4" data-label="Date">
+                {dateFormatter(entry?.createdAt)}
+              </div>
+              <div className="col col-3" data-label="Assigned">
+                {entry?.assigned === undefined
+                  ? "Not Assigned"
+                  : entry?.assigned}
+              </div>
+            </li>
+          ))
+        )}
       </ul>
       {showInfoModal && <BugsInformation bugEntry={currentEntry} />}
-
     </div>
-  )
+  );
 }
 
-export default BugEntryList
+export default BugEntryList;

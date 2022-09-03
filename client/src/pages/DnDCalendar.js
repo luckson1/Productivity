@@ -5,7 +5,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import React, { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasksAction } from "../redux/taskSlices";
+import { fetchTasksAction, isShowInfoModal } from "../redux/taskSlices";
 import { useStateContext } from "../context/ContextProvider";
 import DeleteDialogBox from "../components/DeleteDialogBox";
 import { TasksInformation } from "../components/kanban/TaskInformation";
@@ -15,15 +15,7 @@ import { MdCancel } from "react-icons/md";
 import EditTasks from "../components/kanban/EditTasks";
 
 export default function DnDCalendar() {
-  const {
-    setCurrentEntry,
-    showModal,
-    showDeleteModal,
-    currentEntry,
-    showInfoModal,
-    setShowInfoModal,
-    currentColor,
-  } = useStateContext();
+  const { setCurrentEntry, currentEntry, currentColor } = useStateContext();
   const [showNoDateModal, setShowNoDateModal] = useState(false);
   const DnDCalendarComponent = withDragAndDrop(Calendar);
   const dispatch = useDispatch();
@@ -33,7 +25,9 @@ export default function DnDCalendar() {
     dispatch(fetchTasksAction());
   }, []);
   const tasksState = useSelector((state) => state?.tasks);
-  const tasks = tasksState?.tasksFetched?.tasks;
+  const { tasksFetched, showInfoModal, showModal, showDeleteModal } =
+    tasksState;
+  const tasks = tasksFetched?.tasks;
   const events = tasks?.map((task) => {
     return {
       start: new Date(Date.parse(task?.start)),
@@ -101,8 +95,11 @@ export default function DnDCalendar() {
                 <div
                   className="bg-white rounded m-1 p-1 shadow-2xl text-xs h-8"
                   key={task?.taskId}
-                  style={{cursor: "pointer"}}
-                  onClick={()=> {setShowInfoModal(true); setCurrentEntry(task)}}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    dispatch(isShowInfoModal());
+                    setCurrentEntry(task);
+                  }}
                 >
                   <span>{task?.title}</span>
                 </div>

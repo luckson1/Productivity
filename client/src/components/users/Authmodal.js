@@ -3,11 +3,12 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 // import { loginUserAction, registerUserAction } from '../redux/usersSlices';
 import DisabledButton from "../DisabledButton";
-import { useStateContext } from "../../context/ContextProvider";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { loginUserAction, registerUserAction } from "../../redux/usersSlices";
+import { isShowSignUpModal, isShowSignUpModalReset, loginUserAction, registerUserAction, isShowModalReset  } from "../../redux/usersSlices";
+import { useState } from "react";
+
 
 // use yup to handle errors
 const SignInErrorSchema = Yup.object().shape({
@@ -26,13 +27,7 @@ const LoginErrorSchema = Yup.object().shape({
 });
 
 export const Authmodal = () => {
-  const {
-    revealPassword,
-    setRevealPassword,
-    setShowModal,
-    isSignUp,
-    setIsSignUp,
-  } = useStateContext();
+const [revealPassword, setRevealPassword]=useState(false)
   // dispatch
   const dispatch = useDispatch();
 
@@ -41,7 +36,7 @@ export const Authmodal = () => {
   const user = useSelector((state) => {
     return state?.users;
   });
-  const { userLoading, userServerErr, userAppErr } = user;
+  const { userLoading, userServerErr, userAppErr,   isSignUp,  } = user;
   // use formik hook to handle form state
   const formik = useFormik({
     initialValues: {
@@ -64,8 +59,8 @@ export const Authmodal = () => {
     <div className="auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20">
       <div
         onClick={() => {
-          setShowModal(false);
-          setIsSignUp(true);
+         dispatch(isShowModalReset());
+          dispatch(isShowSignUpModal());
           setRevealPassword(false);
         }}
         className="close-icon"
@@ -132,7 +127,7 @@ export const Authmodal = () => {
               to="/"
               type="button"
               className="text-blue-500"
-              onClick={() => setIsSignUp(true)}
+              onClick={() => dispatch(isShowSignUpModal())}
             >
               Sign Up
             </Link>
@@ -146,7 +141,7 @@ export const Authmodal = () => {
               to="/"
               type="button"
               className="text-blue-500"
-              onClick={() => setIsSignUp(false)}
+              onClick={() => dispatch(isShowSignUpModalReset())}
             >
               Login
             </Link>

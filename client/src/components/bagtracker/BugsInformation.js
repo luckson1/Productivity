@@ -2,24 +2,21 @@ import React, { useEffect } from "react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
-import { editBugsAction } from "../../redux/bugsSlices";
+import {
+  editBugsAction,
+  isEditMode,
+  isEditModeReset,
+  isShowInfoModalReset,
+  isShowModal,
+} from "../../redux/bugsSlices";
 import { fetchCommentAction } from "../../redux/CommentSlices";
 import { Button } from "../Button";
 import CreateComment from "../CreateComment";
 import InfoCard from "../InfoCard";
 
 export const BugsInformation = ({ bugEntry }) => {
-  const {
-    currentColor,
-    setShowInfoModal,
-    setIsEdit,
-    setShowModal,
-    setCurrentEntry,
-    bugs,
-    currentEntry,
-    setBugs,
-    team,
-  } = useStateContext();
+  const { currentColor, setCurrentEntry, bugs, currentEntry, setBugs, team } =
+    useStateContext();
   const entry = currentEntry;
   const dispatch = useDispatch();
   const newStatus =
@@ -50,7 +47,7 @@ export const BugsInformation = ({ bugEntry }) => {
     });
 
     setBugs([...newBugs, values]);
-    setShowInfoModal(false);
+    dispatch(isShowInfoModalReset());
   };
 
   useEffect(() => {
@@ -78,8 +75,8 @@ export const BugsInformation = ({ bugEntry }) => {
             size="30px"
             style={{ cursor: "pointer" }}
             onClick={() => {
-              setIsEdit(false);
-              setShowInfoModal(false);
+              dispatch(isEditModeReset());
+              dispatch(isShowInfoModalReset());
             }}
           />
         </div>
@@ -119,9 +116,9 @@ export const BugsInformation = ({ bugEntry }) => {
             text="Edit Details"
             borderRadius="10px"
             onClick={() => {
-              setShowInfoModal(false);
-              setShowModal(true);
-              setIsEdit(true);
+              dispatch(isShowInfoModalReset());
+              dispatch(isShowModal());
+              dispatch(isEditMode());
               setCurrentEntry(bugEntry);
               window.scrollTo(0, 0);
             }}

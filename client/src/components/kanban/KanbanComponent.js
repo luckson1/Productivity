@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasksAction } from "../../redux/taskSlices";
+import { fetchTasksAction, isShowInfoModal } from "../../redux/taskSlices";
 import DeleteDialogBox from "../DeleteDialogBox";
 import TaskCard from "./TaskCard";
 import { ItemTypes } from "../../utils/items";
@@ -15,21 +15,8 @@ import { fetchTeamMembersAction } from "../../redux/usersSlices";
 export default function KanbanComponent() {
   // display or remove action creation/edit form
 
-  const {
-    showModal,
-    setShowModal,
-    showDeleteModal,
-    setShowDeleteModal,
-    isEdit,
-    setIsEdit,
-    currentEntry,
-    tasks,
-    setTasks,
-    showInfoModal,
-    setShowInfoModal,
-    setCurrentEntry,
-    setTeam,
-  } = useStateContext();
+  const { currentEntry, tasks, setTasks, setCurrentEntry, setTeam } =
+    useStateContext();
 
   // dispatch action to fetch all tasks
   const dispatch = useDispatch();
@@ -39,7 +26,15 @@ export default function KanbanComponent() {
   }, [dispatch]);
 
   const tasksState = useSelector((state) => state?.tasks);
-  const { tasksFetched, taskLoading, taskAppErr, taskServerErr } = tasksState;
+  const {
+    tasksFetched,
+    taskLoading,
+    taskAppErr,
+    taskServerErr,
+    showInfoModal,
+    showModal,
+    showDeleteModal,
+  } = tasksState;
 
   useEffect(() => {
     if (tasksFetched) {
@@ -52,7 +47,9 @@ export default function KanbanComponent() {
   }, []);
 
   const toDoTasks = tasks?.filter((task) => task?.status === "To Do");
-  const inProgressTasks = tasks?.filter((task) => task?.status === "In Progress");
+  const inProgressTasks = tasks?.filter(
+    (task) => task?.status === "In Progress"
+  );
   const doneTasks = tasks?.filter((task) => task?.status === "Done");
 
   const teamMembers = useSelector(
@@ -85,7 +82,7 @@ export default function KanbanComponent() {
                 key={task?.taskId}
                 type={ItemTypes.DO}
                 onClick={() => {
-                  setShowInfoModal(true);
+                  dispatch(isShowInfoModal());
                   setCurrentEntry(task);
                 }}
               />
@@ -121,21 +118,8 @@ export default function KanbanComponent() {
           )}
         </DoneTasks>
       </div>
-      {showModal && (
-        <EditTasks
-          setShowModal={setShowModal}
-          isEdit={isEdit}
-          entry={currentEntry}
-          setIsEdit={setIsEdit}
-        />
-      )}
-      {showDeleteModal && (
-        <DeleteDialogBox
-          setShowDeleteModal={setShowDeleteModal}
-          task={currentEntry}
-          item="Task"
-        />
-      )}
+      {showModal && <EditTasks entry={currentEntry} />}
+      {showDeleteModal && <DeleteDialogBox task={currentEntry} item="Task" />}
       {showInfoModal && <TasksInformation />}
     </div>
   );

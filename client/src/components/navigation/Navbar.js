@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import { useStateContext } from '../../context/ContextProvider';
-import { fetchUserProfileAction } from '../../redux/usersSlices';
+import { fetchUserProfileAction, isShowProfileModal } from '../../redux/usersSlices';
 import { UserProfile } from '../users/UserProfile';
 
 export const Navbar = () => {
     const { setActiveMenu, 
-        screenSize, setScreenSize, currentColor, showProfileModal, setShowProfileModal} = useStateContext();
+        screenSize, setScreenSize, currentColor} = useStateContext();
 
     useEffect(() => {
         const handleResize = () => setScreenSize(window.innerWidth);
@@ -30,11 +30,17 @@ export const Navbar = () => {
         }
     }, [])
 
+     //get state from store 
+     const userState = useSelector(state => state?.users)
+     const {userProfile, showProfileModal}=userState
+     const user=userProfile?.user
+
     const dispatch= useDispatch()
     useEffect(()=> {
         dispatch(fetchUserProfileAction())
     }, [])
-    const user = useSelector(state => state?.users?.userProfile?.user)
+
+   
 
     const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
@@ -56,7 +62,7 @@ export const Navbar = () => {
 
                 <div
                     className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-                    onClick={() => setShowProfileModal(true)}
+                    onClick={() => dispatch(isShowProfileModal())}
                 >
                     <img
                         className="rounded-full w-8 h-8"
@@ -73,7 +79,7 @@ export const Navbar = () => {
                 </div>
 
             
-                {showProfileModal && <UserProfile />}
+                {showProfileModal && <UserProfile user={user}/>}
             </div>
         </div>
 

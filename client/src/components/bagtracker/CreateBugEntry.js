@@ -4,8 +4,8 @@ import { useFormik } from "formik";
 // import { useDispatch } from 'react-redux';
 import { MdCancel } from "react-icons/md";
 import { useStateContext } from "../../context/ContextProvider";
-import { useDispatch } from "react-redux";
-import { createBugAction, editBugsAction } from "../../redux/bugsSlices";
+import { useDispatch, useSelector } from "react-redux";
+import { createBugAction, editBugsAction, isEditModeReset, isShowModalReset } from "../../redux/bugsSlices";
 import { v4 as uuidv4 } from "uuid";
 
 const errorSchema = Yup.object().shape({
@@ -17,10 +17,11 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-  const { setShowModal, isEdit, currentEntry, bugs, setBugs, setIsEdit, team } =
+  const { currentEntry, bugs, setBugs, team } =
     useStateContext();
   const entry = currentEntry;
-
+  const bugsState = useSelector((state) => state?.bugs);
+  const {  isEdit } = bugsState;
   const dispatch = useDispatch();
 
   const addBugHandler = (values) => {
@@ -30,18 +31,19 @@ function CreateBugEntry() {
     newBug.push(values);
     setBugs([...bugs, ...newBug]);
 
-    setShowModal(false);
+    dispatch(isShowModalReset())
   };
 
   const editbugHandler = (values) => {
     dispatch(editBugsAction(values));
+    dispatch(isEditModeReset())
     const newBugs = bugs?.filter((bug) => {
       return entry._id !== bug?._id;
     });
     let editedBug = [];
     editedBug.push(values);
     setBugs([...newBugs, ...editedBug]);
-    setShowModal(false);
+    dispatch(isShowModalReset())
   };
 
   // use formik hook to handle form state
@@ -76,8 +78,8 @@ function CreateBugEntry() {
               size="30px"
               color="red"
               onClick={() => {
-                setIsEdit(false);
-                setShowModal(false);
+                dispatch(isEditModeReset());
+           dispatch(isShowModalReset())
               }}
               style={{ cursor: "pointer" }}
             />

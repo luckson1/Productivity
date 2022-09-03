@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchbugsAction } from "../../redux/bugsSlices";
+import { fetchbugsAction, isShowModal } from "../../redux/bugsSlices";
 import BugCard from "./BugCard";
 import { ItemTypes } from "../../utils/items";
 import { useStateContext } from "../../context/ContextProvider";
@@ -15,18 +15,8 @@ import InProgressBugs from "./InProgressBugs";
 export default function BugEntryComponent() {
   // display or remove action creation/edit form
 
-  const {
-    currentColor,
-    showModal,
-    setShowModal,
-    isEdit,
-    setIsEdit,
-    currentEntry,
-    bugs,
-    setBugs,
-    showInfoModal,
-    setTeam,
-  } = useStateContext();
+  const { currentColor, currentEntry, bugs, setBugs, setTeam } =
+    useStateContext();
 
   // dispatch action to fetch all Bugs
   const dispatch = useDispatch();
@@ -38,8 +28,17 @@ export default function BugEntryComponent() {
     dispatch(fetchTeamMembersAction());
   }, []);
 
+  // get state from bugs store
+
   const bugsState = useSelector((state) => state?.bugs);
-  const { bugsFetched, bugLoading, bugAppErr, bugServerErr } = bugsState;
+  const {
+    bugsFetched,
+    bugLoading,
+    bugAppErr,
+    bugServerErr,
+    showModal,
+    showInfoModal,
+  } = bugsState;
 
   useEffect(() => {
     if (bugsFetched) {
@@ -51,10 +50,11 @@ export default function BugEntryComponent() {
   const inProgressBugs = bugs?.filter((bug) => bug?.status === "In Progress");
   const inReviewBugs = bugs?.filter((bug) => bug?.status === "In Review");
   const closedBugs = bugs?.filter((bug) => bug?.status === "Closed");
-
+  // get data from user store
   const teamMembers = useSelector(
     (state) => state?.users?.teamProfile?.teamMembers
   );
+
   useEffect(() => {
     if (typeof teamMembers !== "undefined")
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
@@ -69,7 +69,7 @@ export default function BugEntryComponent() {
           borderRadius="10px"
           text="Add New Bug"
           onClick={() => {
-            setShowModal(true);
+            dispatch(isShowModal());
             window.scrollTo(0, 0);
           }}
         />
@@ -130,14 +130,7 @@ export default function BugEntryComponent() {
           )}
         </ClosedBugs>
       </div>
-      {showModal && (
-        <CreateBugEntry
-          setShowModal={setShowModal}
-          isEdit={isEdit}
-          entry={currentEntry}
-          setIsEdit={setIsEdit}
-        />
-      )}
+      {showModal && <CreateBugEntry entry={currentEntry} />}
       {showInfoModal && <BugsInformation bugEntry={currentEntry} />}
     </div>
   );

@@ -17,11 +17,11 @@ import CompletedItems from "./pages/CompletedItems";
 function App() {
   const {
     activeMenu,
-    setThemeSettings,
     currentColor,
-    themeSettings,
     showNavBar,
     currentMode,
+    themeSettings,
+    setThemeSettings,
   } = useStateContext();
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
@@ -63,7 +63,7 @@ function App() {
             </div>
 
             <div>
-              {themeSettings && <ThemeSettings />}
+              {themeSettings && <ThemeSettings setThemeSettings />}
               <Routes>
                 <Route exact path="/" element={<Home />} />
 
@@ -112,7 +112,7 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-                  <Route
+                <Route
                   exact
                   path="/completed"
                   element={

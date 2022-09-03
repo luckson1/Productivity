@@ -1,9 +1,13 @@
 import React from "react";
 import { useDrag } from "react-dnd";
+import { useDispatch } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
+import { isShowInfoModal } from "../../redux/taskSlices";
 
 function TaskCard({ task, type }) {
-  const { setCurrentEntry, setShowInfoModal, team } = useStateContext();
+  const { setCurrentEntry, team } = useStateContext();
+
+  //react DnD API
   const [{ isDragging }, drag] = useDrag({
     item: { task },
 
@@ -12,6 +16,9 @@ function TaskCard({ task, type }) {
       isDragging: !!monitor.isDragging(),
     }),
   });
+
+
+  const dispatch=useDispatch()
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
   return (
     <div
@@ -26,7 +33,7 @@ function TaskCard({ task, type }) {
       ref={drag}
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
       onClick={() => {
-        setShowInfoModal(true);
+        dispatch(isShowInfoModal())
         setCurrentEntry(task);
       }}
     >

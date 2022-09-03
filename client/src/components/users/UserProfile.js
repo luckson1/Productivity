@@ -1,28 +1,25 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 
 import { useStateContext } from "../../context/ContextProvider";
 
 import { Button } from "../Button";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUserProfileAction, logout } from "../../redux/usersSlices";
+import { useDispatch } from "react-redux";
+import { isShowProfileModalReset, logout } from "../../redux/usersSlices";
 import { FaEdit } from "react-icons/fa";
 import UserProfileEdit from "./UserProfileEdit";
 
-export const UserProfile = () => {
-  const { currentColor, setShowProfileModal, setShowModal } = useStateContext();
+export const UserProfile = ({user, }) => {
+  const { currentColor} = useStateContext();
   const [isEditPic, setIsEditPic] = useState(false);
   const [showProfileEditModal, setShowProfileEditModal] = useState(false);
   const removeProfileEditModal = useCallback(() => {
     setShowProfileEditModal(false);
-    setShowProfileModal(false);
-  }, [setShowProfileEditModal, setShowProfileModal]);
+    dispatch(isShowProfileModalReset());
+  }, []);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchUserProfileAction());
-  }, []);
-  const user = useSelector((state) => state?.users?.userProfile?.user);
+
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 z-40">
@@ -33,7 +30,7 @@ export const UserProfile = () => {
           size="30px"
           color="red"
           cursor={"pointer"}
-          onClick={() => setShowProfileModal(false)}
+          onClick={() => dispatch(isShowProfileModalReset())}
         />
       </div>
       <div className="flex flex-col gap-7 items-center mt-6 border-color border-b-1 pb-6">
@@ -81,8 +78,7 @@ export const UserProfile = () => {
           borderRadius="10px"
           width="full"
           onClick={() => {
-            setShowProfileModal(false);
-            setShowModal(false);
+            dispatch(isShowProfileModalReset());
             dispatch(logout());
           }}
         />

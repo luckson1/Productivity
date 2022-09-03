@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import { editTasksAction } from "../../redux/taskSlices";
+import {
+  editTasksAction,
+  isEditModeReset, isShowModalReset
+} from "../../redux/taskSlices";
 import { MdCancel } from "react-icons/md";
 import { useStateContext } from "../../context/ContextProvider";
 import { v4 as uuidv4 } from "uuid";
@@ -14,15 +17,7 @@ const errorSchema = Yup.object().shape({
   status: Yup.string(),
 });
 function EditTasks() {
-  const {
-    setShowModal,
-    setIsEdit,
-    isEdit,
-    tasks,
-    setTasks,
-    currentEntry,
-    team,
-  } = useStateContext();
+  const { tasks, setTasks, currentEntry, team } = useStateContext();
   const entry = currentEntry;
   const dispatch = useDispatch();
 
@@ -34,7 +29,7 @@ function EditTasks() {
     let editedTask = [];
     editedTask.push(values);
     setTasks([...newtasks, ...editedTask]);
-    setShowModal(false);
+    dispatch(isShowModalReset());
   };
   // control state of data input
   const [startDate, setStartDate] = useState(
@@ -53,7 +48,7 @@ function EditTasks() {
       updateAt: entry?.updateAt ?? new Date(),
       start: entry?.start ?? undefined,
       end: entry?.end ?? undefined,
-      assigned: isEdit ? entry?.assigned : undefined,
+      assigned: entry?.assigned,
     },
     validationSchema: errorSchema,
     onSubmit: (values) => {
@@ -73,8 +68,8 @@ function EditTasks() {
               size="30px"
               color="red"
               onClick={() => {
-                setIsEdit(false);
-                setShowModal(false);
+                dispatch(isEditModeReset());
+                dispatch(isShowModalReset());
               }}
               style={{ cursor: "pointer" }}
             />
@@ -102,120 +97,115 @@ function EditTasks() {
             <div className="form-validation">
               {formik.touched.summary && formik.errors.summary}
             </div>
-            {isEdit && (
-              <span className="form-row">
-                <label className="form-row-label" htmlFor="task-name">
-                  Summary
-                </label>
-                <textarea
-                  className="form-row-input"
-                  id="task-summary"
-                  cols="50"
-                  rows="6"
-                  value={formik.values.summary}
-                  onChange={formik.handleChange("summary")}
-                  onBlur={formik.handleBlur("summary")}
-                  placeholder="Describe the Task......"
-                ></textarea>
-              </span>
-            )}
 
-            {isEdit && (
-              <span className="form-row">
-                <label className="form-row-label" htmlFor="task-name">
-                  Status
-                </label>
+            <span className="form-row">
+              <label className="form-row-label" htmlFor="task-name">
+                Summary
+              </label>
+              <textarea
+                className="form-row-input"
+                id="task-summary"
+                cols="50"
+                rows="6"
+                value={formik.values.summary}
+                onChange={formik.handleChange("summary")}
+                onBlur={formik.handleBlur("summary")}
+                placeholder="Describe the Task......"
+              ></textarea>
+            </span>
 
-                <div className="multiple-input-container">
-                  <input
-                    id="do"
-                    value={undefined}
-                    onChange={() => {
-                      formik.setFieldValue("status", "To Do");
-                    }}
-                    onBlur={formik.handleBlur("status")}
-                    type="radio"
-                    checked={formik.values.status === "To Do"}
-                  />
-                  <label htmlFor="do">To Do</label>
+            <span className="form-row">
+              <label className="form-row-label" htmlFor="task-name">
+                Status
+              </label>
 
-                  <input
-                    id="progress"
-                    value={undefined}
-                    onChange={() => {
-                      formik.setFieldValue("status", "In Progress");
-                    }}
-                    onBlur={formik.handleBlur("status")}
-                    type="radio"
-                    checked={formik.values.status === "In Progress"}
-                  />
-                  <label htmlFor="progress">In Progress</label>
-
-                  <input
-                    id="Done"
-                    value={undefined}
-                    onChange={() => {
-                      formik.setFieldValue("status", "Done");
-                    }}
-                    onBlur={formik.handleBlur("status")}
-                    type="radio"
-                    checked={formik.values.status === "Done"}
-                  />
-                  <label htmlFor="Done">Done</label>
-
-                  <input
-                    id="Complete"
-                    value={undefined}
-                    onChange={() => {
-                      formik.setFieldValue("status", "Complete");
-                    }}
-                    onBlur={formik.handleBlur("status")}
-                    type="radio"
-                    checked={formik.values.status === "Complete"}
-                  />
-                  <label htmlFor="Complete">Complete</label>
-                </div>
-              </span>
-            )}
-            {isEdit && (
-              <span className="form-row">
-                <label className="form-row-label" htmlFor="startDate">
-                  Start Date
-                </label>
-                <DatePicker
-                  className="w-11/12 rounded-lg m-auto h-10"
-                  id="startDate"
-                  name="startDate"
-                  placeholder="start-date"
-                  selected={startDate}
-                  onChange={(val) => {
-                    formik.setFieldValue("start", val);
-                    setStartDate(val);
+              <div className="multiple-input-container">
+                <input
+                  id="do"
+                  value={undefined}
+                  onChange={() => {
+                    formik.setFieldValue("status", "To Do");
                   }}
-                  minDate={new Date()}
-                  onBlur={formik.handleBlur("startDate")}
+                  onBlur={formik.handleBlur("status")}
+                  type="radio"
+                  checked={formik.values.status === "To Do"}
                 />
-              </span>
-            )}
+                <label htmlFor="do">To Do</label>
 
-            {isEdit && (
-              <span className="form-row">
-                <label className="form-row-label" htmlFor="endDate">
-                  End Date
-                </label>
-                <DatePicker
-                  className="w-11/12 rounded-lg m-auto h-10"
-                  name="endDate"
-                  selected={endDate}
-                  onChange={(val) => {
-                    formik.setFieldValue("end", val);
-                    setEndDate(val);
+                <input
+                  id="progress"
+                  value={undefined}
+                  onChange={() => {
+                    formik.setFieldValue("status", "In Progress");
                   }}
-                  minDate={new Date()}
-                  onBlur={formik.handleBlur("end")}
+                  onBlur={formik.handleBlur("status")}
+                  type="radio"
+                  checked={formik.values.status === "In Progress"}
                 />
-              </span>
-            )}
+                <label htmlFor="progress">In Progress</label>
+
+                <input
+                  id="Done"
+                  value={undefined}
+                  onChange={() => {
+                    formik.setFieldValue("status", "Done");
+                  }}
+                  onBlur={formik.handleBlur("status")}
+                  type="radio"
+                  checked={formik.values.status === "Done"}
+                />
+                <label htmlFor="Done">Done</label>
+
+                <input
+                  id="Complete"
+                  value={undefined}
+                  onChange={() => {
+                    formik.setFieldValue("status", "Complete");
+                  }}
+                  onBlur={formik.handleBlur("status")}
+                  type="radio"
+                  checked={formik.values.status === "Complete"}
+                />
+                <label htmlFor="Complete">Complete</label>
+              </div>
+            </span>
+
+            <span className="form-row">
+              <label className="form-row-label" htmlFor="startDate">
+                Start Date
+              </label>
+              <DatePicker
+                className="w-11/12 rounded-lg m-auto h-10"
+                id="startDate"
+                name="startDate"
+                placeholder="start-date"
+                selected={startDate}
+                onChange={(val) => {
+                  formik.setFieldValue("start", val);
+                  setStartDate(val);
+                }}
+                minDate={new Date()}
+                onBlur={formik.handleBlur("startDate")}
+              />
+            </span>
+
+            <span className="form-row">
+              <label className="form-row-label" htmlFor="endDate">
+                End Date
+              </label>
+              <DatePicker
+                className="w-11/12 rounded-lg m-auto h-10"
+                name="endDate"
+                selected={endDate}
+                onChange={(val) => {
+                  formik.setFieldValue("end", val);
+                  setEndDate(val);
+                }}
+                minDate={new Date()}
+                onBlur={formik.handleBlur("end")}
+              />
+            </span>
+
             <span className="form-row">
               <label className="form-row-label" htmlFor="assigned">
                 Assigned

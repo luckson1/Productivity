@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import productivity from "../assets/productivity.svg";
 import todo from "../assets/todo.svg";
 
@@ -7,19 +7,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { Authmodal } from "../components/users/Authmodal";
 import { MdClose, MdMenu } from "react-icons/md";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/usersSlices";
+import {
+  isShowModal,
+  isShowModalReset,
+  isShowSignUpModal,
+  logout,
+} from "../redux/usersSlices";
 
 function Home() {
-  const {
-    setActiveMenu,
-    setShowNavBar,
-    showModal,
-    setShowModal,
-    setIsSignUp,
-    isOpenMenu,
-    setIsOpenMenu,
-    currentColor,
-  } = useStateContext();
+  const { setActiveMenu, setShowNavBar, currentColor } = useStateContext();
+
+  const [isOpenMenu, setIsOpenMenu] = useState();
   useEffect(() => {
     setActiveMenu(false);
     setShowNavBar(false);
@@ -30,7 +28,7 @@ function Home() {
   const user = useSelector((state) => {
     return state?.users;
   });
-  const { isRegistered, isLoggedIn } = user;
+  const { isRegistered, isLoggedIn, showModal } = user;
   // force navigation once an action is performed
   const navigate = useNavigate();
   useEffect(() => {
@@ -48,7 +46,7 @@ function Home() {
       navigate("/dashboard");
       setActiveMenu(true);
       setShowNavBar(true);
-      setShowModal(false);
+      dispatch(isShowModalReset());
     }
   }, [isLoggedIn]);
   return (
@@ -127,8 +125,8 @@ function Home() {
                   userLogin
                     ? () => dispatch(logout())
                     : () => {
-                        setShowModal(true);
-                        setIsSignUp(false);
+                        dispatch(isShowModal());
+                        dispatch(isShowSignUpModal());
                         setIsOpenMenu(false);
                         window.scrollTo(0, 0);
                       }
@@ -157,7 +155,7 @@ function Home() {
               {!userLogin && (
                 <button
                   onClick={() => {
-                    setShowModal(true);
+                    dispatch(isShowModal());
                     window.scrollTo(0, 0);
                   }}
                   className="mx-auto lg:mx-0 hover:underline text-gray-900 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
@@ -1117,7 +1115,7 @@ function Home() {
           {!userLogin && (
             <button
               onClick={() => {
-                setShowModal(true);
+                dispatch(isShowModal());
                 window.scrollTo(0, 0);
               }}
               className="mx-auto  hover:underline bg-white text-gray-900 font-bold rounded-full mt-6 mb-16 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"

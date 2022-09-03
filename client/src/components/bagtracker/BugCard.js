@@ -1,9 +1,13 @@
 import React from "react";
 import { useDrag } from "react-dnd";
+import { useDispatch } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
+import { isShowInfoModal } from "../../redux/bugsSlices";
 
 function BugCard({ bug, type }) {
-  const { setCurrentEntry, setShowInfoModal, team } = useStateContext();
+  const { setCurrentEntry,  team } = useStateContext();
+
+  // react drag and drop hook and api
   const [{ isDragging }, drag] = useDrag({
     item: {
       bug,
@@ -15,6 +19,7 @@ function BugCard({ bug, type }) {
     }),
   });
 
+  const dispatch=useDispatch()
   const assigneeData = team?.filter((member) => member?._id === bug?.assigned);
   return (
     <div
@@ -29,7 +34,7 @@ function BugCard({ bug, type }) {
       ref={drag}
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
       onClick={() => {
-        setShowInfoModal(true);
+       dispatch(isShowInfoModal())
         setCurrentEntry(bug);
       }}
     >
