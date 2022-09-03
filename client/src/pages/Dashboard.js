@@ -16,11 +16,10 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchTasksAction());
-  }, []);
-
-  useEffect(() => {
     dispatch(fetchbugsAction());
   }, []);
+
+
   // get state from store
   const stateData = useSelector((state) => state);
 

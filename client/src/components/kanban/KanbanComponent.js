@@ -23,6 +23,7 @@ export default function KanbanComponent() {
 
   useEffect(() => {
     dispatch(fetchTasksAction());
+    dispatch(fetchTeamMembersAction());
   }, [dispatch]);
 
   const tasksState = useSelector((state) => state?.tasks);
@@ -42,9 +43,7 @@ export default function KanbanComponent() {
     }
   }, [tasksFetched, setTasks]);
 
-  useEffect(() => {
-    dispatch(fetchTeamMembersAction());
-  }, []);
+
 
   const toDoTasks = tasks?.filter((task) => task?.status === "To Do");
   const inProgressTasks = tasks?.filter(
