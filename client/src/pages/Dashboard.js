@@ -58,7 +58,7 @@ const Dashboard = () => {
 
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
-      <div className="mt-24">
+      <div className="mt-24 mb-12">
         <div className="flex flex-wrap lg:flex-nowrap justify-center ">
           <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-3">
             <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl">
