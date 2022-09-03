@@ -23,10 +23,9 @@ export default function BugEntryComponent() {
 
   useEffect(() => {
     dispatch(fetchbugsAction());
-  }, [dispatch]);
-  useEffect(() => {
     dispatch(fetchTeamMembersAction());
-  }, []);
+  }, [dispatch]);
+
 
   // get state from bugs store
 
