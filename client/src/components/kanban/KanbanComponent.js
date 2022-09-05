@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasksAction, isShowInfoModal } from "../../redux/taskSlices";
 import DeleteDialogBox from "../DeleteDialogBox";
@@ -135,7 +135,7 @@ export default function KanbanComponent() {
         </DoneTasks>
       </div>
       {showModal && <EditTasks entry={currentEntry} />}
-      {showDeleteModal && <DeleteDialogBox task={currentEntry} item="Task" />}
+      {showDeleteModal && <DeleteDialogBox item="Task" />}
       {showInfoModal && <TasksInformation />}
     </div>
   );

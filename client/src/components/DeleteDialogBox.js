@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { useStateContext } from '../context/ContextProvider';
 
 import { deleteTaskAction, isShowDeleteModalReset } from '../redux/taskSlices';
-function DeleteDialogBox({ item,  task,  }) {
+function DeleteDialogBox({ item, }) {
 
     // dispatch action to delete task
     const dispatch = useDispatch()
-    const {  tasks,setTasks } = useStateContext();
+    const {  tasks,setTasks , currentEntry} = useStateContext();
+    const task=currentEntry
     const tasksState = useSelector((state) => state?.tasks);
     const deleteTaskHandler= ()=>{
         dispatch(deleteTaskAction(task));
         dispatch(isShowDeleteModalReset());
-        const newTasks= tasks.filter(item=> item.id !== task.id)
+        const newTasks= tasks.filter(item=> item.taskId !== task.taskId)
         setTasks(newTasks);
    
     }
