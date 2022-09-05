@@ -38,7 +38,7 @@ function BugCard({ bug, type }) {
         setCurrentEntry(bug);
       }}
     >
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between flex-wrap">
         <p>{bug?.title}</p>
         <img
           className="rounded-full h-6 w-6"
