@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasksAction, isShowInfoModal } from "../../redux/taskSlices";
 import DeleteDialogBox from "../DeleteDialogBox";
@@ -11,12 +11,20 @@ import { TasksInformation } from "./TaskInformation";
 import CreateTasks from "./CreateTasks";
 import EditTasks from "./EditTasks";
 import { fetchTeamMembersAction } from "../../redux/usersSlices";
+import { Button } from "../Button";
 
 export default function KanbanComponent() {
   // display or remove action creation/edit form
 
-  const { currentEntry, tasks, setTasks, setCurrentEntry, setTeam } =
-    useStateContext();
+  const {
+    currentEntry,
+    tasks,
+    setTasks,
+    setCurrentEntry,
+    setTeam,
+    currentColor,
+  } = useStateContext();
+  const [showTaskInput, setShowTaskInput] = useState(false);
 
   // dispatch action to fetch all tasks
   const dispatch = useDispatch();
@@ -43,8 +51,6 @@ export default function KanbanComponent() {
     }
   }, [tasksFetched, setTasks]);
 
-
-
   const toDoTasks = tasks?.filter((task) => task?.status === "To Do");
   const inProgressTasks = tasks?.filter(
     (task) => task?.status === "In Progress"
@@ -61,10 +67,21 @@ export default function KanbanComponent() {
 
   return (
     <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
+      <div className="kanban-heading">
+        <Button
+          bgColor={currentColor}
+          animationType="bounce"
+          borderRadius="10px"
+          text="Add New Task"
+          onClick={() => {
+            setShowTaskInput(true);
+          }}
+        />
+      </div>
       <div className="kanban-board ">
         <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-50 to-pink-200 shadow-md">
           <strong>To Do</strong>
-          <CreateTasks />
+          {showTaskInput && <CreateTasks setShowTaskInput={setShowTaskInput} />}
 
           {taskAppErr || taskServerErr ? (
             <div className="form-validation">An Error Has Occured</div>
