@@ -48,13 +48,13 @@ function BugCard({ bug, type }) {
         <div
           className={
             bug?.priority === "Low"
-              ? "bg-blue-200 rounded mt-1 text-xs p-1"
+              ? "bg-blue-200 rounded-lg text-xs w-14 pt-1"
               : bug?.priority === "Medium"
-              ? " rounded mt-1 text-xs p-1 bg-amber-200"
-              : "bg-red-500 rounded mt-1 text-xs p-1"
+              ? " rounded-lg text-xs  bg-amber-200 w-14 pt-1"
+              : "bg-red-500 rounded-lg text-xs w-14 pt-1"
           }
         >
-          <p>{bug?.priority}</p>
+          <p >{bug?.priority}</p>
         </div>
       </div>
     </div>
