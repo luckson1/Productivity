@@ -17,10 +17,10 @@ export default function KanbanComponent() {
   // display or remove action creation/edit form
 
   const {
-    currentEntry,
+    selectedTask,
     tasks,
     setTasks,
-    setCurrentEntry,
+    setSelectedTask,
     setTeam,
     currentColor,
   } = useStateContext();
@@ -99,7 +99,7 @@ export default function KanbanComponent() {
                 type={ItemTypes.DO}
                 onClick={() => {
                   dispatch(isShowInfoModal());
-                  setCurrentEntry(task);
+                  setSelectedTask(task);
                 }}
               />
             ))
@@ -134,7 +134,7 @@ export default function KanbanComponent() {
           )}
         </DoneTasks>
       </div>
-      {showModal && <EditTasks entry={currentEntry} />}
+      {showModal && <EditTasks entry={selectedTask} />}
       {showDeleteModal && <DeleteDialogBox item="Task" />}
       {showInfoModal && <TasksInformation />}
     </div>

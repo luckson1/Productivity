@@ -18,10 +18,10 @@ import {
 } from "../../redux/taskSlices";
 
 export const TasksInformation = () => {
-  const { currentColor, setCurrentEntry, currentEntry, team } =
+  const { currentColor, setSelectedTask, selectedTask, team } =
     useStateContext();
   const dispatch = useDispatch();
-  const task = currentEntry;
+  const task = selectedTask;
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
   useEffect(() => {
     dispatch(fetchCommentAction({ id: task?.taskId }));
@@ -97,7 +97,7 @@ export const TasksInformation = () => {
               dispatch(isShowInfoModalReset());
               dispatch(isShowModal());
               dispatch(isEditMode());
-              setCurrentEntry(task);
+              setSelectedTask(task);
               window.scrollTo(0, 0);
             }}
           />

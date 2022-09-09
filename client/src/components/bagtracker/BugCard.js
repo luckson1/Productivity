@@ -5,7 +5,7 @@ import { useStateContext } from "../../context/ContextProvider";
 import { isShowInfoModal } from "../../redux/bugsSlices";
 
 function BugCard({ bug, type }) {
-  const { setCurrentEntry,  team } = useStateContext();
+  const { setSelectedBug,  team } = useStateContext();
 
   // react drag and drop hook and api
   const [{ isDragging }, drag] = useDrag({
@@ -35,7 +35,7 @@ function BugCard({ bug, type }) {
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
       onClick={() => {
        dispatch(isShowInfoModal())
-        setCurrentEntry(bug);
+        setSelectedBug(bug);
       }}
     >
       <div className="flex flex-row justify-between flex-wrap">

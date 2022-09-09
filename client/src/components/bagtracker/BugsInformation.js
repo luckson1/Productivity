@@ -15,9 +15,9 @@ import CreateComment from "../CreateComment";
 import InfoCard from "../InfoCard";
 
 export const BugsInformation = ({ bugEntry }) => {
-  const { currentColor, setCurrentEntry, bugs, currentEntry, setBugs, team } =
+  const { currentColor, setSelectedBug, bugs, selectedBug, setBugs, team } =
     useStateContext();
-  const entry = currentEntry;
+  const entry = selectedBug;
   const dispatch = useDispatch();
   const newStatus =
     bugEntry?.status === "Open"
@@ -119,7 +119,7 @@ export const BugsInformation = ({ bugEntry }) => {
               dispatch(isShowInfoModalReset());
               dispatch(isShowModal());
               dispatch(isEditMode());
-              setCurrentEntry(bugEntry);
+              setSelectedBug(bugEntry);
               window.scrollTo(0, 0);
             }}
           />

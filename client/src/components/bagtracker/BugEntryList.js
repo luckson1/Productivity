@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isShowInfoModal } from "../../redux/bugsSlices";
 
 function BugEntryList({ entries, loading, errors }) {
-  const { setCurrentEntry, currentEntry, currentColor } = useStateContext();
+  const { setSelectedBug, selectedBug, currentColor } = useStateContext();
 const dispatch=useDispatch()
   // get bug state from store
   const bugsState = useSelector((state) => state?.bugs);
@@ -39,7 +39,7 @@ const dispatch=useDispatch()
               style={{ cursor: "pointer" }}
               onClick={() => {
              dispatch(isShowInfoModal())
-                setCurrentEntry(entry);
+                setSelectedBug(entry);
                 window.scrollTo(0, 0);
               }}
             >
@@ -81,7 +81,7 @@ const dispatch=useDispatch()
           ))
         )}
       </ul>
-      {showInfoModal && <BugsInformation bugEntry={currentEntry} />}
+      {showInfoModal && <BugsInformation bugEntry={selectedBug} />}
     </div>
   );
 }

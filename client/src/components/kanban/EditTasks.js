@@ -17,8 +17,8 @@ const errorSchema = Yup.object().shape({
   status: Yup.string(),
 });
 function EditTasks() {
-  const { tasks, setTasks, currentEntry, team } = useStateContext();
-  const entry = currentEntry;
+  const { tasks, setTasks, selectedTask, team } = useStateContext();
+  const entry = selectedTask;
   const dispatch = useDispatch();
 
   const editTaskHandler = (values) => {

@@ -15,7 +15,7 @@ import InProgressBugs from "./InProgressBugs";
 export default function BugEntryComponent() {
   // display or remove action creation/edit form
 
-  const { currentColor, currentEntry, bugs, setBugs, setTeam } =
+  const { currentColor, selectedBug, bugs, setBugs, setTeam } =
     useStateContext();
 
   // dispatch action to fetch all Bugs
@@ -129,8 +129,8 @@ export default function BugEntryComponent() {
           )}
         </ClosedBugs>
       </div>
-      {showModal && <CreateBugEntry entry={currentEntry} />}
-      {showInfoModal && <BugsInformation bugEntry={currentEntry} />}
+      {showModal && <CreateBugEntry />}
+      {showInfoModal && <BugsInformation bugEntry={selectedBug} />}
     </div>
   );
 }

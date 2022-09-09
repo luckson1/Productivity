@@ -5,7 +5,7 @@ import { useStateContext } from "../../context/ContextProvider";
 import { isShowInfoModal } from "../../redux/taskSlices";
 
 function TaskCard({ task, type }) {
-  const { setCurrentEntry, team } = useStateContext();
+  const { setSelectedTask, team } = useStateContext();
 
   //react DnD API
   const [{ isDragging }, drag] = useDrag({
@@ -34,7 +34,7 @@ function TaskCard({ task, type }) {
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
       onClick={() => {
         dispatch(isShowInfoModal())
-        setCurrentEntry(task);
+        setSelectedTask(task);
       }}
     >
       <div className="flex flex-row justify-between">

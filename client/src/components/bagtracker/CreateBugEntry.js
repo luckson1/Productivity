@@ -17,9 +17,9 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-  const { currentEntry, bugs, setBugs, team } =
+  const { selectedBug, bugs, setBugs, team } =
     useStateContext();
-  const entry = currentEntry;
+  const entry = selectedBug;
   const bugsState = useSelector((state) => state?.bugs);
   const {  isEdit } = bugsState;
   const dispatch = useDispatch();

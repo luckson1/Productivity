@@ -7,8 +7,8 @@ function DeleteDialogBox({ item, }) {
 
     // dispatch action to delete task
     const dispatch = useDispatch()
-    const {  tasks,setTasks , currentEntry} = useStateContext();
-    const task=currentEntry
+    const {  tasks,setTasks , selectedTask} = useStateContext();
+    const task=selectedTask
     const tasksState = useSelector((state) => state?.tasks);
     const deleteTaskHandler= ()=>{
         dispatch(deleteTaskAction(task));

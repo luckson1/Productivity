@@ -13,7 +13,8 @@ export const ContextProvider = ({ children }) => {
     localStorage.getItem("ThemeColor") ?? "Light"
   );
   const [themeSettings, setThemeSettings] = useState(false);
-  const [currentEntry, setCurrentEntry] = useState();
+  const [selectedBug, setSelectedBug] = useState();
+  const [selectedTask, setSelectedTask] = useState();
   const [showNavBar, setShowNavBar] = useState(true);
   const [tasks, setTasks] = useState([]);
   const [bugs, setBugs] = useState([]);
@@ -44,8 +45,10 @@ export const ContextProvider = ({ children }) => {
         setThemeSettings,
         setMode,
         setColor,
-        currentEntry,
-        setCurrentEntry,
+        selectedBug,
+        setSelectedBug,
+        selectedTask,
+         setSelectedTask,
         showNavBar,
         setShowNavBar,
         tasks,

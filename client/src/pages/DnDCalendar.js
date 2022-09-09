@@ -15,7 +15,7 @@ import { MdCancel } from "react-icons/md";
 import EditTasks from "../components/kanban/EditTasks";
 
 export default function DnDCalendar() {
-  const { setCurrentEntry, currentEntry, currentColor } = useStateContext();
+  const { setSelectedTask, selectedTask, currentColor } = useStateContext();
   const [showNoDateModal, setShowNoDateModal] = useState(false);
   const DnDCalendarComponent = withDragAndDrop(Calendar);
   const dispatch = useDispatch();
@@ -98,7 +98,7 @@ export default function DnDCalendar() {
                   style={{ cursor: "pointer" }}
                   onClick={() => {
                     dispatch(isShowInfoModal());
-                    setCurrentEntry(task);
+                    setSelectedTask(task);
                   }}
                 >
                   <span>{task?.title}</span>
@@ -120,7 +120,7 @@ export default function DnDCalendar() {
         popup
       />
       {showModal && <EditTasks />}
-      {showDeleteModal && <DeleteDialogBox task={currentEntry} item="Task" />}
+      {showDeleteModal && <DeleteDialogBox task={selectedTask} item="Task" />}
       {showInfoModal && <TasksInformation />}
     </div>
   );
