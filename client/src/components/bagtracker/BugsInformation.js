@@ -61,6 +61,22 @@ export const BugsInformation = ({ bugEntry }) => {
     (member) => member?._id === bugEntry?.assigned
   );
 
+  const handleEditModule=() => {
+    dispatch(isShowInfoModalReset());
+    dispatch(isShowModal());
+    dispatch(isEditMode());
+    setSelectedBug(bugEntry);
+    window.scrollTo(0, 0);
+  }
+  const buttonTextOptions= bugEntry?.status === "Open"
+  ? "Add to Progress"
+  : bugEntry?.status === "In Review"
+  ? "Mark as Closed"
+  : bugEntry?.status === "In Progress"
+  ? "Send to Review"
+  : bugEntry?.status === "Closed"
+  ? "Mark as Complete"
+  : null
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -115,28 +131,12 @@ export const BugsInformation = ({ bugEntry }) => {
             bgColor={currentColor}
             text="Edit Details"
             borderRadius="10px"
-            onClick={() => {
-              dispatch(isShowInfoModalReset());
-              dispatch(isShowModal());
-              dispatch(isEditMode());
-              setSelectedBug(bugEntry);
-              window.scrollTo(0, 0);
-            }}
+            onClick={handleEditModule()}
           />
           <Button
             color="white"
             bgColor={currentColor}
-            text={
-              bugEntry?.status === "Open"
-                ? "Add to Progress"
-                : bugEntry?.status === "In Review"
-                ? "Mark as Closed"
-                : bugEntry?.status === "In Progress"
-                ? "Send to Review"
-                : bugEntry?.status === "Closed"
-                ? "Mark as Complete"
-                : null
-            }
+            text={buttonTextOptions}
             borderRadius="10px"
             onClick={() => {
               editbugHandler(bugEntry);

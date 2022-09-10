@@ -21,6 +21,10 @@ function BugCard({ bug, type }) {
 
   const dispatch=useDispatch()
   const assigneeData = team?.filter((member) => member?._id === bug?.assigned);
+  const handleClick=() => {
+    dispatch(isShowInfoModal())
+     setSelectedBug(bug);
+   }
   return (
     <div
       className="task dark:bg-[#484B52]
@@ -33,10 +37,7 @@ function BugCard({ bug, type }) {
       id="task"
       ref={drag}
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
-      onClick={() => {
-       dispatch(isShowInfoModal())
-        setSelectedBug(bug);
-      }}
+      onClick={handleClick()}
     >
       <div className="flex flex-row justify-between flex-wrap">
         <p>{bug?.title}</p>

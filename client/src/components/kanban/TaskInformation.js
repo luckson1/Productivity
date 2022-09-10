@@ -30,6 +30,21 @@ export const TasksInformation = () => {
   const comments = useSelector(
     (state) => state?.comment?.commentsFetched?.comment
   );
+  const handleCancel=() => {
+    dispatch(isShowInfoModalReset());
+    dispatch(isEditModeReset());
+  }
+  const handleEditModule=() => {
+    dispatch(isShowInfoModalReset());
+    dispatch(isShowModal());
+    dispatch(isEditMode());
+    setSelectedTask(task);
+    window.scrollTo(0, 0);
+  }
+  const handleDeleteModal=() => {
+    dispatch(isShowDeleteModal());
+    dispatch(isShowInfoModalReset());
+  }
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-10">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -42,10 +57,7 @@ export const TasksInformation = () => {
             className=""
             color="red"
             size="30px"
-            onClick={() => {
-              dispatch(isShowInfoModalReset());
-              dispatch(isEditModeReset());
-            }}
+            onClick={handleCancel()}
             style={{ cursor: "pointer" }}
           />
         </div>
@@ -93,23 +105,14 @@ export const TasksInformation = () => {
             bgColor={currentColor}
             text="Edit Details"
             borderRadius="10px"
-            onClick={() => {
-              dispatch(isShowInfoModalReset());
-              dispatch(isShowModal());
-              dispatch(isEditMode());
-              setSelectedTask(task);
-              window.scrollTo(0, 0);
-            }}
+            onClick={handleEditModule()}
           />
           <Button
             color="white"
             bgColor="red"
             text="Delete Task"
             borderRadius="10px"
-            onClick={() => {
-              dispatch(isShowDeleteModal());
-              dispatch(isShowInfoModalReset());
-            }}
+            onClick={handleDeleteModal()}
           />
         </div>
       </div>

@@ -33,6 +33,7 @@ const newStatus=location?.state?.bugs ? "Open" : "To Do"
     setCompletedItems(newList);
    
   };
+  const handleClick=(item)=> edititemHandler(item)
   return (
     <div className="table mt-24">
 <h2>Completed {location?.state?.bugs? "Bugs": "Tasks"}</h2>
@@ -51,7 +52,7 @@ const newStatus=location?.state?.bugs ? "Open" : "To Do"
                 <div className="col col-3" data-label="Role" >{dateFormatter(item?.updatedAt)} </div>
                 <div className="col col-4" data-label="Status">
                     <button type="button" className="bg-green-500 rounded px-2 py-1"
-                    onClick={()=> edititemHandler(item)}>
+                    onClick={handleClick(item)}>
                         Re-Open
                     </button>
                 </div>

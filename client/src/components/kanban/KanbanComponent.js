@@ -64,7 +64,10 @@ export default function KanbanComponent() {
     if (typeof teamMembers !== "undefined")
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
   }, [teamMembers]);
-
+const handleClick=(task) => {
+  dispatch(isShowInfoModal());
+  setSelectedTask(task);
+}
   return (
     <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
       <div className="kanban-heading">
@@ -97,10 +100,7 @@ export default function KanbanComponent() {
                 task={task}
                 key={task?.taskId}
                 type={ItemTypes.DO}
-                onClick={() => {
-                  dispatch(isShowInfoModal());
-                  setSelectedTask(task);
-                }}
+                onClick={handleClick(task)}
               />
             ))
           )}
