@@ -79,7 +79,7 @@ function CreateBugEntry() {
               color="red"
               onClick={() => {
                 dispatch(isEditModeReset());
-           dispatch(isShowModalReset())
+              dispatch(isShowModalReset())
               }}
               style={{ cursor: "pointer" }}
             />
