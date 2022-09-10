@@ -65,10 +65,7 @@ function CreateBugEntry() {
       ? (values) => editbugHandler(values)
       : (values) => addBugHandler(values),
   });
-const handleCancel=() => {
-  dispatch(isEditModeReset());
-dispatch(isShowModalReset())
-}
+
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-50  dark:bg-[#484B52] w-full sm:w-6/12 ">
@@ -80,7 +77,10 @@ dispatch(isShowModalReset())
             <MdCancel
               size="30px"
               color="red"
-              onClick={handleCancel()}
+              onClick={() => {
+                dispatch(isEditModeReset());
+           dispatch(isShowModalReset())
+              }}
               style={{ cursor: "pointer" }}
             />
           </div>

@@ -19,16 +19,8 @@ export const UserProfile = ({user, }) => {
   }, []);
   const dispatch = useDispatch();
 
-const handleCancel=() => dispatch(isShowProfileModalReset())
-const handleLogOut=() => {
-  dispatch(isShowProfileModalReset());
-  dispatch(logout());
-}
 
-const handleClick=() => {
-  setShowProfileEditModal(true);
-  setIsEditPic(true);
-}
+
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 z-40">
       <div className="flex justify-between items-center">
@@ -38,7 +30,7 @@ const handleClick=() => {
           size="30px"
           color="red"
           cursor={"pointer"}
-          onClick={handleCancel()}
+          onClick={() => dispatch(isShowProfileModalReset())}
         />
       </div>
       <div className="flex flex-col gap-7 items-center mt-6 border-color border-b-1 pb-6">
@@ -49,7 +41,10 @@ const handleClick=() => {
             alt="user-profile"
           />
           <button
-            onClick={handleClick()}
+            onClick={() => {
+              setShowProfileEditModal(true);
+              setIsEditPic(true);
+            }}
           >
             <FaEdit />
           </button>
@@ -82,7 +77,10 @@ const handleClick=() => {
           text="Logout"
           borderRadius="10px"
           width="full"
-          onClick={handleLogOut()}
+          onClick={() => {
+            dispatch(isShowProfileModalReset());
+            dispatch(logout());
+          }}
         />
       </div>
       {showProfileEditModal && (

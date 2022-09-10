@@ -54,15 +54,15 @@ const [revealPassword, setRevealPassword]=useState(false)
           dispatch(loginUserAction(values));
         },
   });
-const handleSignUpModal=() => {
-  dispatch(isShowModalReset());
-   dispatch(isShowSignUpModal());
-   setRevealPassword(false);
- }
+
   return (
     <div className="auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20">
       <div
-        onClick={handleSignUpModal()}
+        onClick={() => {
+         dispatch(isShowModalReset());
+          dispatch(isShowSignUpModal());
+          setRevealPassword(false);
+        }}
         className="close-icon"
       >
         <MdCancel color="red" />

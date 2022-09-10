@@ -14,11 +14,6 @@ const dispatch=useDispatch()
   // get bug state from store
   const bugsState = useSelector((state) => state?.bugs);
   const { showInfoModal } = bugsState;
-  const handleClick=(entry) => {
-    dispatch(isShowInfoModal())
-       setSelectedBug(entry);
-       window.scrollTo(0, 0);
-     }
   return (
     <div className="table">
       <ul className="responsive-table">
@@ -42,7 +37,11 @@ const dispatch=useDispatch()
               className="table-row"
               key={entry?.bugId}
               style={{ cursor: "pointer" }}
-              onClick={handleClick(entry)}
+              onClick={() => {
+             dispatch(isShowInfoModal())
+                setSelectedBug(entry);
+                window.scrollTo(0, 0);
+              }}
             >
               <div className="col col-2" data-label="Title">
                 {entry?.title}

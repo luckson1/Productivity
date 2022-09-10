@@ -20,10 +20,6 @@ function TaskCard({ task, type }) {
 
   const dispatch=useDispatch()
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
-  const handleClick=() => {
-    dispatch(isShowInfoModal())
-    setSelectedTask(task);
-  }
   return (
     <div
       className="task dark:bg-[#484B52]
@@ -36,7 +32,10 @@ function TaskCard({ task, type }) {
       id="task"
       ref={drag}
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
-      onClick={handleClick()}
+      onClick={() => {
+        dispatch(isShowInfoModal())
+        setSelectedTask(task);
+      }}
     >
       <div className="flex flex-row justify-between">
         <p>{task?.title}</p>

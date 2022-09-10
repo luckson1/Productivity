@@ -55,10 +55,7 @@ function EditTasks() {
       editTaskHandler(values);
     },
   });
-const handleCancel=() => {
-  dispatch(isEditModeReset());
-  dispatch(isShowModalReset());
-}
+
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-50">
       <div className="float-right h-screen bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-100  dark:bg-[#484B52] w-full sm:w-6/12 ">
@@ -70,7 +67,10 @@ const handleCancel=() => {
             <MdCancel
               size="30px"
               color="red"
-              onClick={handleCancel()}
+              onClick={() => {
+                dispatch(isEditModeReset());
+                dispatch(isShowModalReset());
+              }}
               style={{ cursor: "pointer" }}
             />
           </div>

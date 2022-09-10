@@ -58,10 +58,11 @@ export default function DnDCalendar() {
     };
   }, []);
 
-const handleClick=(task) => {
-  dispatch(isShowInfoModal());
-  setSelectedTask(task);
-}
+  // useEffect(() => {
+  //   if (tasksFetched) {
+  //     setTasks(tasksFetched?.tasks);
+  //   }
+  // }, [tasksFetched, setTasks]);
 
   return (
     <div className=" w-10/12 mt-5 ml-10  dark:bg-[#484B52] rounded-md dark:text-slate-50">
@@ -95,7 +96,10 @@ const handleClick=(task) => {
                   className="bg-white rounded m-1 p-1 shadow-2xl text-xs h-8"
                   key={task?.taskId}
                   style={{ cursor: "pointer" }}
-                  onClick={handleClick()}
+                  onClick={() => {
+                    dispatch(isShowInfoModal());
+                    setSelectedTask(task);
+                  }}
                 >
                   <span>{task?.title}</span>
                 </div>

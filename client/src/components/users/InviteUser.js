@@ -34,9 +34,6 @@ function InviteUser() {
     validationSchema: errorSchema,
     onSubmit: (values) => addMemberHandler(values),
   });
-  const handleCancel=() => {
-    dispatch(isShowModalReset());
-  }
 
   return (
     <div className="modal bg-white h-96 w-96 shadow-2xl">
@@ -45,7 +42,9 @@ function InviteUser() {
         <MdCancel
           size="30px"
           color="red"
-          onClick={handleCancel()}
+          onClick={() => {
+            dispatch(isShowModalReset());
+          }}
           style={{ cursor: "poiter" }}
         />
       </div>
