@@ -139,7 +139,7 @@ function Home() {
           <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />
         </nav>
 
-        <div className="pt-24 bg-gradient-to-r from-indigo-200  text-gray-900 dark:bg-[#484B52] dark:text-slate-100 ">
+        <div className="pt-24 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 text-gray-900 dark:bg-[#484B52] dark:text-slate-100 ">
           <div className="container px-3 mx-auto flex flex-wrap  flex-col md:flex-row items-center">
             <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
               <p className="uppercase tracking-loose w-full ">
