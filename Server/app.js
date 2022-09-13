@@ -17,13 +17,14 @@ const commentsRouter = require("./routes/Comments");
 
 // allow our node process to have access to the environment variables
 dotenv.config();
+app.enable("trust proxy");
 
 //connect to Database
 dbConnect();
 
 //  connection message
 app.get("/", (req, res) => {
-    res.json({ msg: "welcome!" });
+    res.json({ msg: "welcome here!" });
 });
 // middleware
 app.use(cors());

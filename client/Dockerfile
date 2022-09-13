@@ -1,7 +1,6 @@
 FROM node
 WORKDIR /app
-COPY package.json .
-RUN npm i && npm cache clean --force
+COPY ./package.json ./
+RUN npm i
 COPY . .
-EXPOSE 3000
 CMD [ "npm", "run", "start"] 

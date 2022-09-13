@@ -7,9 +7,9 @@ services:
     stdin_open: true
     volumes: 
       - /app/node_modules
-      - ./client :/app
-    ports: 
-      - "3000:3000"
+      - ./client :/app/client
+    # ports: 
+    #   - "3000:3000"
     networks:
         - mern-app
   api-server:
@@ -18,12 +18,12 @@ services:
       dockerfile: Dockerfile
     volumes: 
       - /app/node_modules
-      - ./Server :/app
-    ports:
-      - "5000:5000"
+      - ./Server :/app/Server
+    # ports:
+    #   - "5000:5000"
     networks:
       - mern-app
-  #   depends_on :
+  #   depends_on : 
   #     - mongo
   # mongo: 
   #   image: mongo
@@ -55,9 +55,21 @@ services:
   #   networks:
   #     - mern-app
 
+  nginx:
+    restart: always
+    depends_on:
+      - react-app
+      - api-server
+    build:
+        context: ./nginx
+        dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    networks:
+      - mern-app
 networks:
   mern-app:
     driver: bridge
-volumes: 
-  mongo-data:
-    driver: local
+# volumes: 
+#   mongo-data:
+#     driver: local
