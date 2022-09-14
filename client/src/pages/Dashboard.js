@@ -57,7 +57,8 @@ const Dashboard = () => {
 
   return (
     <div className={currentMode === "Dark" ? "dark" : ""}>
-      <div className="mt-24 mb-12">
+      <div className="mt-6 mb-6">
+        <div className=" my-12 mx-12 p-6 bg-white dark:bg-slate-600 rounded-md">
         <div className="flex flex-wrap lg:flex-nowrap justify-center ">
           <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-3">
             <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl">
@@ -202,7 +203,7 @@ const Dashboard = () => {
         </div>
 
         <div className="flex gap-10 flex-wrap justify-center mt-10">
-          <div className="bg-white shadow-2xl dark:text-gray-100 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+          <div className="bg-indigo-50 shadow-2xl dark:text-gray-100 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
             <div className="flex justify-between items-center gap-2">
               <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">
                 Recent Tasks
@@ -254,7 +255,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="bg-white shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+          <div className="bg-indigo-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
             <div className="flex justify-between items-center gap-2">
               <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">
                 Recent Bugs
@@ -304,6 +305,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
