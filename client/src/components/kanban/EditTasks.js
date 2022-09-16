@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import {
   editTasksAction,
-  isEditModeReset, isShowModalReset
+  isEditModeReset,
+  isShowModalReset,
 } from "../../redux/taskSlices";
 import { MdCancel } from "react-icons/md";
 import { useStateContext } from "../../context/ContextProvider";

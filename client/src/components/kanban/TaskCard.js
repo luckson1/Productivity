@@ -17,8 +17,7 @@ function TaskCard({ task, type }) {
     }),
   });
 
-
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
   return (
     <div
@@ -33,17 +32,19 @@ function TaskCard({ task, type }) {
       ref={drag}
       style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
       onClick={() => {
-        dispatch(isShowInfoModal())
+        dispatch(isShowInfoModal());
         setSelectedTask(task);
       }}
     >
       <div className="flex flex-row justify-between">
         <p>{task?.title}</p>
-       { assigneeData[0]?.image!==undefined && <img
-          className="rounded-full h-6 w-6"
-          src={assigneeData[0]?.image}
-          alt="user-profile"
-        />}
+        {assigneeData[0]?.image !== undefined && (
+          <img
+            className="rounded-full h-6 w-6"
+            src={assigneeData[0]?.image}
+            alt="user-profile"
+          />
+        )}
       </div>
     </div>
   );

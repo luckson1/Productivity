@@ -19,7 +19,6 @@ const Dashboard = () => {
     dispatch(fetchbugsAction());
   }, []);
 
-
   // get state from store
   const stateData = useSelector((state) => state);
 
@@ -59,253 +58,253 @@ const Dashboard = () => {
     <div className={currentMode === "Dark" ? "dark" : ""}>
       <div className="mt-6 mb-6">
         <div className=" my-12 mx-12 p-6 bg-white dark:bg-slate-600 rounded-md">
-        <div className="flex flex-wrap lg:flex-nowrap justify-center ">
-          <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-3">
-            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl">
-              <button
-                type="button"
-                style={{ backgroundColor: currentColor }}
-                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                onClick={() => navigate("/tasks")}
-              >
-                <FaTasks />
-              </button>
-
-              {taskLoading ? (
-                "Loading, Please wait! 😀"
-              ) : taskAppErr || taskServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : tasksFetched?.tasks === 0 ? (
-                <p className=" text-gray-900"> No Tasks created....yet 😊</p>
-              ) : (
-                <p className=" text-gray-900">
-                  {toDoTasks?.length} Task(s) to do{" "}
-                </p>
-              )}
-            </div>
-            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
-              <button
-                type="button"
-                style={{ backgroundColor: currentColor }}
-                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                onClick={() => navigate("/tasks")}
-              >
-                <FaTasks />
-              </button>
-
-              {taskLoading ? (
-                "Loading, Please wait! 😀"
-              ) : taskAppErr || taskServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : tasksFetched?.tasks === 0 ? (
-                <p className=" text-gray-900"> No Tasks created....yet 😊</p>
-              ) : (
-                <p className=" text-gray-900">
-                  {inProgressTasks?.length} Task(s) in progress
-                </p>
-              )}
-            </div>
-            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
-              <button
-                type="button"
-                style={{ backgroundColor: currentColor }}
-                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                onClick={() =>
-                  navigate("/completed", { state: { tasks: completeTasks } })
-                }
-              >
-                <FaTasks />
-              </button>
-
-              {taskLoading ? (
-                "Loading, Please wait! 😀"
-              ) : taskAppErr || taskServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : tasksFetched?.tasks === 0 ? (
-                <p className=" text-gray-900"> No Tasks created....yet 😊</p>
-              ) : (
-                <p className=" text-gray-900">
-                  {completeTasks?.length} Task(s) in Completed
-                </p>
-              )}
-            </div>
-
-            <div className="dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200">
-              <button
-                type="button"
-                style={{ backgroundColor: currentColor }}
-                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                onClick={() => navigate("/bug-tracker")}
-              >
-                <MdBugReport />
-              </button>
-
-              {bugLoading ? (
-                "Loading, Please wait! 😀"
-              ) : bugAppErr || bugServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : bugsFetched?.bugs === 0 ? (
-                <p className=" text-gray-900"> No bugs created....yet 😊</p>
-              ) : (
-                <p className=" text-gray-900">
-                  {openBugs?.length} Open bug(s){" "}
-                </p>
-              )}
-            </div>
-
-            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
-              <button
-                type="button"
-                style={{ backgroundColor: currentColor }}
-                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                onClick={() => navigate("/bug-tracker")}
-              >
-                <MdBugReport />
-              </button>
-
-              {bugLoading ? (
-                "Loading, Please wait! 😀"
-              ) : bugAppErr || bugServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : bugsFetched?.bugs === 0 ? (
-                <p className=" text-gray-900"> No bugs created....yet 😊</p>
-              ) : (
-                <p className=" text-gray-900">
-                  {inProgressBugs?.length} Bug(s) In Progresss{" "}
-                </p>
-              )}
-            </div>
-            <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
-              <button
-                type="button"
-                style={{ backgroundColor: currentColor }}
-                className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
-                onClick={() =>
-                  navigate("/completed", { state: { bugs: completeBugs } })
-                }
-              >
-                <MdBugReport />
-              </button>
-
-              {bugLoading ? (
-                "Loading, Please wait! 😀"
-              ) : bugAppErr || bugServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : bugsFetched?.bugs === 0 ? (
-                <p className=" text-gray-900"> No bugs created....yet 😊</p>
-              ) : (
-                <p className=" text-gray-900">
-                  {completeBugs?.length} Bug(s) Solved{" "}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex gap-10 flex-wrap justify-center mt-10">
-          <div className="bg-indigo-50 shadow-2xl dark:text-gray-100 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
-            <div className="flex justify-between items-center gap-2">
-              <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">
-                Recent Tasks
-              </p>
-            </div>
-            <div className="mt-10 w-72 md:w-400 text-sm text-left">
-              {taskLoading ? (
-                "Loading, Please wait! 😀"
-              ) : taskAppErr || taskServerErr ? (
-                <p className=" text-red-500">An Error Occured. 😥</p>
-              ) : tasksFetched?.tasks === 0 ? (
-                " No Tasks created....yet 😊"
-              ) : (
-                tasksFetched?.tasks
-                  ?.filter((task) => task?.status !== "Complete")
-                  ?.map((task) => (
-                    <div key={task._id} className="flex justify-between mt-4">
-                      <div className="flex gap-4">
-                        <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
-                          {task?.title}
-                        </p>
-                      </div>
-                      <p
-                        className={
-                          task?.status === "To Do"
-                            ? "text-blue-500"
-                            : task?.status === "In Progress"
-                            ? "text-amber-400"
-                            : task?.status === "Done"
-                            ? "text-green-500"
-                            : "text-gray-900"
-                        }
-                      >
-                        {task?.status}
-                      </p>
-                    </div>
-                  ))
-              )}
-            </div>
-            <div className="flex justify-between items-center mt-5 border-t-1 border-color">
-              <div className="mt-3">
-                <Button
-                  color="white"
-                  bgColor={currentColor}
-                  text="Add"
-                  borderRadius="10px"
+          <div className="flex flex-wrap lg:flex-nowrap justify-center ">
+            <div className="flex m-3 flex-col md:flex-row flex-wrap justify-center gap-3">
+              <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl">
+                <button
+                  type="button"
+                  style={{ backgroundColor: currentColor }}
+                  className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
                   onClick={() => navigate("/tasks")}
-                />
+                >
+                  <FaTasks />
+                </button>
+
+                {taskLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : taskAppErr || taskServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : tasksFetched?.tasks === 0 ? (
+                  <p className=" text-gray-900"> No Tasks created....yet 😊</p>
+                ) : (
+                  <p className=" text-gray-900">
+                    {toDoTasks?.length} Task(s) to do{" "}
+                  </p>
+                )}
+              </div>
+              <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+                <button
+                  type="button"
+                  style={{ backgroundColor: currentColor }}
+                  className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                  onClick={() => navigate("/tasks")}
+                >
+                  <FaTasks />
+                </button>
+
+                {taskLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : taskAppErr || taskServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : tasksFetched?.tasks === 0 ? (
+                  <p className=" text-gray-900"> No Tasks created....yet 😊</p>
+                ) : (
+                  <p className=" text-gray-900">
+                    {inProgressTasks?.length} Task(s) in progress
+                  </p>
+                )}
+              </div>
+              <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+                <button
+                  type="button"
+                  style={{ backgroundColor: currentColor }}
+                  className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                  onClick={() =>
+                    navigate("/completed", { state: { tasks: completeTasks } })
+                  }
+                >
+                  <FaTasks />
+                </button>
+
+                {taskLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : taskAppErr || taskServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : tasksFetched?.tasks === 0 ? (
+                  <p className=" text-gray-900"> No Tasks created....yet 😊</p>
+                ) : (
+                  <p className=" text-gray-900">
+                    {completeTasks?.length} Task(s) in Completed
+                  </p>
+                )}
+              </div>
+
+              <div className="dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200">
+                <button
+                  type="button"
+                  style={{ backgroundColor: currentColor }}
+                  className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                  onClick={() => navigate("/bug-tracker")}
+                >
+                  <MdBugReport />
+                </button>
+
+                {bugLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : bugAppErr || bugServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : bugsFetched?.bugs === 0 ? (
+                  <p className=" text-gray-900"> No bugs created....yet 😊</p>
+                ) : (
+                  <p className=" text-gray-900">
+                    {openBugs?.length} Open bug(s){" "}
+                  </p>
+                )}
+              </div>
+
+              <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+                <button
+                  type="button"
+                  style={{ backgroundColor: currentColor }}
+                  className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                  onClick={() => navigate("/bug-tracker")}
+                >
+                  <MdBugReport />
+                </button>
+
+                {bugLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : bugAppErr || bugServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : bugsFetched?.bugs === 0 ? (
+                  <p className=" text-gray-900"> No bugs created....yet 😊</p>
+                ) : (
+                  <p className=" text-gray-900">
+                    {inProgressBugs?.length} Bug(s) In Progresss{" "}
+                  </p>
+                )}
+              </div>
+              <div className="bg-gradient-to-r from-indigo-100 via-purple-50 to-pink-50 shadow-2xl h-44 dark:text-gray-200 dark:bg-[#484B52] w-72 md:w-56  p-1 pt-7 rounded-2xl ">
+                <button
+                  type="button"
+                  style={{ backgroundColor: currentColor }}
+                  className="text-xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
+                  onClick={() =>
+                    navigate("/completed", { state: { bugs: completeBugs } })
+                  }
+                >
+                  <MdBugReport />
+                </button>
+
+                {bugLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : bugAppErr || bugServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : bugsFetched?.bugs === 0 ? (
+                  <p className=" text-gray-900"> No bugs created....yet 😊</p>
+                ) : (
+                  <p className=" text-gray-900">
+                    {completeBugs?.length} Bug(s) Solved{" "}
+                  </p>
+                )}
               </div>
             </div>
           </div>
-          <div className="bg-indigo-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
-            <div className="flex justify-between items-center gap-2">
-              <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">
-                Recent Bugs
-              </p>
-            </div>
-            <div className="mt-10 w-72 md:w-400 text-sm text-left">
-              {bugLoading ? (
-                "Loading, Please wait! 😀"
-              ) : bugAppErr || bugServerErr ? (
-                <p className="text-red-500">"An Error Occured. 😥"</p>
-              ) : bugsFetched?.bugs === 0 ? (
-                " No bugs found....yet 😊"
-              ) : (
-                bugsFetched?.bugs
-                  ?.filter((bug) => bug?.status !== "Complete")
-                  ?.map((bug) => (
-                    <div key={bug._id} className="flex justify-between mt-4">
-                      <div className="flex gap-4">
-                        <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
-                          {bug?.title}
+
+          <div className="flex gap-10 flex-wrap justify-center mt-10">
+            <div className="bg-indigo-50 shadow-2xl dark:text-gray-100 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+              <div className="flex justify-between items-center gap-2">
+                <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">
+                  Recent Tasks
+                </p>
+              </div>
+              <div className="mt-10 w-72 md:w-400 text-sm text-left">
+                {taskLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : taskAppErr || taskServerErr ? (
+                  <p className=" text-red-500">An Error Occured. 😥</p>
+                ) : tasksFetched?.tasks === 0 ? (
+                  " No Tasks created....yet 😊"
+                ) : (
+                  tasksFetched?.tasks
+                    ?.filter((task) => task?.status !== "Complete")
+                    ?.map((task) => (
+                      <div key={task._id} className="flex justify-between mt-4">
+                        <div className="flex gap-4">
+                          <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
+                            {task?.title}
+                          </p>
+                        </div>
+                        <p
+                          className={
+                            task?.status === "To Do"
+                              ? "text-blue-500"
+                              : task?.status === "In Progress"
+                              ? "text-amber-400"
+                              : task?.status === "Done"
+                              ? "text-green-500"
+                              : "text-gray-900"
+                          }
+                        >
+                          {task?.status}
                         </p>
                       </div>
-                      <p
-                        className={
-                          bug?.status === "Open"
-                            ? "text-blue-500"
-                            : bug?.status === "Closed"
-                            ? "text-green-500"
-                            : "text-gray-900"
-                        }
-                      >
-                        {bug?.status}
-                      </p>
-                    </div>
-                  ))
-              )}
+                    ))
+                )}
+              </div>
+              <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                <div className="mt-3">
+                  <Button
+                    color="white"
+                    bgColor={currentColor}
+                    text="Add"
+                    borderRadius="10px"
+                    onClick={() => navigate("/tasks")}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="flex justify-between items-center mt-5 border-t-1 border-color">
-              <div className="mt-3">
-                <Button
-                  color="white"
-                  bgColor={currentColor}
-                  text="Add"
-                  borderRadius="10px"
-                  onClick={() => navigate("/bug-tracker")}
-                />
+            <div className="bg-indigo-50 shadow-2xl dark:text-gray-200 dark:bg-[#484B52] p-6 rounded-2xl md:w-780   ">
+              <div className="flex justify-between items-center gap-2">
+                <p className="text-xl font-semibold text-gray-900  dark:text-gray-100">
+                  Recent Bugs
+                </p>
+              </div>
+              <div className="mt-10 w-72 md:w-400 text-sm text-left">
+                {bugLoading ? (
+                  "Loading, Please wait! 😀"
+                ) : bugAppErr || bugServerErr ? (
+                  <p className="text-red-500">"An Error Occured. 😥"</p>
+                ) : bugsFetched?.bugs === 0 ? (
+                  " No bugs found....yet 😊"
+                ) : (
+                  bugsFetched?.bugs
+                    ?.filter((bug) => bug?.status !== "Complete")
+                    ?.map((bug) => (
+                      <div key={bug._id} className="flex justify-between mt-4">
+                        <div className="flex gap-4">
+                          <p className="text-md font-semibold text-gray-900  dark:text-gray-100">
+                            {bug?.title}
+                          </p>
+                        </div>
+                        <p
+                          className={
+                            bug?.status === "Open"
+                              ? "text-blue-500"
+                              : bug?.status === "Closed"
+                              ? "text-green-500"
+                              : "text-gray-900"
+                          }
+                        >
+                          {bug?.status}
+                        </p>
+                      </div>
+                    ))
+                )}
+              </div>
+              <div className="flex justify-between items-center mt-5 border-t-1 border-color">
+                <div className="mt-3">
+                  <Button
+                    color="white"
+                    bgColor={currentColor}
+                    text="Add"
+                    borderRadius="10px"
+                    onClick={() => navigate("/bug-tracker")}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

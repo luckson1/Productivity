@@ -48,7 +48,7 @@ export const ContextProvider = ({ children }) => {
         selectedBug,
         setSelectedBug,
         selectedTask,
-         setSelectedTask,
+        setSelectedTask,
         showNavBar,
         setShowNavBar,
         tasks,

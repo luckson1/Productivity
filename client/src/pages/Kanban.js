@@ -1,14 +1,14 @@
-import React from 'react'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import KanbanComponent from '../components/kanban/KanbanComponent'
+import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import KanbanComponent from "../components/kanban/KanbanComponent";
 
 function Kanban() {
   return (
     <DndProvider backend={HTML5Backend}>
-<KanbanComponent />
+      <KanbanComponent />
     </DndProvider>
-  )
+  );
 }
 
-export default Kanban
+export default Kanban;

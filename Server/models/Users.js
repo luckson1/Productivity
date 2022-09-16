@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
-const { isBooleanObject } = require('util/types');
-
 
 const userSchema = new mongoose.Schema(
     {
@@ -12,7 +10,7 @@ const userSchema = new mongoose.Schema(
         },
         userId: {
             type: String,
-            required: true
+            required: true,
         },
 
         firstName: {
@@ -35,14 +33,12 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        userId: {
-            type: String,
-            required: true
-        },
-        invitedBy:[ {
-            type: String,
-            required: false,
-        }],
+        invitedBy: [
+            {
+                type: String,
+                required: false,
+            },
+        ],
         role: {
             type: String,
             required: false,
@@ -52,11 +48,9 @@ const userSchema = new mongoose.Schema(
             required: false,
         },
 
-
         passwordChangeAt: Date,
         passwordResetToken: String,
         passwordResetExpires: Date,
-
     },
     {
         timestamps: true,
@@ -91,13 +85,12 @@ userSchema.methods.isPasswordMatch = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
-
 // /populate virtuals
 userSchema.virtual("Team", {
     ref: "teamCreator",
     localField: "_id",
     foreignField: "user",
-  });
+});
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
