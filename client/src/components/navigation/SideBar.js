@@ -35,7 +35,7 @@ export const SideBar = () => {
                  gap-3 ml-3 mt-4 flex text-xl font-bold
                  tracking-tight dark:text-white text-slate-900"
             >
-              <SiShopware /> <span>TeKivity</span>
+              <SiShopware /> <span>Techivity</span>
             </Link>
 
             <button
