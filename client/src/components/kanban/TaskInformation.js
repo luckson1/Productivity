@@ -52,9 +52,10 @@ export const TasksInformation = () => {
     setTasks([...editedTask, ...newTasks]);
     dispatch(isShowInfoModalReset());
   };
-  const text= task?.status==="Done"? "Mark as Complete" : "Delete Task"
-  const color= task?.status==="Done"? currentColor : "red"
-  const handleClickAction= task?.status==="Done"? ()=> editTaskHandler(task) : () => {
+  const Done= task?.status==="Done"
+  const text= Done? "Mark as Complete" : "Delete Task"
+  const color= Done? currentColor : "red"
+  const handleClickAction= Done? ()=> editTaskHandler(task) : () => {
     dispatch(isShowDeleteModal());
     dispatch(isShowInfoModalReset());
   }
