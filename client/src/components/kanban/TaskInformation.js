@@ -15,10 +15,11 @@ import {
   isShowInfoModalReset,
   isShowModal,
   isEditMode,
+  editTasksAction,
 } from "../../redux/taskSlices";
 
 export const TasksInformation = () => {
-  const { currentColor, setSelectedTask, selectedTask, team } =
+  const { currentColor, setSelectedTask, selectedTask, team, tasks, setTasks} =
     useStateContext();
   const dispatch = useDispatch();
   const task = selectedTask;
@@ -30,6 +31,33 @@ export const TasksInformation = () => {
   const comments = useSelector(
     (state) => state?.comment?.commentsFetched?.comment
   );
+
+  // action to mark task as done
+  const editTaskHandler = (task) => {
+    const editedTaskValues = {
+      title: task?.title,
+      summary: task?.summary,
+      status: "Complete",
+      _id: task?._id,
+      updatedAt: new Date(),
+      taskId: task?.taskId 
+    };
+    let editedTask = [];
+    editedTask.push(editedTaskValues);
+    dispatch(editTasksAction(editedTaskValues));
+    const newTasks = tasks?.filter((t) => {
+      return t._id !== task._id;
+    });
+
+    setTasks([...editedTask, ...newTasks]);
+    dispatch(isShowInfoModalReset());
+  };
+  const text= task?.status==="Done"? "Mark as Done" : "Delete Task"
+  const color= task?.status==="Done"? currentColor : "red"
+  const handleClickAction= task?.status==="Done"? ()=> editTaskHandler(task) : () => {
+    dispatch(isShowDeleteModal());
+    dispatch(isShowInfoModalReset());
+  }
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-10">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -103,13 +131,10 @@ export const TasksInformation = () => {
           />
           <Button
             color="white"
-            bgColor="red"
-            text="Delete Task"
+            bgColor={color}
+            text={text}
             borderRadius="10px"
-            onClick={() => {
-              dispatch(isShowDeleteModal());
-              dispatch(isShowInfoModalReset());
-            }}
+            onClick={handleClickAction}
           />
         </div>
       </div>
