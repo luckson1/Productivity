@@ -16,7 +16,7 @@ function DoneTasks({ children, setStatus }) {
       summary: item?.task.summary,
       status: "Done",
       _id: item.task._id,
-      createdAt: item.task.createdAt,
+      image: item.task.image,
       updatedAt: new Date(),
       taskId: item?.task.taskId ?? uuidv4(),
     };
