@@ -15,6 +15,18 @@ Kanban Board. Both the task management and bug tracking functionalities use a vi
 
 
 Calendar. After creating tasks, you can assign them the expected duration to completion by specifying the start and the end date. One can view all their tasks on the calendar. The calendar has a month, week, or daily view. The month, week, and daily views display all the tasks in a given month, week, or day respectively.
+
+Theme. One can choose a theme color for their app. In addition, one can set their mode to be either dark mode or light. 
+
+
+
+
+![Screenshot](Screenshot.png)
+
+
+
+
+
 ## Set Up
 1. Clone this repo to your desktop
 2. Navigate to the client folder and run npm install to install all the dependencies. Once the dependencies are installed, you can run npm start to start the client application. You will then be able to access it at localhost:3000
