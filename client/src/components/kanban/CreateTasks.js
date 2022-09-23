@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import "react-datepicker/dist/react-datepicker.css";
+import { v4 as uuidv4 } from "uuid";
+import DatePicker from "react-datepicker";
+import { MdCancel } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { createTaskAction } from "../../redux/taskSlices";
 import { useStateContext } from "../../context/ContextProvider";
-import { v4 as uuidv4 } from "uuid";
-import "react-datepicker/dist/react-datepicker.css";
-import { SiAddthis } from "react-icons/si";
 const errorSchema = Yup.object().shape({
   title: Yup.string().required("Title is required"),
   summary: Yup.string(),
   status: Yup.string(),
 });
 function CreateTasks({ setShowTaskInput }) {
-  const { tasks, setTasks } = useStateContext();
+  const { tasks, setTasks, currentColor } = useStateContext();
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,8 @@ function CreateTasks({ setShowTaskInput }) {
   const formik = useFormik({
     initialValues: {
       title: "",
+      start: undefined,
+      end: undefined,
       taskId: uuidv4(),
       status: "To Do",
     },
@@ -35,42 +38,93 @@ function CreateTasks({ setShowTaskInput }) {
       resetForm({ values: "" });
     },
   });
-
+  // control state of data input
+  const [startDate, setStartDate] = useState(new Date(new Date()));
+  const [endDate, setEndDate] = useState(new Date(new Date()));
   return (
-    <>
-      <form
-        onSubmit={formik.handleSubmit}
-        className=" dark:bg-[#484B52] flex flex-row px-0 "
-      >
-        <div
-          className="flex flex-row justify-between gap-1 border-1 border-slate-50"
-          style={{ width: "100%" }}
-        >
-          <input
-            className=" shadow-2xl rounded-md px-1 text-xs"
-            type="text"
-            id="name"
-            value={formik.values.title}
-            onChange={formik.handleChange("title")}
-            onBlur={formik.handleBlur("title")}
-            placeholder="Tittle of the Task"
-            style={{ width: "90%" }}
+    <div className="fixed-modal bg-half-transparent">
+      <div className="modal bg-white h-72 w-11/12 md:w-4/12 shadow-2xl mt-12">
+        <div className="flex flex-row justify-between mx-5 mt-5 cursor-pointer">
+          <strong>Create new Member</strong>
+          <MdCancel
+            size="30px"
+            color="red"
+            onClick={() => {
+              setShowTaskInput(false);
+            }}
           />
-
-          <button
-            type="submit"
-            className=" h-10 w-10 bg-black text-white rounded-md shadow-2xl "
-          >
-            <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-sky-600 opacity-75"></span>
-            <SiAddthis size="100% " />
-          </button>
         </div>
-      </form>
-      {/* errors */}
-      <div className="form-validation">
-        {formik.touched.title && formik.errors.title}
+        <form onSubmit={formik.handleSubmit} className=" mx-5 my-5">
+          {/* errors */}
+          <div className="form-validation">
+            {formik.touched.title && formik.errors.title}
+          </div>
+          <span className="form-row">
+            <label className="form-row-label" htmlFor="title">
+              Title
+            </label>
+            <input
+              className="form-row-input border-b-2 border-b-indigo-500 rounded-none"
+              type="text"
+              id="title"
+              value={formik.values.title}
+              onChange={formik.handleChange("title")}
+              onBlur={formik.handleBlur("title")}
+              placeholder="Title of the task"
+            />
+          </span>
+          <div className="flex flex-row mt-5">
+            <span className="form-row">
+              <label className="form-row-label" htmlFor="startDate">
+                Start Date
+              </label>
+              <DatePicker
+                className="w-11/12 rounded-lg m-auto h-10"
+                id="startDate"
+                name="startDate"
+                placeholder="start-date"
+                selected={startDate}
+                onChange={(val) => {
+                  formik.setFieldValue("start", val);
+                  setStartDate(val);
+                }}
+                minDate={new Date()}
+                onBlur={formik.handleBlur("startDate")}
+              />
+            </span>
+
+            <span className="form-row">
+              <label className="form-row-label" htmlFor="endDate">
+                End Date
+              </label>
+              <DatePicker
+                className="w-11/12 rounded-lg m-auto h-10"
+                name="endDate"
+                selected={endDate}
+                onChange={(val) => {
+                  formik.setFieldValue("end", val);
+                  setEndDate(val);
+                }}
+                minDate={new Date()}
+                onBlur={formik.handleBlur("end")}
+              />
+            
+            </span>
+          </div>
+
+          <span className="form-row-buttons">
+            <label className="form-row-label" htmlFor="Role"></label>
+            <button
+              className="form-row-input"
+              type="submit"
+              style={{ background: currentColor }}
+            >
+              Save
+            </button>
+          </span>
+        </form>
       </div>
-    </>
+    </div>
   );
 }
 

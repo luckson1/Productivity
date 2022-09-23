@@ -81,7 +81,7 @@ export default function KanbanComponent() {
       <div className="kanban-board ">
         <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-50 to-pink-200 shadow-md">
           <strong>To Do</strong>
-          {showTaskInput && <CreateTasks setShowTaskInput={setShowTaskInput} />}
+       
 
           {taskAppErr || taskServerErr ? (
             <div className="form-validation">An Error Has Occured</div>
@@ -137,6 +137,7 @@ export default function KanbanComponent() {
       {showModal && <EditTasks entry={selectedTask} />}
       {showDeleteModal && <DeleteDialogBox item="Task" />}
       {showInfoModal && <TasksInformation />}
+      {showTaskInput && <CreateTasks setShowTaskInput={setShowTaskInput} />}
     </div>
   );
 }
