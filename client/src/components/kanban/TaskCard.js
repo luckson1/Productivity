@@ -3,10 +3,10 @@ import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
 import { isShowInfoModal } from "../../redux/taskSlices";
+import dateFormatter from "../../utils/dateFormatter";
 
 function TaskCard({ task, type }) {
   const { setSelectedTask, team } = useStateContext();
-
   //react DnD API
   const [{ isDragging }, drag] = useDrag({
     item: { task },
@@ -36,8 +36,9 @@ function TaskCard({ task, type }) {
         setSelectedTask(task);
       }}
     >
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between flex-wrap">
         <p>{task?.title}</p>
+        { <p>{task?.end !== undefined? dateFormatter(task?.end): ""}</p>}
         {assigneeData[0]?.image !== undefined && (
           <img
             className="rounded-full h-6 w-6"
