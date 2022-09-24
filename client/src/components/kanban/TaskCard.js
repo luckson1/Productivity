@@ -39,7 +39,6 @@ function TaskCard({ task, type }) {
     >
       <div className="flex flex-row justify-between flex-wrap">
         <p>{task?.title}</p>
-        {<p>{task?.end !== undefined ? dateFormatter(task?.end) : ""}</p>}
         {assigneeData[0]?.image !== undefined && (
           <img
             className="rounded-full h-6 w-6"
