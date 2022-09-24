@@ -30,7 +30,7 @@ function DeleteDialogBox({ item }) {
           <button className="del" onClick={() => deleteTaskHandler()}>
             Delete {item}
           </button>
-          <button className="cancel" onClick={() => isShowDeleteModalReset()}>
+          <button className="cancel" onClick={() => dispatch(isShowDeleteModalReset())}>
             Cancel
           </button>
         </div>
