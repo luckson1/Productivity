@@ -43,7 +43,7 @@ function CreateTasks({ setShowTaskInput }) {
   const [endDate, setEndDate] = useState(new Date(new Date()));
   return (
     <div className="fixed-modal bg-half-transparent">
-      <div className="modal bg-white h-72 w-11/12 md:w-4/12 shadow-2xl mt-12">
+      <div className="modal bg-white h-80 w-11/12 md:w-4/12 shadow-2xl mt-12">
         <div className="flex flex-row justify-between mx-5 mt-5 cursor-pointer">
           <strong>Create new Task</strong>
           <MdCancel
