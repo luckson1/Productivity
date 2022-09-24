@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { useStateContext } from "../context/ContextProvider";
 
 import { deleteTaskAction, isShowDeleteModalReset } from "../redux/taskSlices";
@@ -8,7 +8,6 @@ function DeleteDialogBox({ item }) {
   const dispatch = useDispatch();
   const { tasks, setTasks, selectedTask } = useStateContext();
   const task = selectedTask;
-  const tasksState = useSelector((state) => state?.tasks);
   const deleteTaskHandler = () => {
     dispatch(deleteTaskAction(task));
     dispatch(isShowDeleteModalReset());
