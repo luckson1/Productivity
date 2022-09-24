@@ -7,7 +7,7 @@ import dateFormatter from "../../utils/dateFormatter";
 
 function TaskCard({ task, type }) {
   const { setSelectedTask, team } = useStateContext();
-  const style = { opacity: isDragging ? 0.3 : 1, cursor: "pointer" };
+
   //react DnD API
   const [{ isDragging }, drag] = useDrag({
     item: { task },
@@ -17,7 +17,7 @@ function TaskCard({ task, type }) {
       isDragging: !!monitor.isDragging(),
     }),
   });
-
+  const style = { opacity: isDragging ? 0.3 : 1, cursor: "pointer" };
   const dispatch = useDispatch();
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
   return (

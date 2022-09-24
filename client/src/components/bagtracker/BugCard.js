@@ -6,7 +6,7 @@ import { isShowInfoModal } from "../../redux/bugsSlices";
 
 function BugCard({ bug, type }) {
   const { setSelectedBug,  team } = useStateContext();
-  const style={ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }
+
 
   // react drag and drop hook and api
   const [{ isDragging }, drag] = useDrag({
@@ -19,7 +19,7 @@ function BugCard({ bug, type }) {
       isDragging: !!monitor.isDragging(),
     }),
   });
-
+  const style={ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }
   const dispatch=useDispatch()
   const assigneeData = team?.filter((member) => member?._id === bug?.assigned);
   return (
