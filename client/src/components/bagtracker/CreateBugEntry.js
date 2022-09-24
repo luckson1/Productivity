@@ -1,12 +1,16 @@
 import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-// import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from "uuid";
 import { MdCancel } from "react-icons/md";
 import { useStateContext } from "../../context/ContextProvider";
 import { useDispatch, useSelector } from "react-redux";
-import { createBugAction, editBugsAction, isEditModeReset, isShowModalReset } from "../../redux/bugsSlices";
-import { v4 as uuidv4 } from "uuid";
+import {
+  createBugAction,
+  editBugsAction,
+  isEditModeReset,
+  isShowModalReset,
+} from "../../redux/bugsSlices";
 
 const errorSchema = Yup.object().shape({
   title: Yup.string().required("Title is Required"),
@@ -17,11 +21,10 @@ const errorSchema = Yup.object().shape({
 });
 
 function CreateBugEntry() {
-  const { selectedBug, bugs, setBugs, team } =
-    useStateContext();
+  const { selectedBug, bugs, setBugs, team } = useStateContext();
   const entry = selectedBug;
   const bugsState = useSelector((state) => state?.bugs);
-  const {  isEdit } = bugsState;
+  const { isEdit } = bugsState;
   const dispatch = useDispatch();
 
   const addBugHandler = (values) => {
@@ -31,19 +34,19 @@ function CreateBugEntry() {
     newBug.push(values);
     setBugs([...bugs, ...newBug]);
 
-    dispatch(isShowModalReset())
+    dispatch(isShowModalReset());
   };
 
   const editbugHandler = (values) => {
     dispatch(editBugsAction(values));
-    dispatch(isEditModeReset())
+    dispatch(isEditModeReset());
     const newBugs = bugs?.filter((bug) => {
       return entry._id !== bug?._id;
     });
     let editedBug = [];
     editedBug.push(values);
     setBugs([...newBugs, ...editedBug]);
-    dispatch(isShowModalReset())
+    dispatch(isShowModalReset());
   };
 
   // use formik hook to handle form state
@@ -79,7 +82,7 @@ function CreateBugEntry() {
               color="red"
               onClick={() => {
                 dispatch(isEditModeReset());
-              dispatch(isShowModalReset())
+                dispatch(isShowModalReset());
               }}
               style={{ cursor: "pointer" }}
             />
