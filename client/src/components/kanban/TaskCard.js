@@ -7,6 +7,7 @@ import dateFormatter from "../../utils/dateFormatter";
 
 function TaskCard({ task, type }) {
   const { setSelectedTask, team } = useStateContext();
+  const style = { opacity: isDragging ? 0.3 : 1, cursor: "pointer" };
   //react DnD API
   const [{ isDragging }, drag] = useDrag({
     item: { task },
@@ -30,7 +31,7 @@ function TaskCard({ task, type }) {
      duration-300"
       id="task"
       ref={drag}
-      style={{ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }}
+      style={style}
       onClick={() => {
         dispatch(isShowInfoModal());
         setSelectedTask(task);
@@ -38,7 +39,7 @@ function TaskCard({ task, type }) {
     >
       <div className="flex flex-row justify-between flex-wrap">
         <p>{task?.title}</p>
-        { <p>{task?.end !== undefined? dateFormatter(task?.end): ""}</p>}
+        {<p>{task?.end !== undefined ? dateFormatter(task?.end) : ""}</p>}
         {assigneeData[0]?.image !== undefined && (
           <img
             className="rounded-full h-6 w-6"
@@ -46,6 +47,7 @@ function TaskCard({ task, type }) {
             alt="user-profile"
           />
         )}
+        {<p>{task?.end !== undefined ? dateFormatter(task?.end) : ""}</p>}
       </div>
     </div>
   );
