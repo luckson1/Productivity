@@ -150,13 +150,17 @@ const createUserctrl = expressAsyncHandler(async (req, res) => {
     const userExists = await User.findOne({ email });
 
     // find if existing user has been invited by the admin(invite sender) before.
-    const invitingAdminsIds = userExists.invitedBy;
+    let invitingAdminsIds = [];
+    let alreadyTeamMember;
+    if (userExists !== null) {
+        invitingAdminsIds = userExists.invitedBy;
+        alreadyTeamMember = invitingAdminsIds.includes(id);
+    }
 
-    const alreadyTeamMember = invitingAdminsIds.includes(id);
     if (alreadyTeamMember) {
         throw new Error("Team member already invited!");
     }
-    if (userExists && !alreadyTeamMember) {
+    if (userExists !== null && !alreadyTeamMember) {
         // adding user to the team(by adding the invite sender userId to the list of invitedBy array), if user exists but not added to the request-sender's team
         const updateDocument1 = {
             $push: { invitedBy: id },
