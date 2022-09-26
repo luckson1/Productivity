@@ -1,7 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useStateContext } from "../context/ContextProvider";
 import { v4 as uuidv4 } from "uuid";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,14 +9,17 @@ import { createCommentAction } from "../redux/CommentSlices";
 const errorSchema = Yup.object().shape({
   details: Yup.string().required("Comment Required"),
 });
-function CreateComment({ bugId, taskId }) {
+function CreateComment({ bugId, taskId, setComments, comments}) {
   const { currentColor } = useStateContext();
 
   const dispatch = useDispatch();
 
   const addTaskHandler = (values) => {
     dispatch(createCommentAction(values));
+    setComments([values, ...comments])
   };
+  const user= useSelector(state=> state.users?.userAuth?.user?._id)
+  console.log(user)
   // use formik hook to handle form state
   const formik = useFormik({
     initialValues: {
@@ -24,6 +27,7 @@ function CreateComment({ bugId, taskId }) {
       commentId: uuidv4(),
       bugId: bugId,
       taskId: taskId,
+      creator: user
     },
     validationSchema: errorSchema,
     onSubmit: (values, { resetForm }) => {
