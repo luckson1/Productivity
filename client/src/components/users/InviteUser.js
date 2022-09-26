@@ -14,13 +14,14 @@ const errorSchema = Yup.object().shape({
 });
 
 function InviteUser() {
-  const { currentColor } = useStateContext();
+  const { currentColor, team, setTeam } = useStateContext();
 
   const dispatch = useDispatch();
 
   const addMemberHandler = (values) => {
     dispatch(createUserAction(values));
     dispatch(isShowModalReset());
+    setTeam([values, ...team])
   };
   // use formik hook to handle form state
   const formik = useFormik({
