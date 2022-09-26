@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MdCancel } from "react-icons/md";
 
 import { useStateContext } from "../../context/ContextProvider";
@@ -19,18 +19,24 @@ import {
 } from "../../redux/taskSlices";
 
 export const TasksInformation = () => {
-  const { currentColor, setSelectedTask, selectedTask, team, tasks, setTasks} =
+  console.log("render");
+  const { currentColor, setSelectedTask, selectedTask, team, tasks, setTasks } =
     useStateContext();
+  const [comments, setComments] = useState([]);
   const dispatch = useDispatch();
   const task = selectedTask;
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
+  const commentsData = useSelector(
+    (state) => state?.comment?.commentsFetched?.comment
+  );
+
   useEffect(() => {
     dispatch(fetchCommentAction({ id: task?.taskId }));
   }, []);
 
-  const comments = useSelector(
-    (state) => state?.comment?.commentsFetched?.comment
-  );
+  useEffect(() => {
+    setComments(commentsData);
+  }, [commentsData]);
 
   // action to mark task as done
   const editTaskHandler = (task) => {
@@ -40,7 +46,7 @@ export const TasksInformation = () => {
       status: "Complete",
       _id: task?._id,
       updatedAt: new Date(),
-      taskId: task?.taskId 
+      taskId: task?.taskId,
     };
     let editedTask = [];
     editedTask.push(editedTaskValues);
@@ -52,13 +58,15 @@ export const TasksInformation = () => {
     setTasks([...editedTask, ...newTasks]);
     dispatch(isShowInfoModalReset());
   };
-  const Done= task?.status==="Done"
-  const text= Done? "Mark as Complete" : "Delete Task"
-  const color= Done? currentColor : "red"
-  const handleClickAction= Done? ()=> editTaskHandler(task) : () => {
-    dispatch(isShowDeleteModal());
-    dispatch(isShowInfoModalReset());
-  }
+  const Done = task?.status === "Done";
+  const text = Done ? "Mark as Complete" : "Delete Task";
+  const color = Done ? currentColor : "red";
+  const handleClickAction = Done
+    ? () => editTaskHandler(task)
+    : () => {
+        dispatch(isShowDeleteModal());
+        dispatch(isShowInfoModalReset());
+      };
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-10">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -113,7 +121,11 @@ export const TasksInformation = () => {
                 details={comment?.details}
               />
             ))}
-            <CreateComment taskId={task?.taskId} />
+            <CreateComment
+              taskId={task?.taskId}
+              comments={comments}
+              setComments={setComments}
+            />
           </div>
         </div>
         <div className="flex justify-between items-center mt-3 border-t-1 border-color mx-7">

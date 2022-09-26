@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
@@ -17,6 +17,7 @@ import InfoCard from "../InfoCard";
 export const BugsInformation = ({ bugEntry }) => {
   const { currentColor, setSelectedBug, bugs, selectedBug, setBugs, team } =
     useStateContext();
+  const [comments, setComments] = useState([]);
   const entry = selectedBug;
   const dispatch = useDispatch();
   const newStatus =
@@ -54,9 +55,14 @@ export const BugsInformation = ({ bugEntry }) => {
     dispatch(fetchCommentAction({ id: bugEntry?.bugId }));
   }, []);
 
-  const comments = useSelector(
+  const commentsData = useSelector(
     (state) => state?.comment?.commentsFetched?.comment
   );
+  useEffect(() => {
+    setComments(commentsData);
+
+  }, [commentsData]);
+
   const assigneeData = team?.filter(
     (member) => member?._id === bugEntry?.assigned
   );
@@ -106,7 +112,11 @@ export const BugsInformation = ({ bugEntry }) => {
                 details={comment?.details}
               />
             ))}
-            <CreateComment bugId={bugEntry?.bugId} />
+            <CreateComment
+              bugId={bugEntry?.bugId}
+              comments={comments}
+              setComments={setComments}
+            />
           </div>
         </div>
         <div className="flex justify-between items-center mt-3 border-t-1 border-color mx-7">
