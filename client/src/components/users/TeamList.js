@@ -1,5 +1,6 @@
 import React from "react";
 import { useStateContext } from "../../context/ContextProvider";
+import placeholderImage from "../../assets/ProfilePic.jpg"
 
 function TeamList() {
   const { team } = useStateContext();
@@ -20,7 +21,7 @@ function TeamList() {
             <div className="col col-1" data-label="Avatar">
               <img
                 alt="profile iimage"
-                src={member?.image}
+                src={member?.image ?? placeholderImage}
                 className="rounded-full h-6 w-6 ml-5"
               />
             </div>
