@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   isShowModal,
   isShowModalReset,
-  isShowSignUpModal,
+  isShowSignUpModalReset,
   logout,
 } from "../redux/usersSlices";
 
@@ -126,7 +126,7 @@ function Home() {
                     ? () => dispatch(logout())
                     : () => {
                         dispatch(isShowModal());
-                        dispatch(isShowSignUpModal());
+                        dispatch(isShowSignUpModalReset());
                         setIsOpenMenu(false);
                         window.scrollTo(0, 0);
                       }
