@@ -61,7 +61,7 @@ export default function KanbanComponent() {
     (state) => state?.users?.teamProfile?.teamMembers
   );
   useEffect(() => {
-    if (typeof teamMembers !== "undefined")
+    if (teamMembers)
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
   }, [teamMembers]);
 

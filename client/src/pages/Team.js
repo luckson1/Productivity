@@ -18,7 +18,7 @@ function Team() {
   const { teamProfile, showModal } = teamData;
   const teamMembers = teamProfile?.teamMembers;
   useEffect(() => {
-    if (typeof teamMembers !== "undefined") setTeam(teamMembers);
+    if (teamMembers) setTeam(teamMembers);
   }, [teamMembers]);
 
   return (

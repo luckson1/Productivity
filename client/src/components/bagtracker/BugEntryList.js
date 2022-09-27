@@ -73,9 +73,7 @@ const dispatch=useDispatch()
                 {dateFormatter(entry?.createdAt)}
               </div>
               <div className="col col-3" data-label="Assigned">
-                {entry?.assigned === undefined
-                  ? "Not Assigned"
-                  : entry?.assigned}
+                { entry?.assigned ?? "Not Assigned"}
               </div>
             </li>
           ))

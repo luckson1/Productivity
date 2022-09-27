@@ -46,7 +46,7 @@ function TaskCard({ task, type }) {
             alt="user-profile"
           />
         )}
-        {<p>{task?.end !== undefined ? dateFormatter(task?.end) : ""}</p>}
+        {<p>{task?.end && dateFormatter(task?.end) }</p>}
       </div>
     </div>
   );

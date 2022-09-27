@@ -55,7 +55,7 @@ export default function BugEntryComponent() {
   );
 
   useEffect(() => {
-    if (typeof teamMembers !== "undefined")
+    if (teamMembers)
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
   }, [teamMembers]);
 
