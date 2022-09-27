@@ -1,14 +1,20 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 // import { loginUserAction, registerUserAction } from '../redux/usersSlices';
-import DisabledButton from "../DisabledButton";
+
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { MdCancel } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { isShowSignUpModal, isShowSignUpModalReset, loginUserAction, registerUserAction, isShowModalReset  } from "../../redux/usersSlices";
-import { useState } from "react";
-
+import DisabledButton from "../DisabledButton";
+import {
+  isShowSignUpModal,
+  isShowSignUpModalReset,
+  loginUserAction,
+  registerUserAction,
+  isShowModalReset,
+} from "../../redux/usersSlices";
 
 // use yup to handle errors
 const SignInErrorSchema = Yup.object().shape({
@@ -27,7 +33,7 @@ const LoginErrorSchema = Yup.object().shape({
 });
 
 export const Authmodal = () => {
-const [revealPassword, setRevealPassword]=useState(false)
+  const [revealPassword, setRevealPassword] = useState(false);
   // dispatch
   const dispatch = useDispatch();
 
@@ -36,7 +42,7 @@ const [revealPassword, setRevealPassword]=useState(false)
   const user = useSelector((state) => {
     return state?.users;
   });
-  const { userLoading, userServerErr, userAppErr,   isSignUp,  } = user;
+  const { userLoading, userServerErr, userAppErr, isSignUp } = user;
   // use formik hook to handle form state
   const formik = useFormik({
     initialValues: {
@@ -59,7 +65,7 @@ const [revealPassword, setRevealPassword]=useState(false)
     <div className="auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20">
       <div
         onClick={() => {
-         dispatch(isShowModalReset());
+          dispatch(isShowModalReset());
           dispatch(isShowSignUpModal());
           setRevealPassword(false);
         }}
