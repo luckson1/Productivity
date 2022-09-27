@@ -98,13 +98,13 @@ export const TasksInformation = () => {
               />
             </div>
             <InfoCard title="Summary" details={task?.summary} />
-            {task?.start !== undefined && (
+            {task?.start  && (
               <InfoCard
                 title=" Starting Date"
                 details={dateFormatter(task?.start)}
               />
             )}
-            {task?.end !== undefined && (
+            {task?.end  && (
               <InfoCard
                 title="Ending Date"
                 details={dateFormatter(task?.end)}
