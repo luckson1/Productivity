@@ -35,11 +35,11 @@ export const UserProfile = ({user, }) => {
       </div>
       <div className="flex flex-col gap-7 items-center mt-6 border-color border-b-1 pb-6">
         <div className="flex flex-row gap-1">
-          <img
+      {  user?.image &&  <img
             className="rounded-full h-24 w-24"
             src={user?.image}
             alt="user-profile"
-          />
+          />}
           <button
             onClick={() => {
               setShowProfileEditModal(true);
