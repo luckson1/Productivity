@@ -13,19 +13,16 @@ import { fetchTeamMembersAction } from "../../redux/usersSlices";
 import InProgressBugs from "./InProgressBugs";
 
 export default function BugEntryComponent() {
-  // display or remove action creation/edit form
-
   const { currentColor, selectedBug, bugs, setBugs, setTeam } =
     useStateContext();
 
-  // dispatch action to fetch all Bugs
   const dispatch = useDispatch();
 
+  // fetch data
   useEffect(() => {
     dispatch(fetchbugsAction());
     dispatch(fetchTeamMembersAction());
   }, [dispatch]);
-
 
   // get state from bugs store
 
@@ -38,26 +35,27 @@ export default function BugEntryComponent() {
     showModal,
     showInfoModal,
   } = bugsState;
+  const teamMembers = useSelector(
+    (state) => state?.users?.teamProfile?.teamMembers
+  );
 
+  // introduce effects
   useEffect(() => {
     if (bugsFetched) {
       setBugs(bugsFetched?.bugs);
     }
-  }, [bugsFetched, setBugs]);
-
-  const openBugs = bugs?.filter((bug) => bug?.status === "Open");
-  const inProgressBugs = bugs?.filter((bug) => bug?.status === "In Progress");
-  const inReviewBugs = bugs?.filter((bug) => bug?.status === "In Review");
-  const closedBugs = bugs?.filter((bug) => bug?.status === "Closed");
-  // get data from user store
-  const teamMembers = useSelector(
-    (state) => state?.users?.teamProfile?.teamMembers
-  );
+  }, [bugsFetched]);
 
   useEffect(() => {
     if (teamMembers)
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
   }, [teamMembers]);
+
+  // organise the data
+  const openBugs = bugs?.filter((bug) => bug?.status === "Open");
+  const inProgressBugs = bugs?.filter((bug) => bug?.status === "In Progress");
+  const inReviewBugs = bugs?.filter((bug) => bug?.status === "In Review");
+  const closedBugs = bugs?.filter((bug) => bug?.status === "Closed");
 
   return (
     <div className=" w-11/12  mx-3 text-sm md:text-base md:flex-nowrap mt-24">
