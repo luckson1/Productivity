@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
@@ -21,9 +21,7 @@ function BugCard({ bug, type }) {
   });
   const style={ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }
   const dispatch=useDispatch()
-  const assigneeData = useCallback(()=>{
-    team?.filter((member) => member?._id === bug?.assigned);
-  }, [team, bug?.assigned])
+  const assigneeData = team?.filter((member) => member?._id === bug?.assigned);
   return (
     <div
       className="task dark:bg-[#484B52]
