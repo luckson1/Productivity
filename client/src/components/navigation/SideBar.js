@@ -47,8 +47,8 @@ export const SideBar = () => {
           </div>
 
           <div className="mt-10  min-h-full ">
-            {links?.map((item) => (
-              <div key={item?.title} className="flex flex-col  min-h-full  ">
+            {links?.map((item, index) => (
+              <div key={index} className="flex flex-col  min-h-full  ">
                 {item?.links?.map((link) => (
                   <NavLink
                     key={link?.id.toString()}
