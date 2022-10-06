@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { MdCancel } from "react-icons/md";
 
 import { useStateContext } from "../../context/ContextProvider";
@@ -24,14 +24,18 @@ export const TasksInformation = () => {
   const [comments, setComments] = useState([]);
   const dispatch = useDispatch();
   const task = selectedTask;
+
+  // get the team mate assigned this task
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
+
+  // fetch comments from the store
   const commentsData = useSelector(
     (state) => state?.comment?.commentsFetched?.comment
   );
 
   useEffect(() => {
     dispatch(fetchCommentAction({ id: task?.taskId }));
-  }, []);
+  }, [task?.taskId, dispatch]);
 
   useEffect(() => {
     setComments(commentsData);
@@ -60,12 +64,33 @@ export const TasksInformation = () => {
   const Done = task?.status === "Done";
   const text = Done ? "Mark as Complete" : "Delete Task";
   const color = Done ? currentColor : "red";
-  const handleClickAction = Done
+
+  // click event handler to initiate deletion or mark task as complete and remove it from the board
+  const handleRemoveTask = Done
     ? () => editTaskHandler(task)
     : () => {
         dispatch(isShowDeleteModal());
         dispatch(isShowInfoModalReset());
       };
+
+  // click event handler to initiate editing
+
+  const handleInitiateEdit = useCallback(
+    (task) => {
+      dispatch(isShowInfoModalReset());
+      dispatch(isShowModal());
+      dispatch(isEditMode());
+      setSelectedTask(task);
+      window.scrollTo(0, 0);
+    },
+    [setSelectedTask, dispatch]
+  );
+
+  // cancel button handler
+  const handleCancelModule=useCallback(() => {
+    dispatch(isShowInfoModalReset());
+    dispatch(isEditModeReset());
+  }, [dispatch])
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0 z-10">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -78,10 +103,7 @@ export const TasksInformation = () => {
             className=""
             color="red"
             size="30px"
-            onClick={() => {
-              dispatch(isShowInfoModalReset());
-              dispatch(isEditModeReset());
-            }}
+            onClick={handleCancelModule}
             style={{ cursor: "pointer" }}
           />
         </div>
@@ -97,13 +119,13 @@ export const TasksInformation = () => {
               />
             </div>
             <InfoCard title="Summary" details={task?.summary} />
-            {task?.start  && (
+            {task?.start && (
               <InfoCard
                 title=" Starting Date"
                 details={dateFormatter(task?.start)}
               />
             )}
-            {task?.end  && (
+            {task?.end && (
               <InfoCard
                 title="Ending Date"
                 details={dateFormatter(task?.end)}
@@ -133,20 +155,14 @@ export const TasksInformation = () => {
             bgColor={currentColor}
             text="Edit Details"
             borderRadius="10px"
-            onClick={() => {
-              dispatch(isShowInfoModalReset());
-              dispatch(isShowModal());
-              dispatch(isEditMode());
-              setSelectedTask(task);
-              window.scrollTo(0, 0);
-            }}
+            onClick={() => handleInitiateEdit(task)}
           />
           <Button
             color="white"
             bgColor={color}
             text={text}
             borderRadius="10px"
-            onClick={handleClickAction}
+            onClick={() => handleRemoveTask(task)}
           />
         </div>
       </div>

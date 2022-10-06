@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
 import { isShowInfoModal } from "../../redux/bugsSlices";
 
 function BugCard({ bug, type }) {
-  const { setSelectedBug,  team } = useStateContext();
-
+  const { setSelectedBug, team } = useStateContext();
 
   // react drag and drop hook and api
   const [{ isDragging }, drag] = useDrag({
@@ -19,9 +18,13 @@ function BugCard({ bug, type }) {
       isDragging: !!monitor.isDragging(),
     }),
   });
-  const style={ opacity: isDragging ? 0.3 : 1, cursor: "pointer" }
-  const dispatch=useDispatch()
+  const style = { opacity: isDragging ? 0.3 : 1, cursor: "pointer" };
+  const dispatch = useDispatch();
   const assigneeData = team?.filter((member) => member?._id === bug?.assigned);
+  const handleViewDetails = useCallback(() => {
+    dispatch(isShowInfoModal());
+    setSelectedBug(bug);
+  }, [dispatch, setSelectedBug, bug]);
   return (
     <div
       className="task dark:bg-[#484B52]
@@ -34,10 +37,7 @@ function BugCard({ bug, type }) {
       id="task"
       ref={drag}
       style={style}
-      onClick={() => {
-       dispatch(isShowInfoModal())
-        setSelectedBug(bug);
-      }}
+      onClick={handleViewDetails}
     >
       <div className="flex flex-row justify-between flex-wrap">
         <p>{bug?.title}</p>
@@ -55,7 +55,7 @@ function BugCard({ bug, type }) {
               : "bg-red-500 rounded-lg text-xs w-14 pt-1"
           }
         >
-          <p >{bug?.priority}</p>
+          <p>{bug?.priority}</p>
         </div>
       </div>
     </div>

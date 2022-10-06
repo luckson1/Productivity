@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTasksAction, isShowInfoModal } from "../../redux/taskSlices";
+import { fetchTasksAction } from "../../redux/taskSlices";
 import DeleteDialogBox from "../DeleteDialogBox";
 import TaskCard from "./TaskCard";
 import { ItemTypes } from "../../utils/items";
@@ -16,14 +16,8 @@ import { Button } from "../Button";
 export default function KanbanComponent() {
   // display or remove action creation/edit form
 
-  const {
-    selectedTask,
-    tasks,
-    setTasks,
-    setSelectedTask,
-    setTeam,
-    currentColor,
-  } = useStateContext();
+  const { selectedTask, tasks, setTasks, setTeam, currentColor } =
+    useStateContext();
   const [showTaskInput, setShowTaskInput] = useState(false);
 
   // dispatch action to fetch all tasks
@@ -60,11 +54,16 @@ export default function KanbanComponent() {
   const teamMembers = useSelector(
     (state) => state?.users?.teamProfile?.teamMembers
   );
+
+  // set team to include only members who are verified
   useEffect(() => {
     if (teamMembers)
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
   }, [teamMembers]);
 
+  const handleShowForm = useCallback(() => {
+    setShowTaskInput(true);
+  }, [setShowTaskInput]);
   return (
     <div className=" w-11/12 my-10 mx-3 text-sm md:text-base md:flex-nowrap">
       <div className="kanban-heading">
@@ -73,15 +72,12 @@ export default function KanbanComponent() {
           animationType="bounce"
           borderRadius="10px"
           text="Add New Task"
-          onClick={() => {
-            setShowTaskInput(true);
-          }}
+          onClick={handleShowForm}
         />
       </div>
       <div className="kanban-board ">
         <div className="kanban-block bg-gradient-to-r from-indigo-200 via-purple-50 to-pink-200 shadow-md">
           <strong>To Do</strong>
-       
 
           {taskAppErr || taskServerErr ? (
             <div className="form-validation">An Error Has Occured</div>
@@ -93,15 +89,7 @@ export default function KanbanComponent() {
             </div>
           ) : (
             toDoTasks?.map((task) => (
-              <TaskCard
-                task={task}
-                key={task?.taskId}
-                type={ItemTypes.DO}
-                onClick={() => {
-                  dispatch(isShowInfoModal());
-                  setSelectedTask(task);
-                }}
-              />
+              <TaskCard task={task} key={task?.taskId} type={ItemTypes.DO} />
             ))
           )}
         </div>

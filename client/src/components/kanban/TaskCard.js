@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
@@ -20,6 +20,16 @@ function TaskCard({ task, type }) {
   const style = { opacity: isDragging ? 0.3 : 1, cursor: "pointer" };
   const dispatch = useDispatch();
   const assigneeData = team?.filter((member) => member?._id === task?.assigned);
+
+  // handle event listener to view task details
+
+  const handleViewDetails = useCallback(
+    (task) => {
+      dispatch(isShowInfoModal());
+      setSelectedTask(task);
+    },
+    [setSelectedTask, dispatch]
+  );
   return (
     <div
       className="task dark:bg-[#484B52]
@@ -32,10 +42,7 @@ function TaskCard({ task, type }) {
       id="task"
       ref={drag}
       style={style}
-      onClick={() => {
-        dispatch(isShowInfoModal());
-        setSelectedTask(task);
-      }}
+      onClick={() => handleViewDetails(task)}
     >
       <div className="flex flex-row justify-between flex-wrap">
         <p>{task?.title}</p>
@@ -46,7 +53,7 @@ function TaskCard({ task, type }) {
             alt="user-profile"
           />
         )}
-        {<p>{task?.end && dateFormatter(task?.end) }</p>}
+        {<p>{task?.end && dateFormatter(task?.end)}</p>}
       </div>
     </div>
   );
