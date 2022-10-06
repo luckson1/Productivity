@@ -19,7 +19,6 @@ import {
 } from "../../redux/taskSlices";
 
 export const TasksInformation = () => {
-  console.log("render");
   const { currentColor, setSelectedTask, selectedTask, team, tasks, setTasks } =
     useStateContext();
   const [comments, setComments] = useState([]);

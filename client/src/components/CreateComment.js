@@ -19,7 +19,6 @@ function CreateComment({ bugId, taskId, setComments, comments}) {
     setComments([values, ...comments])
   };
   const user= useSelector(state=> state.users?.userAuth?.user?._id)
-  console.log(user)
   // use formik hook to handle form state
   const formik = useFormik({
     initialValues: {
