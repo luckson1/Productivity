@@ -59,7 +59,7 @@ export default function KanbanComponent() {
   useEffect(() => {
     if (teamMembers)
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
-  }, [teamMembers]);
+  }, [teamMembers, setTeam]);
 
   const handleShowForm = useCallback(() => {
     setShowTaskInput(true);
