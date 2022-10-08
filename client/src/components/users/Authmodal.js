@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,14 +61,16 @@ export const Authmodal = () => {
         },
   });
 
+  const handleHideForm= useCallback(() => {
+    dispatch(isShowModalReset());
+    dispatch(isShowSignUpModal());
+    setRevealPassword(false);
+  }, [dispatch])
+
   return (
     <div className="auth-modal text-gray-900 bg-gradient-to-b from-indigo-300 via-purple-300 to-pink-300 z-20">
       <div
-        onClick={() => {
-          dispatch(isShowModalReset());
-          dispatch(isShowSignUpModal());
-          setRevealPassword(false);
-        }}
+        onClick={handleHideForm}
         className="close-icon"
       >
         <MdCancel color="red" />

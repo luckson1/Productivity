@@ -10,18 +10,33 @@ import { FaEdit } from "react-icons/fa";
 import UserProfileEdit from "./UserProfileEdit";
 
 export const UserProfile = ({user, }) => {
+  const dispatch = useDispatch();
   const { currentColor} = useStateContext();
   const [isEditPic, setIsEditPic] = useState(false);
   const [showProfileEditModal, setShowProfileEditModal] = useState(false);
   const removeProfileEditModal = useCallback(() => {
     setShowProfileEditModal(false);
     dispatch(isShowProfileModalReset());
-  }, []);
-  const dispatch = useDispatch();
+  }, [setShowProfileEditModal, dispatch]);
 
 
 
-  return (
+const handleLogout= useCallback(() => {
+  dispatch(isShowProfileModalReset());
+  dispatch(logout());
+}, [dispatch])
+
+const handleInitiateEditImage= useCallback(() => {
+  setShowProfileEditModal(true);
+  setIsEditPic(true);
+}, [])
+
+const handleInitiateEdit= useCallback(() => {
+  setShowProfileEditModal(true);
+}, [])
+
+const handleHideForm= useCallback( () => dispatch(isShowProfileModalReset()), [dispatch])
+  return ( 
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96 z-40">
       <div className="flex justify-between items-center">
         <p className="font-semibold text-lg dark:text-gray-50">User Profile</p>
@@ -30,7 +45,7 @@ export const UserProfile = ({user, }) => {
           size="30px"
           color="red"
           cursor={"pointer"}
-          onClick={() => dispatch(isShowProfileModalReset())}
+          onClick={handleHideForm}
         />
       </div>
       <div className="flex flex-col gap-7 items-center mt-6 border-color border-b-1 pb-6">
@@ -41,10 +56,7 @@ export const UserProfile = ({user, }) => {
             alt="user-profile"
           />}
           <button
-            onClick={() => {
-              setShowProfileEditModal(true);
-              setIsEditPic(true);
-            }}
+            onClick={handleInitiateEditImage}
           >
             <FaEdit />
           </button>
@@ -61,9 +73,7 @@ export const UserProfile = ({user, }) => {
             {user?.email}
           </p>
           <button
-            onClick={() => {
-              setShowProfileEditModal(true);
-            }}
+            onClick={handleInitiateEdit}
           >
             <FaEdit />
           </button>
@@ -77,10 +87,7 @@ export const UserProfile = ({user, }) => {
           text="Logout"
           borderRadius="10px"
           width="full"
-          onClick={() => {
-            dispatch(isShowProfileModalReset());
-            dispatch(logout());
-          }}
+          onClick={handleLogout}
         />
       </div>
       {showProfileEditModal && (
