@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(fetchTasksAction());
     dispatch(fetchbugsAction());
-  }, []);
+  }, [dispatch]);
 
   // get state from store
   const stateData = useSelector((state) => state);
@@ -28,7 +28,7 @@ const Dashboard = () => {
     if (userStatus === "Pending") {
       navigate("/onboarding");
     }
-  }, [userStatus]);
+  }, [navigate, userStatus]);
 
   // tasks data
   const tasksState = stateData?.tasks;

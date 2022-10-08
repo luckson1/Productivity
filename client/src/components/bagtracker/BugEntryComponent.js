@@ -44,12 +44,12 @@ export default function BugEntryComponent() {
     if (bugsFetched) {
       setBugs(bugsFetched?.bugs);
     }
-  }, [bugsFetched]);
+  }, [bugsFetched, setBugs]);
 
   useEffect(() => {
     if (teamMembers)
       setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
-  }, [teamMembers]);
+  }, [teamMembers, setTeam]);
 
   // organise the data
   const openBugs = bugs?.filter((bug) => bug?.status === "Open");

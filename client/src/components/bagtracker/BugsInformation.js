@@ -53,7 +53,7 @@ export const BugsInformation = ({ bugEntry }) => {
 
   useEffect(() => {
     dispatch(fetchCommentAction({ id: bugEntry?.bugId }));
-  }, []);
+  }, [dispatch, bugEntry?.bugId]);
 
   const commentsData = useSelector(
     (state) => state?.comment?.commentsFetched?.comment
