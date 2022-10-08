@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { v4 as uuidv4 } from "uuid";
@@ -69,6 +69,10 @@ function CreateBugEntry() {
       : (values) => addBugHandler(values),
   });
 
+  const handleHideForm= useCallback(() => {
+    dispatch(isEditModeReset());
+    dispatch(isShowModalReset());
+  }, [dispatch])
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-50  dark:bg-[#484B52] w-full sm:w-6/12 ">
@@ -80,10 +84,7 @@ function CreateBugEntry() {
             <MdCancel
               size="30px"
               color="red"
-              onClick={() => {
-                dispatch(isEditModeReset());
-                dispatch(isShowModalReset());
-              }}
+              onClick={handleHideForm}
               style={{ cursor: "pointer" }}
             />
           </div>
