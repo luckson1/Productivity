@@ -74,7 +74,7 @@ const handleInitiateEditing=  useCallback((bugEntry) => {
   window.scrollTo(0, 0);
 }, [dispatch, setSelectedBug])
 
-const handleShowForm= useCallback(() => {
+const handleHideForm= useCallback(() => {
   dispatch(isEditModeReset());
   dispatch(isShowInfoModalReset());
 }, [dispatch])
@@ -91,7 +91,7 @@ const handleShowForm= useCallback(() => {
             color="red"
             size="30px"
             style={{ cursor: "pointer" }}
-            onClick={handleShowForm}
+            onClick={handleHideForm}
           />
         </div>
 
