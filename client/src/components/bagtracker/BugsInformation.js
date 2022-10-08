@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useStateContext } from "../../context/ContextProvider";
@@ -66,7 +66,18 @@ export const BugsInformation = ({ bugEntry }) => {
   const assigneeData = team?.filter(
     (member) => member?._id === bugEntry?.assigned
   );
+const handleInitiateEditing=  useCallback((bugEntry) => {
+  dispatch(isShowInfoModalReset());
+  dispatch(isShowModal());
+  dispatch(isEditMode());
+  setSelectedBug(bugEntry);
+  window.scrollTo(0, 0);
+}, [dispatch, setSelectedBug])
 
+const handleShowForm= useCallback(() => {
+  dispatch(isEditModeReset());
+  dispatch(isShowInfoModalReset());
+}, [dispatch])
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
       <div className="float-right h-screen  bg-gradient-to-r from-blue-100 via-pink-100 to-indigo-50  dark:bg-[#484B52] w-full sm:w-6/12 overflow-scroll">
@@ -80,10 +91,7 @@ export const BugsInformation = ({ bugEntry }) => {
             color="red"
             size="30px"
             style={{ cursor: "pointer" }}
-            onClick={() => {
-              dispatch(isEditModeReset());
-              dispatch(isShowInfoModalReset());
-            }}
+            onClick={handleShowForm}
           />
         </div>
 
@@ -125,13 +133,7 @@ export const BugsInformation = ({ bugEntry }) => {
             bgColor={currentColor}
             text="Edit Details"
             borderRadius="10px"
-            onClick={() => {
-              dispatch(isShowInfoModalReset());
-              dispatch(isShowModal());
-              dispatch(isEditMode());
-              setSelectedBug(bugEntry);
-              window.scrollTo(0, 0);
-            }}
+            onClick={()=> handleInitiateEditing(bugEntry)}
           />
           <Button
             color="white"

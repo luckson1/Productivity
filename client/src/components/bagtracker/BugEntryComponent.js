@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchbugsAction, isShowModal } from "../../redux/bugsSlices";
 import BugCard from "./BugCard";
@@ -57,6 +57,11 @@ export default function BugEntryComponent() {
   const inReviewBugs = bugs?.filter((bug) => bug?.status === "In Review");
   const closedBugs = bugs?.filter((bug) => bug?.status === "Closed");
 
+  const handleAddBug= useCallback(() => {
+    dispatch(isShowModal());
+    window.scrollTo(0, 0);
+  }, [dispatch])
+
   return (
     <div className=" w-11/12  mx-3 text-sm md:text-base md:flex-nowrap mt-24">
       <div className="kanban-heading">
@@ -65,10 +70,7 @@ export default function BugEntryComponent() {
           animationType="bounce"
           borderRadius="10px"
           text="Add New Bug"
-          onClick={() => {
-            dispatch(isShowModal());
-            window.scrollTo(0, 0);
-          }}
+          onClick={handleAddBug}
         />
       </div>
 
