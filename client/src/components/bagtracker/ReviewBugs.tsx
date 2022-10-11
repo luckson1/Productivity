@@ -1,16 +1,17 @@
-import React from "react";
+import * as React from "react";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "../../utils/items";
-import { useDispatch } from "react-redux";
-import { editBugsAction } from "../../redux/bugsSlices";
+import { editBugsAction, Payload } from "../../redux/bugsSlices";
 import { useStateContext } from "../../context/ContextProvider";
+import { Item } from "./ClosedBug";
+import { dispatch } from "../../redux/hooks";
 
 function ReviewBugs({ children }) {
   const { bugs, setBugs } = useStateContext();
-  const dispatch = useDispatch();
 
-  const editBugHandler = (item) => {
-    const editedBugValues = {
+
+  const editBugHandler = (item: Item) => {
+    const editedBugValues: Payload = {
       title: item?.bug.title,
       priority: item?.bug.priority,
       assigned: item?.bug.assigned,
@@ -19,21 +20,19 @@ function ReviewBugs({ children }) {
       _id: item?.bug._id,
       createdAt: item?.bug.createdAt,
       bugId: item?.bug.bugId,
-      updatedAt: new Date(),
     };
-    let editedBug = [];
-    editedBug.push(editedBugValues);
+
     dispatch(editBugsAction(editedBugValues));
     const newBugs = bugs?.filter((bug) => {
       return bug._id !== item.bug._id;
     });
 
-    setBugs([...newBugs, ...editedBug]);
+    setBugs([...newBugs, editedBugValues]);
   };
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: [ItemTypes.PROGRESS],
 
-    drop: (item, monitor) => {
+    drop: (item: Item, monitor) => {
       editBugHandler(item);
     },
 
