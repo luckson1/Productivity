@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchbugsAction, isShowModal } from "../../redux/bugsSlices";
 import BugCard from "./BugCard";
 import { ItemTypes } from "../../utils/items";
@@ -11,12 +10,12 @@ import ClosedBugs from "./ClosedBug";
 import { Button } from "../Button";
 import { fetchTeamMembersAction } from "../../redux/usersSlices";
 import InProgressBugs from "./InProgressBugs";
+import { dispatch, getState } from "../../redux/hooks";
 
 export default function BugEntryComponent() {
   const { currentColor, selectedBug, bugs, setBugs, setTeam } =
     useStateContext();
 
-  const dispatch = useDispatch();
 
   // fetch data
   useEffect(() => {
@@ -26,7 +25,7 @@ export default function BugEntryComponent() {
 
   // get state from bugs store
 
-  const bugsState = useSelector((state) => state?.bugs);
+  const bugsState = getState((state) => state.bugs)
   const {
     bugsFetched,
     bugLoading,
@@ -35,7 +34,7 @@ export default function BugEntryComponent() {
     showModal,
     showInfoModal,
   } = bugsState;
-  const teamMembers = useSelector(
+  const teamMembers = getState(
     (state) => state?.users?.teamProfile?.teamMembers
   );
 
@@ -71,6 +70,7 @@ export default function BugEntryComponent() {
           borderRadius="10px"
           text="Add New Bug"
           onClick={handleAddBug}
+          size="md"
         />
       </div>
 
