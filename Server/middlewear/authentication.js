@@ -4,8 +4,8 @@ const User = require("../models/Users");
 
 const authentication = expressAsyncHandler(async (req, res, next) => {
     let token;
-
-    if (req.headers.authorization.startsWith("Bearer")) {
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (authHeader?.startsWith("Bearer ")) {
         token = req.headers.authorization.split(" ")[1];
 
         try {
@@ -22,10 +22,11 @@ const authentication = expressAsyncHandler(async (req, res, next) => {
                 next();
             }
         } catch (error) {
-            throw new Error("Not Authorized token expired");
+            res.sendStatus(403);
         }
     } else {
-        throw new Error("There is no token attached to the header");
+        res.sendStatus(401);
+        throw new Error("Unauthorised");
     }
 });
 

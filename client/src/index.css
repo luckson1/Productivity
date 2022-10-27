@@ -243,6 +243,13 @@ padding: 10px;
   cursor: pointer;
   font-size: large;
 }
+.calendar-icon {
+
+margin-left: -05px;
+margin-top: 10px;
+cursor: pointer;
+font-size: large;
+}
 .secondary-button {
   color: black;
  
@@ -381,7 +388,7 @@ textarea {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .modalContent {
   font-size: 16px;
@@ -494,13 +501,13 @@ h2 small {
   flex-basis: 10%;
 }
 .responsive-table .col-2 {
-  flex-basis: 40%;
+  flex-basis: 35%;
 }
 .responsive-table .col-3 {
   flex-basis: 15%;
 }
 .responsive-table .col-4 {
-  flex-basis: 25%;
+  flex-basis: 20%;
 
 }
 .responsive-table .col-5 {
@@ -547,7 +554,8 @@ h2 small {
 
 /* ---------Onboarding----------- */
 .onboarding {
- 
+  display: flex;
+  justify-content: center;
 }
 
 .onboarding form {

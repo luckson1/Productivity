@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import { fetchbugsAction, isShowModal } from "../../redux/bugsSlices";
+import { BugsData,  isShowModal } from "../../redux/bugsSlices";
 import BugCard from "./BugCard";
 import { ItemTypes } from "../../utils/items";
 import { useStateContext } from "../../context/ContextProvider";
@@ -8,47 +8,41 @@ import { BugsInformation } from "./BugsInformation";
 import ReviewBugs from "./ReviewBugs";
 import ClosedBugs from "./ClosedBug";
 import { Button } from "../Button";
-import { fetchTeamMembersAction } from "../../redux/usersSlices";
 import InProgressBugs from "./InProgressBugs";
-import { dispatch, getState } from "../../redux/hooks";
+import { appDispatch, getState } from "../../redux/Hooks";
+import { useGetBugsQuery} from "../../redux/bugsApiSlices";
+import { useState } from "react";
 
 export default function BugEntryComponent() {
-  const { currentColor, selectedBug, bugs, setBugs, setTeam } =
-    useStateContext();
+  const {  currentColor } = useStateContext();
+const [selectedBug, setSelectedBug]=useState<BugsData| undefined>()
+const dispatch=appDispatch()
 
-
-  // fetch data
-  useEffect(() => {
-    dispatch(fetchbugsAction());
-    dispatch(fetchTeamMembersAction());
-  }, [dispatch]);
+const selectBug= useCallback((bug: BugsData)=> {
+  setSelectedBug(bug);
+}, [])
 
   // get state from bugs store
 
   const bugsState = getState((state) => state.bugs)
   const {
-    bugsFetched,
-    bugLoading,
-    bugAppErr,
-    bugServerErr,
     showModal,
     showInfoModal,
   } = bugsState;
-  const teamMembers = getState(
-    (state) => state?.users?.teamProfile?.teamMembers
-  );
 
-  // introduce effects
-  useEffect(() => {
-    if (bugsFetched) {
-      setBugs(bugsFetched?.bugs);
-    }
-  }, [bugsFetched, setBugs]);
+  const {
+    data: bugsData,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  }=useGetBugsQuery(undefined)
+  const bugs=bugsData? Object.values(bugsData)[0] as Array<BugsData>: null
 
-  useEffect(() => {
-    if (teamMembers)
-      setTeam(teamMembers.filter((member) => member?.status !== "Pending"));
-  }, [teamMembers, setTeam]);
+
+
+
+
 
   // organise the data
   const openBugs = bugs?.filter((bug) => bug?.status === "Open");
@@ -59,7 +53,7 @@ export default function BugEntryComponent() {
   const handleAddBug= useCallback(() => {
     dispatch(isShowModal());
     window.scrollTo(0, 0);
-  }, [dispatch])
+  }, [])
 
   return (
     <div className=" w-11/12  mx-3 text-sm md:text-base md:flex-nowrap mt-24">
@@ -78,9 +72,9 @@ export default function BugEntryComponent() {
         <div className="kanban-block bg-indigo-100 shadow-md">
           <strong>Open</strong>
 
-          {bugAppErr || bugServerErr ? (
+          {isError? (
             <div className="form-validation">An Error Has Occured</div>
-          ) : bugLoading ? (
+          ) : isLoading? (
             <h4>Loading Please Wait......</h4>
           ) : openBugs?.length === 0 ? (
             <div>
@@ -88,49 +82,49 @@ export default function BugEntryComponent() {
             </div>
           ) : (
             openBugs?.map((bug) => (
-              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.OPEN} />
+              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.OPEN} setSelectedBug={selectBug}/>
             ))
           )}
         </div>
         <InProgressBugs>
           <strong>In Progress</strong>
-          {bugAppErr || bugServerErr ? (
+          {isError? (
             <div className="form-validation">An Error Has Occured</div>
-          ) : bugLoading ? (
+          ) : isLoading ? (
             <h4>Loading Please Wait......</h4>
           ) : (
             inProgressBugs?.map((bug) => (
-              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.PROGRESS} />
+              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.PROGRESS} setSelectedBug={selectBug}/>
             ))
           )}
         </InProgressBugs>
         <ReviewBugs>
           <strong>Testing/Review</strong>
-          {bugAppErr || bugServerErr ? (
+          {isError? (
             <div className="form-validation">An Error Has Occured</div>
-          ) : bugLoading ? (
+          ) : isLoading? (
             <h4>Loading Please Wait......</h4>
           ) : (
             inReviewBugs?.map((bug) => (
-              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.REVIEW} />
+              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.REVIEW} setSelectedBug={selectBug}/>
             ))
           )}
         </ReviewBugs>
         <ClosedBugs>
           <strong>Closed</strong>
-          {bugAppErr || bugServerErr ? (
+          {isError? (
             <div className="form-validation">An Error Has Occured</div>
-          ) : bugLoading ? (
+          ) : isLoading? (
             <h4>Loading Please Wait......</h4>
           ) : (
             closedBugs?.map((bug) => (
-              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.CLOSED} />
+              <BugCard bug={bug} key={bug?.bugId} type={ItemTypes.CLOSED} setSelectedBug={selectBug}/>
             ))
           )}
         </ClosedBugs>
       </div>
-      {showModal && <CreateBugEntry />}
-      {showInfoModal && <BugsInformation bugEntry={selectedBug} />}
+      {showModal && <CreateBugEntry selectedBug={selectedBug}/>}
+      {showInfoModal && <BugsInformation selectedBug={selectedBug} setSelectedBug={selectBug}/>}
     </div>
   );
 }

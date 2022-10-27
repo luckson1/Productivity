@@ -3,21 +3,29 @@ const dotenv = require("dotenv");
 
 const app = express();
 const cors = require("cors");
-const dbConnect = require("./dbConnect");
+const cookieParser = require("cookie-parser");
 const {
     notFound,
     errorHandler,
     mongooseErrorHandler,
 } = require("./middlewear/errors");
 const { taskRoutes } = require("./routes/Tasks");
+const { refreshRoutes } = require("./routes/refresh");
 const { teamRoutes } = require("./routes/Teams");
 const { userRoutes } = require("./routes/Users");
 const { bugRoutes } = require("./routes/Bugs");
 const commentsRouter = require("./routes/Comments");
+const dbConnect = require("./config/dbConnect");
+const corsOptions = require("./config/corsOptions");
+const credentials = require("./middlewear/credentials");
+const { logoutRoutes } = require("./routes/logout");
 
 // allow our node process to have access to the environment variables
 dotenv.config();
 app.enable("trust proxy");
+
+//middleware for cookies
+app.use(cookieParser());
 
 //connect to Database
 dbConnect();
@@ -27,11 +35,20 @@ app.get("/", (req, res) => {
     res.json({ msg: "welcome here!" });
 });
 // middleware
-app.use(cors());
+
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
+//refresh token
+app.use("/api/logout", logoutRoutes);
+//logout
+app.use("/api/refresh", refreshRoutes);
 //tasks routes
 app.use("/api/tasks", taskRoutes);
 

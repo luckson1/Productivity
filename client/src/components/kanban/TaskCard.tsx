@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { useStateContext } from "../../context/ContextProvider";
 import { isShowInfoModal } from "../../redux/taskSlices";
+import { useGetTeamQuery } from "../../redux/usersApiSlices";
+import { userData } from "../../redux/usersSlices";
 import dateFormatter from "../../utils/dateFormatter";
 
-function TaskCard({ task, type }) {
-  const { setSelectedTask, team } = useStateContext();
+function TaskCard( {task, type,setSelectedTask}) {
+
 
   //react DnD API
   const [{ isDragging }, drag] = useDrag({
@@ -19,7 +20,14 @@ function TaskCard({ task, type }) {
   });
   const style = { opacity: isDragging ? 0.3 : 1, cursor: "pointer" };
   const dispatch = useDispatch();
-  const assigneeData = team?.filter((member) => member?._id === task?.assigned);
+ //fetch team
+ const {
+  data: teamData
+}=useGetTeamQuery(undefined)
+const team=teamData? Object.values(teamData)[0] as Array<userData>: null
+  const assigneeData = team?.filter(
+    (member) => member?._id === task?.assigned
+  );
 
   // handle event listener to view task details
 
@@ -46,13 +54,14 @@ function TaskCard({ task, type }) {
     >
       <div className="flex flex-row justify-between flex-wrap">
         <p>{task?.title}</p>
-        {assigneeData[0]?.image && (
-          <img
-            className="rounded-full h-6 w-6"
-            src={assigneeData[0]?.image}
-            alt="user-profile"
-          />
-        )}
+        {assigneeData?.map((user)=> 
+          (
+           user?.image?  <img key={user?.userId}
+           className="rounded-full h-6 w-6"
+           src={user.image}
+           alt="user-profile"
+         />: ""
+          ))}
         {<p>{task?.end && dateFormatter(task?.end)}</p>}
       </div>
     </div>

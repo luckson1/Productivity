@@ -1,43 +1,71 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "./usersSlices";
-
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios, { AxiosError } from "axios";
+import { BaseURL } from "../utils/BaseUrl";
+import { AppDispatch } from "./Store";
+import { User, userData } from "./usersSlices";
 
 interface Data extends User {
-    _id: string;
-    isAdmin: boolean | undefined;
-    updatedAt: string;
-    createdAt: string;
-  }
+  _id: string;
+  isAdmin: boolean | undefined;
+  updatedAt: string;
+  createdAt: string;
+}
 export interface AuthState {
-    user: Data;
-    token: string;
-  
+  user: Data;
+  token: string;
+}
+interface AppErrors {
+  msg: string | undefined;
+}
+//Logout action
+export const logout = createAsyncThunk<
+  undefined,
+  undefined,
+  { rejectValue: AppErrors; dispatch: AppDispatch }
+>("user/logout", async (payload, { rejectWithValue, dispatch }) => {
+  try {
+    await axios.get(`${BaseURL}/logout`, {
+      withCredentials: true,
+    });
+  } catch (err) {
+    let error: AxiosError<AppErrors> = err; // cast the error for access
+    if (!error.response) {
+      throw err;
+    }
+
+    return rejectWithValue(error.response.data);
   }
+});
 
 
-    const initialState = {
+const initialState = {
   user: null,
-  token: null
-      } as AuthState;
+  token: null,
+} as AuthState;
+console.log(initialState)
 const authSlice = createSlice({
-    name: "auth",
-    initialState,
-    reducers:{ 
-        setCredentials: (state, action: PayloadAction<AuthState>)=> {
-        const {user, token}=action.payload
-        
-        state.user=user;
-        state.token=token;
-
-
+  name: "auth",
+  initialState,
+  reducers: {
+    setCredentials: (state, action: PayloadAction<AuthState>) => {
+      const { user, token } = action.payload;
+    
+      state.user = user;
+      state.token=token;
+      
+      
     },
-logout: (state, action)=> {
-    state.user=null;
-    state.token=null;
+  },
+  extraReducers: builder=> {
+    builder.addCase(logout.fulfilled, (state, action) => {
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("user");
+      state.token= undefined;
+      state.user= undefined;
+    });
 
-}}})
+  }
+});
 
-export const {setCredentials, logout} = authSlice.actions
-export default authSlice.reducer
-export const selectCurrentUser= state=> state.auth.user
-export const selectCurrentToken= state=> state.auth.token
+export const { setCredentials} = authSlice.actions;
+export default authSlice.reducer;

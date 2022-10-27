@@ -1,10 +1,10 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 interface Props {
   bgColor: string,
   size: string,
   text: string,
   borderRadius: string,
-  onClick: any,
+  onClick: MouseEventHandler,
   animationType: string,
 }
 export const Button = (props: Props

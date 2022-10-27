@@ -1,9 +1,12 @@
 const expressAsyncHandler = require("express-async-handler");
 const { v4: uuidv4 } = require("uuid");
 const nodemailer = require("nodemailer");
-const generateToken = require("../middlewear/generateTokens");
 const User = require("../models/Users");
 const cloudinary = require("../utils/cloudinary");
+const {
+    generateToken,
+    generateRefreshToken,
+} = require("../middlewear/generateTokens");
 
 // Create the transporter with the required configuration for Outlook
 const transporter = nodemailer.createTransport({
@@ -33,6 +36,7 @@ const registerUserCtrl = expressAsyncHandler(async (req, res) => {
 
     // generate token
     const token = generateToken(userId);
+    const newRefreshToken = generateRefreshToken(userId);
 
     //find if a user exists
 
@@ -45,9 +49,16 @@ const registerUserCtrl = expressAsyncHandler(async (req, res) => {
             email,
             password,
             userId,
+            refreshToken: newRefreshToken,
             status: "Pending",
         });
-
+        // Creates Secure Cookie with refresh token
+        res.cookie("jwt", newRefreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: 24 * 60 * 60 * 1000,
+        });
         res.json({ user, token });
     } catch (error) {
         res.json({ error });
@@ -57,18 +68,51 @@ const registerUserCtrl = expressAsyncHandler(async (req, res) => {
 // login user
 const loginUserCtrl = expressAsyncHandler(async (req, res) => {
     const { email, password } = req.body;
+    const { cookies } = req;
     //check if user exists
     const user = await User.findOne({ email });
 
     //Check if password is match
     if (user && (await user.isPasswordMatch(password))) {
+        //generate tokens
+        let newRefreshTokenArray = !cookies.jwt
+            ? user.refreshToken
+            : user.refreshToken.filter((rt) => rt !== cookies.jwt);
+        const token = generateToken(user.userId);
+        const newRefreshToken = generateRefreshToken(user.userId);
+        if (cookies.jwt) {
+            const refreshToken = cookies.jwt;
+            const foundToken = await User.findOne({ refreshToken }).exec();
+
+            // Detected refresh token reuse!
+            if (!foundToken) {
+                // clear out ALL previous refresh tokens
+                newRefreshTokenArray = [];
+            }
+
+            res.clearCookie("jwt", {
+                httpOnly: true,
+                sameSite: "None",
+                secure: true,
+            });
+        }
+        // Saving refreshToken with current user
+        user.refreshToken = [...[newRefreshTokenArray], newRefreshToken];
+        await user.save();
+
+        // Creates Secure Cookie with refresh token
+        res.cookie("jwt", newRefreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+            maxAge: 24 * 60 * 60 * 1000,
+        });
         res.json({
-            token: generateToken(user.userId),
+            token,
             user,
         });
     } else {
-        res.status(401);
-        throw new Error("Invalid Login Credentials");
+        res.status(401).json("Invalide Login Credentials");
     }
 });
 
@@ -76,8 +120,8 @@ const loginUserCtrl = expressAsyncHandler(async (req, res) => {
 
 const createProfileCtrl = expressAsyncHandler(async (req, res) => {
     const { id } = req.user;
-
     const filePath = req.file.path;
+
     // upload file to cloudinary
     const result = await cloudinary.uploader.upload(filePath);
 

@@ -19,8 +19,8 @@ services:
     volumes: 
       - /app/node_modules
       - ./Server :/app/Server
-    # ports:
-    #   - "5000:5000"
+    ports:
+      - "5000:5000"
     networks:
       - mern-app
   #   depends_on : 

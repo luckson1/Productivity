@@ -2,6 +2,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.30.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -23,7 +24,7 @@
   "version": "1.0.0",
   "engines": {
     "node": ">=10.0.0"
-},
+  },
   "description": "productivity",
   "main": "server.js",
   "keywords": [
@@ -42,7 +43,7 @@
     "eslint-plugin-react": "^7.31.8",
     "prettier": "^2.7.1"
   },
-"prettier": {
+  "prettier": {
     "tabWidth": 4
-}
+  }
 }

@@ -9,6 +9,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const fileName = file.originalname.toLowerCase().split(" ").join("-");
+
         cb(null, `${uuidv4()}-${fileName}`);
     },
 });
@@ -20,6 +21,7 @@ const Multer = multer({
             file.mimetype === "image/jpg" ||
             file.mimetype === "image/jpeg"
         ) {
+            console.log("hi");
             cb(null, true);
         } else {
             cb(null, false);
