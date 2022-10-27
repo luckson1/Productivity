@@ -6,7 +6,7 @@ import {
  
 } from "@reduxjs/toolkit/query/react";
 import { BaseURL } from "../../../utils/BaseUrl";
-import {  setCredentials } from "../../authslice";
+import {  logout, setCredentials } from "../../authslice";
 import { AppDispatch, AppState } from "../../Store";
 
 export type FetchBaseQueryError = {
@@ -32,7 +32,9 @@ const baseQuery = fetchBaseQuery({
 
     // If we have a token set in state, let's assume that we should be passing it.
     if (token) {
+      console.log(token)
       headers.set("Authorization", `Bearer ${token}`);
+      
     }
     return headers;
   },
@@ -62,7 +64,7 @@ const baseQueryWithReauth = async (
       dispatch(setCredentials({ user, token }));
       results = await baseQuery(args, api, extraOptions);
     } else {
-     console.log(token)
+     dispatch(logout())
     }
   }
   return results;
