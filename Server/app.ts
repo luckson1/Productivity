@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const dotenv = require("dotenv");
 
 const app = express();
@@ -9,11 +9,11 @@ const {
     errorHandler,
     mongooseErrorHandler,
 } = require("./middlewear/errors");
-const { taskRoutes } = require("./routes/Tasks");
+import{ taskRoutes} from "./routes/Tasks";
 const { refreshRoutes } = require("./routes/refresh");
 const { teamRoutes } = require("./routes/Teams");
 const { userRoutes } = require("./routes/Users");
-const { bugRoutes } = require("./routes/Bugs");
+import{ bugRoutes} from "./routes/Bugs";
 const commentsRouter = require("./routes/Comments");
 const dbConnect = require("./config/dbConnect");
 const corsOptions = require("./config/corsOptions");

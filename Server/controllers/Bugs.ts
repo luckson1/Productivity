@@ -1,12 +1,13 @@
-const expressAsyncHandler = require("express-async-handler");
-const Bug = require("../models/Bugs");
-require("dotenv").config();
+
+import { TypedRequestBody } from "../ExpressTypes";
+import {Bug }from "../models/Bugs";
+import { Response} from 'express';
 
 //create Bug
 
-const createBugCtrl = expressAsyncHandler(async (req, res) => {
-    const user = req.user._id;
-    const { title, description, bugId, assigned, priority, steps } = req.body;
+const createBugCtrl = async (req:TypedRequestBody, res:Response) => {
+    const user = req.user!._id;
+    const { title, description, bugId, assigned, priority, steps} = req.body;
     try {
         const bug = await Bug.create({
             title,
@@ -20,13 +21,13 @@ const createBugCtrl = expressAsyncHandler(async (req, res) => {
 
         res.json({ bug });
     } catch (error) {
-        res.json({ error });
+        res.json({error})
     }
-});
+};
 
 // fetch all Bus
 
-const fetchAllBugs = expressAsyncHandler(async (req, res) => {
+const fetchAllBugs = async (req:TypedRequestBody, res:Response)  => {
     try {
         const bugs = await Bug.find({});
 
@@ -34,13 +35,13 @@ const fetchAllBugs = expressAsyncHandler(async (req, res) => {
     } catch (error) {
         res.json({ error });
     }
-});
+};
 
 // fetch all Bugs of a given user
 // fetch all Bug
 
-const fetchUserBugs = expressAsyncHandler(async (req, res) => {
-    const id = req.user._id;
+const fetchUserBugs = async (req:TypedRequestBody, res:Response)  => {
+    const id = req.user!._id;
 
     try {
         const bugs = await Bug.find({ user: id });
@@ -49,11 +50,11 @@ const fetchUserBugs = expressAsyncHandler(async (req, res) => {
     } catch (error) {
         res.json({ error });
     }
-});
+};
 
 // fetch one Bug
 
-const fetchOneBugCtrl = expressAsyncHandler(async (req, res) => {
+const fetchOneBugCtrl = async (req:TypedRequestBody, res:Response)  => {
     const { id } = req.params;
 
     try {
@@ -62,11 +63,11 @@ const fetchOneBugCtrl = expressAsyncHandler(async (req, res) => {
     } catch (error) {
         res.json({ error });
     }
-});
+};
 
 //updates Bug
 
-const updateBugctrl = expressAsyncHandler(async (req, res) => {
+const updateBugctrl = async (req:TypedRequestBody, res:Response)  => {
     const { id } = req.params;
 
     const { title, description, assigned, priority, steps, user, status } =
@@ -83,11 +84,11 @@ const updateBugctrl = expressAsyncHandler(async (req, res) => {
     } catch (error) {
         res.json(error);
     }
-});
+};
 
 //delete Bug
 
-const deleteBugctrl = expressAsyncHandler(async (req, res) => {
+const deleteBugctrl = async (req:TypedRequestBody, res:Response)  => {
     const { id } = req.params;
     try {
         const bug = await Bug.findOneAndDelete({ bugId: id });
@@ -96,13 +97,12 @@ const deleteBugctrl = expressAsyncHandler(async (req, res) => {
     } catch (error) {
         res.json(error);
     }
-});
-
-module.exports = {
-    fetchUserBugs,
-    createBugCtrl,
-    fetchOneBugCtrl,
-    fetchAllBugs,
-    updateBugctrl,
-    deleteBugctrl,
 };
+
+export  {
+fetchUserBugs,
+createBugCtrl,
+fetchOneBugCtrl,
+fetchAllBugs,
+updateBugctrl,
+deleteBugctrl}

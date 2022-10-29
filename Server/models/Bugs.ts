@@ -1,9 +1,21 @@
-const mongoose = require("mongoose");
+import { Schema, model, Types} from 'mongoose';
 
-const { Schema } = mongoose;
+
 
 //schema
-const bugSchema = new mongoose.Schema(
+export interface BugTypes {
+    title?: string;
+    status?: string;
+    user?: Types.ObjectId;
+
+    description?: string;
+    bugId: string;
+
+    steps?: string;
+    priority?: string;
+    assigned?: Types.ObjectId;
+}
+const bugSchema = new Schema<BugTypes>(
     {
         title: {
             type: String,
@@ -56,5 +68,5 @@ const bugSchema = new mongoose.Schema(
 //populate virtuals
 
 //model
-const Bug = mongoose.model("Bug", bugSchema);
-module.exports = Bug;
+export const Bug =model<BugTypes>("Bug", bugSchema);
+

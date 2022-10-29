@@ -1,12 +1,12 @@
-const express = require("express");
-const {
+import express from "express";
+import {
     fetchUserBugs,
     createBugCtrl,
     fetchOneBugCtrl,
     updateBugctrl,
     deleteBugctrl,
-} = require("../controllers/Bugs");
-const authentication = require("../middlewear/authentication");
+} from "../controllers/Bugs";
+import {authentication}  from "../middlewear/authentication";
 
 const bugRoutes = express.Router();
 
@@ -15,4 +15,5 @@ bugRoutes.get("/", authentication, fetchUserBugs);
 bugRoutes.get("/:id", authentication, fetchOneBugCtrl);
 bugRoutes.put("/:id", authentication, updateBugctrl);
 bugRoutes.delete("/:id", authentication, deleteBugctrl);
-module.exports = { bugRoutes };
+export {bugRoutes}
+

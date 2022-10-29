@@ -1,8 +1,23 @@
-const mongoose = require("mongoose");
+import {Schema, Types, model} from "mongoose";
 const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema(
+export interface UserTypes {
+    email: string;
+    userId?: string;
+  
+    firstName?: string;
+    lastName?: string;
+    isAdmin?: boolean | undefined;
+    password?: string;
+    image?: string;
+    invitedBy?: Array<string>;
+    role?: string;
+    status?: string;
+    _id: Types.ObjectId
+  }
+
+const userSchema = new Schema(
     {
         email: {
             type: String,
@@ -92,6 +107,6 @@ userSchema.virtual("Team", {
     localField: "_id",
     foreignField: "user",
 });
-const User = mongoose.model("User", userSchema);
+export const User = model("User", userSchema);
 
-module.exports = User;
+
