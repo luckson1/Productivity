@@ -40,7 +40,7 @@ export const logout = createAsyncThunk<
 
 const initialState = {
   user: null,
-  token: localStorage.getItem("userToken"),
+  token: null
 } as AuthState
 console.log(initialState)
 const authSlice = createSlice({
@@ -51,9 +51,8 @@ const authSlice = createSlice({
       const { user, token } = action.payload;
     
       state.user = user;
-      localStorage.setItem("user", JSON.stringify(user))
       state.token=token;
-      console.log(token)
+
       
       
     },

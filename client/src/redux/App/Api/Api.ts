@@ -59,7 +59,7 @@ const baseQueryWithReauth = async (
     const token = result?.data?.token;
     if (token) {
       const user = (api.getState() as AppState).auth.user;
-      localStorage.setItem("userToken", token)
+      
 
       dispatch(setCredentials({ user, token }));
       results = await baseQuery(args, api, extraOptions);
