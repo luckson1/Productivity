@@ -51,7 +51,7 @@ const registerUserCtrl = async (req:TypedRequest<UserTypes>, res: Response) => {
             email,
             password,
             userId,
-            refreshToken: newRefreshToken,
+            refreshTokens: newRefreshToken,
             status: "Pending",
         });
         // Creates Secure Cookie with refresh token
@@ -84,8 +84,8 @@ const loginUserCtrl = async (req:TypedRequest<UserTypes>, res: Response) => {
         const token = generateToken(user.userId);
         const newRefreshToken = generateRefreshToken(user.userId);
         if (cookies.jwt) {
-            const refreshToken = cookies.jwt;
-            const foundToken = await User.findOne({ refreshToken }).exec();
+            const refreshToken: string = cookies.jwt;
+            const foundToken = await User.findOne({ refreshTokens:refreshToken }).exec();
 
             // Detected refresh token reuse!
             if (!foundToken) {
@@ -100,7 +100,7 @@ const loginUserCtrl = async (req:TypedRequest<UserTypes>, res: Response) => {
             });
         }
         // Saving refreshToken with current user
-        console.log(newRefreshTokenArray)
+      
         user.refreshTokens = [...newRefreshTokenArray, newRefreshToken];
         await user.save();
 

@@ -20,9 +20,10 @@ const handleRefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, funct
     if (!cookies.jwt)
         return res.sendStatus(401).json("You are not authenticated");
     const refreshToken = cookies.jwt;
+    console.log(refreshToken);
     res.clearCookie("jwt", { httpOnly: true, sameSite: "none", secure: true });
     const foundUser = yield Users_1.User.findOne({ refreshTokens: refreshToken });
-    console.log(foundUser, "ref");
+    console.log(foundUser === null || foundUser === void 0 ? void 0 : foundUser.email);
     // Detected refresh token reuse!
     if (!foundUser) {
         jsonwebtoken_1.default.verify(refreshToken, process.env.JWT_KEY, (err, decoded) => __awaiter(void 0, void 0, void 0, function* () {
@@ -34,7 +35,7 @@ const handleRefreshToken = (req, res) => __awaiter(void 0, void 0, void 0, funct
             }).exec();
             hackedUser.refreshTokens = [];
             yield hackedUser.save();
-            console.log("hacker", hackedUser);
+            console.log("hacked", hackedUser === null || hackedUser === void 0 ? void 0 : hackedUser.firstName);
         }));
         return res.status(403); //Forbidden
     }

@@ -23,7 +23,7 @@ export const authentication = async (req: TypedRequest<null>, res:Response, next
 
                 //attach the user the req obj
                 req.user = user;
-                console.log(user)
+             
 
                 next();
             }

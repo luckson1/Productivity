@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import { BaseURL } from "../utils/BaseUrl";
 import { AppDispatch } from "./Store";
-import { User, userData } from "./usersSlices";
+import { User} from "./usersSlices";
 
 interface Data extends User {
   _id: string;
@@ -53,7 +53,6 @@ const authSlice = createSlice({
       state.user = user;
       localStorage.setItem("user", JSON.stringify(user))
       state.token=token;
-      localStorage.setItem("userToken", token)
       console.log(token)
       
       

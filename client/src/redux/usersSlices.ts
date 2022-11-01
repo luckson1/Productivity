@@ -96,7 +96,7 @@ export const registerUserAction = createAsyncThunk<
     );
 
     //save user into localstorage
-    localStorage.setItem("userInfo", JSON.stringify(data));
+
     dispatch(resetUserRegistered());
     return data;
   } catch (err) {
@@ -196,7 +196,7 @@ export const fetchUserProfileAction = createAsyncThunk<
     //http call
     const { data } = await axios.get(`${BaseURL}/users/profile`, config);
 
-    localStorage.setItem("userData", JSON.stringify(data));
+   
     return data;
   } catch (err) {
     let error: AxiosError<AppErrors> = err; // cast the error for access
@@ -258,7 +258,7 @@ export const createProfileAction = createAsyncThunk<
     //http call
     const { data } = await axios.put(`${BaseURL}/users`, payload, config);
 
-    localStorage.setItem("userData", JSON.stringify(data));
+
     dispatch(resetProfilecreated());
     return data;
   } catch (err) {
@@ -285,7 +285,7 @@ export const editProfilePicAction = createAsyncThunk<
   };
   try {
     const { data } = await axios.put(`${BaseURL}/users`, payload, config);
-    localStorage.setItem("userData", JSON.stringify(data));
+
     return data;
   } catch (error) {
     return rejectWithValue(error?.response?.data);
@@ -310,7 +310,7 @@ export const editProfileAction = createAsyncThunk<
       payload,
       config
     );
-    localStorage.setItem("userData", JSON.stringify(data));
+
 
     return data;
   } catch (error) {

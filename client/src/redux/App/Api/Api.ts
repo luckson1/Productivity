@@ -32,7 +32,7 @@ const baseQuery = fetchBaseQuery({
 
     // If we have a token set in state, let's assume that we should be passing it.
     if (token) {
-      console.log(token)
+  
       headers.set("Authorization", `Bearer ${token}`);
       
     }
@@ -59,7 +59,7 @@ const baseQueryWithReauth = async (
     const token = result?.data?.token;
     if (token) {
       const user = (api.getState() as AppState).auth.user;
-      
+      localStorage.setItem("userToken", token)
 
       dispatch(setCredentials({ user, token }));
       results = await baseQuery(args, api, extraOptions);

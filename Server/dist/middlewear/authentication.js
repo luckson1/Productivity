@@ -28,7 +28,6 @@ const authentication = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
                 const user = yield Users_1.User.findOne({ userId });
                 //attach the user the req obj
                 req.user = user;
-                console.log(user);
                 next();
             }
         }
