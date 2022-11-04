@@ -42,7 +42,7 @@ const initialState = {
   user: null,
   token: null
 } as AuthState
-console.log(initialState)
+
 const authSlice = createSlice({
   name: "auth",
   initialState,

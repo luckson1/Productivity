@@ -2,10 +2,8 @@ import {
   createAsyncThunk,
   createSlice,
   createAction,
-  PayloadAction,
 } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
-import { TypedUseSelectorHook } from "react-redux";
 import { BaseURL } from "../utils/BaseUrl";
 import { getState } from "./Hooks";
 import { AppDispatch, AppState } from "./Store";
